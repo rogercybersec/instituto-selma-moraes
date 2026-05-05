@@ -1970,8 +1970,9 @@
       function animate() {
         requestAnimationFrame(animate);
         earth.rotation.y += 0.004;
+        nr1Mesh.rotation.y = earth.rotation.y;
         // Dim lights when NR-1 text faces camera for readability
-        const nr1Angle = (earth.rotation.y % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);
+        const nr1Angle = (nr1Mesh.rotation.y % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);
         const facing = Math.cos(nr1Angle);
         const dimFactor = facing > 0 ? 1.0 - facing * 0.55 : 1.0;
         dirLight.intensity = baseDirIntensity * dimFactor;
