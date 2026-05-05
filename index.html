@@ -1967,19 +1967,18 @@
         torus.rotation.z += 0.002;
         innerTorus.rotation.z -= 0.003;
         wire.rotation.y += 0.003;
-        // Shields orbit around globe — always visible, circling in front
+        // Shields orbit full 360° — tilted plane so always visible around globe
         orbitAngle += 0.0018;
-        var oR = 2.0;
-        orbitShield.position.x = Math.cos(orbitAngle) * oR;
-        orbitShield.position.z = Math.sin(orbitAngle) * 0.6 + 1.0;
-        orbitShield.position.y = Math.sin(orbitAngle * 0.8) * 0.12;
-        orbitShield.rotation.y = -orbitAngle * 0.3;
-        orbitShield.rotation.x = Math.sin(orbitAngle * 0.4) * 0.06;
-        orbitShield2.position.x = Math.cos(orbitAngle + Math.PI) * oR;
-        orbitShield2.position.z = Math.sin(orbitAngle + Math.PI) * 0.6 + 1.0;
-        orbitShield2.position.y = Math.sin((orbitAngle + Math.PI) * 0.8) * 0.12;
-        orbitShield2.rotation.y = -(orbitAngle + Math.PI) * 0.3;
-        orbitShield2.rotation.x = Math.sin((orbitAngle + Math.PI) * 0.4) * 0.06;
+        orbitShield.position.x = Math.cos(orbitAngle) * 2.2;
+        orbitShield.position.y = Math.sin(orbitAngle) * 1.5;
+        orbitShield.position.z = Math.sin(orbitAngle) * 1.2;
+        orbitShield.rotation.y = -orbitAngle;
+        orbitShield.rotation.x = Math.sin(orbitAngle * 0.5) * 0.1;
+        orbitShield2.position.x = Math.cos(orbitAngle + Math.PI) * 2.2;
+        orbitShield2.position.y = Math.sin(orbitAngle + Math.PI) * 1.5;
+        orbitShield2.position.z = Math.sin(orbitAngle + Math.PI) * 1.2;
+        orbitShield2.rotation.y = -(orbitAngle + Math.PI);
+        orbitShield2.rotation.x = Math.sin((orbitAngle + Math.PI) * 0.5) * 0.1;
         renderer.render(scene, camera);
       }
       animate();
