@@ -1806,7 +1806,7 @@
       const innerTorus = new THREE.Mesh(innerTorusGeo, innerTorusMat);
       group.add(innerTorus);
 
-      // NASA Earth texture + NR-1 baked on same surface (rotates together)
+      // NASA Earth texture (continents only)
       const earthGeo = new THREE.SphereGeometry(0.85, 48, 48);
       const earthMat = new THREE.MeshPhongMaterial({ color: 0xffffff, shininess: 60, specular: 0x2A9D8F, transparent: true, opacity: 0.85, side: THREE.DoubleSide });
       const earth = new THREE.Mesh(earthGeo, earthMat);
@@ -1814,28 +1814,32 @@
       const earthImg = new Image();
       earthImg.crossOrigin = 'anonymous';
       earthImg.onload = function() {
-        const c = document.createElement('canvas');
-        c.width = 2048; c.height = 1024;
-        const cx = c.getContext('2d');
-        cx.drawImage(earthImg, 0, 0, 2048, 1024);
-        // NR-1 gold text — same style as before, baked onto Earth
-        cx.save();
-        cx.textAlign = 'center'; cx.textBaseline = 'middle';
-        cx.shadowColor = 'rgba(255,215,0,0.9)'; cx.shadowBlur = 50;
-        cx.font = 'bold 200px Inter, Arial, sans-serif';
-        cx.fillStyle = 'rgba(255,215,0,0.95)';
-        cx.fillText('NR-1', 512, 512);
-        cx.fillText('NR-1', 1536, 512);
-        cx.shadowBlur = 0;
-        cx.strokeStyle = 'rgba(184,134,11,0.8)'; cx.lineWidth = 4;
-        cx.strokeText('NR-1', 512, 512);
-        cx.strokeText('NR-1', 1536, 512);
-        cx.restore();
-        const tex = new THREE.CanvasTexture(c);
+        const tex = new THREE.CanvasTexture(earthImg);
         earthMat.map = tex;
         earthMat.needsUpdate = true;
       };
       earthImg.src = 'earth-texture.jpg';
+
+      // NR-1 gold text — separate sphere, intercalates with continents as it rotates
+      const nr1Canvas = document.createElement('canvas');
+      nr1Canvas.width = 1024; nr1Canvas.height = 512;
+      const nctx = nr1Canvas.getContext('2d');
+      nctx.clearRect(0, 0, 1024, 512);
+      nctx.save();
+      nctx.textAlign = 'center'; nctx.textBaseline = 'middle';
+      nctx.shadowColor = 'rgba(255,215,0,0.9)'; nctx.shadowBlur = 40;
+      nctx.font = 'bold 130px Inter, Arial, sans-serif';
+      nctx.fillStyle = 'rgba(255,215,0,0.95)';
+      nctx.fillText('NR-1', 512, 256);
+      nctx.shadowBlur = 0;
+      nctx.strokeStyle = 'rgba(184,134,11,0.8)'; nctx.lineWidth = 3;
+      nctx.strokeText('NR-1', 512, 256);
+      nctx.restore();
+      const nr1Texture = new THREE.CanvasTexture(nr1Canvas);
+      const nr1Geo = new THREE.SphereGeometry(0.86, 48, 48);
+      const nr1Mat = new THREE.MeshBasicMaterial({ map: nr1Texture, transparent: true, depthWrite: false, side: THREE.FrontSide });
+      const nr1Mesh = new THREE.Mesh(nr1Geo, nr1Mat);
+      group.add(nr1Mesh);
 
       // Inner glow core (visible through translucent globe)
       const coreGeo = new THREE.SphereGeometry(0.4, 32, 32);
