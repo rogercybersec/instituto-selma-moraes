@@ -1845,6 +1845,27 @@
       const particles = new THREE.Points(particleGeo, particleMat);
       group.add(particles);
 
+      // Orbiting Shield (flat shield shape circling the globe)
+      const orbitShieldGroup = new THREE.Group();
+      scene.add(orbitShieldGroup);
+      const shieldShape = new THREE.Shape();
+      shieldShape.moveTo(0, 0.25);
+      shieldShape.quadraticCurveTo(0.2, 0.2, 0.2, 0.05);
+      shieldShape.quadraticCurveTo(0.2, -0.15, 0, -0.25);
+      shieldShape.quadraticCurveTo(-0.2, -0.15, -0.2, 0.05);
+      shieldShape.quadraticCurveTo(-0.2, 0.2, 0, 0.25);
+      const shieldExtrudeSettings = { depth: 0.04, bevelEnabled: true, bevelThickness: 0.01, bevelSize: 0.01, bevelSegments: 3 };
+      const orbitShieldGeo = new THREE.ExtrudeGeometry(shieldShape, shieldExtrudeSettings);
+      const orbitShieldMat = new THREE.MeshPhongMaterial({ color: 0x4CAF50, emissive: 0x1B5E20, shininess: 150, transparent: true, opacity: 0.9 });
+      const orbitShield = new THREE.Mesh(orbitShieldGeo, orbitShieldMat);
+      orbitShield.scale.set(0.6, 0.6, 0.6);
+      orbitShieldGroup.add(orbitShield);
+      const orbitShield2 = orbitShield.clone();
+      orbitShield2.material = orbitShieldMat.clone();
+      orbitShield2.material.color.setHex(0x2A9D8F);
+      orbitShield2.material.emissive.setHex(0x0a3d37);
+      orbitShieldGroup.add(orbitShield2);
+
       // Lighting
       const ambientLight = new THREE.AmbientLight(0x334455, 0.6);
       scene.add(ambientLight);
@@ -1867,6 +1888,7 @@
         targetRotY = 0;
       });
 
+      let orbitAngle = 0;
       function animate() {
         requestAnimationFrame(animate);
         group.rotation.y += 0.005;
@@ -1877,6 +1899,19 @@
         innerTorus.rotation.z -= 0.003;
         wire.rotation.y += 0.002;
         wire.rotation.x += 0.001;
+        // Orbiting shields animation
+        orbitAngle += 0.015;
+        const orbitRadius = 2.0;
+        orbitShield.position.x = Math.cos(orbitAngle) * orbitRadius;
+        orbitShield.position.z = Math.sin(orbitAngle) * orbitRadius;
+        orbitShield.position.y = Math.sin(orbitAngle * 2) * 0.3;
+        orbitShield.rotation.y = -orbitAngle + Math.PI / 2;
+        orbitShield.rotation.z = Math.sin(orbitAngle) * 0.2;
+        orbitShield2.position.x = Math.cos(orbitAngle + Math.PI) * orbitRadius;
+        orbitShield2.position.z = Math.sin(orbitAngle + Math.PI) * orbitRadius;
+        orbitShield2.position.y = Math.sin((orbitAngle + Math.PI) * 2) * 0.3;
+        orbitShield2.rotation.y = -(orbitAngle + Math.PI) + Math.PI / 2;
+        orbitShield2.rotation.z = Math.sin(orbitAngle + Math.PI) * 0.2;
         renderer.render(scene, camera);
       }
       animate();
