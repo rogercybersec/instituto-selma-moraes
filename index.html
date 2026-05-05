@@ -1900,6 +1900,9 @@
       const pointLight = new THREE.PointLight(0x2A9D8F, 0.6, 10);
       pointLight.position.set(-2, 2, 3);
       scene.add(pointLight);
+      const goldLight = new THREE.PointLight(0xFFD700, 0.5, 8);
+      goldLight.position.set(2, 1, 4);
+      scene.add(goldLight);
 
       // Mouse interaction
       let targetRotX = 0, targetRotY = 0;
@@ -1924,19 +1927,20 @@
         innerTorus.rotation.z -= 0.003;
         wire.rotation.y += 0.002;
         wire.rotation.x += 0.001;
-        // Orbiting shields animation
-        orbitAngle += 0.015;
-        const orbitRadius = 2.0;
+        // Golden shields floating around the globe
+        orbitAngle += 0.012;
+        const orbitRadius = 2.2;
+        const bobAmount = 0.4;
         orbitShield.position.x = Math.cos(orbitAngle) * orbitRadius;
         orbitShield.position.z = Math.sin(orbitAngle) * orbitRadius;
-        orbitShield.position.y = Math.sin(orbitAngle * 2) * 0.3;
+        orbitShield.position.y = Math.sin(orbitAngle * 1.5) * bobAmount;
         orbitShield.rotation.y = -orbitAngle + Math.PI / 2;
-        orbitShield.rotation.z = Math.sin(orbitAngle) * 0.2;
+        orbitShield.rotation.x = Math.sin(orbitAngle * 0.8) * 0.15;
         orbitShield2.position.x = Math.cos(orbitAngle + Math.PI) * orbitRadius;
         orbitShield2.position.z = Math.sin(orbitAngle + Math.PI) * orbitRadius;
-        orbitShield2.position.y = Math.sin((orbitAngle + Math.PI) * 2) * 0.3;
+        orbitShield2.position.y = Math.sin((orbitAngle + Math.PI) * 1.5) * bobAmount;
         orbitShield2.rotation.y = -(orbitAngle + Math.PI) + Math.PI / 2;
-        orbitShield2.rotation.z = Math.sin(orbitAngle + Math.PI) * 0.2;
+        orbitShield2.rotation.x = Math.sin((orbitAngle + Math.PI) * 0.8) * 0.15;
         renderer.render(scene, camera);
       }
       animate();
