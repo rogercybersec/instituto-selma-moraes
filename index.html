@@ -1836,8 +1836,8 @@
       nctx.strokeText('NR-1', 1024, 512);
       nctx.restore();
       const nr1Texture = new THREE.CanvasTexture(nr1Canvas);
-      const nr1Geo = new THREE.SphereGeometry(0.82, 48, 48);
-      const nr1Mat = new THREE.MeshBasicMaterial({ map: nr1Texture, transparent: true, depthWrite: false, side: THREE.DoubleSide });
+      const nr1Geo = new THREE.SphereGeometry(0.86, 48, 48);
+      const nr1Mat = new THREE.MeshBasicMaterial({ map: nr1Texture, transparent: true, depthWrite: false, side: THREE.FrontSide });
       const nr1Mesh = new THREE.Mesh(nr1Geo, nr1Mat);
       group.add(nr1Mesh);
 
@@ -1961,24 +1961,15 @@
         targetRotY = 0;
       });
 
-      const baseDirIntensity = dirLight.intensity;
-      const baseDir2Intensity = dirLight2.intensity;
-      const baseGoldIntensity = goldLight.intensity;
-      const baseRimIntensity = rimLight.intensity;
+      dirLight.intensity = 0.6;
+      dirLight2.intensity = 0.25;
+      goldLight.intensity = 0.4;
+      rimLight.intensity = 0.2;
 
       let orbitAngle = 0;
       function animate() {
         requestAnimationFrame(animate);
         earth.rotation.y += 0.004;
-        nr1Mesh.rotation.y = earth.rotation.y;
-        // Dim lights when NR-1 text faces camera for readability
-        const nr1Angle = (nr1Mesh.rotation.y % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);
-        const facing = Math.cos(nr1Angle);
-        const dimFactor = facing > 0 ? 1.0 - facing * 0.55 : 1.0;
-        dirLight.intensity = baseDirIntensity * dimFactor;
-        dirLight2.intensity = baseDir2Intensity * dimFactor;
-        goldLight.intensity = baseGoldIntensity * dimFactor;
-        rimLight.intensity = baseRimIntensity * dimFactor;
 
         group.rotation.x += (targetRotX * 0.3 - group.rotation.x) * 0.05;
         group.rotation.y += (targetRotY * 0.3 - group.rotation.y) * 0.02;
