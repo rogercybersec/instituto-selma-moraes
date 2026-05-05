@@ -1820,24 +1820,24 @@
       };
       earthImg.src = 'earth-texture.jpg';
 
-      // NR-1 gold text — separate sphere, intercalates with continents as it rotates
+      // NR-1 gold text — larger canvas so full text visible when facing camera
       const nr1Canvas = document.createElement('canvas');
-      nr1Canvas.width = 1024; nr1Canvas.height = 512;
+      nr1Canvas.width = 2048; nr1Canvas.height = 1024;
       const nctx = nr1Canvas.getContext('2d');
-      nctx.clearRect(0, 0, 1024, 512);
+      nctx.clearRect(0, 0, 2048, 1024);
       nctx.save();
       nctx.textAlign = 'center'; nctx.textBaseline = 'middle';
-      nctx.shadowColor = 'rgba(255,215,0,0.9)'; nctx.shadowBlur = 40;
-      nctx.font = 'bold 130px Inter, Arial, sans-serif';
+      nctx.font = 'bold 220px Inter, Arial, sans-serif';
+      nctx.shadowColor = 'rgba(255,215,0,0.9)'; nctx.shadowBlur = 50;
       nctx.fillStyle = 'rgba(255,215,0,0.95)';
-      nctx.fillText('NR-1', 512, 256);
+      nctx.fillText('NR-1', 1024, 512);
       nctx.shadowBlur = 0;
-      nctx.strokeStyle = 'rgba(184,134,11,0.8)'; nctx.lineWidth = 3;
-      nctx.strokeText('NR-1', 512, 256);
+      nctx.strokeStyle = 'rgba(184,134,11,0.8)'; nctx.lineWidth = 4;
+      nctx.strokeText('NR-1', 1024, 512);
       nctx.restore();
       const nr1Texture = new THREE.CanvasTexture(nr1Canvas);
-      const nr1Geo = new THREE.SphereGeometry(0.86, 48, 48);
-      const nr1Mat = new THREE.MeshBasicMaterial({ map: nr1Texture, transparent: true, depthWrite: false, side: THREE.FrontSide });
+      const nr1Geo = new THREE.SphereGeometry(0.861, 48, 48);
+      const nr1Mat = new THREE.MeshBasicMaterial({ map: nr1Texture, transparent: true, depthWrite: false, side: THREE.DoubleSide });
       const nr1Mesh = new THREE.Mesh(nr1Geo, nr1Mat);
       group.add(nr1Mesh);
 
@@ -1896,13 +1896,13 @@
         const brightBronze = 0xCD9B1D;
         const goldHL = 0xDAA520;
         const backGeo = new THREE.ExtrudeGeometry(makeShieldShape(1), { depth: 0.14, bevelEnabled: true, bevelThickness: 0.05, bevelSize: 0.04, bevelSegments: 8 });
-        const backMat = new THREE.MeshPhongMaterial({ color: darkMetal, emissive: 0x1a1408, shininess: 120, specular: bronze });
+        const backMat = new THREE.MeshPhongMaterial({ color: darkMetal, emissive: 0x1a1408, shininess: 120, specular: bronze, side: THREE.DoubleSide });
         g.add(new THREE.Mesh(backGeo, backMat));
         const borderGeo = new THREE.ExtrudeGeometry(makeShieldShape(0.92), { depth: 0.08, bevelEnabled: true, bevelThickness: 0.03, bevelSize: 0.02, bevelSegments: 5 });
-        const borderMat = new THREE.MeshPhongMaterial({ color: bronze, emissive: 0x3d2a08, shininess: 200, specular: goldHL });
+        const borderMat = new THREE.MeshPhongMaterial({ color: bronze, emissive: 0x3d2a08, shininess: 200, specular: goldHL, side: THREE.DoubleSide });
         const bdr = new THREE.Mesh(borderGeo, borderMat); bdr.position.z = 0.08; g.add(bdr);
         const innerGeo = new THREE.ExtrudeGeometry(makeShieldShape(0.72), { depth: 0.03, bevelEnabled: true, bevelThickness: 0.01, bevelSize: 0.008, bevelSegments: 3 });
-        const innerMat = new THREE.MeshPhongMaterial({ color: 0x2E2218, emissive: 0x0d0a06, shininess: 80, specular: 0x5C4A2E });
+        const innerMat = new THREE.MeshPhongMaterial({ color: 0x2E2218, emissive: 0x0d0a06, shininess: 80, specular: 0x5C4A2E, side: THREE.DoubleSide });
         const inn = new THREE.Mesh(innerGeo, innerMat); inn.position.z = 0.12; g.add(inn);
         const bladeShape = new THREE.Shape();
         bladeShape.moveTo(0, 0.22);
@@ -1914,12 +1914,12 @@
         bladeShape.lineTo(-0.018, -0.14); bladeShape.lineTo(-0.025, 0.18);
         bladeShape.lineTo(0, 0.22);
         const bladeGeo = new THREE.ExtrudeGeometry(bladeShape, { depth: 0.05, bevelEnabled: true, bevelThickness: 0.01, bevelSize: 0.006, bevelSegments: 3 });
-        const bladeMat = new THREE.MeshPhongMaterial({ color: brightBronze, emissive: 0x5C4A1E, shininess: 300, specular: 0xFFD700 });
+        const bladeMat = new THREE.MeshPhongMaterial({ color: brightBronze, emissive: 0x5C4A1E, shininess: 300, specular: 0xFFD700, side: THREE.DoubleSide });
         const blade = new THREE.Mesh(bladeGeo, bladeMat); blade.position.set(0, 0, 0.14); g.add(blade);
         const rivetGeo = new THREE.SphereGeometry(0.025, 12, 12);
-        const rivetMat = new THREE.MeshPhongMaterial({ color: brightBronze, emissive: 0x4A3C18, shininess: 280, specular: goldHL });
+        const rivetMat = new THREE.MeshPhongMaterial({ color: brightBronze, emissive: 0x4A3C18, shininess: 280, specular: goldHL, side: THREE.DoubleSide });
         [[0.28,0.30],[-0.28,0.30],[0.30,0.16],[-0.30,0.16],[0.28,0.02],[-0.28,0.02],[0.22,-0.12],[-0.22,-0.12],[0.14,-0.24],[-0.14,-0.24],[0,-0.36]].forEach(([x,y]) => { const r = new THREE.Mesh(rivetGeo, rivetMat); r.position.set(x, y, 0.18); g.add(r); });
-        const bandMat = new THREE.MeshPhongMaterial({ color: bronze, emissive: 0x2a1e08, shininess: 160, specular: brightBronze });
+        const bandMat = new THREE.MeshPhongMaterial({ color: bronze, emissive: 0x2a1e08, shininess: 160, specular: brightBronze, side: THREE.DoubleSide });
         [0.20, 0.02, -0.14].forEach(yPos => { const b = new THREE.Mesh(new THREE.BoxGeometry(0.50, 0.018, 0.03), bandMat); b.position.set(0, yPos, 0.16); g.add(b); });
         return g;
       }
@@ -1987,9 +1987,9 @@
         innerTorus.rotation.z -= 0.003;
         wire.rotation.y += 0.003;
         // Golden shields floating around the globe
-        orbitAngle += 0.012;
+        orbitAngle += 0.004;
         const orbitRadius = 2.2;
-        const bobAmount = 0.4;
+        const bobAmount = 0.15;
         orbitShield.position.x = Math.cos(orbitAngle) * orbitRadius;
         orbitShield.position.z = Math.sin(orbitAngle) * orbitRadius;
         orbitShield.position.y = Math.sin(orbitAngle * 1.5) * bobAmount;
