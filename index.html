@@ -1967,18 +1967,20 @@
         torus.rotation.z += 0.002;
         innerTorus.rotation.z -= 0.003;
         wire.rotation.y += 0.003;
-        // Shields orbit full 360° — always face toward camera, never edge-on
+        // Shields circle around globe in XY plane — always in front, always visible
         orbitAngle += 0.0018;
-        orbitShield.position.x = Math.cos(orbitAngle) * 2.5;
+        orbitShield.position.x = Math.cos(orbitAngle) * 1.8;
         orbitShield.position.y = Math.sin(orbitAngle) * 1.8;
-        orbitShield.position.z = Math.sin(orbitAngle) * 1.0;
-        orbitShield.lookAt(camera.position);
-        orbitShield.rotation.y += Math.sin(orbitAngle) * 0.4;
-        orbitShield2.position.x = Math.cos(orbitAngle + Math.PI) * 2.5;
+        orbitShield.position.z = 0.4;
+        orbitShield.rotation.x = Math.cos(orbitAngle) * 0.12;
+        orbitShield.rotation.y = Math.sin(orbitAngle) * 0.25;
+        orbitShield.rotation.z = 0;
+        orbitShield2.position.x = Math.cos(orbitAngle + Math.PI) * 1.8;
         orbitShield2.position.y = Math.sin(orbitAngle + Math.PI) * 1.8;
-        orbitShield2.position.z = Math.sin(orbitAngle + Math.PI) * 1.0;
-        orbitShield2.lookAt(camera.position);
-        orbitShield2.rotation.y += Math.sin(orbitAngle + Math.PI) * 0.4;
+        orbitShield2.position.z = 0.4;
+        orbitShield2.rotation.x = Math.cos(orbitAngle + Math.PI) * 0.12;
+        orbitShield2.rotation.y = Math.sin(orbitAngle + Math.PI) * 0.25;
+        orbitShield2.rotation.z = 0;
         renderer.render(scene, camera);
       }
       animate();
