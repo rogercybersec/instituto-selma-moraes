@@ -1820,20 +1820,20 @@
       };
       earthImg.src = 'earth-texture.jpg';
 
-      // NR-1 gold text — larger canvas so full text visible when facing camera
+      // NR-1 gold text — exact original working version
       const nr1Canvas = document.createElement('canvas');
-      nr1Canvas.width = 2048; nr1Canvas.height = 1024;
+      nr1Canvas.width = 1024; nr1Canvas.height = 512;
       const nctx = nr1Canvas.getContext('2d');
-      nctx.clearRect(0, 0, 2048, 1024);
+      nctx.clearRect(0, 0, 1024, 512);
       nctx.save();
       nctx.textAlign = 'center'; nctx.textBaseline = 'middle';
-      nctx.font = 'bold 220px Inter, Arial, sans-serif';
       nctx.shadowColor = 'rgba(255,215,0,0.9)'; nctx.shadowBlur = 40;
+      nctx.font = 'bold 130px Inter, Arial, sans-serif';
       nctx.fillStyle = 'rgba(255,215,0,0.95)';
-      nctx.fillText('NR-1', 1024, 512);
+      nctx.fillText('NR-1', 512, 256);
       nctx.shadowBlur = 0;
       nctx.strokeStyle = 'rgba(184,134,11,0.8)'; nctx.lineWidth = 3;
-      nctx.strokeText('NR-1', 1024, 512);
+      nctx.strokeText('NR-1', 512, 256);
       nctx.restore();
       const nr1Texture = new THREE.CanvasTexture(nr1Canvas);
       const nr1Geo = new THREE.SphereGeometry(0.86, 48, 48);
