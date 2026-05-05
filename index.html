@@ -1845,20 +1845,26 @@
       const particles = new THREE.Points(particleGeo, particleMat);
       group.add(particles);
 
-      // Orbiting Shield (flat shield shape circling the globe)
+      // Orbiting Shield (real heraldic shield shape)
       const orbitShieldGroup = new THREE.Group();
       scene.add(orbitShieldGroup);
       const shieldShape = new THREE.Shape();
-      shieldShape.moveTo(0, 0.25);
-      shieldShape.quadraticCurveTo(0.2, 0.2, 0.2, 0.05);
-      shieldShape.quadraticCurveTo(0.2, -0.15, 0, -0.25);
-      shieldShape.quadraticCurveTo(-0.2, -0.15, -0.2, 0.05);
-      shieldShape.quadraticCurveTo(-0.2, 0.2, 0, 0.25);
-      const shieldExtrudeSettings = { depth: 0.04, bevelEnabled: true, bevelThickness: 0.01, bevelSize: 0.01, bevelSegments: 3 };
+      shieldShape.moveTo(0, 0.32);
+      shieldShape.lineTo(0.22, 0.30);
+      shieldShape.lineTo(0.26, 0.22);
+      shieldShape.lineTo(0.26, 0.10);
+      shieldShape.lineTo(0.24, -0.02);
+      shieldShape.quadraticCurveTo(0.20, -0.18, 0, -0.32);
+      shieldShape.quadraticCurveTo(-0.20, -0.18, -0.24, -0.02);
+      shieldShape.lineTo(-0.26, 0.10);
+      shieldShape.lineTo(-0.26, 0.22);
+      shieldShape.lineTo(-0.22, 0.30);
+      shieldShape.lineTo(0, 0.32);
+      const shieldExtrudeSettings = { depth: 0.06, bevelEnabled: true, bevelThickness: 0.015, bevelSize: 0.015, bevelSegments: 4 };
       const orbitShieldGeo = new THREE.ExtrudeGeometry(shieldShape, shieldExtrudeSettings);
-      const orbitShieldMat = new THREE.MeshPhongMaterial({ color: 0x4CAF50, emissive: 0x1B5E20, shininess: 150, transparent: true, opacity: 0.9 });
+      const orbitShieldMat = new THREE.MeshPhongMaterial({ color: 0x4CAF50, emissive: 0x1B5E20, shininess: 150, transparent: true, opacity: 0.92 });
       const orbitShield = new THREE.Mesh(orbitShieldGeo, orbitShieldMat);
-      orbitShield.scale.set(0.6, 0.6, 0.6);
+      orbitShield.scale.set(0.55, 0.55, 0.55);
       orbitShieldGroup.add(orbitShield);
       const orbitShield2 = orbitShield.clone();
       orbitShield2.material = orbitShieldMat.clone();
