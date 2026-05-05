@@ -1879,53 +1879,48 @@
       function makeShieldShape(scale) {
         const s = new THREE.Shape();
         const k = scale;
-        s.moveTo(0, 0.38*k);
-        s.bezierCurveTo(0.10*k, 0.39*k, 0.24*k, 0.36*k, 0.30*k, 0.30*k);
-        s.bezierCurveTo(0.34*k, 0.24*k, 0.34*k, 0.14*k, 0.32*k, 0.04*k);
-        s.bezierCurveTo(0.30*k, -0.08*k, 0.22*k, -0.22*k, 0, -0.42*k);
-        s.bezierCurveTo(-0.22*k, -0.22*k, -0.30*k, -0.08*k, -0.32*k, 0.04*k);
-        s.bezierCurveTo(-0.34*k, 0.14*k, -0.34*k, 0.24*k, -0.30*k, 0.30*k);
-        s.bezierCurveTo(-0.24*k, 0.36*k, -0.10*k, 0.39*k, 0, 0.38*k);
+        s.moveTo(-0.30*k, 0.36*k);
+        s.lineTo(0.30*k, 0.36*k);
+        s.bezierCurveTo(0.34*k, 0.36*k, 0.36*k, 0.32*k, 0.36*k, 0.28*k);
+        s.lineTo(0.36*k, 0.10*k);
+        s.bezierCurveTo(0.35*k, -0.06*k, 0.26*k, -0.22*k, 0, -0.48*k);
+        s.bezierCurveTo(-0.26*k, -0.22*k, -0.35*k, -0.06*k, -0.36*k, 0.10*k);
+        s.lineTo(-0.36*k, 0.28*k);
+        s.bezierCurveTo(-0.36*k, 0.32*k, -0.34*k, 0.36*k, -0.30*k, 0.36*k);
         return s;
       }
       function makeGoldenShield() {
         const g = new THREE.Group();
-        // Back plate — dark gold, thick with deep bevel (relevo)
-        const backGeo = new THREE.ExtrudeGeometry(makeShieldShape(1), { depth: 0.12, bevelEnabled: true, bevelThickness: 0.04, bevelSize: 0.03, bevelSegments: 6 });
-        const backMat = new THREE.MeshPhongMaterial({ color: 0xB8860B, emissive: 0x6B4E0A, shininess: 180, specular: 0xDAA520 });
-        const back = new THREE.Mesh(backGeo, backMat);
-        g.add(back);
-        // Middle raised layer — brighter gold, raised for relevo effect
-        const midGeo = new THREE.ExtrudeGeometry(makeShieldShape(0.82), { depth: 0.06, bevelEnabled: true, bevelThickness: 0.02, bevelSize: 0.015, bevelSegments: 4 });
-        const midMat = new THREE.MeshPhongMaterial({ color: 0xDAA520, emissive: 0x8B6914, shininess: 220, specular: 0xFFD700 });
-        const mid = new THREE.Mesh(midGeo, midMat);
-        mid.position.z = 0.10;
-        g.add(mid);
-        // Inner face — bright shiny gold, raised highest
-        const innerGeo = new THREE.ExtrudeGeometry(makeShieldShape(0.62), { depth: 0.04, bevelEnabled: true, bevelThickness: 0.015, bevelSize: 0.01, bevelSegments: 3 });
-        const innerMat = new THREE.MeshPhongMaterial({ color: 0xFFD700, emissive: 0xB8860B, shininess: 280, specular: 0xFFFACD });
-        const inner = new THREE.Mesh(innerGeo, innerMat);
-        inner.position.z = 0.14;
-        g.add(inner);
-        // Border trim — thin raised edge around outside
-        const trimGeo = new THREE.TorusGeometry(0.33, 0.012, 8, 60);
-        const trimMat = new THREE.MeshPhongMaterial({ color: 0xCD9B1D, emissive: 0x8B6914, shininess: 250, specular: 0xFFD700 });
-        const trim = new THREE.Mesh(trimGeo, trimMat);
-        trim.position.z = 0.06; trim.position.y = -0.02;
-        trim.scale.set(1, 1.15, 1);
-        g.add(trim);
-        // Rivets — raised dome bolts around edge
-        const rivetGeo = new THREE.SphereGeometry(0.022, 12, 12);
-        const rivetMat = new THREE.MeshPhongMaterial({ color: 0xCD9B1D, emissive: 0x6B4E0A, shininess: 300, specular: 0xFFD700 });
-        const rivets = [[0,0.36],[0.16,0.34],[-0.16,0.34],[0.28,0.25],[-0.28,0.25],[0.32,0.10],[-0.32,0.10],[0.30,-0.04],[-0.30,-0.04],[0.22,-0.16],[-0.22,-0.16],[0.12,-0.28],[-0.12,-0.28],[0,-0.38]];
-        rivets.forEach(([x,y]) => { const r = new THREE.Mesh(rivetGeo, rivetMat); r.position.set(x, y, 0.16); g.add(r); });
-        // Center cross emblem (raised)
-        const crossV = new THREE.BoxGeometry(0.04, 0.16, 0.03);
-        const crossH = new THREE.BoxGeometry(0.12, 0.04, 0.03);
-        const crossMat = new THREE.MeshPhongMaterial({ color: 0xFFFACD, emissive: 0xDAA520, shininess: 200, specular: 0xFFFFFF });
-        const cv = new THREE.Mesh(crossV, crossMat); cv.position.set(0, 0, 0.19);
-        const ch = new THREE.Mesh(crossH, crossMat); ch.position.set(0, 0, 0.19);
-        g.add(cv); g.add(ch);
+        const darkMetal = 0x4A3C28;
+        const bronze = 0x8B6914;
+        const brightBronze = 0xCD9B1D;
+        const goldHL = 0xDAA520;
+        const backGeo = new THREE.ExtrudeGeometry(makeShieldShape(1), { depth: 0.14, bevelEnabled: true, bevelThickness: 0.05, bevelSize: 0.04, bevelSegments: 8 });
+        const backMat = new THREE.MeshPhongMaterial({ color: darkMetal, emissive: 0x1a1408, shininess: 120, specular: bronze });
+        g.add(new THREE.Mesh(backGeo, backMat));
+        const borderGeo = new THREE.ExtrudeGeometry(makeShieldShape(0.92), { depth: 0.08, bevelEnabled: true, bevelThickness: 0.03, bevelSize: 0.02, bevelSegments: 5 });
+        const borderMat = new THREE.MeshPhongMaterial({ color: bronze, emissive: 0x3d2a08, shininess: 200, specular: goldHL });
+        const bdr = new THREE.Mesh(borderGeo, borderMat); bdr.position.z = 0.08; g.add(bdr);
+        const innerGeo = new THREE.ExtrudeGeometry(makeShieldShape(0.72), { depth: 0.03, bevelEnabled: true, bevelThickness: 0.01, bevelSize: 0.008, bevelSegments: 3 });
+        const innerMat = new THREE.MeshPhongMaterial({ color: 0x2E2218, emissive: 0x0d0a06, shininess: 80, specular: 0x5C4A2E });
+        const inn = new THREE.Mesh(innerGeo, innerMat); inn.position.z = 0.12; g.add(inn);
+        const bladeShape = new THREE.Shape();
+        bladeShape.moveTo(0, 0.22);
+        bladeShape.lineTo(0.025, 0.18); bladeShape.lineTo(0.018, -0.14);
+        bladeShape.lineTo(0.04, -0.14); bladeShape.lineTo(0.04, -0.17);
+        bladeShape.lineTo(0.018, -0.17); bladeShape.lineTo(0.012, -0.24);
+        bladeShape.lineTo(-0.012, -0.24); bladeShape.lineTo(-0.018, -0.17);
+        bladeShape.lineTo(-0.04, -0.17); bladeShape.lineTo(-0.04, -0.14);
+        bladeShape.lineTo(-0.018, -0.14); bladeShape.lineTo(-0.025, 0.18);
+        bladeShape.lineTo(0, 0.22);
+        const bladeGeo = new THREE.ExtrudeGeometry(bladeShape, { depth: 0.05, bevelEnabled: true, bevelThickness: 0.01, bevelSize: 0.006, bevelSegments: 3 });
+        const bladeMat = new THREE.MeshPhongMaterial({ color: brightBronze, emissive: 0x5C4A1E, shininess: 300, specular: 0xFFD700 });
+        const blade = new THREE.Mesh(bladeGeo, bladeMat); blade.position.set(0, 0, 0.14); g.add(blade);
+        const rivetGeo = new THREE.SphereGeometry(0.025, 12, 12);
+        const rivetMat = new THREE.MeshPhongMaterial({ color: brightBronze, emissive: 0x4A3C18, shininess: 280, specular: goldHL });
+        [[0.28,0.30],[-0.28,0.30],[0.30,0.16],[-0.30,0.16],[0.28,0.02],[-0.28,0.02],[0.22,-0.12],[-0.22,-0.12],[0.14,-0.24],[-0.14,-0.24],[0,-0.36]].forEach(([x,y]) => { const r = new THREE.Mesh(rivetGeo, rivetMat); r.position.set(x, y, 0.18); g.add(r); });
+        const bandMat = new THREE.MeshPhongMaterial({ color: bronze, emissive: 0x2a1e08, shininess: 160, specular: brightBronze });
+        [0.20, 0.02, -0.14].forEach(yPos => { const b = new THREE.Mesh(new THREE.BoxGeometry(0.50, 0.018, 0.03), bandMat); b.position.set(0, yPos, 0.16); g.add(b); });
         return g;
       }
       const orbitShield = makeGoldenShield();
@@ -1966,10 +1961,24 @@
         targetRotY = 0;
       });
 
+      const baseDirIntensity = dirLight.intensity;
+      const baseDir2Intensity = dirLight2.intensity;
+      const baseGoldIntensity = goldLight.intensity;
+      const baseRimIntensity = rimLight.intensity;
+
       let orbitAngle = 0;
       function animate() {
         requestAnimationFrame(animate);
         earth.rotation.y += 0.004;
+        // Dim lights when NR-1 text faces camera for readability
+        const nr1Angle = (earth.rotation.y % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);
+        const facing = Math.cos(nr1Angle);
+        const dimFactor = facing > 0 ? 1.0 - facing * 0.55 : 1.0;
+        dirLight.intensity = baseDirIntensity * dimFactor;
+        dirLight2.intensity = baseDir2Intensity * dimFactor;
+        goldLight.intensity = baseGoldIntensity * dimFactor;
+        rimLight.intensity = baseRimIntensity * dimFactor;
+
         group.rotation.x += (targetRotX * 0.3 - group.rotation.x) * 0.05;
         group.rotation.y += (targetRotY * 0.3 - group.rotation.y) * 0.02;
         particles.rotation.y -= 0.003;
