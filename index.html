@@ -1820,21 +1820,23 @@
       };
       earthImg.src = 'earth-texture.jpg';
 
-      // NR-1 gold text — exact original working version
+      // NR-1 gold text — 3 copies 120° apart so always visible while rotating
       const nr1Canvas = document.createElement('canvas');
       nr1Canvas.width = 1024; nr1Canvas.height = 512;
       const nctx = nr1Canvas.getContext('2d');
       nctx.clearRect(0, 0, 1024, 512);
-      nctx.save();
       nctx.textAlign = 'center'; nctx.textBaseline = 'middle';
-      nctx.shadowColor = 'rgba(255,215,0,0.9)'; nctx.shadowBlur = 40;
       nctx.font = 'bold 130px Inter, Arial, sans-serif';
-      nctx.fillStyle = 'rgba(255,215,0,0.95)';
-      nctx.fillText('NR-1', 512, 256);
-      nctx.shadowBlur = 0;
-      nctx.strokeStyle = 'rgba(184,134,11,0.8)'; nctx.lineWidth = 3;
-      nctx.strokeText('NR-1', 512, 256);
-      nctx.restore();
+      [170, 512, 854].forEach(function(xPos) {
+        nctx.save();
+        nctx.shadowColor = 'rgba(255,215,0,0.9)'; nctx.shadowBlur = 40;
+        nctx.fillStyle = 'rgba(255,215,0,0.95)';
+        nctx.fillText('NR-1', xPos, 256);
+        nctx.shadowBlur = 0;
+        nctx.strokeStyle = 'rgba(184,134,11,0.8)'; nctx.lineWidth = 3;
+        nctx.strokeText('NR-1', xPos, 256);
+        nctx.restore();
+      });
       const nr1Texture = new THREE.CanvasTexture(nr1Canvas);
       const nr1Geo = new THREE.SphereGeometry(0.86, 48, 48);
       const nr1Mat = new THREE.MeshBasicMaterial({ map: nr1Texture, transparent: true, depthWrite: false, side: THREE.FrontSide });
