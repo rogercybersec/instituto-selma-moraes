@@ -1818,10 +1818,11 @@
       ctx.lineWidth = 0.8;
       for (let i = 0; i < 18; i++) { ctx.beginPath(); ctx.moveTo(i*57, 0); ctx.lineTo(i*57, 512); ctx.stroke(); }
       for (let i = 0; i < 9; i++) { ctx.beginPath(); ctx.moveTo(0, i*57); ctx.lineTo(1024, i*57); ctx.stroke(); }
-      // Continents — translucent teal with bright edges
-      ctx.fillStyle = 'rgba(42,157,143,0.5)';
-      ctx.strokeStyle = 'rgba(82,199,184,0.9)';
-      ctx.lineWidth = 2;
+      // Continents — clearly visible with glowing edges
+      ctx.shadowColor = 'rgba(42,157,143,0.6)'; ctx.shadowBlur = 10;
+      ctx.fillStyle = 'rgba(42,157,143,0.75)';
+      ctx.strokeStyle = 'rgba(130,230,210,1)';
+      ctx.lineWidth = 3;
       ctx.beginPath(); ctx.moveTo(300,240); ctx.quadraticCurveTo(280,260,285,300); ctx.quadraticCurveTo(290,340,310,370); ctx.quadraticCurveTo(315,390,305,400); ctx.quadraticCurveTo(295,380,280,350); ctx.quadraticCurveTo(270,310,265,280); ctx.quadraticCurveTo(260,250,270,230); ctx.quadraticCurveTo(285,220,300,240); ctx.fill(); ctx.stroke();
       ctx.beginPath(); ctx.moveTo(240,120); ctx.quadraticCurveTo(220,140,210,170); ctx.quadraticCurveTo(200,200,230,220); ctx.quadraticCurveTo(260,230,280,225); ctx.quadraticCurveTo(300,215,290,190); ctx.quadraticCurveTo(280,160,260,140); ctx.quadraticCurveTo(250,125,240,120); ctx.fill(); ctx.stroke();
       ctx.beginPath(); ctx.moveTo(520,200); ctx.quadraticCurveTo(500,220,495,260); ctx.quadraticCurveTo(490,300,510,350); ctx.quadraticCurveTo(520,380,540,370); ctx.quadraticCurveTo(555,340,550,300); ctx.quadraticCurveTo(545,260,540,230); ctx.quadraticCurveTo(535,210,520,200); ctx.fill(); ctx.stroke();
@@ -1852,7 +1853,7 @@
       earthTexture.wrapS = THREE.RepeatWrapping;
       // Translucent glass-like globe
       const earthGeo = new THREE.SphereGeometry(0.85, 48, 48);
-      const earthMat = new THREE.MeshPhongMaterial({ map: earthTexture, shininess: 120, specular: 0x2A9D8F, transparent: true, opacity: 0.6, side: THREE.DoubleSide });
+      const earthMat = new THREE.MeshPhongMaterial({ map: earthTexture, shininess: 80, specular: 0x2A9D8F, transparent: true, opacity: 0.75, side: THREE.DoubleSide });
       const earth = new THREE.Mesh(earthGeo, earthMat);
       group.add(earth);
 
@@ -1888,64 +1889,86 @@
       const particles = new THREE.Points(particleGeo, particleMat);
       group.add(particles);
 
-      // Orbiting Golden Shield (metallic with rivets)
+      // Orbiting Golden Shield — with relevo (embossed edges, 3D depth)
       const orbitShieldGroup = new THREE.Group();
       scene.add(orbitShieldGroup);
-      function makeGoldenShield() {
+      function makeShieldShape(scale) {
         const s = new THREE.Shape();
-        s.moveTo(0, 0.35);
-        s.bezierCurveTo(0.12, 0.35, 0.25, 0.33, 0.28, 0.28);
-        s.lineTo(0.30, 0.18);
-        s.lineTo(0.28, 0.05);
-        s.lineTo(0.24, -0.08);
-        s.bezierCurveTo(0.20, -0.20, 0.10, -0.30, 0, -0.38);
-        s.bezierCurveTo(-0.10, -0.30, -0.20, -0.20, -0.24, -0.08);
-        s.lineTo(-0.28, 0.05);
-        s.lineTo(-0.30, 0.18);
-        s.lineTo(-0.28, 0.28);
-        s.bezierCurveTo(-0.25, 0.33, -0.12, 0.35, 0, 0.35);
-        const geo = new THREE.ExtrudeGeometry(s, { depth: 0.08, bevelEnabled: true, bevelThickness: 0.025, bevelSize: 0.02, bevelSegments: 5 });
-        const mat = new THREE.MeshPhongMaterial({ color: 0xDAA520, emissive: 0x8B6914, shininess: 200, specular: 0xFFD700, transparent: true, opacity: 0.95 });
-        const mesh = new THREE.Mesh(geo, mat);
-        const s2 = new THREE.Shape();
-        s2.moveTo(0, 0.26);
-        s2.bezierCurveTo(0.09, 0.26, 0.18, 0.24, 0.20, 0.20);
-        s2.lineTo(0.21, 0.13); s2.lineTo(0.20, 0.03); s2.lineTo(0.17, -0.06);
-        s2.bezierCurveTo(0.14, -0.15, 0.07, -0.22, 0, -0.28);
-        s2.bezierCurveTo(-0.07, -0.22, -0.14, -0.15, -0.17, -0.06);
-        s2.lineTo(-0.20, 0.03); s2.lineTo(-0.21, 0.13); s2.lineTo(-0.20, 0.20);
-        s2.bezierCurveTo(-0.18, 0.24, -0.09, 0.26, 0, 0.26);
-        const innerGeo = new THREE.ExtrudeGeometry(s2, { depth: 0.02, bevelEnabled: false });
-        const innerMat = new THREE.MeshPhongMaterial({ color: 0xFFD700, emissive: 0xB8860B, shininess: 250, specular: 0xFFFACD });
-        const innerMesh = new THREE.Mesh(innerGeo, innerMat);
-        innerMesh.position.z = 0.07;
-        const rivetGeo = new THREE.SphereGeometry(0.018, 8, 8);
-        const rivetMat = new THREE.MeshPhongMaterial({ color: 0xB8860B, shininess: 300, specular: 0xFFD700 });
-        const rivets = [[0,0.33],[0.15,0.32],[-0.15,0.32],[0.27,0.22],[-0.27,0.22],[0.28,0.08],[-0.28,0.08],[0.22,-0.08],[-0.22,-0.08],[0.13,-0.22],[-0.13,-0.22],[0,-0.35]];
+        const k = scale;
+        s.moveTo(0, 0.38*k);
+        s.bezierCurveTo(0.10*k, 0.39*k, 0.24*k, 0.36*k, 0.30*k, 0.30*k);
+        s.bezierCurveTo(0.34*k, 0.24*k, 0.34*k, 0.14*k, 0.32*k, 0.04*k);
+        s.bezierCurveTo(0.30*k, -0.08*k, 0.22*k, -0.22*k, 0, -0.42*k);
+        s.bezierCurveTo(-0.22*k, -0.22*k, -0.30*k, -0.08*k, -0.32*k, 0.04*k);
+        s.bezierCurveTo(-0.34*k, 0.14*k, -0.34*k, 0.24*k, -0.30*k, 0.30*k);
+        s.bezierCurveTo(-0.24*k, 0.36*k, -0.10*k, 0.39*k, 0, 0.38*k);
+        return s;
+      }
+      function makeGoldenShield() {
         const g = new THREE.Group();
-        g.add(mesh); g.add(innerMesh);
-        rivets.forEach(([x,y]) => { const r = new THREE.Mesh(rivetGeo, rivetMat); r.position.set(x, y, 0.10); g.add(r); });
+        // Back plate — dark gold, thick with deep bevel (relevo)
+        const backGeo = new THREE.ExtrudeGeometry(makeShieldShape(1), { depth: 0.12, bevelEnabled: true, bevelThickness: 0.04, bevelSize: 0.03, bevelSegments: 6 });
+        const backMat = new THREE.MeshPhongMaterial({ color: 0xB8860B, emissive: 0x6B4E0A, shininess: 180, specular: 0xDAA520 });
+        const back = new THREE.Mesh(backGeo, backMat);
+        g.add(back);
+        // Middle raised layer — brighter gold, raised for relevo effect
+        const midGeo = new THREE.ExtrudeGeometry(makeShieldShape(0.82), { depth: 0.06, bevelEnabled: true, bevelThickness: 0.02, bevelSize: 0.015, bevelSegments: 4 });
+        const midMat = new THREE.MeshPhongMaterial({ color: 0xDAA520, emissive: 0x8B6914, shininess: 220, specular: 0xFFD700 });
+        const mid = new THREE.Mesh(midGeo, midMat);
+        mid.position.z = 0.10;
+        g.add(mid);
+        // Inner face — bright shiny gold, raised highest
+        const innerGeo = new THREE.ExtrudeGeometry(makeShieldShape(0.62), { depth: 0.04, bevelEnabled: true, bevelThickness: 0.015, bevelSize: 0.01, bevelSegments: 3 });
+        const innerMat = new THREE.MeshPhongMaterial({ color: 0xFFD700, emissive: 0xB8860B, shininess: 280, specular: 0xFFFACD });
+        const inner = new THREE.Mesh(innerGeo, innerMat);
+        inner.position.z = 0.14;
+        g.add(inner);
+        // Border trim — thin raised edge around outside
+        const trimGeo = new THREE.TorusGeometry(0.33, 0.012, 8, 60);
+        const trimMat = new THREE.MeshPhongMaterial({ color: 0xCD9B1D, emissive: 0x8B6914, shininess: 250, specular: 0xFFD700 });
+        const trim = new THREE.Mesh(trimGeo, trimMat);
+        trim.position.z = 0.06; trim.position.y = -0.02;
+        trim.scale.set(1, 1.15, 1);
+        g.add(trim);
+        // Rivets — raised dome bolts around edge
+        const rivetGeo = new THREE.SphereGeometry(0.022, 12, 12);
+        const rivetMat = new THREE.MeshPhongMaterial({ color: 0xCD9B1D, emissive: 0x6B4E0A, shininess: 300, specular: 0xFFD700 });
+        const rivets = [[0,0.36],[0.16,0.34],[-0.16,0.34],[0.28,0.25],[-0.28,0.25],[0.32,0.10],[-0.32,0.10],[0.30,-0.04],[-0.30,-0.04],[0.22,-0.16],[-0.22,-0.16],[0.12,-0.28],[-0.12,-0.28],[0,-0.38]];
+        rivets.forEach(([x,y]) => { const r = new THREE.Mesh(rivetGeo, rivetMat); r.position.set(x, y, 0.16); g.add(r); });
+        // Center cross emblem (raised)
+        const crossV = new THREE.BoxGeometry(0.04, 0.16, 0.03);
+        const crossH = new THREE.BoxGeometry(0.12, 0.04, 0.03);
+        const crossMat = new THREE.MeshPhongMaterial({ color: 0xFFFACD, emissive: 0xDAA520, shininess: 200, specular: 0xFFFFFF });
+        const cv = new THREE.Mesh(crossV, crossMat); cv.position.set(0, 0, 0.19);
+        const ch = new THREE.Mesh(crossH, crossMat); ch.position.set(0, 0, 0.19);
+        g.add(cv); g.add(ch);
         return g;
       }
       const orbitShield = makeGoldenShield();
-      orbitShield.scale.set(0.5, 0.5, 0.5);
+      orbitShield.scale.set(0.45, 0.45, 0.45);
       orbitShieldGroup.add(orbitShield);
       const orbitShield2 = makeGoldenShield();
-      orbitShield2.scale.set(0.5, 0.5, 0.5);
+      orbitShield2.scale.set(0.45, 0.45, 0.45);
       orbitShieldGroup.add(orbitShield2);
 
-      // Lighting
-      const ambientLight = new THREE.AmbientLight(0x334455, 0.6);
+      // Lighting — warm for realistic gold + cool for globe
+      const ambientLight = new THREE.AmbientLight(0x445566, 0.5);
       scene.add(ambientLight);
-      const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
-      dirLight.position.set(3, 3, 5);
+      const dirLight = new THREE.DirectionalLight(0xfff5e0, 1.0);
+      dirLight.position.set(3, 4, 5);
       scene.add(dirLight);
-      const pointLight = new THREE.PointLight(0x2A9D8F, 0.6, 10);
+      const dirLight2 = new THREE.DirectionalLight(0xffd700, 0.4);
+      dirLight2.position.set(-3, 2, 3);
+      scene.add(dirLight2);
+      const pointLight = new THREE.PointLight(0x2A9D8F, 0.5, 10);
       pointLight.position.set(-2, 2, 3);
       scene.add(pointLight);
-      const goldLight = new THREE.PointLight(0xFFD700, 0.5, 8);
+      const goldLight = new THREE.PointLight(0xFFD700, 0.7, 8);
       goldLight.position.set(2, 1, 4);
       scene.add(goldLight);
+      const rimLight = new THREE.PointLight(0xFFA500, 0.3, 6);
+      rimLight.position.set(0, -2, 3);
+      scene.add(rimLight);
 
       // Mouse interaction
       let targetRotX = 0, targetRotY = 0;
