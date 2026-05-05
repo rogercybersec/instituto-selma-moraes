@@ -1957,6 +1957,7 @@
       function animate() {
         requestAnimationFrame(animate);
         earth.rotation.y += 0.004;
+        nr1Mesh.rotation.y += 0.003;
 
         group.rotation.x += (targetRotX * 0.3 - group.rotation.x) * 0.05;
         group.rotation.y += (targetRotY * 0.3 - group.rotation.y) * 0.02;
