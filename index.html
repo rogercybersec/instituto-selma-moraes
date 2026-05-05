@@ -209,6 +209,82 @@
       -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 80%);
     }
 
+    /* 3D Particle Wave Canvas */
+    #heroCanvas {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    /* 3D tilt effect for cards */
+    .tilt-3d {
+      perspective: 1000px;
+    }
+    .tilt-3d-inner {
+      transform-style: preserve-3d;
+      transition: transform 0.15s ease-out;
+    }
+    .tilt-3d-inner .glass-card-title,
+    .tilt-3d-inner .stat-value {
+      transform: translateZ(40px);
+    }
+    .tilt-3d-inner .stat-desc {
+      transform: translateZ(20px);
+    }
+
+    /* Card shine sweep */
+    .glass-card { position: relative; overflow: hidden; }
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
+      transition: left 0.8s;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .glass-card:hover::before { left: 100%; }
+
+    /* 3D rotating glow ring on CTA */
+    .btn-glow { position: relative; }
+    .btn-glow::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: inherit;
+      background: conic-gradient(from 0deg, var(--green), var(--teal), var(--green-bright), var(--green));
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.4s;
+      filter: blur(8px);
+      animation: spin3d 4s linear infinite;
+    }
+    .btn-glow:hover::before { opacity: 0.7; }
+    @keyframes spin3d { to { transform: rotate(360deg); } }
+
+    /* 3D section entrance */
+    .sr-3d {
+      opacity: 0;
+      transform: perspective(800px) rotateX(8deg) translateY(60px);
+      transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .sr-3d.visible {
+      opacity: 1;
+      transform: perspective(800px) rotateX(0) translateY(0);
+    }
+
+    /* Method cards 3D hover */
+    .phase-card {
+      transition: transform 0.4s cubic-bezier(0.03, 0.98, 0.52, 0.99), box-shadow 0.4s;
+    }
+    .phase-card:hover {
+      transform: perspective(600px) rotateY(-5deg) rotateX(3deg) translateY(-8px) scale(1.02);
+      box-shadow: 20px 20px 60px rgba(0,0,0,0.15), -5px -5px 20px rgba(42,157,143,0.05);
+    }
+
     /* Animated gradient orbs */
     .hero-orb {
       position: absolute;
@@ -1174,6 +1250,7 @@
 
   <!-- HERO — IMMERSIVE DARK WITH INTERACTIVE EFFECTS -->
   <section class="hero" id="hero">
+    <canvas id="heroCanvas"></canvas>
     <div class="hero-grid"></div>
     <div class="hero-orb hero-orb-1"></div>
     <div class="hero-orb hero-orb-2"></div>
@@ -1215,8 +1292,8 @@
           </a>
         </div>
       </div>
-      <div class="hero-card-wrapper">
-        <div class="glass-card">
+      <div class="hero-card-wrapper tilt-3d">
+        <div class="glass-card tilt-3d-inner" id="tiltCard">
           <div class="glass-card-title">O custo de não agir</div>
           <div class="stat-block">
             <div>
@@ -1616,6 +1693,106 @@
         btn.style.background = '';
       }, 4000);
     });
+
+    // ─── 3D Particle Wave (Canvas) ───
+    (function() {
+      const canvas = document.getElementById('heroCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let w, h, cols, rows, dots = [];
+      let mouseX = 0, mouseY = 0;
+      const spacing = 30;
+      const baseR = 1.5;
+
+      function resize() {
+        w = canvas.width = canvas.parentElement.offsetWidth;
+        h = canvas.height = canvas.parentElement.offsetHeight;
+        cols = Math.ceil(w / spacing) + 1;
+        rows = Math.ceil(h / spacing) + 1;
+        dots = [];
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols; c++) {
+            dots.push({ x: c * spacing, y: r * spacing, bx: c * spacing, by: r * spacing });
+          }
+        }
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      const heroEl = document.querySelector('.hero');
+      heroEl.addEventListener('mousemove', (e) => {
+        const rect = heroEl.getBoundingClientRect();
+        mouseX = e.clientX - rect.left;
+        mouseY = e.clientY - rect.top;
+      });
+
+      let t = 0;
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+        t += 0.008;
+        for (let i = 0; i < dots.length; i++) {
+          const d = dots[i];
+          const wave = Math.sin(d.bx * 0.008 + t * 3) * 8 + Math.cos(d.by * 0.006 + t * 2) * 6;
+          d.x = d.bx;
+          d.y = d.by + wave;
+          const dx = mouseX - d.x;
+          const dy = mouseY - d.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const maxDist = 180;
+          if (dist < maxDist) {
+            const force = (1 - dist / maxDist) * 18;
+            d.x -= (dx / dist) * force;
+            d.y -= (dy / dist) * force;
+          }
+          const alpha = 0.08 + (dist < maxDist ? (1 - dist / maxDist) * 0.25 : 0);
+          const radius = baseR + (dist < maxDist ? (1 - dist / maxDist) * 2 : 0);
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(42, 157, 143, ${alpha})`;
+          ctx.fill();
+        }
+        for (let i = 0; i < dots.length; i++) {
+          const a = dots[i];
+          const dxa = mouseX - a.x, dya = mouseY - a.y;
+          const da = Math.sqrt(dxa * dxa + dya * dya);
+          if (da > 150) continue;
+          for (let j = i + 1; j < dots.length; j++) {
+            const b = dots[j];
+            const ddx = a.x - b.x, ddy = a.y - b.y;
+            const dd = Math.sqrt(ddx * ddx + ddy * ddy);
+            if (dd < spacing * 1.8) {
+              ctx.beginPath();
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(b.x, b.y);
+              ctx.strokeStyle = `rgba(42, 157, 143, ${0.06 * (1 - da / 150)})`;
+              ctx.lineWidth = 0.5;
+              ctx.stroke();
+            }
+          }
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    // ─── 3D Tilt Effect on Glass Card ───
+    (function() {
+      const card = document.getElementById('tiltCard');
+      if (!card) return;
+      const wrapper = card.parentElement;
+      wrapper.addEventListener('mousemove', (e) => {
+        const rect = wrapper.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `rotateY(${x * 12}deg) rotateX(${-y * 12}deg) scale(1.02)`;
+      });
+      wrapper.addEventListener('mouseleave', () => {
+        card.style.transform = 'rotateY(0) rotateX(0) scale(1)';
+      });
+    })();
+
+    // ─── 3D scroll reveal ───
+    document.querySelectorAll('.sr-3d').forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
