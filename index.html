@@ -1808,11 +1808,13 @@
 
       // Real NASA Earth texture + NR-1 text overlay
       const earthGeo = new THREE.SphereGeometry(0.85, 48, 48);
-      const textureLoader = new THREE.TextureLoader();
-      const earthTexture = textureLoader.load('earth-texture.jpg');
-      const earthMat = new THREE.MeshPhongMaterial({ map: earthTexture, shininess: 60, specular: 0x2A9D8F, transparent: true, opacity: 0.72, side: THREE.DoubleSide });
+      const earthMat = new THREE.MeshPhongMaterial({ color: 0xffffff, shininess: 60, specular: 0x2A9D8F, transparent: true, opacity: 0.85, side: THREE.DoubleSide });
       const earth = new THREE.Mesh(earthGeo, earthMat);
       group.add(earth);
+      new THREE.TextureLoader().load('earth-texture.jpg', function(tex) {
+        earthMat.map = tex;
+        earthMat.needsUpdate = true;
+      });
 
       // NR-1 gold text on separate transparent sphere overlay
       const nr1Canvas = document.createElement('canvas');
