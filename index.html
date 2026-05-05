@@ -1898,13 +1898,13 @@
         const warmGold = 0xB8962E;
         const specGold = 0x8B7328;
         const backGeo = new THREE.ExtrudeGeometry(makeShieldShape(1), { depth: 0.14, bevelEnabled: true, bevelThickness: 0.05, bevelSize: 0.04, bevelSegments: 8 });
-        const backMat = new THREE.MeshPhongMaterial({ color: darkGold, emissive: 0x1a1508, shininess: 40, specular: specGold, side: THREE.DoubleSide });
+        const backMat = new THREE.MeshPhongMaterial({ color: darkGold, emissive: 0x1a1508, shininess: 40, specular: specGold, side: THREE.DoubleSide, depthTest: false });
         g.add(new THREE.Mesh(backGeo, backMat));
         const borderGeo = new THREE.ExtrudeGeometry(makeShieldShape(0.92), { depth: 0.08, bevelEnabled: true, bevelThickness: 0.03, bevelSize: 0.02, bevelSegments: 5 });
-        const borderMat = new THREE.MeshPhongMaterial({ color: midGold, emissive: 0x201a08, shininess: 60, specular: specGold, side: THREE.DoubleSide });
+        const borderMat = new THREE.MeshPhongMaterial({ color: midGold, emissive: 0x201a08, shininess: 60, specular: specGold, side: THREE.DoubleSide, depthTest: false });
         const bdr = new THREE.Mesh(borderGeo, borderMat); bdr.position.z = 0.08; g.add(bdr);
         const innerGeo = new THREE.ExtrudeGeometry(makeShieldShape(0.72), { depth: 0.03, bevelEnabled: true, bevelThickness: 0.01, bevelSize: 0.008, bevelSegments: 3 });
-        const innerMat = new THREE.MeshPhongMaterial({ color: 0x3D3018, emissive: 0x0d0a06, shininess: 30, specular: 0x4A3E20, side: THREE.DoubleSide });
+        const innerMat = new THREE.MeshPhongMaterial({ color: 0x3D3018, emissive: 0x0d0a06, shininess: 30, specular: 0x4A3E20, side: THREE.DoubleSide, depthTest: false });
         const inn = new THREE.Mesh(innerGeo, innerMat); inn.position.z = 0.12; g.add(inn);
         const bladeShape = new THREE.Shape();
         bladeShape.moveTo(0, 0.22);
@@ -1916,12 +1916,12 @@
         bladeShape.lineTo(-0.018, -0.14); bladeShape.lineTo(-0.025, 0.18);
         bladeShape.lineTo(0, 0.22);
         const bladeGeo = new THREE.ExtrudeGeometry(bladeShape, { depth: 0.05, bevelEnabled: true, bevelThickness: 0.01, bevelSize: 0.006, bevelSegments: 3 });
-        const bladeMat = new THREE.MeshPhongMaterial({ color: warmGold, emissive: 0x2a2010, shininess: 50, specular: specGold, side: THREE.DoubleSide });
+        const bladeMat = new THREE.MeshPhongMaterial({ color: warmGold, emissive: 0x2a2010, shininess: 50, specular: specGold, side: THREE.DoubleSide, depthTest: false });
         const blade = new THREE.Mesh(bladeGeo, bladeMat); blade.position.set(0, 0, 0.14); g.add(blade);
         const rivetGeo = new THREE.SphereGeometry(0.025, 12, 12);
-        const rivetMat = new THREE.MeshPhongMaterial({ color: warmGold, emissive: 0x201a0a, shininess: 50, specular: specGold, side: THREE.DoubleSide });
+        const rivetMat = new THREE.MeshPhongMaterial({ color: warmGold, emissive: 0x201a0a, shininess: 50, specular: specGold, side: THREE.DoubleSide, depthTest: false });
         [[0.28,0.30],[-0.28,0.30],[0.30,0.16],[-0.30,0.16],[0.28,0.02],[-0.28,0.02],[0.22,-0.12],[-0.22,-0.12],[0.14,-0.24],[-0.14,-0.24],[0,-0.36]].forEach(([x,y]) => { const r = new THREE.Mesh(rivetGeo, rivetMat); r.position.set(x, y, 0.18); g.add(r); });
-        const bandMat = new THREE.MeshPhongMaterial({ color: midGold, emissive: 0x151008, shininess: 40, specular: specGold, side: THREE.DoubleSide });
+        const bandMat = new THREE.MeshPhongMaterial({ color: midGold, emissive: 0x151008, shininess: 40, specular: specGold, side: THREE.DoubleSide, depthTest: false });
         [0.20, 0.02, -0.14].forEach(yPos => { const b = new THREE.Mesh(new THREE.BoxGeometry(0.50, 0.018, 0.03), bandMat); b.position.set(0, yPos, 0.16); g.add(b); });
         return g;
       }
@@ -1967,20 +1967,19 @@
         torus.rotation.z += 0.002;
         innerTorus.rotation.z -= 0.003;
         wire.rotation.y += 0.003;
-        // Shields circle around globe in XY plane — always in front, always visible
+        // Shields orbit horizontally around globe — original path
         orbitAngle += 0.0018;
-        orbitShield.position.x = Math.cos(orbitAngle) * 1.8;
-        orbitShield.position.y = Math.sin(orbitAngle) * 1.8;
-        orbitShield.position.z = 0.4;
-        orbitShield.rotation.x = Math.cos(orbitAngle) * 0.12;
-        orbitShield.rotation.y = Math.sin(orbitAngle) * 0.25;
-        orbitShield.rotation.z = 0;
-        orbitShield2.position.x = Math.cos(orbitAngle + Math.PI) * 1.8;
-        orbitShield2.position.y = Math.sin(orbitAngle + Math.PI) * 1.8;
-        orbitShield2.position.z = 0.4;
-        orbitShield2.rotation.x = Math.cos(orbitAngle + Math.PI) * 0.12;
-        orbitShield2.rotation.y = Math.sin(orbitAngle + Math.PI) * 0.25;
-        orbitShield2.rotation.z = 0;
+        var oRadius = 2.2;
+        orbitShield.position.x = Math.cos(orbitAngle) * oRadius;
+        orbitShield.position.z = Math.sin(orbitAngle) * oRadius;
+        orbitShield.position.y = Math.sin(orbitAngle * 1.5) * 0.15;
+        orbitShield.rotation.y = -orbitAngle + Math.PI / 2;
+        orbitShield.rotation.x = Math.sin(orbitAngle * 0.8) * 0.08;
+        orbitShield2.position.x = Math.cos(orbitAngle + Math.PI) * oRadius;
+        orbitShield2.position.z = Math.sin(orbitAngle + Math.PI) * oRadius;
+        orbitShield2.position.y = Math.sin((orbitAngle + Math.PI) * 1.5) * 0.15;
+        orbitShield2.rotation.y = -(orbitAngle + Math.PI) + Math.PI / 2;
+        orbitShield2.rotation.x = Math.sin((orbitAngle + Math.PI) * 0.8) * 0.08;
         renderer.render(scene, camera);
       }
       animate();
