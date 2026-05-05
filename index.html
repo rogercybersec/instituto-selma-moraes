@@ -1845,31 +1845,50 @@
       const particles = new THREE.Points(particleGeo, particleMat);
       group.add(particles);
 
-      // Orbiting Shield (real heraldic shield shape)
+      // Orbiting Golden Shield (metallic with rivets)
       const orbitShieldGroup = new THREE.Group();
       scene.add(orbitShieldGroup);
-      const shieldShape = new THREE.Shape();
-      shieldShape.moveTo(0, 0.32);
-      shieldShape.lineTo(0.22, 0.30);
-      shieldShape.lineTo(0.26, 0.22);
-      shieldShape.lineTo(0.26, 0.10);
-      shieldShape.lineTo(0.24, -0.02);
-      shieldShape.quadraticCurveTo(0.20, -0.18, 0, -0.32);
-      shieldShape.quadraticCurveTo(-0.20, -0.18, -0.24, -0.02);
-      shieldShape.lineTo(-0.26, 0.10);
-      shieldShape.lineTo(-0.26, 0.22);
-      shieldShape.lineTo(-0.22, 0.30);
-      shieldShape.lineTo(0, 0.32);
-      const shieldExtrudeSettings = { depth: 0.06, bevelEnabled: true, bevelThickness: 0.015, bevelSize: 0.015, bevelSegments: 4 };
-      const orbitShieldGeo = new THREE.ExtrudeGeometry(shieldShape, shieldExtrudeSettings);
-      const orbitShieldMat = new THREE.MeshPhongMaterial({ color: 0x4CAF50, emissive: 0x1B5E20, shininess: 150, transparent: true, opacity: 0.92 });
-      const orbitShield = new THREE.Mesh(orbitShieldGeo, orbitShieldMat);
-      orbitShield.scale.set(0.55, 0.55, 0.55);
+      function makeGoldenShield() {
+        const s = new THREE.Shape();
+        s.moveTo(0, 0.35);
+        s.bezierCurveTo(0.12, 0.35, 0.25, 0.33, 0.28, 0.28);
+        s.lineTo(0.30, 0.18);
+        s.lineTo(0.28, 0.05);
+        s.lineTo(0.24, -0.08);
+        s.bezierCurveTo(0.20, -0.20, 0.10, -0.30, 0, -0.38);
+        s.bezierCurveTo(-0.10, -0.30, -0.20, -0.20, -0.24, -0.08);
+        s.lineTo(-0.28, 0.05);
+        s.lineTo(-0.30, 0.18);
+        s.lineTo(-0.28, 0.28);
+        s.bezierCurveTo(-0.25, 0.33, -0.12, 0.35, 0, 0.35);
+        const geo = new THREE.ExtrudeGeometry(s, { depth: 0.08, bevelEnabled: true, bevelThickness: 0.025, bevelSize: 0.02, bevelSegments: 5 });
+        const mat = new THREE.MeshPhongMaterial({ color: 0xDAA520, emissive: 0x8B6914, shininess: 200, specular: 0xFFD700, transparent: true, opacity: 0.95 });
+        const mesh = new THREE.Mesh(geo, mat);
+        const s2 = new THREE.Shape();
+        s2.moveTo(0, 0.26);
+        s2.bezierCurveTo(0.09, 0.26, 0.18, 0.24, 0.20, 0.20);
+        s2.lineTo(0.21, 0.13); s2.lineTo(0.20, 0.03); s2.lineTo(0.17, -0.06);
+        s2.bezierCurveTo(0.14, -0.15, 0.07, -0.22, 0, -0.28);
+        s2.bezierCurveTo(-0.07, -0.22, -0.14, -0.15, -0.17, -0.06);
+        s2.lineTo(-0.20, 0.03); s2.lineTo(-0.21, 0.13); s2.lineTo(-0.20, 0.20);
+        s2.bezierCurveTo(-0.18, 0.24, -0.09, 0.26, 0, 0.26);
+        const innerGeo = new THREE.ExtrudeGeometry(s2, { depth: 0.02, bevelEnabled: false });
+        const innerMat = new THREE.MeshPhongMaterial({ color: 0xFFD700, emissive: 0xB8860B, shininess: 250, specular: 0xFFFACD });
+        const innerMesh = new THREE.Mesh(innerGeo, innerMat);
+        innerMesh.position.z = 0.07;
+        const rivetGeo = new THREE.SphereGeometry(0.018, 8, 8);
+        const rivetMat = new THREE.MeshPhongMaterial({ color: 0xB8860B, shininess: 300, specular: 0xFFD700 });
+        const rivets = [[0,0.33],[0.15,0.32],[-0.15,0.32],[0.27,0.22],[-0.27,0.22],[0.28,0.08],[-0.28,0.08],[0.22,-0.08],[-0.22,-0.08],[0.13,-0.22],[-0.13,-0.22],[0,-0.35]];
+        const g = new THREE.Group();
+        g.add(mesh); g.add(innerMesh);
+        rivets.forEach(([x,y]) => { const r = new THREE.Mesh(rivetGeo, rivetMat); r.position.set(x, y, 0.10); g.add(r); });
+        return g;
+      }
+      const orbitShield = makeGoldenShield();
+      orbitShield.scale.set(0.5, 0.5, 0.5);
       orbitShieldGroup.add(orbitShield);
-      const orbitShield2 = orbitShield.clone();
-      orbitShield2.material = orbitShieldMat.clone();
-      orbitShield2.material.color.setHex(0x2A9D8F);
-      orbitShield2.material.emissive.setHex(0x0a3d37);
+      const orbitShield2 = makeGoldenShield();
+      orbitShield2.scale.set(0.5, 0.5, 0.5);
       orbitShieldGroup.add(orbitShield2);
 
       // Lighting
