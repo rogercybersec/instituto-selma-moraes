@@ -1967,19 +1967,18 @@
         torus.rotation.z += 0.002;
         innerTorus.rotation.z -= 0.003;
         wire.rotation.y += 0.003;
-        // Shields orbit like satellites — slow cinematic gravitational rotation
+        // Shields orbit around globe — always visible, circling in front
         orbitAngle += 0.0018;
-        const orbitRadius = 2.0;
-        const bobAmount = 0.08;
-        orbitShield.position.x = Math.cos(orbitAngle) * orbitRadius;
-        orbitShield.position.z = Math.sin(orbitAngle) * orbitRadius;
-        orbitShield.position.y = Math.sin(orbitAngle * 0.8) * bobAmount;
-        orbitShield.rotation.y = -orbitAngle + Math.PI / 2;
+        var oR = 2.0;
+        orbitShield.position.x = Math.cos(orbitAngle) * oR;
+        orbitShield.position.z = Math.sin(orbitAngle) * 0.6 + 1.0;
+        orbitShield.position.y = Math.sin(orbitAngle * 0.8) * 0.12;
+        orbitShield.rotation.y = -orbitAngle * 0.3;
         orbitShield.rotation.x = Math.sin(orbitAngle * 0.4) * 0.06;
-        orbitShield2.position.x = Math.cos(orbitAngle + Math.PI) * orbitRadius;
-        orbitShield2.position.z = Math.sin(orbitAngle + Math.PI) * orbitRadius;
-        orbitShield2.position.y = Math.sin((orbitAngle + Math.PI) * 0.8) * bobAmount;
-        orbitShield2.rotation.y = -(orbitAngle + Math.PI) + Math.PI / 2;
+        orbitShield2.position.x = Math.cos(orbitAngle + Math.PI) * oR;
+        orbitShield2.position.z = Math.sin(orbitAngle + Math.PI) * 0.6 + 1.0;
+        orbitShield2.position.y = Math.sin((orbitAngle + Math.PI) * 0.8) * 0.12;
+        orbitShield2.rotation.y = -(orbitAngle + Math.PI) * 0.3;
         orbitShield2.rotation.x = Math.sin((orbitAngle + Math.PI) * 0.4) * 0.06;
         renderer.render(scene, camera);
       }
