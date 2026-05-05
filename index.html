@@ -7,6 +7,7 @@
   <meta name="description" content="Adequação completa à NR-1 em 30 dias para PMEs. Método Resguarda™ — sem burocracia excessiva, sem autuações, sem colaboradores adoecendo.">
   <meta property="og:title" content="Instituto Selma Moraes — Método Resguarda™">
   <meta property="og:description" content="Sua empresa em conformidade com a NR-1 em 30 dias. Sem autuações. Sem colaboradores adoecendo.">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
@@ -1292,6 +1293,7 @@
           </a>
         </div>
       </div>
+      <div id="hero3d" style="width:100%;max-width:380px;aspect-ratio:1;position:relative;"></div>
       <div class="hero-card-wrapper tilt-3d">
         <div class="glass-card tilt-3d-inner" id="tiltCard">
           <div class="glass-card-title">O custo de não agir</div>
@@ -1773,6 +1775,112 @@
 
     // ─── 3D scroll reveal ───
     document.querySelectorAll('.sr-3d').forEach(el => observer.observe(el));
+
+    // ─── 3D Interactive Shield (Three.js) ───
+    (function() {
+      const container = document.getElementById('hero3d');
+      if (!container || typeof THREE === 'undefined') return;
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+      camera.position.z = 4;
+
+      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+      renderer.setSize(380, 380);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      container.appendChild(renderer.domElement);
+
+      // Shield group
+      const group = new THREE.Group();
+      scene.add(group);
+
+      // Torus (outer ring)
+      const torusGeo = new THREE.TorusGeometry(1.4, 0.06, 16, 64);
+      const torusMat = new THREE.MeshPhongMaterial({ color: 0x2A9D8F, emissive: 0x0a3d37, shininess: 100, transparent: true, opacity: 0.9 });
+      const torus = new THREE.Mesh(torusGeo, torusMat);
+      group.add(torus);
+
+      // Inner ring
+      const innerTorusGeo = new THREE.TorusGeometry(1.0, 0.04, 16, 64);
+      const innerTorusMat = new THREE.MeshPhongMaterial({ color: 0x2E7D32, emissive: 0x0a2d10, shininess: 80, transparent: true, opacity: 0.8 });
+      const innerTorus = new THREE.Mesh(innerTorusGeo, innerTorusMat);
+      group.add(innerTorus);
+
+      // Shield body (icosahedron)
+      const shieldGeo = new THREE.IcosahedronGeometry(0.7, 1);
+      const shieldMat = new THREE.MeshPhongMaterial({ color: 0x1B365D, emissive: 0x0a1929, shininess: 120, transparent: true, opacity: 0.85, wireframe: false });
+      const shield = new THREE.Mesh(shieldGeo, shieldMat);
+      group.add(shield);
+
+      // Wireframe overlay
+      const wireGeo = new THREE.IcosahedronGeometry(0.72, 1);
+      const wireMat = new THREE.MeshBasicMaterial({ color: 0x2A9D8F, wireframe: true, transparent: true, opacity: 0.3 });
+      const wire = new THREE.Mesh(wireGeo, wireMat);
+      group.add(wire);
+
+      // Cross / Plus symbol (NR-1 health)
+      const crossV = new THREE.BoxGeometry(0.08, 0.4, 0.08);
+      const crossH = new THREE.BoxGeometry(0.4, 0.08, 0.08);
+      const crossMat = new THREE.MeshPhongMaterial({ color: 0x4CAF50, emissive: 0x2E7D32, shininess: 100 });
+      const cv = new THREE.Mesh(crossV, crossMat);
+      const ch = new THREE.Mesh(crossH, crossMat);
+      cv.position.z = 0.5;
+      ch.position.z = 0.5;
+      group.add(cv);
+      group.add(ch);
+
+      // Orbiting particles
+      const particleCount = 40;
+      const particleGeo = new THREE.BufferGeometry();
+      const positions = new Float32Array(particleCount * 3);
+      for (let i = 0; i < particleCount; i++) {
+        const angle = (i / particleCount) * Math.PI * 2;
+        const radius = 1.7 + Math.random() * 0.3;
+        positions[i * 3] = Math.cos(angle) * radius;
+        positions[i * 3 + 1] = (Math.random() - 0.5) * 0.5;
+        positions[i * 3 + 2] = Math.sin(angle) * radius;
+      }
+      particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      const particleMat = new THREE.PointsMaterial({ color: 0x52C7B8, size: 0.04, transparent: true, opacity: 0.7 });
+      const particles = new THREE.Points(particleGeo, particleMat);
+      group.add(particles);
+
+      // Lighting
+      const ambientLight = new THREE.AmbientLight(0x334455, 0.6);
+      scene.add(ambientLight);
+      const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+      dirLight.position.set(3, 3, 5);
+      scene.add(dirLight);
+      const pointLight = new THREE.PointLight(0x2A9D8F, 0.6, 10);
+      pointLight.position.set(-2, 2, 3);
+      scene.add(pointLight);
+
+      // Mouse interaction
+      let targetRotX = 0, targetRotY = 0;
+      container.addEventListener('mousemove', (e) => {
+        const rect = container.getBoundingClientRect();
+        targetRotX = ((e.clientY - rect.top) / rect.height - 0.5) * 1.5;
+        targetRotY = ((e.clientX - rect.left) / rect.width - 0.5) * 1.5;
+      });
+      container.addEventListener('mouseleave', () => {
+        targetRotX = 0;
+        targetRotY = 0;
+      });
+
+      function animate() {
+        requestAnimationFrame(animate);
+        group.rotation.y += 0.005;
+        group.rotation.x += (targetRotX - group.rotation.x) * 0.05;
+        group.rotation.y += (targetRotY - group.rotation.y) * 0.02;
+        particles.rotation.y -= 0.003;
+        torus.rotation.z += 0.002;
+        innerTorus.rotation.z -= 0.003;
+        wire.rotation.y += 0.002;
+        wire.rotation.x += 0.001;
+        renderer.render(scene, camera);
+      }
+      animate();
+    })();
   </script>
 </body>
 </html>
