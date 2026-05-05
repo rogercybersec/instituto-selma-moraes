@@ -1790,7 +1790,7 @@
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       container.appendChild(renderer.domElement);
 
-      // Shield group
+      // Earth globe group
       const group = new THREE.Group();
       scene.add(group);
 
@@ -1806,38 +1806,81 @@
       const innerTorus = new THREE.Mesh(innerTorusGeo, innerTorusMat);
       group.add(innerTorus);
 
-      // Shield body (icosahedron)
-      const shieldGeo = new THREE.IcosahedronGeometry(0.7, 1);
-      const shieldMat = new THREE.MeshPhongMaterial({ color: 0x1B365D, emissive: 0x0a1929, shininess: 120, transparent: true, opacity: 0.85, wireframe: false });
-      const shield = new THREE.Mesh(shieldGeo, shieldMat);
-      group.add(shield);
+      // Earth texture via canvas (continents + NR-1 text)
+      const earthCanvas = document.createElement('canvas');
+      earthCanvas.width = 1024; earthCanvas.height = 512;
+      const ctx = earthCanvas.getContext('2d');
+      const oceanGrad = ctx.createLinearGradient(0, 0, 0, 512);
+      oceanGrad.addColorStop(0, '#0a2e4a');
+      oceanGrad.addColorStop(0.5, '#0d3b5e');
+      oceanGrad.addColorStop(1, '#0a2e4a');
+      ctx.fillStyle = oceanGrad;
+      ctx.fillRect(0, 0, 1024, 512);
+      ctx.strokeStyle = 'rgba(42,157,143,0.15)';
+      ctx.lineWidth = 0.5;
+      for (let i = 0; i < 18; i++) { ctx.beginPath(); ctx.moveTo(i*57, 0); ctx.lineTo(i*57, 512); ctx.stroke(); }
+      for (let i = 0; i < 9; i++) { ctx.beginPath(); ctx.moveTo(0, i*57); ctx.lineTo(1024, i*57); ctx.stroke(); }
+      ctx.fillStyle = '#1a6b5a';
+      ctx.strokeStyle = '#2A9D8F';
+      ctx.lineWidth = 1.5;
+      // South America
+      ctx.beginPath(); ctx.moveTo(300,240); ctx.quadraticCurveTo(280,260,285,300); ctx.quadraticCurveTo(290,340,310,370); ctx.quadraticCurveTo(315,390,305,400); ctx.quadraticCurveTo(295,380,280,350); ctx.quadraticCurveTo(270,310,265,280); ctx.quadraticCurveTo(260,250,270,230); ctx.quadraticCurveTo(285,220,300,240); ctx.fill(); ctx.stroke();
+      // North America
+      ctx.beginPath(); ctx.moveTo(240,120); ctx.quadraticCurveTo(220,140,210,170); ctx.quadraticCurveTo(200,200,230,220); ctx.quadraticCurveTo(260,230,280,225); ctx.quadraticCurveTo(300,215,290,190); ctx.quadraticCurveTo(280,160,260,140); ctx.quadraticCurveTo(250,125,240,120); ctx.fill(); ctx.stroke();
+      // Africa
+      ctx.beginPath(); ctx.moveTo(520,200); ctx.quadraticCurveTo(500,220,495,260); ctx.quadraticCurveTo(490,300,510,350); ctx.quadraticCurveTo(520,380,540,370); ctx.quadraticCurveTo(555,340,550,300); ctx.quadraticCurveTo(545,260,540,230); ctx.quadraticCurveTo(535,210,520,200); ctx.fill(); ctx.stroke();
+      // Europe
+      ctx.beginPath(); ctx.moveTo(500,130); ctx.quadraticCurveTo(490,150,500,170); ctx.quadraticCurveTo(510,185,530,180); ctx.quadraticCurveTo(545,170,540,150); ctx.quadraticCurveTo(535,135,520,125); ctx.quadraticCurveTo(510,125,500,130); ctx.fill(); ctx.stroke();
+      // Asia
+      ctx.beginPath(); ctx.moveTo(560,110); ctx.quadraticCurveTo(600,100,660,120); ctx.quadraticCurveTo(720,140,750,170); ctx.quadraticCurveTo(760,200,740,220); ctx.quadraticCurveTo(700,240,660,230); ctx.quadraticCurveTo(620,220,590,200); ctx.quadraticCurveTo(560,180,550,150); ctx.quadraticCurveTo(545,130,560,110); ctx.fill(); ctx.stroke();
+      // Australia
+      ctx.beginPath(); ctx.moveTo(760,310); ctx.quadraticCurveTo(740,320,730,340); ctx.quadraticCurveTo(740,360,770,365); ctx.quadraticCurveTo(800,360,810,340); ctx.quadraticCurveTo(800,315,780,310); ctx.quadraticCurveTo(770,305,760,310); ctx.fill(); ctx.stroke();
+      // NR-1 text (appears twice so it's visible as globe rotates)
+      ctx.save();
+      ctx.font = 'bold 72px Inter, Arial, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillStyle = 'rgba(255,215,0,0.85)';
+      ctx.strokeStyle = 'rgba(139,105,20,0.6)';
+      ctx.lineWidth = 2;
+      ctx.fillText('NR-1', 400, 280);
+      ctx.strokeText('NR-1', 400, 280);
+      ctx.fillText('NR-1', 912, 280);
+      ctx.strokeText('NR-1', 912, 280);
+      ctx.restore();
+      // Glow dots on continents
+      [[290,260],[310,350],[520,280],[530,160],[660,170],[770,340],[250,180]].forEach(([x,y]) => {
+        const grd = ctx.createRadialGradient(x,y,0,x,y,8);
+        grd.addColorStop(0,'rgba(82,199,184,0.8)'); grd.addColorStop(1,'rgba(82,199,184,0)');
+        ctx.fillStyle = grd; ctx.fillRect(x-8,y-8,16,16);
+      });
 
-      // Wireframe overlay
-      const wireGeo = new THREE.IcosahedronGeometry(0.72, 1);
-      const wireMat = new THREE.MeshBasicMaterial({ color: 0x2A9D8F, wireframe: true, transparent: true, opacity: 0.3 });
+      const earthTexture = new THREE.CanvasTexture(earthCanvas);
+      earthTexture.wrapS = THREE.RepeatWrapping;
+      const earthGeo = new THREE.SphereGeometry(0.85, 48, 48);
+      const earthMat = new THREE.MeshPhongMaterial({ map: earthTexture, shininess: 40, transparent: true, opacity: 0.95 });
+      const earth = new THREE.Mesh(earthGeo, earthMat);
+      group.add(earth);
+
+      // Atmosphere glow
+      const atmosGeo = new THREE.SphereGeometry(0.90, 48, 48);
+      const atmosMat = new THREE.MeshPhongMaterial({ color: 0x2A9D8F, transparent: true, opacity: 0.08, side: THREE.BackSide });
+      group.add(new THREE.Mesh(atmosGeo, atmosMat));
+
+      // Wireframe overlay on globe
+      const wireGeo = new THREE.SphereGeometry(0.87, 24, 24);
+      const wireMat = new THREE.MeshBasicMaterial({ color: 0x2A9D8F, wireframe: true, transparent: true, opacity: 0.12 });
       const wire = new THREE.Mesh(wireGeo, wireMat);
       group.add(wire);
 
-      // Cross / Plus symbol (NR-1 health)
-      const crossV = new THREE.BoxGeometry(0.08, 0.4, 0.08);
-      const crossH = new THREE.BoxGeometry(0.4, 0.08, 0.08);
-      const crossMat = new THREE.MeshPhongMaterial({ color: 0x4CAF50, emissive: 0x2E7D32, shininess: 100 });
-      const cv = new THREE.Mesh(crossV, crossMat);
-      const ch = new THREE.Mesh(crossH, crossMat);
-      cv.position.z = 0.5;
-      ch.position.z = 0.5;
-      group.add(cv);
-      group.add(ch);
-
       // Orbiting particles
-      const particleCount = 40;
+      const particleCount = 50;
       const particleGeo = new THREE.BufferGeometry();
       const positions = new Float32Array(particleCount * 3);
       for (let i = 0; i < particleCount; i++) {
         const angle = (i / particleCount) * Math.PI * 2;
         const radius = 1.7 + Math.random() * 0.3;
         positions[i * 3] = Math.cos(angle) * radius;
-        positions[i * 3 + 1] = (Math.random() - 0.5) * 0.5;
+        positions[i * 3 + 1] = (Math.random() - 0.5) * 0.6;
         positions[i * 3 + 2] = Math.sin(angle) * radius;
       }
       particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
@@ -1919,14 +1962,13 @@
       let orbitAngle = 0;
       function animate() {
         requestAnimationFrame(animate);
-        group.rotation.y += 0.005;
-        group.rotation.x += (targetRotX - group.rotation.x) * 0.05;
-        group.rotation.y += (targetRotY - group.rotation.y) * 0.02;
+        earth.rotation.y += 0.004;
+        group.rotation.x += (targetRotX * 0.3 - group.rotation.x) * 0.05;
+        group.rotation.y += (targetRotY * 0.3 - group.rotation.y) * 0.02;
         particles.rotation.y -= 0.003;
         torus.rotation.z += 0.002;
         innerTorus.rotation.z -= 0.003;
-        wire.rotation.y += 0.002;
-        wire.rotation.x += 0.001;
+        wire.rotation.y += 0.003;
         // Golden shields floating around the globe
         orbitAngle += 0.012;
         const orbitRadius = 2.2;
