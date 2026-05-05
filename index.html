@@ -1930,24 +1930,15 @@
       orbitShield2.scale.set(0.45, 0.45, 0.45);
       orbitShieldGroup.add(orbitShield2);
 
-      // Lighting — warm for realistic gold + cool for globe
-      const ambientLight = new THREE.AmbientLight(0x445566, 0.5);
+      // Lighting — single warm light + subtle ambient
+      const ambientLight = new THREE.AmbientLight(0x445566, 0.4);
       scene.add(ambientLight);
-      const dirLight = new THREE.DirectionalLight(0xfff5e0, 1.0);
+      const dirLight = new THREE.DirectionalLight(0xfff5e0, 0.8);
       dirLight.position.set(3, 4, 5);
       scene.add(dirLight);
-      const dirLight2 = new THREE.DirectionalLight(0xffd700, 0.4);
-      dirLight2.position.set(-3, 2, 3);
-      scene.add(dirLight2);
-      const pointLight = new THREE.PointLight(0x2A9D8F, 0.5, 10);
+      const pointLight = new THREE.PointLight(0x2A9D8F, 0.3, 10);
       pointLight.position.set(-2, 2, 3);
       scene.add(pointLight);
-      const goldLight = new THREE.PointLight(0xFFD700, 0.7, 8);
-      goldLight.position.set(2, 1, 4);
-      scene.add(goldLight);
-      const rimLight = new THREE.PointLight(0xFFA500, 0.3, 6);
-      rimLight.position.set(0, -2, 3);
-      scene.add(rimLight);
 
       // Mouse interaction
       let targetRotX = 0, targetRotY = 0;
@@ -1961,10 +1952,6 @@
         targetRotY = 0;
       });
 
-      dirLight.intensity = 0.6;
-      dirLight2.intensity = 0.25;
-      goldLight.intensity = 0.4;
-      rimLight.intensity = 0.2;
 
       let orbitAngle = 0;
       function animate() {
