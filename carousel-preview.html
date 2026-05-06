@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrossel NR-1 — Preview</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #111; font-family: -apple-system, sans-serif; color: #fff; }
+.header { text-align: center; padding: 24px 16px 8px; }
+.header h1 { font-size: 18px; font-weight: 600; color: #ccc; }
+.header p { font-size: 13px; color: #666; margin-top: 4px; }
+.carousel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; gap: 0; padding: 16px 0; }
+.carousel::-webkit-scrollbar { display: none; }
+.carousel img { width: 85vw; max-width: 400px; height: auto; scroll-snap-align: center; flex-shrink: 0; border-radius: 8px; margin: 0 4px; }
+.carousel img:first-child { margin-left: 7.5vw; }
+.carousel img:last-child { margin-right: 7.5vw; }
+.dots { display: flex; justify-content: center; gap: 6px; padding: 12px 0 24px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: #333; }
+.dot.active { background: #F5A623; }
+.info { text-align: center; padding: 0 24px 32px; font-size: 13px; color: #555; line-height: 1.6; }
+</style>
+</head>
+<body>
+<div class="header">
+<h1>Carrossel LinkedIn — Selma Moraes</h1>
+<p>Deslize para ver os 5 slides</p>
+</div>
+<div class="carousel" id="carousel">
+<img src="slide-1.png" alt="Slide 1">
+<img src="slide-2.png" alt="Slide 2">
+<img src="slide-3.png" alt="Slide 3">
+<img src="slide-4.png" alt="Slide 4">
+<img src="slide-5.png" alt="Slide 5">
+</div>
+<div class="dots" id="dots">
+<div class="dot active"></div>
+<div class="dot"></div>
+<div class="dot"></div>
+<div class="dot"></div>
+<div class="dot"></div>
+</div>
+<div class="info">Estes slides aparecem um de cada vez no LinkedIn. A pessoa desliza para ver o proximo.</div>
+<script>
+const carousel = document.getElementById('carousel');
+const dots = document.querySelectorAll('.dot');
+carousel.addEventListener('scroll', () => {
+  const idx = Math.round(carousel.scrollLeft / (carousel.scrollWidth / 5));
+  dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+});
+</script>
+</body>
+</html>
