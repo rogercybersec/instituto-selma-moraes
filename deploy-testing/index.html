@@ -1818,6 +1818,8 @@
           if (el && vals[k] !== cdPrev[k]) { el.textContent = vals[k]; cdFlip(el); }
         });
         cdPrev = vals;
+        const heroEl = document.getElementById('hero-days-left');
+        if (heroEl) heroEl.innerHTML = days + ' ' + (days === 1 ? 'dia' : 'dias');
       } else {
         ['days','hours','mins','secs'].forEach(k => { const el = document.getElementById('cd-' + k); if (el) el.textContent = '00'; });
         const txt = document.querySelector('.countdown-text');
