@@ -1841,7 +1841,7 @@
         const heroEl = document.getElementById('hero-days-left');
         if (heroEl) heroEl.innerHTML = days + "&nbsp;" + (days === 1 ? "dia" : "dias");
         var badgeEl = document.getElementById("hero-badge-text");
-        if (badgeEl) badgeEl.textContent = "NR-1 entra em vigor em " + days + (days === 1 ? " dia" : " dias") + " — prepare-se agora";
+        if (badgeEl) badgeEl.textContent = "NR-1 entra em vigor em " + days + (days === 1 ? " dia" : " dias");
       } else {
         ['days','hours','mins','secs'].forEach(k => { const el = document.getElementById('cd-' + k); if (el) el.textContent = '00'; });
         const txt = document.querySelector('.countdown-text');
