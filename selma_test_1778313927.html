@@ -1142,9 +1142,7 @@
     /* ═══ TRUST LOGOS MARQUEE ═══ */
     .trust-bar {
       padding: 48px 0;
-      background: #ECFDF5;
-      border-top: 1px solid #E5E7EB;
-      border-bottom: 1px solid #E5E7EB;
+      background: #134E4A;
       overflow: hidden;
     }
     .trust-label {
@@ -1152,7 +1150,7 @@
       font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      color: var(--gray-400);
+      color: rgba(255,255,255,0.5);
       font-weight: 600;
       margin-bottom: 24px;
     }
@@ -1165,25 +1163,34 @@
     .trust-item {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       padding: 0 40px;
-      color: var(--gray-400);
+      color: rgba(255,255,255,0.7);
       font-weight: 600;
       font-size: 0.9rem;
       white-space: nowrap;
-      opacity: 0.5;
+      opacity: 0.8;
       transition: opacity 0.3s;
     }
     .trust-item:hover { opacity: 1; }
     .trust-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: var(--gray-100);
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.1);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1rem;
+      color: #2DD4BF;
+    }
+    .trust-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     /* ═══ FOOTER ═══ */
