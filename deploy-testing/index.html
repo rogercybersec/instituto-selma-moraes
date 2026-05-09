@@ -1795,6 +1795,8 @@
     document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
 
     // ─── Countdown timer (days until NR-1 deadline: May 26, 2026) ───
+    let cdPrev = {};
+    function cdFlip(el) { el.classList.remove('flip'); void el.offsetWidth; el.classList.add('flip'); }
     function updateCountdown() {
       const deadline = new Date('2026-05-26T00:00:00-03:00');
       const now = new Date();
@@ -1803,14 +1805,17 @@
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
-        document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
-        document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
+        const secs = Math.floor((diff % (1000 * 60)) / 1000);
+        const vals = { days: String(days).padStart(2, '0'), hours: String(hours).padStart(2, '0'), mins: String(mins).padStart(2, '0'), secs: String(secs).padStart(2, '0') };
+        Object.keys(vals).forEach(k => {
+          const el = document.getElementById('cd-' + k);
+          if (el && vals[k] !== cdPrev[k]) { el.textContent = vals[k]; cdFlip(el); }
+        });
+        cdPrev = vals;
       } else {
-        document.getElementById('cd-days').textContent = '00';
-        document.getElementById('cd-hours').textContent = '00';
-        document.getElementById('cd-mins').textContent = '00';
-        document.querySelector('.countdown-text').textContent = '⚠️ O prazo da NR-1 já expirou — sua empresa pode ser autuada a qualquer momento!';
+        ['days','hours','mins','secs'].forEach(k => { const el = document.getElementById('cd-' + k); if (el) el.textContent = '00'; });
+        const txt = document.querySelector('.countdown-text');
+        if (txt) txt.innerHTML = '<strong>O prazo da NR-1 já expirou</strong> — sua empresa pode ser autuada a qualquer momento!';
       }
     }
     updateCountdown();
