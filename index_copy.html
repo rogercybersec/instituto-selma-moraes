@@ -22,24 +22,23 @@
       --green: #2E7D32;
       --green-bright: #4CAF50;
       --green-glow: rgba(46, 125, 50, 0.35);
-      --teal: #1A7D71;
-      --teal-light: #2A9D8F;
-      --teal-bright: #52C7B8;
+      --teal: #2A9D8F;
+      --teal-light: #52C7B8;
       --gold: #D4A853;
       --red: #D32F2F;
-      --white: #FAFAF8;
-      --off-white: #F5F3EE;
-      --gray-50: #F8F7F4;
-      --gray-100: #F0EEE9;
-      --gray-200: #E0DDD6;
-      --gray-300: #C7C4BC;
-      --gray-400: #9F9C94;
-      --gray-500: #5F5D57;
-      --gray-600: #46443F;
-      --gray-700: #33312D;
-      --gray-800: #1E1D1A;
-      --text: #2D2B27;
-      --text-secondary: #46443F;
+      --white: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray-50: #F8FAFC;
+      --gray-100: #F1F5F9;
+      --gray-200: #E2E8F0;
+      --gray-300: #CBD5E1;
+      --gray-400: #94A3B8;
+      --gray-500: #64748B;
+      --gray-600: #475569;
+      --gray-700: #334155;
+      --gray-800: #1E293B;
+      --text: #0F172A;
+      --text-secondary: #475569;
       --radius-xl: 24px;
       --radius-lg: 16px;
       --radius-md: 12px;
@@ -105,16 +104,6 @@
       50% { border-color: rgba(46, 125, 50, 0.5); }
     }
 
-    /* Focus-visible for keyboard accessibility */
-    :focus-visible {
-      outline: 2px solid var(--teal-bright);
-      outline-offset: 3px;
-    }
-    a:focus-visible, button:focus-visible, input:focus-visible {
-      outline: 2px solid var(--teal-bright);
-      outline-offset: 3px;
-    }
-
     /* Scroll reveal system */
     .sr { opacity: 0; transform: translateY(36px); transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
     .sr.visible { opacity: 1; transform: translateY(0); }
@@ -172,7 +161,7 @@
       text-decoration: none;
       letter-spacing: -0.02em;
     }
-    .nav-logo span { color: var(--teal-bright); }
+    .nav-logo span { color: var(--teal-light); }
     .nav-links { display: flex; gap: 32px; align-items: center; }
     .nav-links a {
       color: rgba(255,255,255,0.6);
@@ -401,7 +390,7 @@
       border-radius: 100px;
       font-size: 0.78rem;
       font-weight: 600;
-      color: var(--teal-bright);
+      color: var(--teal-light);
       margin-bottom: 32px;
       letter-spacing: 0.06em;
       text-transform: uppercase;
@@ -410,7 +399,7 @@
     .hero-badge-dot {
       width: 8px;
       height: 8px;
-      background: var(--teal-bright);
+      background: var(--teal-light);
       border-radius: 50%;
       position: relative;
     }
@@ -419,7 +408,7 @@
       position: absolute;
       inset: -4px;
       border-radius: 50%;
-      border: 1.5px solid var(--teal-bright);
+      border: 1.5px solid var(--teal-light);
       animation: pulseRing 2s ease-out infinite;
     }
 
@@ -446,7 +435,7 @@
     .hero h1 .word:nth-child(7) { animation-delay: 1.1s; }
     .hero h1 .word:nth-child(8) { animation-delay: 1.2s; }
     .hero h1 .accent {
-      color: var(--teal-bright);
+      color: var(--teal-light);
       position: relative;
     }
     .hero h1 .accent::after {
@@ -522,14 +511,14 @@
       text-decoration: none;
       font-weight: 500;
       font-size: 1rem;
-      border: 1px solid rgba(255,255,255,0.30);
+      border: 1px solid rgba(255,255,255,0.12);
       cursor: pointer;
       transition: all 0.3s;
       backdrop-filter: blur(4px);
     }
     .btn-ghost:hover {
       color: var(--white);
-      border-color: rgba(255,255,255,0.5);
+      border-color: rgba(255,255,255,0.3);
       background: rgba(255,255,255,0.05);
     }
 
@@ -570,7 +559,7 @@
       font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.14em;
-      color: var(--teal-bright);
+      color: var(--teal-light);
       font-weight: 700;
       margin-bottom: 36px;
     }
@@ -591,7 +580,7 @@
       line-height: 1;
       letter-spacing: -0.04em;
     }
-    .stat-value.teal { color: var(--teal-bright); }
+    .stat-value.teal { color: var(--teal-light); }
     .stat-unit {
       font-size: 1.4rem;
       color: rgba(255,255,255,0.35);
@@ -1103,7 +1092,7 @@
       outline: none;
       transition: all 0.3s;
     }
-    .cta-input::placeholder { color: rgba(255,255,255,0.5); }
+    .cta-input::placeholder { color: rgba(255,255,255,0.3); }
     .cta-input:focus {
       border-color: var(--teal);
       background: rgba(255,255,255,0.08);
@@ -1193,7 +1182,7 @@
       color: var(--white);
       margin-bottom: 8px;
     }
-    .footer-brand span { color: var(--teal-bright); }
+    .footer-brand span { color: var(--teal-light); }
     .footer-subtitle {
       font-size: 0.85rem;
       color: rgba(255,255,255,0.3);
@@ -1212,12 +1201,12 @@
       font-weight: 500;
       transition: color 0.3s;
     }
-    .footer-links a:hover { color: var(--teal-bright); }
+    .footer-links a:hover { color: var(--teal-light); }
     .footer-copy {
       font-size: 0.78rem;
-      color: rgba(255,255,255,0.4);
+      color: rgba(255,255,255,0.2);
       padding-top: 32px;
-      border-top: 1px solid rgba(255,255,255,0.08);
+      border-top: 1px solid rgba(255,255,255,0.05);
     }
 
     /* ═══ RESPONSIVE ═══ */
@@ -1463,7 +1452,7 @@
         </div>
         <div class="proof-card sr sr-d2">
           <div class="proof-stars">★★★★★</div>
-          <p class="proof-quote">"Nossos afastamentos reduziram 40% em quatro meses. O Instituto não apenas implementou a NR-1 — transformou a cultura da organização. Nossas lideranças aprenderam, de fato, a escutar as equipes."</p>
+          <p class="proof-quote">"Nossos afastamentos reduziram 40% em quatro meses. A Selma não apenas implementou a NR-1 — ela transformou a cultura da organização. Nossas lideranças aprenderam, de fato, a escutar as equipes."</p>
           <div class="proof-author">
             <div class="proof-avatar">CS</div>
             <div>
@@ -1823,7 +1812,6 @@
       const earth = new THREE.Mesh(earthGeo, earthMat);
       group.add(earth);
       const earthImg = new Image();
-      earthImg.crossOrigin = 'anonymous';
       earthImg.onload = function() {
         const tex = new THREE.CanvasTexture(earthImg);
         earthMat.map = tex;
@@ -1837,42 +1825,15 @@
       const nctx = nr1Canvas.getContext('2d');
       nctx.clearRect(0, 0, 1024, 512);
       nctx.textAlign = 'center'; nctx.textBaseline = 'middle';
-      var sansFont = 'bold 130px Inter, Arial, sans-serif';
-      var serifFont = '900 130px "Playfair Display", Georgia, serif';
-      var goldFill = 'rgba(212,175,40,0.95)';
-      var goldShadow = 'rgba(212,175,40,0.9)';
-      var goldStroke = 'rgba(160,125,15,0.8)';
-      nctx.font = sansFont;
-      var fullW = nctx.measureText('NR-1').width;
+      nctx.font = 'bold 130px Inter, Arial, sans-serif';
       [170, 512, 854].forEach(function(xPos) {
         nctx.save();
-        nctx.textAlign = 'left';
-        var startX = xPos - fullW / 2;
-        nctx.font = sansFont;
-        var nW = nctx.measureText('N').width;
-        nctx.shadowColor = goldShadow; nctx.shadowBlur = 40;
-        nctx.fillStyle = goldFill;
-        nctx.fillText('N', startX, 256);
+        nctx.shadowColor = 'rgba(255,215,0,0.9)'; nctx.shadowBlur = 40;
+        nctx.fillStyle = 'rgba(255,215,0,0.95)';
+        nctx.fillText('NR-1', xPos, 256);
         nctx.shadowBlur = 0;
-        nctx.strokeStyle = goldStroke; nctx.lineWidth = 3;
-        nctx.strokeText('N', startX, 256);
-        var rX = startX + nW;
-        nctx.font = serifFont;
-        var rW = nctx.measureText('R').width;
-        nctx.shadowColor = goldShadow; nctx.shadowBlur = 40;
-        nctx.fillStyle = goldFill;
-        nctx.fillText('R', rX, 256);
-        nctx.shadowBlur = 0;
-        nctx.strokeStyle = goldStroke; nctx.lineWidth = 3;
-        nctx.strokeText('R', rX, 256);
-        var dashX = rX + rW;
-        nctx.font = sansFont;
-        nctx.shadowColor = goldShadow; nctx.shadowBlur = 40;
-        nctx.fillStyle = goldFill;
-        nctx.fillText('-1', dashX, 256);
-        nctx.shadowBlur = 0;
-        nctx.strokeStyle = goldStroke; nctx.lineWidth = 3;
-        nctx.strokeText('-1', dashX, 256);
+        nctx.strokeStyle = 'rgba(184,134,11,0.8)'; nctx.lineWidth = 3;
+        nctx.strokeText('NR-1', xPos, 256);
         nctx.restore();
       });
       const nr1Texture = new THREE.CanvasTexture(nr1Canvas);
