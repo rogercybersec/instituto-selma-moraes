@@ -984,12 +984,14 @@
       background: #FFFFFF;
       border-radius: var(--radius-lg);
       margin-bottom: 10px;
-      border: none;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.03);
+      border: 1px solid #E5E7EB;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
       overflow: hidden;
       transition: all 0.3s;
+      border-left: 4px solid transparent;
     }
-    .faq-item:hover { border-color: var(--teal); }
+    .faq-item:hover { border-color: #E5E7EB; border-left-color: #0D9488; }
+    .faq-item.open { background: #F0FDFA; border-left-color: #0D9488; }
     .faq-q {
       padding: 24px 28px;
       font-weight: 700;
