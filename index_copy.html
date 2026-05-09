@@ -1837,15 +1837,25 @@
       const nctx = nr1Canvas.getContext('2d');
       nctx.clearRect(0, 0, 1024, 512);
       nctx.textAlign = 'center'; nctx.textBaseline = 'middle';
-      nctx.font = 'bold 130px Inter, Arial, sans-serif';
+      nctx.font = '900 140px "Playfair Display", Georgia, "Times New Roman", serif';
+
+      var goldGrad = nctx.createLinearGradient(0, 180, 0, 340);
+      goldGrad.addColorStop(0, '#E8C547');
+      goldGrad.addColorStop(0.25, '#D4A853');
+      goldGrad.addColorStop(0.5, '#C4952E');
+      goldGrad.addColorStop(0.75, '#D4A853');
+      goldGrad.addColorStop(1, '#B8860B');
+
       [170, 512, 854].forEach(function(xPos) {
         nctx.save();
-        nctx.shadowColor = 'rgba(255,215,0,0.9)'; nctx.shadowBlur = 40;
-        nctx.fillStyle = 'rgba(255,215,0,0.95)';
+        nctx.shadowColor = 'rgba(212,168,83,0.7)'; nctx.shadowBlur = 35;
+        nctx.fillStyle = goldGrad;
         nctx.fillText('NR-1', xPos, 256);
         nctx.shadowBlur = 0;
-        nctx.strokeStyle = 'rgba(184,134,11,0.8)'; nctx.lineWidth = 3;
+        nctx.strokeStyle = 'rgba(139,101,8,0.6)'; nctx.lineWidth = 2;
         nctx.strokeText('NR-1', xPos, 256);
+        nctx.fillStyle = 'rgba(232,197,71,0.15)';
+        nctx.fillText('NR-1', xPos, 254);
         nctx.restore();
       });
       const nr1Texture = new THREE.CanvasTexture(nr1Canvas);
