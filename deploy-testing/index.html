@@ -397,12 +397,13 @@
     .hero-text { perspective: 1000px; }
     .hero-badge {
       display: inline-flex;
+      flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 4px;
       background: #F8FAFC;
       border: 1px solid rgba(13, 148, 136, 0.2);
-      padding: 8px 20px;
-      border-radius: 100px;
+      padding: 10px 24px 12px;
+      border-radius: 20px;
       font-size: 0.78rem;
       font-weight: 600;
       color: #0F766E;
@@ -410,6 +411,18 @@
       letter-spacing: 0.06em;
       text-transform: uppercase;
       animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+    .hero-badge-main {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-badge-sub {
+      font-size: 0.68rem;
+      font-weight: 500;
+      color: #0D9488;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
     .hero-badge-dot {
       width: 8px;
