@@ -1824,6 +1824,8 @@
         ['days','hours','mins','secs'].forEach(k => { const el = document.getElementById('cd-' + k); if (el) el.textContent = '00'; });
         const txt = document.querySelector('.countdown-text');
         if (txt) txt.innerHTML = '<strong>O prazo da NR-1 já expirou</strong> — sua empresa pode ser autuada a qualquer momento!';
+        const heroEl = document.getElementById('hero-days-left');
+        if (heroEl) heroEl.textContent = '0 dias';
       }
     }
     updateCountdown();
