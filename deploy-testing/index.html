@@ -1866,17 +1866,90 @@
     });
 
     // ─── Form submit ───
-    document.getElementById('leadForm').addEventListener('submit', (e) => {
+    document.getElementById('leadForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = e.target.querySelector('button');
       const input = e.target.querySelector('input');
-      btn.textContent = 'Enviado! ✓';
-      btn.style.background = 'var(--navy)';
-      input.value = '';
+      const email = input.value.trim();
+      if (!email) return;
+
+      btn.textContent = 'Enviando...';
+      btn.disabled = true;
+
+      const checklistHTML = `
+        <div style="font-family:Arial,sans-serif;max-width:640px;margin:0 auto;background:#fff;border:1px solid #E2E8F0;border-radius:12px;overflow:hidden">
+          <div style="background:#1B365D;padding:32px 24px;text-align:center">
+            <h1 style="color:#fff;margin:0;font-size:22px">Checklist NR-1 — Riscos Psicossociais</h1>
+            <p style="color:#94A3B8;margin:8px 0 0;font-size:14px">Instituto Selma Moraes · Método Resguarda™</p>
+          </div>
+          <div style="padding:24px">
+            <p style="color:#334155;font-size:15px;line-height:1.6">Olá! Aqui está seu checklist com os <strong>10 pontos críticos</strong> de conformidade com a NR-1 que toda PME precisa verificar agora.</p>
+
+            <h2 style="color:#1B365D;font-size:17px;margin:24px 0 12px;border-bottom:2px solid #2A9D8F;padding-bottom:8px">📋 Checklist de Conformidade NR-1</h2>
+
+            <table style="width:100%;border-collapse:collapse;font-size:14px">
+              <tr style="background:#F8FAFC"><td style="padding:12px;border:1px solid #E2E8F0"><strong>1.</strong> O PGR (Programa de Gerenciamento de Riscos) da empresa inclui riscos psicossociais?</td><td style="padding:12px;border:1px solid #E2E8F0;text-align:center;width:60px">☐</td></tr>
+              <tr><td style="padding:12px;border:1px solid #E2E8F0"><strong>2.</strong> Foi realizado levantamento de fatores como sobrecarga, assédio moral/sexual e pressão excessiva?</td><td style="padding:12px;border:1px solid #E2E8F0;text-align:center">☐</td></tr>
+              <tr style="background:#F8FAFC"><td style="padding:12px;border:1px solid #E2E8F0"><strong>3.</strong> Existe canal de denúncia acessível e confidencial para os colaboradores?</td><td style="padding:12px;border:1px solid #E2E8F0;text-align:center">☐</td></tr>
+              <tr><td style="padding:12px;border:1px solid #E2E8F0"><strong>4.</strong> Os gestores e líderes receberam treinamento sobre identificação de riscos psicossociais?</td><td style="padding:12px;border:1px solid #E2E8F0;text-align:center">☐</td></tr>
+              <tr style="background:#F8FAFC"><td style="padding:12px;border:1px solid #E2E8F0"><strong>5.</strong> A empresa possui política documentada de prevenção ao assédio e promoção da saúde mental?</td><td style="padding:12px;border:1px solid #E2E8F0;text-align:center">☐</td></tr>
+              <tr><td style="padding:12px;border:1px solid #E2E8F0"><strong>6.</strong> As jornadas de trabalho são monitoradas para evitar sobrecarga e horas extras excessivas?</td><td style="padding:12px;border:1px solid #E2E8F0;text-align:center">☐</td></tr>
+              <tr style="background:#F8FAFC"><td style="padding:12px;border:1px solid #E2E8F0"><strong>7.</strong> O inventário de riscos foi atualizado nos últimos 12 meses com dados de absenteísmo e afastamentos?</td><td style="padding:12px;border:1px solid #E2E8F0;text-align:center">☐</td></tr>
+              <tr><td style="padding:12px;border:1px solid #E2E8F0"><strong>8.</strong> Existe plano de ação com prazos e responsáveis para mitigar cada risco identificado?</td><td style="padding:12px;border:1px solid #E2E8F0;text-align:center">☐</td></tr>
+              <tr style="background:#F8FAFC"><td style="padding:12px;border:1px solid #E2E8F0"><strong>9.</strong> Os colaboradores participaram de pesquisa de clima organizacional nos últimos 6 meses?</td><td style="padding:12px;border:1px solid #E2E8F0;text-align:center">☐</td></tr>
+              <tr><td style="padding:12px;border:1px solid #E2E8F0"><strong>10.</strong> A empresa está preparada para apresentar documentação comprobatória em caso de fiscalização do MTE?</td><td style="padding:12px;border:1px solid #E2E8F0;text-align:center">☐</td></tr>
+            </table>
+
+            <div style="background:#FEF3C7;border-left:4px solid #D97706;padding:16px;margin:20px 0;border-radius:0 8px 8px 0">
+              <p style="margin:0;font-size:14px;color:#92400E"><strong>⚠️ Atenção:</strong> Se você marcou menos de 7 itens, sua empresa está em risco de autuação. A multa pode chegar a <strong>R$ 67 mil por colaborador</strong> exposto a riscos não gerenciados.</p>
+            </div>
+
+            <h2 style="color:#1B365D;font-size:17px;margin:24px 0 12px;border-bottom:2px solid #2A9D8F;padding-bottom:8px">🔍 O que cada item significa</h2>
+
+            <p style="font-size:14px;color:#475569;line-height:1.7"><strong>Itens 1-2:</strong> A Portaria MTE 1.419/2024 exige que riscos psicossociais estejam no PGR. Sem isso, a empresa está automaticamente em não conformidade.</p>
+            <p style="font-size:14px;color:#475569;line-height:1.7"><strong>Itens 3-5:</strong> Políticas e canais de denúncia são a primeira linha de defesa. O MTE verifica se existem e se são acessíveis.</p>
+            <p style="font-size:14px;color:#475569;line-height:1.7"><strong>Itens 6-7:</strong> Dados concretos (jornadas, absenteísmo, afastamentos) são evidências que o fiscal solicita. Sem registros, não há como comprovar gestão.</p>
+            <p style="font-size:14px;color:#475569;line-height:1.7"><strong>Itens 8-10:</strong> Plano de ação, pesquisa de clima e documentação comprobatória demonstram que a empresa não apenas identificou os riscos, mas está agindo para mitigá-los.</p>
+
+            <div style="background:#1B365D;border-radius:8px;padding:20px;margin:24px 0;text-align:center">
+              <p style="color:#fff;margin:0 0 12px;font-size:15px"><strong>Precisa de ajuda para se adequar em 30 dias?</strong></p>
+              <a href="https://wa.me/5511956520330?text=Ol%C3%A1%2C%20fiz%20o%20checklist%20e%20preciso%20de%20ajuda%20com%20a%20NR-1" style="display:inline-block;background:#2A9D8F;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px">Falar com a Selma →</a>
+            </div>
+
+            <p style="font-size:12px;color:#94A3B8;text-align:center;margin-top:24px">Instituto Selma Moraes · Psicóloga Organizacional — CRP 06/138420<br>Método Resguarda™ · selmamoraes.com.br</p>
+          </div>
+        </div>
+      `;
+
+      try {
+        const res = await fetch('https://formsubmit.co/ajax/contato@selmamoraes.com.br', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            email: email,
+            _subject: 'Checklist NR-1 — Instituto Selma Moraes',
+            _replyto: email,
+            _template: 'box',
+            message: checklistHTML
+          })
+        });
+        if (res.ok) {
+          btn.textContent = 'Enviado! ✓';
+          btn.style.background = 'var(--navy)';
+          input.value = '';
+        } else {
+          btn.textContent = 'Erro — tente novamente';
+          btn.style.background = '#D32F2F';
+        }
+      } catch {
+        btn.textContent = 'Erro — tente novamente';
+        btn.style.background = '#D32F2F';
+      }
+      btn.disabled = false;
       setTimeout(() => {
         btn.textContent = 'Receber Checklist';
         btn.style.background = '';
-      }, 4000);
+      }, 5000);
     });
 
     // ─── 3D Particle Wave (Canvas) ───
