@@ -1927,13 +1927,26 @@
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
           body: JSON.stringify({
             email: email,
-            _subject: 'Checklist NR-1 — Instituto Selma Moraes',
+            _subject: 'Novo lead — Checklist NR-1 solicitado',
             _replyto: email,
             _template: 'box',
+            _autoresponse: 'Olá! Obrigada por solicitar o Checklist NR-1 do Instituto Selma Moraes. Seu checklist está sendo enviado para este e-mail. Se precisar de ajuda com a adequação, responda este e-mail ou entre em contato pelo WhatsApp: (11) 95652-0330. — Selma Moraes, Psicóloga Organizacional',
+            _captcha: 'false',
+            message: 'Um novo visitante solicitou o Checklist NR-1.\n\nE-mail do lead: ' + email + '\n\nAção recomendada: entrar em contato em até 24h para oferecer a consultoria do Método Resguarda™.'
+          })
+        });
+        const res2 = await fetch('https://formsubmit.co/ajax/' + email, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            _subject: 'Seu Checklist NR-1 — Instituto Selma Moraes',
+            _replyto: 'contato@selmamoraes.com.br',
+            _template: 'box',
+            _captcha: 'false',
             message: checklistHTML
           })
         });
-        if (res.ok) {
+        if (res.ok || res2.ok) {
           btn.textContent = 'Enviado! ✓';
           btn.style.background = 'var(--navy)';
           input.value = '';
