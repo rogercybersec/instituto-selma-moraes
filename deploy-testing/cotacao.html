@@ -276,6 +276,14 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(-
       </div>
     </div>
 
+    <div id="adminActions" style="display:none;margin-top:16px">
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-outline" onclick="previewProposal()" style="flex:1;padding:12px;font-size:13px">👁 Ver proposta</button>
+        <button class="btn btn-outline" onclick="editProposal()" style="flex:1;padding:12px;font-size:13px">✏️ Editar e regerar</button>
+      </div>
+      <p style="font-size:11px;color:var(--text-muted);margin-top:8px;text-align:center">"Ver proposta" abre exatamente o que o cliente verá. "Editar" permite ajustar e gerar um novo link.</p>
+    </div>
+
     <div class="msg-templates" id="msgTemplates" style="display:none">
       <h3>Mensagens prontas para enviar</h3>
       <div class="msg-box" id="msgWhatsApp">
