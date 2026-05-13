@@ -221,10 +221,10 @@
     }
     .nav-logo-img {
       width: auto;
-      /* Responsive fluido: min 76px (iPhone SE), escala 13vw, max 150px (desktop).
-         max-width 50vw garante que nunca passe da metade da tela em nenhum device. */
-      height: clamp(76px, 13vw, 150px);
-      max-width: 50vw;
+      /* Logo prominente em qualquer device: min 110px (mobile readable),
+         escala 14vw fluida, max 150px (desktop cap). Funciona iPhone SE → 4K. */
+      height: clamp(110px, 14vw, 150px);
+      max-width: 65vw;
       object-fit: contain;
       display: block;
       background: transparent;
