@@ -2418,6 +2418,46 @@
       });
     }
 
+    // ─── PWA Install Button — detecta plataforma + dispara prompt
+    (function(){
+      const btn = document.getElementById('navInstallBtn');
+      const iosModal = document.getElementById('iosInstallModal');
+      const iosClose = document.getElementById('iosInstallClose');
+      if (!btn) return;
+      let deferredPrompt = null;
+
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+      const isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+      if (isStandalone) return; // já instalado — esconde tudo
+
+      // Android/Chrome/Edge: captura prompt nativo
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        btn.hidden = false;
+      });
+
+      // iOS: sempre mostra botão (Apple não envia beforeinstallprompt)
+      if (isIOS) btn.hidden = false;
+
+      btn.addEventListener('click', async () => {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+          if (outcome === 'accepted') btn.hidden = true;
+          deferredPrompt = null;
+        } else if (isIOS) {
+          iosModal.classList.add('open');
+        }
+      });
+
+      if (iosClose) iosClose.addEventListener('click', () => iosModal.classList.remove('open'));
+      if (iosModal) iosModal.addEventListener('click', (e) => {
+        if (e.target === iosModal) iosModal.classList.remove('open');
+      });
+      window.addEventListener('appinstalled', () => { btn.hidden = true; deferredPrompt = null; });
+    })();
+
     // ─── Hamburger / Mobile menu toggle + backdrop click-outside-to-close ───
     (function(){
       const ham = document.getElementById('navHamburger');
