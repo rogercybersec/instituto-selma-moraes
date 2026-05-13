@@ -558,6 +558,16 @@ Método Resguarda™ · selmamoraes.com.br`;
       const badge = document.getElementById('priorityBadgeContainer');
       badge.innerHTML = `<span class="priority-badge ${priority.class}">${priority.emoji} PRIORIDADE ${priority.level}</span>`;
       document.getElementById('priorityMessage').textContent = priority.msg + ' Confira seu email — o checklist completo já foi enviado pra ' + data.email + '.';
+      // Inject investment estimate
+      const invEl = document.getElementById('investmentEstimate');
+      if(invEl){
+        invEl.innerHTML = `
+          <div style="background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:24px;margin-bottom:20px;text-align:left">
+            <p style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">Faixa estimada de investimento</p>
+            <p style="font-size:28px;font-weight:700;color:var(--navy);margin-bottom:8px">${investment.formatted}</p>
+            <p style="font-size:13px;color:var(--text-muted);line-height:1.5">${investment.note}</p>
+          </div>`;
+      }
     } else {
       throw new Error(result.message || 'Erro no envio');
     }
