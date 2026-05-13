@@ -1808,9 +1808,20 @@
         <a href="#metodo">Método</a>
         <a href="#sobre">Quem Sou</a>
         <a href="#faq">Dúvidas</a>
-        <a href="/cotacao" style="color:var(--gold);font-weight:600;font-size:14px;text-decoration:none;">Solicitar proposta</a>
+        <a href="/cotacao" class="nav-secondary" style="color:var(--gold);font-weight:600;font-size:14px;text-decoration:none;">Solicitar proposta</a>
         <a href="/avaliacao" class="nav-cta">Avaliação em 2 minutos</a>
-        <a href="/cotacao?admin=1" onclick="event.preventDefault();var p=prompt('Senha:');if(p==='resguarda2026')window.location='/cotacao?admin=1'" style="color:#9CA3AF;font-size:11px;text-decoration:none;margin-left:16px;opacity:0.6">Admin</a>
+        <a href="/cotacao?admin=1" class="nav-admin" onclick="event.preventDefault();var p=prompt('Senha:');if(p==='resguarda2026')window.location='/cotacao?admin=1'" style="color:#9CA3AF;font-size:11px;text-decoration:none;margin-left:16px;opacity:0.6">Admin</a>
+      </div>
+      <button class="nav-hamburger" aria-label="Abrir menu" aria-expanded="false" id="navHamburger">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+        <a href="#problema">O Problema</a>
+        <a href="#metodo">Método</a>
+        <a href="#sobre">Quem Sou</a>
+        <a href="#faq">Dúvidas</a>
+        <a href="/cotacao">Solicitar proposta</a>
+        <a href="/avaliacao" class="mobile-menu-cta">Avaliação em 2 minutos</a>
       </div>
     </div>
   </nav>
