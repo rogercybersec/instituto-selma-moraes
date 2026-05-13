@@ -2308,22 +2308,31 @@
       document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
     });
 
-    // ─── Hamburger / Mobile menu toggle ───
+    // ─── Hamburger / Mobile menu toggle + backdrop click-outside-to-close ───
     (function(){
       const ham = document.getElementById('navHamburger');
       const menu = document.getElementById('mobileMenu');
+      const backdrop = document.getElementById('mobileMenuBackdrop');
       if (!ham || !menu) return;
       const toggle = (open) => {
         const isOpen = typeof open === 'boolean' ? open : !ham.classList.contains('open');
         ham.classList.toggle('open', isOpen);
         menu.classList.toggle('open', isOpen);
+        if (backdrop) backdrop.classList.toggle('open', isOpen);
         ham.setAttribute('aria-expanded', String(isOpen));
         menu.setAttribute('aria-hidden', String(!isOpen));
         document.body.style.overflow = isOpen ? 'hidden' : '';
       };
-      ham.addEventListener('click', () => toggle());
+      ham.addEventListener('click', (e) => { e.stopPropagation(); toggle(); });
+      if (backdrop) backdrop.addEventListener('click', () => toggle(false));
       menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggle(false)));
       document.addEventListener('keydown', e => { if (e.key === 'Escape') toggle(false); });
+      // Click outside menu on document body fecha tb (extra safety)
+      document.addEventListener('click', (e) => {
+        if (!menu.classList.contains('open')) return;
+        if (menu.contains(e.target) || ham.contains(e.target)) return;
+        toggle(false);
+      });
     })();
 
     // ─── Mouse-following gradient ───
