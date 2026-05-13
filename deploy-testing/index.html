@@ -1447,19 +1447,20 @@
     /* Footer logo — PNG transparente flutua direto no navy. Sem frame, sem card, sem borda.
        Glow champagne sutil + mix-blend-mode pra integrar com o bg. (brief ChatGPT) */
     .footer-logo-img {
-      width: 220px;
-      height: 220px;
+      width: 320px;
+      height: auto;
+      max-width: 80%;
       object-fit: contain;
       display: block;
       margin: 0 auto 22px;
       background: transparent;
       filter:
-        drop-shadow(0 0 32px rgba(214,178,122,0.25))
-        drop-shadow(0 12px 28px rgba(0,0,0,0.55));
+        drop-shadow(0 0 48px rgba(214,178,122,0.30))
+        drop-shadow(0 16px 32px rgba(0,0,0,0.6));
       opacity: 0.96;
     }
     @media (max-width: 480px) {
-      .footer-logo-img { width: 180px; height: 180px; }
+      .footer-logo-img { width: 240px; }
       .footer-instituto { font-size: 0.78rem; letter-spacing: 0.24em; }
     }
     .footer-brand {
