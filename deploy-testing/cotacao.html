@@ -607,7 +607,50 @@ function generateLink(){
   document.getElementById('msgWhatsApp').firstChild.textContent=whatsMsg;
   document.getElementById('msgEmail').firstChild.textContent=emailMsg;
   document.getElementById('msgTemplates').style.display='block';
+  document.getElementById('adminActions').style.display='block';
   document.getElementById('linkBox').scrollIntoView({behavior:'smooth'});
+}
+function previewProposal(){
+  const data={};
+  const fields=['nome','cargo','email','empresa','setor','tamanho','desconto','cortesia','mensagem'];
+  fields.forEach(f=>{const el=document.getElementById('a_'+f);if(el&&el.value)data[f]=el.value});
+  // Simulate client submission with admin data to render proposal
+  proposalData=data;
+  if(data.nome)document.getElementById('c_nome').value=data.nome;
+  if(data.cargo)document.getElementById('c_cargo').value=data.cargo;
+  if(data.email)document.getElementById('c_email').value=data.email;
+  if(data.empresa)document.getElementById('c_empresa').value=data.empresa;
+  if(data.setor){const s=document.getElementById('c_setor');for(let o of s.options){if(o.value===data.setor||o.textContent===data.setor){o.selected=true;break}}}
+  if(data.tamanho)document.getElementById('c_tamanho').value=data.tamanho;
+  // Fill required fields with placeholders if empty for preview
+  if(!document.getElementById('c_nome').value)document.getElementById('c_nome').value='[Nome do cliente]';
+  if(!document.getElementById('c_cargo').value)document.getElementById('c_cargo').value='[Cargo]';
+  if(!document.getElementById('c_email').value)document.getElementById('c_email').value='preview@exemplo.com';
+  if(!document.getElementById('c_telefone').value)document.getElementById('c_telefone').value='(00) 00000-0000';
+  if(!document.getElementById('c_empresa').value)document.getElementById('c_empresa').value='[Empresa]';
+  if(!document.getElementById('c_setor').value)document.getElementById('c_setor').selectedIndex=1;
+  if(!document.getElementById('c_tamanho').value)document.getElementById('c_tamanho').selectedIndex=2;
+  if(!document.getElementById('c_setores').value)document.getElementById('c_setores').selectedIndex=1;
+  if(!document.querySelector('input[name="c_pgr"]:checked'))document.querySelector('input[name="c_pgr"]').checked=true;
+  // Render proposal without sending email
+  renderProposal(true);
+  document.getElementById('adminView').classList.remove('active');
+  document.getElementById('proposalView').classList.add('active');
+  document.getElementById('backToAdmin').style.display='flex';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function editProposal(){
+  document.getElementById('linkBox').style.display='none';
+  document.getElementById('adminActions').style.display='none';
+  document.getElementById('msgTemplates').style.display='none';
+  document.getElementById('a_nome').focus();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function backToAdmin(){
+  document.getElementById('proposalView').classList.remove('active');
+  document.getElementById('adminView').classList.add('active');
+  document.getElementById('backToAdmin').style.display='none';
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 function copyLink(){navigator.clipboard.writeText(generatedLink).then(()=>{const b=document.querySelector('.link-copy');b.textContent='Copiado!';setTimeout(()=>b.textContent='Copiar link',2000)})}
 function sendWhatsApp(){window.open('https://wa.me/?text='+encodeURIComponent(document.getElementById('msgWhatsApp').firstChild.textContent),'_blank')}
