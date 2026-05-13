@@ -2321,6 +2321,15 @@
       document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
     });
 
+    // ─── PWA Service Worker — habilita "Instalar" no Chrome/Edge + offline support
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch((err) => {
+          console.warn('SW register failed', err);
+        });
+      });
+    }
+
     // ─── Hamburger / Mobile menu toggle + backdrop click-outside-to-close ───
     (function(){
       const ham = document.getElementById('navHamburger');
