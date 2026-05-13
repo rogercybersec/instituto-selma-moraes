@@ -75,6 +75,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .radio-card input:checked + .radio-content .radio-dot::after{content:'';position:absolute;inset:3px;background:var(--teal);border-radius:50%}
 .radio-card .radio-label{font-size:14px;color:var(--text);font-weight:500;line-height:1.4}
 .radio-card .radio-emoji{font-size:18px;flex-shrink:0}
+/* Professional SVG icons in colored badges (Lucide-style line icons) */
+.radio-icon{width:32px;height:32px;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;border-radius:8px}
+.radio-icon svg{width:18px;height:18px;stroke-width:2;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round}
+.radio-icon.ic-success{background:#ECFDF5;color:#047857}
+.radio-icon.ic-warning{background:#FFFBEB;color:#B45309}
+.radio-icon.ic-danger{background:#FEF2F2;color:#B91C1C}
+.radio-icon.ic-info{background:#F1F5F9;color:#475569}
+.radio-icon.ic-neutral{background:#F8FAFC;color:#1B365D}
 
 /* Buttons */
 .actions{display:flex;gap:12px;margin-top:28px;padding-top:24px;border-top:1px solid var(--border)}
