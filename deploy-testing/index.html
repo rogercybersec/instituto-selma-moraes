@@ -187,24 +187,26 @@
       text-decoration: none;
       color: #1B365D;
     }
-    /* Logo PNG transparente — monograma SM flutuando direto no header branco (brief ChatGPT) */
+    /* Logo INTEIRO (SM + SELMA MORAES + Ψ) flutuando no header branco — brief ChatGPT */
     .nav-logo-img {
       width: auto;
-      height: 56px;
+      height: 88px;
       object-fit: contain;
       display: block;
       background: transparent;
-      filter: drop-shadow(0 4px 12px rgba(214,178,122,0.22));
+      filter: drop-shadow(0 4px 14px rgba(214,178,122,0.20));
       opacity: 0.98;
       transition: transform 0.35s cubic-bezier(.2,.7,.2,1), filter 0.35s;
     }
     .nav-logo:hover .nav-logo-img {
       transform: translateY(-1px);
-      filter: drop-shadow(0 8px 20px rgba(214,178,122,0.32));
+      filter: drop-shadow(0 8px 22px rgba(214,178,122,0.30));
     }
     @media (max-width: 600px) {
-      .nav-logo-img { height: 44px; }
+      .nav-logo-img { height: 64px; }
     }
+    /* Esconder o tag "Instituto" — logo já tem 'SELMA MORAES' completo */
+    .nav-logo-tag { display: none; }
     /* Tag "Instituto" — discreto, deixa o logo dourado dominar */
     .nav-logo-tag {
       font-family: 'Playfair Display', serif;
