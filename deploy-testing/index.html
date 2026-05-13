@@ -1428,7 +1428,27 @@
   <!-- NAVIGATION -->
   <nav id="navbar">
     <div class="nav-inner">
-      <a href="#hero" class="nav-logo">Instituto Selma <span>Moraes</span></a>
+      <a href="#hero" class="nav-logo" aria-label="Instituto Selma Moraes — voltar ao topo">
+        <svg class="seal" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <filter id="navSeal" x="-10%" y="-10%" width="120%" height="120%">
+              <feGaussianBlur stdDeviation="0.4"/>
+              <feSpecularLighting surfaceScale="2.5" specularConstant="1.6" specularExponent="20" lighting-color="#fff">
+                <feDistantLight azimuth="135" elevation="50"/>
+              </feSpecularLighting>
+              <feComposite in2="SourceGraphic" operator="in"/>
+              <feMerge>
+                <feMergeNode in="SourceGraphic"/>
+                <feMergeNode/>
+              </feMerge>
+            </filter>
+          </defs>
+          <circle cx="50" cy="50" r="46" fill="none" stroke="#1B365D" stroke-width="1.5"/>
+          <circle cx="50" cy="50" r="42" fill="none" stroke="#1B365D" stroke-width="0.5" opacity="0.5"/>
+          <text x="50" y="63" font-family="Playfair Display, Georgia, serif" font-size="38" font-weight="700" text-anchor="middle" fill="#1B365D" filter="url(#navSeal)">SM</text>
+        </svg>
+        <span class="nav-logo-text">Instituto Selma <span>Moraes</span></span>
+      </a>
       <div class="nav-links">
         <a href="#problema">O Problema</a>
         <a href="#metodo">Método</a>
