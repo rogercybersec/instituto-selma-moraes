@@ -1443,6 +1443,47 @@
       margin: 0 auto 16px;
       display: block;
     }
+    /* Footer logo (gold PNG) — cream frame neutraliza contraste vs navy bg */
+    .footer-instituto {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: 0.85rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #C9A876;
+      margin-bottom: 14px;
+      text-shadow:
+        0 1px 0 rgba(0,0,0,0.55),
+        0 0 18px rgba(201,168,118,0.15);
+    }
+    .footer-logo-frame {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 168px;
+      height: 168px;
+      border-radius: 50%;
+      margin: 0 auto 22px;
+      background: radial-gradient(circle at 35% 28%, #FBF6EC 0%, #F0E5D2 70%, #E2D2B2 100%);
+      box-shadow:
+        0 2px 0 rgba(255,255,255,0.55) inset,
+        0 -2px 0 rgba(139,111,71,0.30) inset,
+        0 0 0 1px rgba(201,168,118,0.28),
+        0 18px 40px -12px rgba(0,0,0,0.55),
+        0 0 60px -10px rgba(201,168,118,0.30);
+    }
+    .footer-logo-img {
+      width: 152px;
+      height: 152px;
+      object-fit: contain;
+      display: block;
+    }
+    @media (max-width: 480px) {
+      .footer-logo-frame { width: 140px; height: 140px; }
+      .footer-logo-img { width: 126px; height: 126px; }
+      .footer-instituto { font-size: 0.78rem; letter-spacing: 0.24em; }
+    }
     .footer-brand {
       font-family: 'Playfair Display', serif;
       font-weight: 700;
