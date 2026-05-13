@@ -451,9 +451,9 @@ function calculatePriority(data){
   if(data.prazo === '1 a 3 meses') score += 2;
   if(data.tamanho?.includes('250+')) score += 1;
 
-  if(score >= 8) return {level:'ALTO', class:'priority-alto', emoji:'🚨', msg:'A sua empresa apresenta RISCO ELEVADO. Entraremos em contato com prioridade nas próximas horas.'};
-  if(score >= 4) return {level:'MÉDIO', class:'priority-medio', emoji:'⚠️', msg:'A sua empresa apresenta lacunas importantes. Entraremos em contato em até 24 horas com um plano de ação.'};
-  return {level:'BAIXO', class:'priority-baixo', emoji:'🟢', msg:'A sua empresa está bem posicionada. Entraremos em contato nos próximos dias para reforçar os pontos que faltam.'};
+  if(score >= 8) return {level:'ALTO', class:'priority-alto', emoji:'', msg:'A sua empresa apresenta RISCO ELEVADO. Entraremos em contato com prioridade nas próximas horas.'};
+  if(score >= 4) return {level:'MÉDIO', class:'priority-medio', emoji:'', msg:'A sua empresa apresenta lacunas importantes. Entraremos em contato em até 24 horas com um plano de ação.'};
+  return {level:'BAIXO', class:'priority-baixo', emoji:'', msg:'A sua empresa está bem posicionada. Entraremos em contato nos próximos dias para reforçar os pontos que faltam.'};
 }
 
 // Estimate investment range based on size + state + urgency
