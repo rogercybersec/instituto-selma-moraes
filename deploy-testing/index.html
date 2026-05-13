@@ -1450,31 +1450,26 @@
         0 1px 0 rgba(0,0,0,0.55),
         0 0 18px rgba(201,168,118,0.15);
     }
+    /* Footer logo — display direto do PNG (não recortado), com border-radius elegante
+       e shadow integrando ao navy bg. Sem frame artificial — PNG carrega seu próprio cream. */
     .footer-logo-frame {
       display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 168px;
-      height: 168px;
-      border-radius: 50%;
       margin: 0 auto 22px;
-      background: radial-gradient(circle at 35% 28%, #FBF6EC 0%, #F0E5D2 70%, #E2D2B2 100%);
+      border-radius: 22px;
+      overflow: hidden;
       box-shadow:
-        0 2px 0 rgba(255,255,255,0.55) inset,
-        0 -2px 0 rgba(139,111,71,0.30) inset,
-        0 0 0 1px rgba(201,168,118,0.28),
-        0 18px 40px -12px rgba(0,0,0,0.55),
-        0 0 60px -10px rgba(201,168,118,0.30);
+        0 0 0 1px rgba(201,168,118,0.32),
+        0 18px 40px -12px rgba(0,0,0,0.65),
+        0 0 60px -10px rgba(201,168,118,0.22);
     }
     .footer-logo-img {
-      width: 152px;
-      height: 152px;
-      object-fit: contain;
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
       display: block;
     }
     @media (max-width: 480px) {
-      .footer-logo-frame { width: 140px; height: 140px; }
-      .footer-logo-img { width: 126px; height: 126px; }
+      .footer-logo-img { width: 150px; height: 150px; }
       .footer-instituto { font-size: 0.78rem; letter-spacing: 0.24em; }
     }
     .footer-brand {
