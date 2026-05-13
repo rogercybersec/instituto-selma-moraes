@@ -1867,6 +1867,22 @@
       });
     });
 
+    // ─── Photo protection (impede right-click, drag, copy da foto da Selma) ───
+    (function protectPhoto(){
+      const photo = document.querySelector('.protected-photo');
+      if (!photo) return;
+      ['contextmenu', 'dragstart', 'selectstart', 'copy', 'cut'].forEach(evt => {
+        photo.addEventListener(evt, e => { e.preventDefault(); return false; });
+      });
+      // Bloqueia atalhos comuns de save quando o foco está na foto
+      photo.setAttribute('tabindex', '-1');
+      photo.addEventListener('keydown', e => {
+        if ((e.ctrlKey || e.metaKey) && ['s', 'c', 'a', 'p'].includes(e.key.toLowerCase())) {
+          e.preventDefault();
+        }
+      });
+    })();
+
     // ─── Form submit (legacy lead form — removed in favor of /diagnostico) ───
     document.getElementById('leadForm')?.addEventListener('submit', async (e) => {
       e.preventDefault();
