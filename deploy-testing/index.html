@@ -312,11 +312,12 @@
     @media (max-width: 768px) {
       .nav-hamburger { display: flex; position: relative; z-index: 1200; }
       .nav-links { display: none !important; }
-      /* Mobile: logo INTEIRO (SM + SELMA MORAES + Ψ) maior — escala 30vw fluido
-         iPhone SE (375px): 30vw = 112px ✓ | iPhone Pro (414px): 124px ✓ */
+      /* Mobile: logo INTEIRO grande (impacto visual = desktop) — escala 38vw
+         320px (iPhone SE 1st gen): 38vw = 121px | 375px: 142px | 414px: 157px | 600px: max 168px
+         max-width 65vw garante espaço pro hamburger (44px) + gap (8px) sempre */
       .nav-logo-img {
-        height: clamp(96px, 30vw, 140px);
-        max-width: 60vw;
+        height: clamp(112px, 38vw, 168px);
+        max-width: 65vw;
       }
       .mobile-menu { z-index: 1150; }
       /* Backdrop acima do nav (1100 > 1000) → click outside fecha */
