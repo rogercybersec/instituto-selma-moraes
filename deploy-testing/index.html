@@ -222,7 +222,7 @@
     }
     .nav-logo-img {
       width: auto;
-      height: 120px;
+      height: 180px;
       object-fit: contain;
       display: block;
       background: transparent;
@@ -239,8 +239,12 @@
         drop-shadow(0 8px 22px rgba(214,178,122,0.40))
         drop-shadow(0 0 32px rgba(231,199,154,0.45));
     }
+    nav.scrolled .nav-logo-img { height: 110px !important; }
+    @media (max-width: 900px) {
+      .nav-logo-img { height: 130px; }
+    }
     @media (max-width: 600px) {
-      .nav-logo-img { height: 80px; }
+      .nav-logo-img { height: 96px; }
     }
     /* Esconder o tag "Instituto" — logo já tem 'SELMA MORAES' completo */
     .nav-logo-tag { display: none; }
