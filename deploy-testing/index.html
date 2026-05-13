@@ -1863,8 +1863,8 @@
       });
     });
 
-    // ─── Form submit ───
-    document.getElementById('leadForm').addEventListener('submit', async (e) => {
+    // ─── Form submit (legacy lead form — removed in favor of /diagnostico) ───
+    document.getElementById('leadForm')?.addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = e.target.querySelector('button');
       const input = e.target.querySelector('input');
