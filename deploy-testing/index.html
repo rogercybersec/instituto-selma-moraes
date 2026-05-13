@@ -308,11 +308,11 @@
     @media (max-width: 768px) {
       .nav-hamburger { display: flex; position: relative; z-index: 1200; }
       .nav-links { display: none !important; }
-      /* Mobile usa monograma SM (sem texto MORAES) → mesma altura mostra a marca MAIOR
-         monograma aspect 1.67:1 (wider), full logo 1.16:1 */
+      /* Mobile: logo INTEIRO (SM + SELMA MORAES + Ψ) maior — escala 30vw fluido
+         iPhone SE (375px): 30vw = 112px ✓ | iPhone Pro (414px): 124px ✓ */
       .nav-logo-img {
-        height: clamp(72px, 18vw, 100px);
-        max-width: 55vw;
+        height: clamp(96px, 30vw, 140px);
+        max-width: 60vw;
       }
       .mobile-menu { z-index: 1150; }
       /* Backdrop acima do nav (1100 > 1000) → click outside fecha */
