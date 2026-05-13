@@ -18,6 +18,10 @@
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+    /* Anti-copy protection da foto da Selma (background + overlay impedem right-click save/drag) */
+    .protected-photo { user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -webkit-user-drag: none; -webkit-touch-callout: none; pointer-events: auto; position: relative; }
+    .protected-photo * { user-select: none; -webkit-user-select: none; -webkit-user-drag: none; -webkit-touch-callout: none; }
+
     :root {
       --navy: #1B365D;
       --navy-deep: #0A1929;
