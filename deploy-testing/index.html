@@ -1570,6 +1570,18 @@
       font-size: 0.85rem;
       color: rgba(241,245,249,0.4);
       margin-bottom: 32px;
+      white-space: nowrap;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 0 16px;
+    }
+    @media (max-width: 600px) {
+      .footer-subtitle {
+        white-space: normal;
+        font-size: 0.78rem;
+        line-height: 1.5;
+      }
     }
     /* Email destaque — card com letterpress real (texto rebaixado, moldura em relevo) */
     .footer-contact-card {
