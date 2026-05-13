@@ -11,6 +11,8 @@
     }
   ],
   "rewrites": [
+    { "source": "/diagnostico", "destination": "/diagnostico.html" },
+    { "source": "/diagnostico.html", "destination": "/diagnostico.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "headers": [
