@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proposta Comercial | Instituto Selma Moraes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy: #1B365D;
+      --navy-deep: #0F2341;
+      --navy-mid: #132F4C;
+      --green: #2E7D32;
+      --green-bright: #4CAF50;
+      --teal: #0F766E;
+      --teal-light: #14B8A6;
+      --gold: #D4A853;
+      --gold-light: #E8C87A;
+      --white: #FFFFFF;
+      --off-white: #F8F9FC;
+      --gray-100: #F3F4F6;
+      --gray-200: #E5E7EB;
+      --gray-300: #D1D5DB;
+      --gray-400: #9CA3AF;
+      --gray-500: #6B7280;
+      --gray-600: #4B5563;
+      --gray-700: #374151;
+      --text: #111827;
+      --text-secondary: #4B5563;
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      color: var(--text);
+      background: var(--off-white);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ═══ ADMIN PANEL (Selma fills this) ═══ */
+    .admin-panel {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 380px;
+      height: 100vh;
+      background: var(--navy-deep);
+      color: white;
+      z-index: 1000;
+      overflow-y: auto;
+      padding: 24px 20px;
+      transform: translateX(-100%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 4px 0 30px rgba(0,0,0,0.3);
+    }
+    .admin-panel.open { transform: translateX(0); }
+    .admin-panel h2 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--gold);
+    }
+    .admin-panel p.subtitle {
+      font-size: 12px;
+      color: var(--gray-400);
+      margin-bottom: 20px;
+    }
+    .admin-panel label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--gray-400);
+      margin-bottom: 4px;
+      margin-top: 14px;
+    }
+    .admin-panel input, .admin-panel select, .admin-panel textarea {
+      width: 100%;
+      padding: 10px 12px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      color: white;
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .admin-panel input:focus, .admin-panel select:focus, .admin-panel textarea:focus {
+      border-color: var(--gold);
+    }
+    .admin-panel select option { background: var(--navy-deep); color: white; }
+    .admin-panel textarea { min-height: 60px; resize: vertical; }
+    .admin-panel .btn-generate {
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy-deep);
+      font-weight: 700;
+      font-size: 14px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .admin-panel .btn-generate:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(212, 168, 83, 0.4);
+    }
+    .admin-panel .btn-secondary {
+      width: 100%;
+      margin-top: 8px;
+      padding: 12px;
+      background: rgba(255,255,255,0.08);
+      color: var(--gray-300);
+      font-weight: 600;
+      font-size: 13px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .admin-panel .btn-secondary:hover { background: rgba(255,255,255,0.15); }
+    .admin-toggle {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      z-index: 1001;
+      width: 44px;
+      height: 44px;
+      background: var(--navy);
+      color: var(--gold);
+      border: 2px solid var(--gold);
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    }
+    .admin-toggle:hover { transform: scale(1.1); }
+    .admin-toggle.hidden-for-client { display: none; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .field-row label { grid-column: span 1; }
+    .admin-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin: 18px 0 8px;
+    }
+    .admin-section-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--teal-light);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+
+    /* ═══ PROPOSAL LAYOUT ═══ */
+    .proposal {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      min-height: 100vh;
+    }
+
+    /* Cover */
+    .cover {
+      background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy) 50%, var(--navy-mid) 100%);
+      color: white;
+      padding: 80px 60px 60px;
+      position: relative;
+      overflow: hidden;
+      min-height: 500px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(212,168,83,0.08) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(14,184,166,0.06) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .cover-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(212,168,83,0.15);
+      border: 1px solid rgba(212,168,83,0.3);
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      position: relative;
+      z-index: 1;
+    }
+    .cover-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.5); }
+    }
+    .cover h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .cover h1 span { color: var(--gold); }
+    .cover .cover-subtitle {
+      font-size: 17px;
+      color: rgba(255,255,255,0.7);
+      max-width: 500px;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+    .cover-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 60px;
+      position: relative;
+      z-index: 1;
+    }
+    .cover-client {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 16px 20px;
+    }
+    .cover-client .label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gray-400);
+      margin-bottom: 4px;
+    }
+    .cover-client .value {
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .cover-date {
+      font-size: 13px;
+      color: var(--gray-400);
+    }
+    .cover-logo {
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.03em;
+    }
+
+    /* Sections */
+    .section {
+      padding: 56px 60px;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .section:last-child { border-bottom: none; }
+    .section-number {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 8px;
+    }
+    .section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    .section p {
+      color: var(--text-secondary);
+      font-size: 15px;
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    .section p strong { color: var(--text); }
+
+    /* Credentials */
+    .credentials-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .credential-card {
+      background: var(--off-white);
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 20px;
+      transition: transform 0.2s;
+    }
+    .credential-card:hover { transform: translateY(-2px); }
+    .credential-card .icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+    .credential-card h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .credential-card p {
+      font-size: 13px;
+      color: var(--gray-500);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* Urgency banner */
+    .urgency-banner {
+      background: linear-gradient(135deg, #FEF3C7, #FDE68A);
+      border: 1px solid #F59E0B;
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 24px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .urgency-banner .icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+    .urgency-banner h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #92400E;
+      margin-bottom: 4px;
+    }
+    .urgency-banner p {
+      font-size: 13px;
+      color: #78350F;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* Method phases */
+    .phases { margin-top: 28px; }
+    .phase {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 20px;
+      margin-bottom: 28px;
+      position: relative;
+    }
+    .phase:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 29px;
+      top: 60px;
+      bottom: -28px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--teal), transparent);
+    }
+    .phase-number {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-size: 20px;
+      font-weight: 800;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .phase-content h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .phase-content .phase-time {
+      font-size: 12px;
+      color: var(--teal);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .phase-content p { font-size: 14px; margin: 0; }
+    .phase-content ul {
+      list-style: none;
+      margin-top: 8px;
+    }
+    .phase-content ul li {
+      font-size: 14px;
+      color: var(--text-secondary);
+      padding: 3px 0;
+      padding-left: 20px;
+      position: relative;
+    }
+    .phase-content ul li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    /* Services table */
+    .services-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--gray-200);
+    }
+    .services-table th {
+      background: var(--navy);
+      color: white;
+      padding: 14px 20px;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .services-table td {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--gray-100);
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    .services-table tr:nth-child(even) { background: var(--off-white); }
+    .services-table tr:last-child td { border-bottom: none; }
+    .services-table td:first-child { font-weight: 600; color: var(--text); }
+
+    /* Results grid */
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 24px;
+    }
+    .result-card {
+      background: var(--off-white);
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 18px;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .result-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    }
+    .result-card .result-icon { font-size: 28px; margin-bottom: 8px; }
+    .result-card h4 { font-size: 13px; font-weight: 700; color: var(--navy); line-height: 1.3; }
+
+    /* Fines table */
+    .fines-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #FECACA;
+    }
+    .fines-table th {
+      background: #DC2626;
+      color: white;
+      padding: 12px 14px;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .fines-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #FEE2E2;
+      font-size: 13px;
+      color: var(--text-secondary);
+      text-align: center;
+    }
+    .fines-table tr:nth-child(even) { background: #FEF2F2; }
+    .fines-table td:first-child { text-align: left; font-weight: 600; color: var(--text); font-size: 12px; }
+
+    /* Investment section */
+    .investment-box {
+      background: linear-gradient(135deg, var(--navy-deep), var(--navy));
+      border-radius: 16px;
+      padding: 40px;
+      color: white;
+      text-align: center;
+      margin-top: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .investment-box::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(212,168,83,0.1) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .investment-box .inv-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 12px;
+      position: relative;
+    }
+    .investment-box .inv-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 44px;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 4px;
+      position: relative;
+    }
+    .investment-box .inv-installments {
+      font-size: 16px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .investment-box .inv-scope {
+      display: inline-block;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.8);
+      position: relative;
+    }
+    .investment-box .inv-courtesy {
+      margin-top: 20px;
+      font-size: 13px;
+      color: var(--teal-light);
+      font-weight: 500;
+      position: relative;
+    }
+    .inv-vista {
+      font-size: 14px;
+      color: var(--gold-light);
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    /* CTA / Footer */
+    .cta-section {
+      background: var(--off-white);
+      padding: 48px 60px;
+      text-align: center;
+    }
+    .cta-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+    .cta-section p {
+      color: var(--text-secondary);
+      font-size: 15px;
+      max-width: 500px;
+      margin: 0 auto 28px;
+    }
+    .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cta-btn:hover { transform: translateY(-2px); }
+    .cta-btn.primary {
+      background: linear-gradient(135deg, var(--green), var(--green-bright));
+      color: white;
+      box-shadow: 0 4px 16px rgba(46,125,50,0.3);
+    }
+    .cta-btn.secondary {
+      background: white;
+      color: var(--navy);
+      border: 2px solid var(--navy);
+    }
+
+    .proposal-footer {
+      padding: 32px 60px;
+      background: var(--navy-deep);
+      color: rgba(255,255,255,0.5);
+      font-size: 12px;
+      text-align: center;
+      line-height: 1.8;
+    }
+    .proposal-footer strong { color: rgba(255,255,255,0.8); }
+
+    /* Validity badge */
+    .validity-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(14,184,166,0.1);
+      border: 1px solid rgba(14,184,166,0.2);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--teal);
+      margin-top: 16px;
+    }
+
+    /* Print styles */
+    @media print {
+      .admin-panel, .admin-toggle, .no-print { display: none !important; }
+      .proposal { box-shadow: none; }
+      .cover { min-height: 400px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .section { page-break-inside: avoid; }
+      body { background: white; }
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .cover { padding: 60px 28px 40px; }
+      .cover h1 { font-size: 28px; }
+      .section { padding: 36px 28px; }
+      .credentials-grid { grid-template-columns: 1fr; }
+      .results-grid { grid-template-columns: 1fr 1fr; }
+      .phase { grid-template-columns: 44px 1fr; gap: 14px; }
+      .phase-number { width: 44px; height: 44px; font-size: 16px; border-radius: 12px; }
+      .cta-section { padding: 36px 28px; }
+      .investment-box { padding: 28px 20px; }
+      .investment-box .inv-price { font-size: 32px; }
+      .field-row { grid-template-columns: 1fr; }
+      .admin-panel { width: 100%; }
+      .fines-table th, .fines-table td { padding: 8px 6px; font-size: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Admin Toggle (only visible to Selma) -->
+<button class="admin-toggle no-print" onclick="toggleAdmin()" title="Painel da Selma">⚙</button>
+
+<!-- Admin Panel -->
+<div class="admin-panel no-print" id="adminPanel">
+  <h2>Painel de Cotação</h2>
+  <p class="subtitle">Preencha os dados do cliente — a proposta atualiza em tempo real</p>
+
+  <div class="admin-section-title">Dados do Cliente</div>
+  <label>Nome do contato</label>
+  <input type="text" id="clientName" placeholder="Ex: João Silva" oninput="updateProposal()">
+  <label>Cargo</label>
+  <input type="text" id="clientRole" placeholder="Ex: Diretor de RH" oninput="updateProposal()">
+  <label>Nome da empresa</label>
+  <input type="text" id="companyName" placeholder="Ex: TechSolutions Ltda" oninput="updateProposal()">
+  <label>Ramo de atividade</label>
+  <input type="text" id="companySegment" placeholder="Ex: Tecnologia, Indústria, Comércio" oninput="updateProposal()">
+
+  <div class="field-row">
+    <div>
+      <label>Nº de colaboradores</label>
+      <input type="number" id="numEmployees" placeholder="50" oninput="updateProposal()">
+    </div>
+    <div>
+      <label>Nº de setores</label>
+      <input type="number" id="numSectors" placeholder="8" oninput="updateProposal()">
+    </div>
+  </div>
+
+  <label>Já possui PGR?</label>
+  <select id="hasPGR" onchange="updateProposal()">
+    <option value="nao">Não possui</option>
+    <option value="sim-sem-psico">Sim, mas sem riscos psicossociais</option>
+    <option value="sim-completo">Sim, já com riscos psicossociais</option>
+  </select>
+
+  <hr class="admin-divider">
+  <div class="admin-section-title">Investimento</div>
+
+  <label>Valor mensal (R$)</label>
+  <input type="number" id="monthlyPrice" placeholder="1500" oninput="updateProposal()">
+  <label>Nº de parcelas</label>
+  <select id="installments" onchange="updateProposal()">
+    <option value="12">12 meses</option>
+    <option value="6">6 meses</option>
+    <option value="3">3 meses</option>
+    <option value="1">À vista</option>
+  </select>
+  <label>Desconto à vista (%)</label>
+  <input type="number" id="discount" placeholder="10" value="10" oninput="updateProposal()">
+  <label>Cortesia oferecida</label>
+  <input type="text" id="courtesy" placeholder="Ex: Ação Setembro Amarelo presencial" value="Ação Setembro Amarelo presencial para toda a empresa" oninput="updateProposal()">
+
+  <hr class="admin-divider">
+  <div class="admin-section-title">Validade</div>
+  <label>Proposta válida por (dias)</label>
+  <input type="number" id="validDays" value="15" oninput="updateProposal()">
+
+  <hr class="admin-divider">
+  <div class="admin-section-title">Observações extras</div>
+  <textarea id="extraNotes" placeholder="Adicione observações específicas para este cliente..." oninput="updateProposal()"></textarea>
+
+  <button class="btn-generate" onclick="updateProposal()">Atualizar Proposta</button>
+  <button class="btn-secondary" onclick="window.print()">Exportar PDF</button>
+  <button class="btn-secondary" onclick="copyLink()">Copiar Link</button>
+  <button class="btn-secondary" onclick="toggleClientMode()">Modo Cliente (esconder painel)</button>
+</div>
+
+<!-- ═══ PROPOSAL ═══ -->
+<div class="proposal" id="proposal">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div>
+      <div class="cover-badge">Proposta Comercial</div>
+      <h1>Gerenciamento de<br>Riscos Psicossociais<br><span>Método Resguarda™</span></h1>
+      <p class="cover-subtitle">Implementação completa de adequação à NR-1 para sua empresa — sem burocracia excessiva, sem autuações, sem colaboradores adoecendo.</p>
+    </div>
+    <div class="cover-footer">
+      <div class="cover-client">
+        <div class="label">Preparada para</div>
+        <div class="value" id="coverCompany">Nome da Empresa</div>
+      </div>
+      <div style="text-align: right;">
+        <div class="cover-date" id="coverDate"></div>
+        <div class="cover-logo" style="margin-top: 8px;">Instituto Selma Moraes</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: QUEM SOMOS -->
+  <div class="section">
+    <div class="section-number">01 — Sobre nós</div>
+    <h2>Quem está por trás desta proposta</h2>
+    <p>Me chamo <strong>Selma Moraes</strong>, sou <strong>Psicóloga Clínica e Organizacional (CRP 06/138420)</strong> e atuo há 9 anos com as consequências do adoecimento ocupacional — burnout, trauma organizacional e os impactos reais que a falta de gestão de riscos psicossociais causa nos colaboradores e nas empresas.</p>
+    <p>Desenvolvi o <strong>Método Resguarda™</strong>, uma metodologia em 4 fases que implementa o gerenciamento de riscos psicossociais conforme exigido pela <strong>Portaria MTE nº 1.419/2024</strong>. O método é específico para PMEs — empresas que precisam de adequação técnica rigorosa, mas sem a burocracia das grandes consultorias.</p>
+
+    <div class="credentials-grid">
+      <div class="credential-card">
+        <div class="icon">🧠</div>
+        <h4>Especialista em NR-1</h4>
+        <p>Alinhada com as mudanças desde a publicação da Portaria MTE nº 1.419 em agosto/2024</p>
+      </div>
+      <div class="credential-card">
+        <div class="icon">📊</div>
+        <h4>Instrumentos Validados</h4>
+        <p>Diagnóstico via DPRS com ferramentas cientificamente validadas para a população brasileira</p>
+      </div>
+      <div class="credential-card">
+        <div class="icon">🏢</div>
+        <h4>Foco em PMEs</h4>
+        <p>Metodologia desenhada para empresas de 20 a 200 colaboradores com agilidade e custo-benefício</p>
+      </div>
+      <div class="credential-card">
+        <div class="icon">🤝</div>
+        <h4>Olhar Integrado</h4>
+        <p>Atuação junto ao RH, TST, Medicina do Trabalho, CIPA e SIPAT para um gerenciamento real</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: CONTEXTO LEGAL -->
+  <div class="section">
+    <div class="section-number">02 — Contexto legal</div>
+    <h2>Por que adequar agora é urgente</h2>
+    <p>A <strong>Portaria MTE nº 1.419/2024</strong> incluiu expressamente os <strong>fatores de risco psicossociais relacionados ao trabalho (FRPRT)</strong> no Gerenciamento de Riscos Ocupacionais (GRO) da NR-1. Isso significa que toda empresa é obrigada a identificar, classificar e gerenciar riscos psicossociais — sob pena de multa e autuação.</p>
+
+    <div class="urgency-banner">
+      <div class="icon">⚠️</div>
+      <div>
+        <h4>Cronograma oficial (Portaria MTE nº 765/2025)</h4>
+        <p><strong>26 de maio de 2025:</strong> Início da fase educativa — o MTE orienta, mas já fiscaliza.<br>
+        <strong>26 de maio de 2026:</strong> Início da fiscalização punitiva — multas e autuações formais.<br>
+        O Ministério Público do Trabalho (MPT) já pode atuar com base na legislação existente, independente deste prazo.</p>
+      </div>
+    </div>
+
+    <p><strong>Riscos para empresas que não se adequarem:</strong></p>
+    <table class="fines-table">
+      <thead>
+        <tr>
+          <th>Infração</th>
+          <th>Micro (≤19)</th>
+          <th>Peq. (20-99)</th>
+          <th>Média (100-499)</th>
+          <th>Grande (500+)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Ausência de PGR</td>
+          <td>R$ 632</td>
+          <td>R$ 1.265</td>
+          <td>R$ 3.161</td>
+          <td>R$ 6.323</td>
+        </tr>
+        <tr>
+          <td>PGR sem riscos psicossociais</td>
+          <td>R$ 1.265</td>
+          <td>R$ 2.529</td>
+          <td>R$ 6.323</td>
+          <td>R$ 12.645</td>
+        </tr>
+        <tr>
+          <td>Não implementação de ações</td>
+          <td>R$ 1.265</td>
+          <td>R$ 2.529</td>
+          <td>R$ 6.323</td>
+          <td>R$ 12.645</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size: 12px; color: var(--gray-400); margin-top: 8px;">Fonte: NR-28, Portaria MTE 1.131/2025. Reincidência: multa dobra em 12 meses. Além das multas: ações trabalhistas, aumento do FAP/RAT, danos à reputação.</p>
+  </div>
+
+  <!-- SECTION 3: MÉTODO -->
+  <div class="section">
+    <div class="section-number">03 — Metodologia</div>
+    <h2>Método Resguarda™ — 4 Fases</h2>
+    <p>Quatro fases estruturadas para levar sua empresa à conformidade total com a NR-1 — sem atalhos que comprometam a qualidade e sem burocracia que paralise seu time.</p>
+
+    <div class="phases">
+      <div class="phase">
+        <div class="phase-number">1</div>
+        <div class="phase-content">
+          <h3>Radiografia</h3>
+          <div class="phase-time">Semana 1-2</div>
+          <ul>
+            <li>Diagnóstico aprofundado via instrumento DPRS (online e/ou presencial)</li>
+            <li>Inventário com todos os colaboradores</li>
+            <li>Identificação de sobrecarga, pressão, assédio e fatores de adoecimento</li>
+            <li>Visita técnica presencial para levantamento e classificação</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-number">2</div>
+        <div class="phase-content">
+          <h3>Estruturação</h3>
+          <div class="phase-time">Semana 2-3</div>
+          <ul>
+            <li>Apuração dos dados e análise quantitativa/qualitativa</li>
+            <li>Relatório técnico com classificação dos riscos</li>
+            <li>Inclusão dos riscos psicossociais no PGR da empresa</li>
+            <li>Plano de ação personalizado com prioridades, prazos e responsáveis</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-number">3</div>
+        <div class="phase-content">
+          <h3>Sustentação</h3>
+          <div class="phase-time">Semana 3-4</div>
+          <ul>
+            <li>Implantação do programa de promoção de saúde mental</li>
+            <li>Treinamento de lideranças para identificação e prevenção</li>
+            <li>Canais de escuta estruturados e seguros</li>
+            <li>Protocolos de crise para situações críticas</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-number">4</div>
+        <div class="phase-content">
+          <h3>Gestão Contínua</h3>
+          <div class="phase-time">Acompanhamento permanente</div>
+          <ul>
+            <li>Monitoramento contínuo com indicadores de saúde organizacional</li>
+            <li>Revisões periódicas conforme exigido pela NR-1</li>
+            <li>Suporte em auditorias e fiscalização do MTE</li>
+            <li>12 programas anuais de promoção e prevenção</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: ESCOPO -->
+  <div class="section">
+    <div class="section-number">04 — Escopo de serviços</div>
+    <h2>O que está incluído</h2>
+    <p>Todos os serviços necessários para a conformidade total da <strong id="scopeCompany">sua empresa</strong> com a NR-1 atualizada:</p>
+
+    <table class="services-table">
+      <thead>
+        <tr>
+          <th>Serviço</th>
+          <th>Descrição</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Diagnóstico DPRS</td>
+          <td>Inventário completo com todos os colaboradores — análise quantitativa e qualitativa</td>
+        </tr>
+        <tr>
+          <td>Classificação de Riscos</td>
+          <td>Categorização e priorização dos FRPRT identificados</td>
+        </tr>
+        <tr>
+          <td>Inclusão no PGR</td>
+          <td>Integração dos riscos psicossociais ao Programa de Gerenciamento de Riscos</td>
+        </tr>
+        <tr>
+          <td>Relatório Técnico</td>
+          <td>Documento completo para apresentação ao MTE em caso de fiscalização</td>
+        </tr>
+        <tr>
+          <td>Plano de Ação</td>
+          <td>Medidas de prevenção e controle com prazos, responsáveis e prioridades</td>
+        </tr>
+        <tr>
+          <td>Programa de Saúde Mental</td>
+          <td>12 programas anuais de promoção, prevenção e melhoria contínua</td>
+        </tr>
+        <tr>
+          <td>Treinamento de Lideranças</td>
+          <td>Capacitação de gestores para identificar sinais e agir preventivamente</td>
+        </tr>
+        <tr>
+          <td>Canais de Escuta</td>
+          <td>Implementação de canais seguros para relatos de assédio e situações de risco</td>
+        </tr>
+        <tr>
+          <td>Suporte a Auditorias</td>
+          <td>Acompanhamento e documentação para fiscalização do MTE</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SECTION 5: RESULTADOS -->
+  <div class="section">
+    <div class="section-number">05 — Resultados esperados</div>
+    <h2>O que sua empresa ganha</h2>
+    <p>Com o Método Resguarda™ implementado, <strong id="resultsCompany">sua empresa</strong> terá melhorias mensuráveis e documentadas:</p>
+
+    <div class="results-grid">
+      <div class="result-card">
+        <div class="result-icon">📉</div>
+        <h4>Redução de afastamentos</h4>
+      </div>
+      <div class="result-card">
+        <div class="result-icon">⚖️</div>
+        <h4>Menor passivo trabalhista</h4>
+      </div>
+      <div class="result-card">
+        <div class="result-icon">💰</div>
+        <h4>Economia no FAP/RAT</h4>
+      </div>
+      <div class="result-card">
+        <div class="result-icon">📋</div>
+        <h4>Conformidade total NR-1</h4>
+      </div>
+      <div class="result-card">
+        <div class="result-icon">🔄</div>
+        <h4>Redução do turnover</h4>
+      </div>
+      <div class="result-card">
+        <div class="result-icon">🚀</div>
+        <h4>Melhor performance</h4>
+      </div>
+      <div class="result-card">
+        <div class="result-icon">🏥</div>
+        <h4>Economia em plano de saúde</h4>
+      </div>
+      <div class="result-card">
+        <div class="result-icon">✅</div>
+        <h4>Sem multas ou autuações</h4>
+      </div>
+      <div class="result-card">
+        <div class="result-icon">🧠</div>
+        <h4>Cultura de saúde mental</h4>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: INVESTIMENTO -->
+  <div class="section">
+    <div class="section-number">06 — Investimento</div>
+    <h2>Investimento para <span id="investCompany">sua empresa</span></h2>
+    <p>Para implementação completa do Método Resguarda™ — diagnóstico, classificação, gerenciamento, relatório técnico e 12 programas anuais de promoção de saúde mental:</p>
+
+    <div class="investment-box">
+      <div class="inv-label">Investimento</div>
+      <div class="inv-price" id="invPrice">12x R$ 1.500</div>
+      <div class="inv-vista" id="invVista">ou R$ 16.200 à vista (10% de desconto)</div>
+      <div class="inv-scope" id="invScope">Para 50 colaboradores em 8 setores</div>
+      <div class="inv-courtesy" id="invCourtesy">✨ Cortesia: Ação Setembro Amarelo presencial para toda a empresa</div>
+    </div>
+
+    <div id="extraNotesSection" style="display: none; margin-top: 20px;">
+      <p style="font-size: 14px; color: var(--text-secondary);"><strong>Observações:</strong> <span id="extraNotesDisplay"></span></p>
+    </div>
+
+    <div class="validity-badge" id="validityBadge">
+      📅 Proposta válida por 15 dias — até <span id="validityDate"></span>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <h2>Vamos adequar sua empresa?</h2>
+    <p>A fase educativa já está em vigor. Empresas que se adequam agora saem na frente — com segurança jurídica, colaboradores saudáveis e economia real.</p>
+    <div class="cta-buttons">
+      <a href="https://wa.me/5511956520330?text=Ol%C3%A1%20Selma%2C%20recebi%20a%20proposta%20e%20gostaria%20de%20conversar!" class="cta-btn primary">💬 Falar no WhatsApp</a>
+      <a href="mailto:smoraes@selmamoraes.com.br?subject=Proposta%20NR-1%20-%20Retorno" class="cta-btn secondary">✉️ Enviar E-mail</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="proposal-footer">
+    <strong>Instituto Selma Moraes</strong> | Selma Moraes — Psicóloga CRP 06/138420<br>
+    selmamoraes.com.br | smoraes@selmamoraes.com.br | (11) 95652-0330<br><br>
+    Base legal: Portaria MTE nº 1.419/2024 | Portaria MTE nº 765/2025 | NR-1 atualizada<br>
+    Todas as informações regulatórias foram verificadas em fontes oficiais do Ministério do Trabalho e Emprego (gov.br)
+  </div>
+</div>
+
+<script>
+function toggleAdmin() {
+  document.getElementById('adminPanel').classList.toggle('open');
+}
+
+function toggleClientMode() {
+  document.querySelector('.admin-toggle').classList.toggle('hidden-for-client');
+  document.getElementById('adminPanel').classList.remove('open');
+}
+
+function copyLink() {
+  const params = new URLSearchParams();
+  const fields = ['clientName','clientRole','companyName','companySegment','numEmployees','numSectors','hasPGR','monthlyPrice','installments','discount','courtesy','validDays','extraNotes'];
+  fields.forEach(f => {
+    const el = document.getElementById(f);
+    if (el && el.value) params.set(f, el.value);
+  });
+  const url = window.location.origin + window.location.pathname + '?' + params.toString();
+  navigator.clipboard.writeText(url).then(() => alert('Link copiado! Envie por e-mail ou WhatsApp.'));
+}
+
+function loadFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  const fields = ['clientName','clientRole','companyName','companySegment','numEmployees','numSectors','hasPGR','monthlyPrice','installments','discount','courtesy','validDays','extraNotes'];
+  let hasData = false;
+  fields.forEach(f => {
+    const val = params.get(f);
+    if (val) {
+      document.getElementById(f).value = val;
+      hasData = true;
+    }
+  });
+  if (hasData) {
+    updateProposal();
+    document.querySelector('.admin-toggle').classList.add('hidden-for-client');
+  }
+}
+
+function formatCurrency(value) {
+  return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 0 }).format(value);
+}
+
+function updateProposal() {
+  const company = document.getElementById('companyName').value || 'Nome da Empresa';
+  const employees = document.getElementById('numEmployees').value || '—';
+  const sectors = document.getElementById('numSectors').value || '—';
+  const monthly = parseFloat(document.getElementById('monthlyPrice').value) || 0;
+  const installments = parseInt(document.getElementById('installments').value) || 12;
+  const discountPct = parseFloat(document.getElementById('discount').value) || 0;
+  const courtesy = document.getElementById('courtesy').value;
+  const validDays = parseInt(document.getElementById('validDays').value) || 15;
+  const extraNotes = document.getElementById('extraNotes').value;
+
+  document.getElementById('coverCompany').textContent = company;
+  document.getElementById('scopeCompany').textContent = company;
+  document.getElementById('resultsCompany').textContent = company;
+  document.getElementById('investCompany').textContent = company;
+
+  const today = new Date();
+  const months = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+  document.getElementById('coverDate').textContent = today.getDate() + ' de ' + months[today.getMonth()] + ' de ' + today.getFullYear();
+
+  if (monthly > 0) {
+    if (installments === 1) {
+      document.getElementById('invPrice').textContent = formatCurrency(monthly);
+      document.getElementById('invVista').textContent = 'pagamento único';
+    } else {
+      const total = monthly * installments;
+      const vistaValue = total * (1 - discountPct / 100);
+      document.getElementById('invPrice').textContent = installments + 'x ' + formatCurrency(monthly);
+      document.getElementById('invVista').textContent = 'ou ' + formatCurrency(vistaValue) + ' à vista' + (discountPct > 0 ? ' (' + discountPct + '% de desconto)' : '');
+    }
+  }
+
+  document.getElementById('invScope').textContent = 'Para ' + employees + ' colaboradores em ' + sectors + ' setores';
+
+  if (courtesy) {
+    document.getElementById('invCourtesy').textContent = '✨ Cortesia: ' + courtesy;
+    document.getElementById('invCourtesy').style.display = 'block';
+  } else {
+    document.getElementById('invCourtesy').style.display = 'none';
+  }
+
+  const validDate = new Date(today.getTime() + validDays * 86400000);
+  document.getElementById('validityDate').textContent = validDate.getDate() + '/' + (validDate.getMonth() + 1) + '/' + validDate.getFullYear();
+
+  if (extraNotes) {
+    document.getElementById('extraNotesSection').style.display = 'block';
+    document.getElementById('extraNotesDisplay').textContent = extraNotes;
+  } else {
+    document.getElementById('extraNotesSection').style.display = 'none';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  updateProposal();
+  loadFromURL();
+});
+</script>
+</body>
+</html>
