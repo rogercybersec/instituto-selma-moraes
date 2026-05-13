@@ -1529,6 +1529,54 @@
     }
     @media (max-width: 480px) {
       .footer-logo-img { width: 200px; }
+      .footer-logo-wrap { width: 200px; }
+    }
+    /* Wrapper para o shine effect ficar limitado ao logo */
+    .footer-logo-wrap {
+      position: relative;
+      display: inline-block;
+      width: 240px;
+      max-width: 70%;
+      margin: 0 auto 22px;
+      line-height: 0;
+    }
+    .footer-logo-wrap .footer-logo-img {
+      margin: 0;
+      width: 100%;
+      height: auto;
+    }
+    /* Shine: luz dourada percorrendo POR DENTRO das letras (mask preserva só gold pixels)
+       Disparado em hover ou via .shine-active (scroll trigger via JS) */
+    .footer-logo-shine {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(115deg,
+        transparent 0%,
+        transparent 38%,
+        rgba(255, 240, 200, 0.0) 42%,
+        rgba(255, 240, 200, 0.85) 50%,
+        rgba(255, 240, 200, 0.0) 58%,
+        transparent 62%,
+        transparent 100%);
+      background-size: 250% 100%;
+      background-position: 150% 0;
+      -webkit-mask: url('/logo-sm-footer-cutout.png') center/100% 100% no-repeat;
+              mask: url('/logo-sm-footer-cutout.png') center/100% 100% no-repeat;
+      mix-blend-mode: screen;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .footer-logo-wrap:hover .footer-logo-shine,
+    .footer-logo-wrap.shine-active .footer-logo-shine {
+      opacity: 1;
+      animation: goldSweep 1.8s cubic-bezier(.4,0,.2,1) forwards;
+    }
+    @keyframes goldSweep {
+      0%   { background-position: 150% 0; opacity: 0; }
+      15%  { opacity: 1; }
+      85%  { opacity: 1; }
+      100% { background-position: -50% 0; opacity: 0; }
     }
     .footer-brand {
       font-family: 'Playfair Display', serif;
