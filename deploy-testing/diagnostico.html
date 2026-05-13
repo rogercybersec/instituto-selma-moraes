@@ -577,7 +577,7 @@ Método Resguarda™ · selmamoraes.com.br`;
       document.querySelector('.intro').style.display = 'none';
       successScreen.classList.add('active');
       const badge = document.getElementById('priorityBadgeContainer');
-      badge.innerHTML = `<span class="priority-badge ${priority.class}">${priority.emoji} PRIORIDADE ${priority.level}</span>`;
+      badge.innerHTML = `<span class="priority-badge ${priority.class}">PRIORIDADE ${priority.level}</span>`;
       document.getElementById('priorityMessage').textContent = priority.msg + ' Confira seu email — o checklist completo já foi enviado pra ' + data.email + '.';
       // Inject investment estimate
       const invEl = document.getElementById('investmentEstimate');
