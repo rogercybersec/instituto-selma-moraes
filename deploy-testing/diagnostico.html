@@ -476,6 +476,7 @@ form.addEventListener('submit', async (e) => {
   const formData = new FormData(form);
   const data = Object.fromEntries(formData.entries());
   const priority = calculatePriority(data);
+  const investment = estimateInvestment(data);
 
   const autoResponseBody = `Olá ${data.nome.split(' ')[0]},
 
@@ -489,6 +490,9 @@ Resumo do seu caso:
 • Afastamentos por saúde mental: ${data.afastamentos}
 • Fiscalização do MTE: ${data.fiscalizacao}
 • Prazo desejado: ${data.prazo}
+
+FAIXA ESTIMADA DE INVESTIMENTO: ${investment.formatted}
+(${investment.note})
 
 PRÓXIMOS PASSOS:
 1. Em até 24 horas eu te chamo pessoalmente no WhatsApp (${data.telefone}) com análise específica do seu caso.
