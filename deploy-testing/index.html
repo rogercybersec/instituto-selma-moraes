@@ -190,12 +190,19 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      /* Letterpress effect sutil — sombra interna + highlight */
       text-shadow:
         0 1px 0 rgba(255,255,255,0.55),
         0 -1px 0 rgba(0,0,0,0.18);
     }
     .nav-logo span { color: #0D9488; font-weight: 700; }
+    /* Flair artístico no S e M — referência Vogue/Cartier (itálico discreto) */
+    .nav-logo .art-letter, .footer-brand .art-letter {
+      font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: 1.18em;
+      letter-spacing: -0.02em;
+    }
     .nav-logo .seal {
       width: 32px;
       height: 32px;
