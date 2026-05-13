@@ -1,8 +1,36 @@
 {
   "buildCommand": "",
-  "outputDirectory": ".",
+  "outputDirectory": "deploy-testing",
   "framework": null,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "selmamoraes.com.br" }],
+      "destination": "https://www.selmamoraes.com.br/:path*",
+      "permanent": true
+    }
+  ],
   "rewrites": [
+    { "source": "/cotacao", "destination": "/cotacao.html" },
+    { "source": "/cotacao.html", "destination": "/cotacao.html" },
+    { "source": "/avaliacao", "destination": "/diagnostico.html" },
+    { "source": "/diagnostico", "destination": "/diagnostico.html" },
+    { "source": "/diagnostico.html", "destination": "/diagnostico.html" },
+    { "source": "/logo-preview", "destination": "/logo-preview.html" },
+    { "source": "/logo-preview.html", "destination": "/logo-preview.html" },
+    { "source": "/manifest.webmanifest", "destination": "/manifest.webmanifest" },
+    { "source": "/icon-192.svg", "destination": "/icon-192.svg" },
+    { "source": "/icon-512.svg", "destination": "/icon-512.svg" },
+    { "source": "/logo-sm-header.png", "destination": "/logo-sm-header.png" },
+    { "source": "/logo-sm-footer.png", "destination": "/logo-sm-footer.png" },
+    { "source": "/logo-sm-favicon.png", "destination": "/logo-sm-favicon.png" },
+    { "source": "/logo-sm-header-cutout.png", "destination": "/logo-sm-header-cutout.png" },
+    { "source": "/logo-sm-footer-cutout.png", "destination": "/logo-sm-footer-cutout.png" },
+    { "source": "/logo-sm-cutout.png", "destination": "/logo-sm-cutout.png" },
+    { "source": "/logo-sm-monogram.png", "destination": "/logo-sm-monogram.png" },
+    { "source": "/selma-photo.png", "destination": "/selma-photo.png" },
+    { "source": "/earth-texture.jpg", "destination": "/earth-texture.jpg" },
+    { "source": "/:path*.:ext(png|jpg|jpeg|gif|svg|webp|ico|woff|woff2|ttf|otf|js|css|map)", "destination": "/:path*.:ext" },
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "headers": [
