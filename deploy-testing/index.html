@@ -1367,13 +1367,19 @@
     }
     .footer-brand {
       font-family: 'Playfair Display', serif;
-      font-weight: 900;
-      font-size: 1.6rem;
+      font-weight: 700;
+      font-size: 1.75rem;
       color: #F1F5F9;
       margin-bottom: 8px;
       font-feature-settings: 'lnum';
+      letter-spacing: -0.01em;
+      /* Letterpress effect no escuro — highlight superior + sombra inferior */
+      text-shadow:
+        0 1px 0 rgba(255,255,255,0.10),
+        0 -1px 0 rgba(0,0,0,0.55),
+        0 0 24px rgba(20,184,166,0.08);
     }
-    .footer-brand span { color: #0D9488; }
+    .footer-brand span { color: #2DD4BF; font-weight: 700; }
     .footer-subtitle {
       font-size: 0.85rem;
       color: rgba(241,245,249,0.4);
