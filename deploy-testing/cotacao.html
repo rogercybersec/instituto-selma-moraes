@@ -511,6 +511,46 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(-
 </div>
 </div>
 
+<!-- ADMIN LOGIN MODAL -->
+<div id="adminLoginModal" style="display:none;position:fixed;inset:0;background:rgba(10,25,41,0.85);z-index:9999;display:none;align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:16px;padding:32px 28px;max-width:360px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3)">
+    <div style="width:48px;height:48px;background:var(--navy);color:var(--gold);display:flex;align-items:center;justify-content:center;border-radius:12px;font-family:Georgia,serif;font-weight:700;font-size:18px;margin:0 auto 16px">SM</div>
+    <h3 style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:4px">Área profissional</h3>
+    <p style="font-size:12px;color:var(--text-muted);margin-bottom:20px">Digite sua senha para acessar o painel de propostas.</p>
+    <input type="password" id="adminPassword" placeholder="Senha" style="width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit;text-align:center;margin-bottom:12px" onkeydown="if(event.key==='Enter')checkAdminPassword()">
+    <div id="adminLoginError" style="display:none;color:var(--red);font-size:12px;margin-bottom:10px">Senha incorreta</div>
+    <button onclick="checkAdminPassword()" style="width:100%;padding:13px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy-deep);border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">Entrar</button>
+    <button onclick="closeAdminLogin()" style="margin-top:10px;background:none;border:none;color:var(--text-muted);font-size:12px;cursor:pointer;font-family:inherit">Cancelar</button>
+  </div>
+</div>
+
+<script>
+/* ═══ ADMIN LOGIN ═══ */
+const ADMIN_HASH='resguarda2026';
+function showAdminLogin(){
+  const m=document.getElementById('adminLoginModal');
+  m.style.display='flex';
+  document.getElementById('adminPassword').value='';
+  document.getElementById('adminLoginError').style.display='none';
+  setTimeout(()=>document.getElementById('adminPassword').focus(),100);
+}
+function closeAdminLogin(){document.getElementById('adminLoginModal').style.display='none'}
+function checkAdminPassword(){
+  const pw=document.getElementById('adminPassword').value;
+  if(pw===ADMIN_HASH){
+    closeAdminLogin();
+    document.getElementById('clientView').classList.remove('active');
+    document.getElementById('proposalView').classList.remove('active');
+    document.getElementById('adminView').classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  } else {
+    document.getElementById('adminLoginError').style.display='block';
+    document.getElementById('adminPassword').value='';
+    document.getElementById('adminPassword').focus();
+  }
+}
+</script>
+
 <script>
 /* ═══ PRICING ENGINE ═══ */
 const PRICING={
