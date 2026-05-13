@@ -256,6 +256,66 @@
     /* Esconder o tag "Instituto" — logo já tem 'SELMA MORAES' completo */
     .nav-logo-tag { display: none; }
 
+    /* ═══ INSTALL BUTTON (PWA) ═══ */
+    .nav-install-btn {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 16px;
+      background: linear-gradient(135deg, #D6B27A, #E7C79A);
+      color: #1B365D;
+      border: none;
+      border-radius: 100px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(214,178,122,0.3), 0 1px 0 rgba(255,255,255,0.4) inset;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .nav-install-btn:not([hidden]) { display: inline-flex; }
+    .nav-install-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(214,178,122,0.45), 0 1px 0 rgba(255,255,255,0.5) inset; }
+    .nav-install-btn svg { width: 16px; height: 16px; }
+    @media (max-width: 600px) {
+      .nav-install-btn span { display: none; }
+      .nav-install-btn { padding: 9px 11px; }
+      .nav-install-btn svg { width: 18px; height: 18px; }
+    }
+    /* iOS install instructions modal */
+    .ios-install-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(15,23,42,0.7);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      padding: 20px;
+    }
+    .ios-install-modal.open { opacity: 1; pointer-events: auto; }
+    .ios-install-card {
+      background: #FFF;
+      border-radius: 20px;
+      padding: 32px 24px;
+      max-width: 380px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      text-align: center;
+      transform: scale(0.95);
+      transition: transform 0.3s;
+    }
+    .ios-install-modal.open .ios-install-card { transform: scale(1); }
+    .ios-install-card h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #1B365D; margin: 0 0 12px; font-weight: 700; }
+    .ios-install-card p { color: #475569; line-height: 1.6; margin: 8px 0; font-size: 0.95rem; }
+    .ios-install-card .step { display: flex; align-items: center; gap: 12px; text-align: left; padding: 10px 0; border-top: 1px solid #F1F5F9; }
+    .ios-install-card .step:first-of-type { border-top: none; }
+    .ios-install-card .step-num { width: 28px; height: 28px; border-radius: 50%; background: #D6B27A; color: #FFF; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.9rem; }
+    .ios-install-card .step svg { width: 22px; height: 22px; color: #1B365D; }
+    .ios-install-card .close-btn { margin-top: 20px; padding: 12px 28px; background: #1B365D; color: #FFF; border: none; border-radius: 100px; font-weight: 600; cursor: pointer; }
+
     /* ═══ HAMBURGER MOBILE MENU ═══ */
     .nav-hamburger {
       display: none;
