@@ -306,11 +306,22 @@
       font-weight: 600;
     }
     @media (max-width: 768px) {
-      .nav-hamburger { display: flex; }
-      /* Esconde links secundários e admin no mobile, mantém só CTA principal */
-      .nav-links > .nav-secondary, .nav-links > .nav-admin { display: none !important; }
-      .nav-links > a:not(.nav-cta) { display: none; }
-      .nav-links > a.nav-cta { display: inline-flex; }
+      .nav-hamburger { display: flex; position: relative; z-index: 1100; }
+      /* Mobile: TODOS os links escondidos (inclusive CTA — usuário usa hamburger ou hero CTA).
+         Logo ganha mais espaço. */
+      .nav-links { display: none !important; }
+      .mobile-menu { z-index: 1050; }
+      /* Backdrop quando menu aberto pra fechar ao clicar fora */
+      .mobile-menu-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(15,23,42,0.45);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s;
+        z-index: 998;
+      }
+      .mobile-menu-backdrop.open { opacity: 1; pointer-events: auto; }
     }
     /* Tag "Instituto" — discreto, deixa o logo dourado dominar */
     .nav-logo-tag {
