@@ -29,7 +29,7 @@
     { "source": "/logo-sm-monogram.png", "destination": "/logo-sm-monogram.png" },
     { "source": "/selma-photo.png", "destination": "/selma-photo.png" },
     { "source": "/earth-texture.jpg", "destination": "/earth-texture.jpg" },
-    { "source": "/(.*\\.(png|jpg|jpeg|gif|svg|webp|ico|woff|woff2|ttf|otf|js|css|map))", "destination": "/$1" },
+    { "source": "/:path*.:ext(png|jpg|jpeg|gif|svg|webp|ico|woff|woff2|ttf|otf|js|css|map)", "destination": "/:path*.:ext" },
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "headers": [
