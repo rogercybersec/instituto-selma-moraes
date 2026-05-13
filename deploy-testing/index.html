@@ -195,13 +195,37 @@
         0 -1px 0 rgba(0,0,0,0.18);
     }
     .nav-logo span { color: #0D9488; font-weight: 700; }
-    /* Flair artístico no S e M — referência Vogue/Cartier (itálico discreto) */
+    /* S e M esculturais — Playfair 900 italic com 3D depth stack (referência turning bold) */
     .nav-logo .art-letter, .footer-brand .art-letter {
-      font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+      font-family: 'Playfair Display', 'Cormorant Garamond', serif;
       font-style: italic;
-      font-weight: 500;
-      font-size: 1.18em;
-      letter-spacing: -0.02em;
+      font-weight: 900;
+      font-size: 1.32em;
+      letter-spacing: -0.025em;
+      display: inline-block;
+      transform: translateY(0.04em);
+    }
+    /* Depth stack — claro no header (header é light bg) */
+    .nav-logo .art-letter {
+      color: #0D9488;
+      text-shadow:
+        1px 1px 0 #0a6862,
+        2px 2px 0 #084d49,
+        3px 3px 0 #063431,
+        4px 4px 0 #042422,
+        5px 5px 8px rgba(13,148,136,0.30),
+        0 0 18px rgba(45,212,191,0.18);
+    }
+    /* Depth stack — escuro no footer (footer é dark bg, depth puxa pra teal claro) */
+    .footer-brand .art-letter {
+      color: #2DD4BF;
+      text-shadow:
+        1px 1px 0 #14b8a6,
+        2px 2px 0 #0d9488,
+        3px 3px 0 #0f766e,
+        4px 4px 0 #115e59,
+        5px 5px 12px rgba(45,212,191,0.40),
+        0 0 24px rgba(45,212,191,0.22);
     }
     .nav-logo .seal {
       width: 32px;
