@@ -1510,7 +1510,7 @@
       .footer-logo-img { width: 200px; }
       .footer-logo-wrap { width: 200px; }
     }
-    /* Wrapper para o shine effect — centralizado horizontalmente com texto abaixo */
+    /* Wrapper alinhado horizontalmente com texto abaixo (display:block + margin auto) */
     .footer-logo-wrap {
       position: relative;
       display: block;
@@ -1520,43 +1520,38 @@
       line-height: 0;
       text-align: center;
     }
-    .footer-logo-wrap .footer-logo-img {
-      margin: 0;
-      width: 100%;
-      height: auto;
-    }
-    /* Shine: luz dourada percorrendo POR DENTRO das letras (mask preserva só gold pixels)
-       Disparado em hover ou via .shine-active (scroll trigger via JS) */
+    /* Shine: faixa de luz percorrendo PELO INTERIOR das letras
+       Técnica: mask-image LIMITA ao pixel gold, gradient se move dentro do mask
+       mix-blend-mode: REMOVIDO (causava bleed externo) — mask sozinho confina */
     .footer-logo-shine {
       position: absolute;
       inset: 0;
       pointer-events: none;
-      background: linear-gradient(115deg,
-        transparent 0%,
-        transparent 38%,
-        rgba(255, 240, 200, 0.0) 42%,
-        rgba(255, 240, 200, 0.85) 50%,
-        rgba(255, 240, 200, 0.0) 58%,
-        transparent 62%,
-        transparent 100%);
-      background-size: 250% 100%;
-      background-position: 150% 0;
-      -webkit-mask: url('/logo-sm-footer-cutout.png') center/100% 100% no-repeat;
-              mask: url('/logo-sm-footer-cutout.png') center/100% 100% no-repeat;
-      mix-blend-mode: screen;
+      background: linear-gradient(105deg,
+        transparent 44%,
+        rgba(255, 240, 195, 0.95) 50%,
+        transparent 56%);
+      background-size: 220% 100%;
+      background-position: 120% 0;
+      -webkit-mask-image: url('/logo-sm-footer-cutout.png');
+      -webkit-mask-size: 100% 100%;
+      -webkit-mask-position: center;
+      -webkit-mask-repeat: no-repeat;
+              mask-image: url('/logo-sm-footer-cutout.png');
+              mask-size: 100% 100%;
+              mask-position: center;
+              mask-repeat: no-repeat;
       opacity: 0;
-      transition: opacity 0.3s ease;
     }
     .footer-logo-wrap:hover .footer-logo-shine,
     .footer-logo-wrap.shine-active .footer-logo-shine {
-      opacity: 1;
-      animation: goldSweep 1.8s cubic-bezier(.4,0,.2,1) forwards;
+      animation: goldSweep 1.6s cubic-bezier(.4,0,.2,1) forwards;
     }
     @keyframes goldSweep {
-      0%   { background-position: 150% 0; opacity: 0; }
-      15%  { opacity: 1; }
-      85%  { opacity: 1; }
-      100% { background-position: -50% 0; opacity: 0; }
+      0%   { background-position: 120% 0; opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 1; }
+      100% { background-position: -20% 0; opacity: 0; }
     }
     .footer-brand {
       font-family: 'Playfair Display', serif;
