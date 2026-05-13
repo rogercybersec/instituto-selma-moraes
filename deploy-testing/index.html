@@ -1954,34 +1954,29 @@
       `;
 
       try {
-        const res = await fetch('https://formsubmit.co/ajax/contato@selmamoraes.com.br', {
+        const res = await fetch('https://formsubmit.co/ajax/smoraes@selmamoraes.com.br', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
           body: JSON.stringify({
-            email: email,
-            _subject: 'Novo lead — Checklist NR-1 solicitado',
+            _subject: 'Novo lead — Checklist NR-1 solicitado por ' + email,
             _replyto: email,
-            _template: 'box',
-            _autoresponse: 'Olá! Obrigada pelo interesse no Checklist NR-1. Seu material completo está a caminho — verifique também a caixa de spam, por favor. Se quiser conversar sobre a situação da sua empresa, é só responder este e-mail ou me chamar no WhatsApp: (11) 95652-0330. Fico à disposição! — Selma Moraes, Psicóloga Organizacional, CRP 06/138420',
+            _template: 'table',
             _captcha: 'false',
-            message: 'Novo lead qualificado — Checklist NR-1\\n\\nE-mail: ' + email + '\\n\\nEste visitante baixou o Checklist NR-1 pelo site. Ele já está avaliando se a empresa dele está em conformidade. É o momento ideal para entrar em contato — de preferência em até 24 horas.\\n\\nSugestão de abordagem:\\n"Olá! Vi que você solicitou nosso checklist. Posso te ajudar a interpretar os resultados? Muitas empresas descobrem lacunas que são simples de resolver quando há orientação adequada."\\n\\nMétodo Resguarda™ — Instituto Selma Moraes'
+            Nome: 'Visitante do site',
+            Email: email,
+            Origem: 'selmamoraes.com.br — Checklist NR-1',
+            Mensagem: 'Este visitante baixou o Checklist NR-1 pelo site. Momento ideal para contato em até 24h.'
           })
         });
-        const res2 = await fetch('https://formsubmit.co/ajax/' + email, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({
-            _subject: 'Seu Checklist NR-1 — Instituto Selma Moraes',
-            _replyto: 'contato@selmamoraes.com.br',
-            _template: 'box',
-            _captcha: 'false',
-            message: checklistHTML
-          })
-        });
-        if (res.ok || res2.ok) {
+        if (res.ok) {
           btn.textContent = 'Enviado! ✓';
           btn.style.background = 'var(--navy)';
           input.value = '';
+          const formSection = e.target.closest('.cta-section') || e.target.parentElement;
+          const checklistDiv = document.createElement('div');
+          checklistDiv.style.cssText = 'margin-top:24px;animation:fadeIn .5s ease';
+          checklistDiv.innerHTML = checklistHTML;
+          formSection.appendChild(checklistDiv);
         } else {
           btn.textContent = 'Erro — tente novamente';
           btn.style.background = '#D32F2F';
@@ -1992,9 +1987,11 @@
       }
       btn.disabled = false;
       setTimeout(() => {
-        btn.textContent = 'Receber Checklist';
-        btn.style.background = '';
-      }, 5000);
+        if (btn.textContent !== 'Enviado! ✓') {
+          btn.textContent = 'Receber Checklist';
+          btn.style.background = '';
+        }
+      }, 8000);
     });
 
     // ─── 3D Particle Wave (Canvas) ───
