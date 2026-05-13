@@ -307,11 +307,15 @@
     }
     @media (max-width: 768px) {
       .nav-hamburger { display: flex; position: relative; z-index: 1200; }
-      /* Mobile: TODOS os links escondidos (inclusive CTA — usuário usa hamburger ou hero CTA).
-         Logo ganha mais espaço. */
       .nav-links { display: none !important; }
+      /* Mobile usa monograma SM (sem texto MORAES) → mesma altura mostra a marca MAIOR
+         monograma aspect 1.67:1 (wider), full logo 1.16:1 */
+      .nav-logo-img {
+        height: clamp(72px, 18vw, 100px);
+        max-width: 55vw;
+      }
       .mobile-menu { z-index: 1150; }
-      /* Backdrop ACIMA do nav (z-index 1100 > nav 1000) — clicar QUALQUER lugar do nav (logo, espaços) fecha */
+      /* Backdrop acima do nav (1100 > 1000) → click outside fecha */
       .mobile-menu-backdrop {
         position: fixed;
         inset: 0;
