@@ -666,13 +666,9 @@ function sendEmail(){
 }
 function copyMsg(id){const t=document.getElementById(id).firstChild.textContent;navigator.clipboard.writeText(t).then(()=>{const b=document.getElementById(id).querySelector('.copy-msg');b.textContent='Copiado!';setTimeout(()=>b.textContent='Copiar',2000)})}
 
-/* ═══ CLIENT: SUBMIT & GENERATE PROPOSAL ═══ */
+/* ═══ RENDER PROPOSAL (shared by client submit & admin preview) ═══ */
 let proposalData={};
-document.getElementById('clientForm').addEventListener('submit',async function(e){
-  e.preventDefault();
-  const btn=document.getElementById('btnGenerate');
-  btn.disabled=true;btn.textContent='Gerando proposta…';
-
+function renderProposal(skipEmail){
   const empresa=document.getElementById('c_empresa').value.trim();
   const tamanho=document.getElementById('c_tamanho').value;
   const setores=document.getElementById('c_setores').value;
@@ -703,6 +699,9 @@ document.getElementById('clientForm').addEventListener('submit',async function(e
     document.getElementById('pOriginal').style.display='block';
     document.getElementById('pDiscountBadge').textContent=desconto+'% de desconto aplicado';
     document.getElementById('pDiscountBadge').style.display='inline-block';
+  } else {
+    document.getElementById('pOriginal').style.display='none';
+    document.getElementById('pDiscountBadge').style.display='none';
   }
   document.getElementById('pPrice').textContent='12x R$ '+fmt(discountedMonthly);
   document.getElementById('pVista').textContent='ou R$ '+fmt(vista)+' à vista (10% adicional)';
@@ -716,24 +715,35 @@ document.getElementById('clientForm').addEventListener('submit',async function(e
   if(mensagem){
     document.getElementById('personalMsgText').textContent=mensagem;
     document.getElementById('personalMsg').style.display='block';
+  } else {
+    document.getElementById('personalMsg').style.display='none';
   }
 
-  try{
-    await fetch('https://formsubmit.co/ajax/smoraes@selmamoraes.com.br',{
-      method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify({
-        _subject:'[PROPOSTA GERADA] '+empresa+' ('+p.label+' colab.) — '+setor,
-        _replyto:email,_template:'table',_captcha:'false',
-        'Nome':nome,'Cargo':cargo,'E-mail':email,'WhatsApp':tel,
-        'Empresa':empresa,'Setor':setor,'Colaboradores':p.label,'Setores':sm.label,
-        'PGR':pgr==='sim'?'Sim, atualizado':pgr==='desatualizado'?'Sim, desatualizado':pgr==='nao'?'Não possui':'Não sabe',
-        'Investimento':'12x R$ '+fmt(discountedMonthly)+' (desconto '+desconto+'%)',
-        'À vista':'R$ '+fmt(vista),
-        'Origem':'selmamoraes.com.br/cotacao (proposta gerada)'
-      })
-    });
-  }catch(err){}
+  if(!skipEmail){
+    try{
+      fetch('https://formsubmit.co/ajax/smoraes@selmamoraes.com.br',{
+        method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body:JSON.stringify({
+          _subject:'[PROPOSTA GERADA] '+empresa+' ('+p.label+' colab.) — '+setor,
+          _replyto:email,_template:'table',_captcha:'false',
+          'Nome':nome,'Cargo':cargo,'E-mail':email,'WhatsApp':tel,
+          'Empresa':empresa,'Setor':setor,'Colaboradores':p.label,'Setores':sm.label,
+          'PGR':pgr==='sim'?'Sim, atualizado':pgr==='desatualizado'?'Sim, desatualizado':pgr==='nao'?'Não possui':'Não sabe',
+          'Investimento':'12x R$ '+fmt(discountedMonthly)+' (desconto '+desconto+'%)',
+          'À vista':'R$ '+fmt(vista),
+          'Origem':'selmamoraes.com.br/cotacao (proposta gerada)'
+        })
+      });
+    }catch(err){}
+  }
+}
 
+/* ═══ CLIENT: SUBMIT & GENERATE PROPOSAL ═══ */
+document.getElementById('clientForm').addEventListener('submit',async function(e){
+  e.preventDefault();
+  const btn=document.getElementById('btnGenerate');
+  btn.disabled=true;btn.textContent='Gerando proposta…';
+  renderProposal(false);
   document.getElementById('clientView').classList.remove('active');
   document.getElementById('proposalView').classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
