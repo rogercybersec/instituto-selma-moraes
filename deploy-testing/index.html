@@ -1441,26 +1441,22 @@
         0 1px 0 rgba(0,0,0,0.55),
         0 0 18px rgba(201,168,118,0.15);
     }
-    /* Footer logo — display direto do PNG (não recortado), com border-radius elegante
-       e shadow integrando ao navy bg. Sem frame artificial — PNG carrega seu próprio cream. */
-    .footer-logo-frame {
-      display: inline-flex;
-      margin: 0 auto 22px;
-      border-radius: 22px;
-      overflow: hidden;
-      box-shadow:
-        0 0 0 1px rgba(201,168,118,0.32),
-        0 18px 40px -12px rgba(0,0,0,0.65),
-        0 0 60px -10px rgba(201,168,118,0.22);
-    }
+    /* Footer logo — PNG transparente flutua direto no navy. Sem frame, sem card, sem borda.
+       Glow champagne sutil + mix-blend-mode pra integrar com o bg. (brief ChatGPT) */
     .footer-logo-img {
-      width: 180px;
-      height: 180px;
-      object-fit: cover;
+      width: 220px;
+      height: 220px;
+      object-fit: contain;
       display: block;
+      margin: 0 auto 22px;
+      background: transparent;
+      filter:
+        drop-shadow(0 0 32px rgba(214,178,122,0.25))
+        drop-shadow(0 12px 28px rgba(0,0,0,0.55));
+      opacity: 0.96;
     }
     @media (max-width: 480px) {
-      .footer-logo-img { width: 150px; height: 150px; }
+      .footer-logo-img { width: 180px; height: 180px; }
       .footer-instituto { font-size: 0.78rem; letter-spacing: 0.24em; }
     }
     .footer-brand {
