@@ -635,6 +635,24 @@ document.getElementById('clientForm').addEventListener('submit',async function(e
   window.scrollTo({top:0,behavior:'smooth'});
 });
 
+/* ═══ SECRET ADMIN ACCESS — triple-tap on SM logo ═══ */
+let tapCount=0,tapTimer=null;
+document.querySelectorAll('.logo-mark').forEach(el=>{
+  el.addEventListener('click',function(e){
+    e.preventDefault();e.stopPropagation();
+    tapCount++;
+    clearTimeout(tapTimer);
+    tapTimer=setTimeout(()=>tapCount=0,800);
+    if(tapCount>=3){
+      tapCount=0;
+      document.getElementById('clientView').classList.remove('active');
+      document.getElementById('proposalView').classList.remove('active');
+      document.getElementById('adminView').classList.add('active');
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+  });
+});
+
 /* ═══ ROUTER ═══ */
 (function(){
   const params=new URLSearchParams(window.location.search);
