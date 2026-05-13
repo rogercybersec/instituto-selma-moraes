@@ -376,6 +376,11 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(-
 <div class="view" id="proposalView">
 <div class="proposal">
 
+  <!-- Back to admin button (only visible when previewing) -->
+  <div id="backToAdmin" style="display:none;padding:12px 56px;background:var(--gold);align-items:center;justify-content:center;gap:8px;cursor:pointer;font-size:13px;font-weight:600;color:var(--navy-deep)" onclick="backToAdmin()">
+    ← Voltar ao painel — esta é uma pré-visualização
+  </div>
+
   <!-- Personal message from Selma -->
   <div id="personalMsg" style="display:none;padding:20px 56px;background:#F0FDFA;border-bottom:1px solid rgba(14,184,166,0.15);font-size:14px;color:#047857;line-height:1.6">
     <strong style="display:block;margin-bottom:4px;font-size:12px;color:var(--teal);text-transform:uppercase;letter-spacing:0.06em">Mensagem da Selma</strong>
