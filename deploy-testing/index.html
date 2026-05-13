@@ -1959,11 +1959,15 @@
         <a href="/avaliacao" class="nav-cta">Avaliação em 2 minutos</a>
         <a href="/cotacao?admin=1" class="nav-admin" onclick="event.preventDefault();var p=prompt('Senha:');if(p==='resguarda2026')window.location='/cotacao?admin=1'" style="color:#9CA3AF;font-size:11px;text-decoration:none;margin-left:16px;opacity:0.6">Admin</a>
       </div>
-      <button class="nav-install-btn" id="navInstallBtn" aria-label="Instalar app" hidden>
+      <button class="nav-install-btn" id="navInstallBtn" aria-label="Baixar app pra celular" hidden>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M12 5v14M5 12l7 7 7-7"/>
+          <rect x="6" y="2" width="12" height="20" rx="2"/>
+          <line x1="11" y1="18" x2="13" y2="18"/>
+          <path d="M9 11v2" opacity="0.6"/>
+          <path d="M15 11v2" opacity="0.6"/>
+          <path d="M12 10v4M10 12l2 2 2-2"/>
         </svg>
-        <span>Instalar App</span>
+        <span>Baixar App</span>
       </button>
       <button class="nav-hamburger" aria-label="Abrir menu" aria-expanded="false" id="navHamburger">
         <span></span><span></span><span></span>
