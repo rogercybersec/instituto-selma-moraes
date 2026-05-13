@@ -174,12 +174,15 @@
     }
     nav.scrolled .nav-logo-img { height: 64px; }
     .nav-inner {
-      max-width: 1200px;
+      max-width: 1280px;
       margin: 0 auto;
-      padding: 0 32px;
+      padding: 0 16px 0 8px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+    }
+    @media (max-width: 600px) {
+      .nav-inner { padding: 0 12px 0 4px; }
     }
     .nav-logo {
       display: inline-flex;
