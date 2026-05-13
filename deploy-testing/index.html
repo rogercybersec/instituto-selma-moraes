@@ -221,7 +221,10 @@
     }
     .nav-logo-img {
       width: auto;
-      height: 140px;
+      /* Responsive fluid sizing via clamp() — min 110px (mobile readable),
+         escala fluida 12vw, max 150px (desktop cap). Funciona em qualquer viewport. */
+      height: clamp(110px, 12vw, 150px);
+      max-width: 65vw;
       object-fit: contain;
       display: block;
       background: transparent;
@@ -238,13 +241,8 @@
         drop-shadow(0 8px 22px rgba(214,178,122,0.40))
         drop-shadow(0 0 32px rgba(231,199,154,0.45));
     }
-    nav.scrolled .nav-logo-img { height: 90px !important; }
-    @media (max-width: 900px) {
-      .nav-logo-img { height: 110px; }
-    }
-    @media (max-width: 600px) {
-      .nav-logo-img { height: 84px; }
-    }
+    /* Encolhe ~33% no estado scrolled — fluido também */
+    nav.scrolled .nav-logo-img { height: clamp(74px, 8vw, 100px) !important; }
     /* Esconder o tag "Instituto" — logo já tem 'SELMA MORAES' completo */
     .nav-logo-tag { display: none; }
     /* Tag "Instituto" — discreto, deixa o logo dourado dominar */
