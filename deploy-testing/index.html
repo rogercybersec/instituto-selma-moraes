@@ -2463,16 +2463,36 @@
       // iOS: sempre mostra botão (Apple não envia beforeinstallprompt)
       if (isIOS) btn.hidden = false;
 
-      btn.addEventListener('click', async () => {
+      const triggerInstall = async () => {
         if (deferredPrompt) {
+          // Android/Chrome: prompt nativo idêntico ao Play Store
           deferredPrompt.prompt();
           const { outcome } = await deferredPrompt.userChoice;
           if (outcome === 'accepted') btn.hidden = true;
           deferredPrompt = null;
-        } else if (isIOS) {
+          return;
+        }
+        if (isIOS) {
+          // iOS Safari: abre Share Sheet nativa do iPhone diretamente (mais próximo possível
+          // de tap-to-install sem App Store — Apple não permite trigger programático).
+          if (navigator.share) {
+            try {
+              await navigator.share({
+                title: 'Instituto Selma Moraes',
+                text: 'Instalar como app no iPhone',
+                url: window.location.href
+              });
+              return;
+            } catch (e) { /* user cancelled or unsupported — fallback modal */ }
+          }
           iosModal.classList.add('open');
         }
-      });
+      };
+      btn.addEventListener('click', triggerInstall);
+      const fIos = document.getElementById('footerInstallIos');
+      const fAnd = document.getElementById('footerInstallAndroid');
+      if (fIos) fIos.addEventListener('click', triggerInstall);
+      if (fAnd) fAnd.addEventListener('click', triggerInstall);
 
       if (iosClose) iosClose.addEventListener('click', () => iosModal.classList.remove('open'));
       if (iosModal) iosModal.addEventListener('click', (e) => {
