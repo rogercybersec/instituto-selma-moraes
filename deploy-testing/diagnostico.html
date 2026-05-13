@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<script>if(location.hostname==='selmamoraes.com.br'){location.replace('https://www.selmamoraes.com.br'+location.pathname+location.search+location.hash);}</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>Diagnóstico NR-1 — Instituto Selma Moraes</title>
+<meta name="description" content="Diagnóstico personalizado em 2 minutos. Descubra o nível de risco da sua empresa frente à NR-1 e receba um plano de ação direto da Selma Moraes.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%231B365D'/%3E%3Ctext x='50' y='62' font-family='Georgia,serif' font-size='42' fill='%23D4A853' text-anchor='middle' font-weight='bold'%3ESM%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --navy:#1B365D; --navy-deep:#0A1929; --navy-mid:#132F4C; --navy-light:#1E4976;
+  --teal:#0F766E; --teal-light:#14B8A6; --teal-bright:#2DD4BF;
+  --green:#2E7D32; --green-bright:#4CAF50;
+  --gold:#D4A853; --red:#D32F2F;
+  --text:#111827; --text-muted:#475569; --border:#E2E8F0; --bg-soft:#F8FAFC;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:linear-gradient(180deg,#F8FAFC 0%,#FFFFFF 100%);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
+.container{max-width:680px;margin:0 auto;padding:24px 20px 80px}
+
+/* Header */
+.brand{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--navy);font-weight:700;font-size:16px}
+.logo-mark{width:36px;height:36px;background:var(--navy);color:var(--gold);display:flex;align-items:center;justify-content:center;border-radius:8px;font-family:Georgia,serif;font-weight:700;letter-spacing:-1px}
+.back-link{color:var(--text-muted);text-decoration:none;font-size:14px}
+.back-link:hover{color:var(--navy)}
+
+/* Intro */
+.intro{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-deep) 100%);color:#fff;border-radius:16px;padding:28px 24px;margin-bottom:24px;box-shadow:0 20px 50px -20px rgba(27,54,93,0.4)}
+.intro .badge{display:inline-block;background:rgba(212,168,83,0.2);color:var(--gold);padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px}
+.intro h1{font-size:24px;line-height:1.3;margin-bottom:8px;font-weight:700}
+.intro p{font-size:15px;line-height:1.6;color:rgba(255,255,255,0.85)}
+.intro .stats{display:flex;gap:16px;margin-top:20px;flex-wrap:wrap}
+.intro .stat{flex:1;min-width:140px;padding:12px;background:rgba(255,255,255,0.05);border-radius:10px;border:1px solid rgba(255,255,255,0.1)}
+.intro .stat-num{font-size:20px;font-weight:700;color:var(--gold);display:block}
+.intro .stat-lbl{font-size:11px;color:rgba(255,255,255,0.7);margin-top:2px}
+
+/* Progress */
+.progress-wrap{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;gap:12px;position:sticky;top:16px;z-index:10;box-shadow:0 4px 12px rgba(15,23,42,0.04)}
+.progress-text{font-size:13px;color:var(--text-muted);font-weight:600;white-space:nowrap}
+.progress-bar{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--teal) 0%,var(--teal-bright) 100%);width:25%;transition:width 0.4s cubic-bezier(0.4,0,0.2,1);border-radius:3px}
+
+/* Form steps */
+.step{display:none;animation:slideIn 0.4s ease}
+.step.active{display:block}
+@keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+
+.card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:28px 24px;box-shadow:0 4px 20px rgba(15,23,42,0.04)}
+.step-num{display:inline-block;background:var(--teal);color:#fff;padding:4px 10px;border-radius:6px;font-size:12px;font-weight:700;letter-spacing:0.5px;margin-bottom:14px}
+.step h2{font-size:22px;color:var(--navy);margin-bottom:8px;font-weight:700}
+.step .step-desc{color:var(--text-muted);font-size:14px;margin-bottom:24px;line-height:1.5}
+
+/* Fields */
+.field{margin-bottom:20px}
+.field label{display:block;font-size:14px;font-weight:600;color:var(--navy);margin-bottom:8px}
+.field label .req{color:var(--red);margin-left:2px}
+.field label .hint{display:block;font-size:12px;color:var(--text-muted);font-weight:400;margin-top:2px}
+.field input[type=text], .field input[type=email], .field input[type=tel], .field select, .field textarea{
+  width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:15px;font-family:inherit;background:#fff;transition:border-color 0.2s, box-shadow 0.2s
+}
+.field input:focus, .field select:focus, .field textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(20,184,166,0.15)}
+.field textarea{resize:vertical;min-height:90px}
+
+/* Radio cards */
+.radio-grid{display:grid;gap:8px}
+.radio-card{position:relative;cursor:pointer}
+.radio-card input{position:absolute;opacity:0;pointer-events:none}
+.radio-card .radio-content{padding:14px 16px;border:1.5px solid var(--border);border-radius:10px;display:flex;align-items:center;gap:12px;transition:all 0.2s;background:#fff}
+.radio-card .radio-dot{width:18px;height:18px;border:2px solid var(--border);border-radius:50%;flex-shrink:0;position:relative;transition:all 0.2s}
+.radio-card input:checked + .radio-content{border-color:var(--teal);background:#F0FDFA}
+.radio-card input:checked + .radio-content .radio-dot{border-color:var(--teal)}
+.radio-card input:checked + .radio-content .radio-dot::after{content:'';position:absolute;inset:3px;background:var(--teal);border-radius:50%}
+.radio-card .radio-label{font-size:14px;color:var(--text);font-weight:500;line-height:1.4}
+.radio-card .radio-emoji{font-size:18px;flex-shrink:0}
+
+/* Buttons */
+.actions{display:flex;gap:12px;margin-top:28px;padding-top:24px;border-top:1px solid var(--border)}
+button{font-family:inherit;cursor:pointer;border:none;font-weight:600;transition:all 0.2s}
+.btn-primary{flex:1;background:linear-gradient(135deg,var(--teal) 0%,var(--teal-light) 100%);color:#fff;padding:14px 20px;border-radius:10px;font-size:15px;box-shadow:0 4px 14px rgba(20,184,166,0.35)}
+.btn-primary:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 6px 20px rgba(20,184,166,0.45)}
+.btn-primary:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+.btn-secondary{background:transparent;color:var(--text-muted);padding:14px 20px;border-radius:10px;font-size:14px;border:1.5px solid var(--border)}
+.btn-secondary:hover{border-color:var(--text-muted);color:var(--text)}
+
+/* Two columns for short inputs */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:480px){.two-col{grid-template-columns:1fr}.intro h1{font-size:20px}}
+
+/* Success screen */
+.success{display:none;text-align:center;animation:slideIn 0.4s ease}
+.success.active{display:block}
+.success-icon{width:80px;height:80px;background:linear-gradient(135deg,var(--green) 0%,var(--green-bright) 100%);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 20px;box-shadow:0 10px 30px rgba(46,125,50,0.35)}
+.success h2{font-size:26px;color:var(--navy);margin-bottom:12px}
+.success p{color:var(--text-muted);font-size:16px;line-height:1.6;margin-bottom:24px;max-width:500px;margin-left:auto;margin-right:auto}
+.success .priority-badge{display:inline-block;padding:8px 20px;border-radius:20px;font-weight:700;font-size:14px;margin-bottom:18px}
+.priority-alto{background:#FEE2E2;color:#991B1B}
+.priority-medio{background:#FEF3C7;color:#92400E}
+.priority-baixo{background:#D1FAE5;color:#065F46}
+.success .next-card{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-deep) 100%);color:#fff;border-radius:14px;padding:24px;margin-bottom:20px;text-align:left}
+.success .next-card h3{font-size:16px;margin-bottom:12px;color:var(--gold)}
+.success .next-card ul{list-style:none;font-size:14px}
+.success .next-card li{padding:8px 0;display:flex;gap:10px}
+.success .next-card li::before{content:'✓';color:var(--teal-bright);font-weight:bold;flex-shrink:0}
+.whatsapp-btn{display:inline-block;background:#25D366;color:#fff;padding:14px 28px;border-radius:10px;text-decoration:none;font-weight:600;font-size:15px;box-shadow:0 4px 14px rgba(37,211,102,0.4);transition:transform 0.2s}
+.whatsapp-btn:hover{transform:translateY(-1px)}
+
+/* Footer */
+.footer{text-align:center;color:var(--text-muted);font-size:12px;margin-top:32px;line-height:1.6}
+.footer a{color:var(--teal);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="brand">
+    <a href="/" class="logo">
+      <div class="logo-mark">SM</div>
+      <span>Instituto Selma Moraes</span>
+    </a>
+    <a href="/" class="back-link">← Voltar</a>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro">
+    <span class="badge">Diagnóstico em 2 minutos</span>
+    <h1>Vamos avaliar a exposição da sua empresa à NR-1</h1>
+    <p>Responda 11 perguntas rápidas. Em até 24 horas, a Selma analisa pessoalmente o seu caso e te chama no WhatsApp com um plano direto pra sua situação — sem robô, sem script genérico.</p>
+    <div class="stats">
+      <div class="stat"><span class="stat-num">2 min</span><span class="stat-lbl">Pra preencher</span></div>
+      <div class="stat"><span class="stat-num">24h</span><span class="stat-lbl">Pra resposta</span></div>
+      <div class="stat"><span class="stat-num">R$67mil</span><span class="stat-lbl">Multa por colaborador</span></div>
+    </div>
+  </div>
+
+  <!-- Progress -->
+  <div class="progress-wrap" id="progressWrap">
+    <span class="progress-text" id="progressText">Etapa 1 de 4</span>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <form id="diagForm">
+
+    <!-- STEP 1: Identificação -->
+    <div class="step active" data-step="1">
+      <div class="card">
+        <span class="step-num">PASSO 1 / 4</span>
+        <h2>Quem é você?</h2>
+        <p class="step-desc">Pra Selma personalizar a conversa.</p>
+
+        <div class="field">
+          <label>Seu nome completo <span class="req">*</span></label>
+          <input type="text" name="nome" required placeholder="Ex.: Maria Silva">
+        </div>
+
+        <div class="field">
+          <label>Seu cargo na empresa <span class="req">*</span></label>
+          <select name="cargo" required>
+            <option value="">Selecione…</option>
+            <option>Sócio(a) / Proprietário(a)</option>
+            <option>Diretor(a) Geral / CEO</option>
+            <option>Diretor(a) de RH / Gente</option>
+            <option>Gerente de RH</option>
+            <option>Coordenador(a) de SST / Saúde Ocupacional</option>
+            <option>Consultor(a) / Advogado(a) terceirizado</option>
+            <option>Outro</option>
+          </select>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn-primary" data-next>Próximo →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: Empresa -->
+    <div class="step" data-step="2">
+      <div class="card">
+        <span class="step-num">PASSO 2 / 4</span>
+        <h2>Sobre sua empresa</h2>
+        <p class="step-desc">Pra entender porte e setor — fatores que mudam a exigência da NR-1.</p>
+
+        <div class="field">
+          <label>Razão social ou nome fantasia <span class="req">*</span></label>
+          <input type="text" name="empresa" required placeholder="Ex.: Empresa X LTDA">
+        </div>
+
+        <div class="field">
+          <label>Quantos colaboradores no total? <span class="req">*</span>
+            <span class="hint">Inclui CLT, terceirizados e estagiários no quadro</span>
+          </label>
+          <div class="radio-grid">
+            <label class="radio-card"><input type="radio" name="tamanho" value="Até 10 colaboradores (MEI/ME)" required>
+              <div class="radio-content"><div class="radio-dot"></div><span class="radio-label">Até 10 — MEI / Microempresa</span></div></label>
+            <label class="radio-card"><input type="radio" name="tamanho" value="11–49 colaboradores (PE)">
+              <div class="radio-content"><div class="radio-dot"></div><span class="radio-label">11 a 49 — Pequena empresa</span></div></label>
+            <label class="radio-card"><input type="radio" name="tamanho" value="50–249 colaboradores (PME)">
+              <div class="radio-content"><div class="radio-dot"></div><span class="radio-label">50 a 249 — Média empresa</span></div></label>
+            <label class="radio-card"><input type="radio" name="tamanho" value="250+ colaboradores (Grande)">
+              <div class="radio-content"><div class="radio-dot"></div><span class="radio-label">250+ — Grande empresa</span></div></label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Setor de atuação principal <span class="req">*</span></label>
+          <select name="setor" required>
+            <option value="">Selecione…</option>
+            <option>Indústria / Manufatura</option>
+            <option>Construção civil</option>
+            <option>Logística / Transporte</option>
+            <option>Varejo / Comércio</option>
+            <option>Serviços (financeiro, jurídico, contábil)</option>
+            <option>Saúde / Hospitais / Clínicas</option>
+            <option>Educação</option>
+            <option>Alimentação / Hotelaria</option>
+            <option>Tecnologia</option>
+            <option>Agro</option>
+            <option>Outro</option>
+          </select>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn-secondary" data-prev>← Voltar</button>
+          <button type="button" class="btn-primary" data-next>Próximo →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3: Estado atual + Urgência -->
+    <div class="step" data-step="3">
+      <div class="card">
+        <span class="step-num">PASSO 3 / 4</span>
+        <h2>Onde sua empresa está hoje</h2>
+        <p class="step-desc">As respostas aqui definem o risco e a urgência da adequação.</p>
+
+        <div class="field">
+          <label>A empresa já tem PGR (Programa de Gerenciamento de Riscos) atualizado? <span class="req">*</span></label>
+          <div class="radio-grid">
+            <label class="radio-card"><input type="radio" name="pgr" value="Sim, atualizado nos últimos 12 meses" required>
+              <div class="radio-content"><span class="radio-emoji">✅</span><div class="radio-dot"></div><span class="radio-label">Sim, atualizado nos últimos 12 meses</span></div></label>
+            <label class="radio-card"><input type="radio" name="pgr" value="Sim, mas está desatualizado">
+              <div class="radio-content"><span class="radio-emoji">⚠️</span><div class="radio-dot"></div><span class="radio-label">Sim, mas está desatualizado</span></div></label>
+            <label class="radio-card"><input type="radio" name="pgr" value="Não temos">
+              <div class="radio-content"><span class="radio-emoji">❌</span><div class="radio-dot"></div><span class="radio-label">Não temos</span></div></label>
+            <label class="radio-card"><input type="radio" name="pgr" value="Não sei">
+              <div class="radio-content"><span class="radio-emoji">❓</span><div class="radio-dot"></div><span class="radio-label">Não sei dizer</span></div></label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Houve afastamentos por saúde mental nos últimos 12 meses? <span class="req">*</span>
+            <span class="hint">Ansiedade, depressão, burnout, transtornos psicossociais</span>
+          </label>
+          <div class="radio-grid">
+            <label class="radio-card"><input type="radio" name="afastamentos" value="Vários casos (4 ou mais)" required>
+              <div class="radio-content"><span class="radio-emoji">🚨</span><div class="radio-dot"></div><span class="radio-label">Sim — vários casos (4 ou mais)</span></div></label>
+            <label class="radio-card"><input type="radio" name="afastamentos" value="Alguns casos (1–3)">
+              <div class="radio-content"><span class="radio-emoji">⚠️</span><div class="radio-dot"></div><span class="radio-label">Sim — alguns casos (1 a 3)</span></div></label>
+            <label class="radio-card"><input type="radio" name="afastamentos" value="Nenhum caso">
+              <div class="radio-content"><span class="radio-emoji">✅</span><div class="radio-dot"></div><span class="radio-label">Nenhum caso</span></div></label>
+            <label class="radio-card"><input type="radio" name="afastamentos" value="Não tenho esse dado">
+              <div class="radio-content"><span class="radio-emoji">❓</span><div class="radio-dot"></div><span class="radio-label">Não tenho esse dado</span></div></label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Já recebeu fiscalização ou notificação do MTE? <span class="req">*</span></label>
+          <div class="radio-grid">
+            <label class="radio-card"><input type="radio" name="fiscalizacao" value="Sim, autuação aplicada" required>
+              <div class="radio-content"><span class="radio-emoji">🚨</span><div class="radio-dot"></div><span class="radio-label">Sim — autuação aplicada</span></div></label>
+            <label class="radio-card"><input type="radio" name="fiscalizacao" value="Sim, apenas advertência ou termo">
+              <div class="radio-content"><span class="radio-emoji">⚠️</span><div class="radio-dot"></div><span class="radio-label">Sim — apenas advertência</span></div></label>
+            <label class="radio-card"><input type="radio" name="fiscalizacao" value="Não, nunca">
+              <div class="radio-content"><span class="radio-emoji">🟢</span><div class="radio-dot"></div><span class="radio-label">Não, nunca</span></div></label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Qual o prazo desejado para adequação? <span class="req">*</span></label>
+          <div class="radio-grid">
+            <label class="radio-card"><input type="radio" name="prazo" value="Urgente — até 30 dias" required>
+              <div class="radio-content"><span class="radio-emoji">🔥</span><div class="radio-dot"></div><span class="radio-label">Urgente — até 30 dias</span></div></label>
+            <label class="radio-card"><input type="radio" name="prazo" value="1 a 3 meses">
+              <div class="radio-content"><span class="radio-emoji">📅</span><div class="radio-dot"></div><span class="radio-label">1 a 3 meses</span></div></label>
+            <label class="radio-card"><input type="radio" name="prazo" value="3 a 6 meses">
+              <div class="radio-content"><span class="radio-emoji">🗓️</span><div class="radio-dot"></div><span class="radio-label">3 a 6 meses</span></div></label>
+            <label class="radio-card"><input type="radio" name="prazo" value="Estou estudando o tema">
+              <div class="radio-content"><span class="radio-emoji">📖</span><div class="radio-dot"></div><span class="radio-label">Estou estudando o tema</span></div></label>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn-secondary" data-prev>← Voltar</button>
+          <button type="button" class="btn-primary" data-next>Próximo →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4: Contato -->
+    <div class="step" data-step="4">
+      <div class="card">
+        <span class="step-num">PASSO 4 / 4</span>
+        <h2>Como a Selma fala com você</h2>
+        <p class="step-desc">Em até 24h ela vai te chamar pessoalmente com base nas suas respostas.</p>
+
+        <div class="field">
+          <label>Email corporativo <span class="req">*</span></label>
+          <input type="email" name="email" required placeholder="você@suaempresa.com.br">
+        </div>
+
+        <div class="field">
+          <label>Telefone com WhatsApp <span class="req">*</span>
+            <span class="hint">DDD + número. A Selma sempre responde primeiro no WhatsApp.</span>
+          </label>
+          <input type="tel" name="telefone" required placeholder="(11) 99999-9999">
+        </div>
+
+        <div class="field">
+          <label>Melhor horário pra te chamar</label>
+          <select name="horario">
+            <option value="">Sem preferência</option>
+            <option>Manhã (8h–12h)</option>
+            <option>Tarde (13h–18h)</option>
+            <option>Início da noite (18h–20h)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Algo mais que a Selma precisa saber? <span class="hint">Opcional. Contexto, dúvida específica, etc.</span></label>
+          <textarea name="observacoes" placeholder="Ex.: temos uma auditoria marcada pra mês que vem…"></textarea>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn-secondary" data-prev>← Voltar</button>
+          <button type="submit" class="btn-primary" id="submitBtn">Enviar diagnóstico →</button>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+  <!-- Success screen -->
+  <div class="success" id="successScreen">
+    <div class="success-icon">✓</div>
+    <h2>Recebido — Selma vai te chamar em até 24h</h2>
+    <div id="priorityBadgeContainer"></div>
+    <p id="priorityMessage">Sua resposta foi enviada com prioridade. Você também vai receber um email confirmando, com o checklist completo da NR-1 e os próximos passos.</p>
+
+    <div class="next-card">
+      <h3>O que acontece agora</h3>
+      <ul>
+        <li>A Selma vê pessoalmente cada diagnóstico (não é robô).</li>
+        <li>Em até 24h ela te manda WhatsApp com análise direta do seu caso.</li>
+        <li>Se for urgente, ela libera horário pra conversa hoje mesmo.</li>
+        <li>Email com checklist completo e plano de ação inicial já tá no seu inbox.</li>
+      </ul>
+    </div>
+
+    <a href="https://wa.me/5511956520330?text=Oi%20Selma%2C%20acabei%20de%20preencher%20o%20diagn%C3%B3stico%20no%20site.%20Posso%20ser%20priorizado%3F" class="whatsapp-btn" target="_blank">📱 Falar agora no WhatsApp</a>
+  </div>
+
+  <div class="footer">
+    <p>Instituto Selma Moraes — Psicóloga Organizacional · CRP 06/138420</p>
+    <p>Método Resguarda™ · <a href="https://selmamoraes.com.br">selmamoraes.com.br</a></p>
+  </div>
+
+</div>
+
+<script>
+const steps = document.querySelectorAll('.step');
+const progressFill = document.getElementById('progressFill');
+const progressText = document.getElementById('progressText');
+const successScreen = document.getElementById('successScreen');
+const form = document.getElementById('diagForm');
+const progressWrap = document.getElementById('progressWrap');
+let currentStep = 1;
+const totalSteps = steps.length;
+
+function showStep(n){
+  steps.forEach(s => s.classList.toggle('active', parseInt(s.dataset.step) === n));
+  progressFill.style.width = (n/totalSteps*100) + '%';
+  progressText.textContent = `Etapa ${n} de ${totalSteps}`;
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function validateStep(n){
+  const step = document.querySelector(`.step[data-step="${n}"]`);
+  const fields = step.querySelectorAll('input[required], select[required], textarea[required]');
+  for(const f of fields){
+    if(!f.value || (f.type==='radio' && !step.querySelector(`input[name="${f.name}"]:checked`))){
+      f.focus();
+      f.reportValidity?.();
+      return false;
+    }
+  }
+  // Radio group validation
+  const radioGroups = new Set();
+  step.querySelectorAll('input[type=radio][required]').forEach(r => radioGroups.add(r.name));
+  for(const name of radioGroups){
+    if(!step.querySelector(`input[name="${name}"]:checked`)){
+      alert('Por favor responda todas as perguntas obrigatórias.');
+      return false;
+    }
+  }
+  return true;
+}
+
+document.querySelectorAll('[data-next]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if(!validateStep(currentStep)) return;
+    if(currentStep < totalSteps){ currentStep++; showStep(currentStep); }
+  });
+});
+document.querySelectorAll('[data-prev]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if(currentStep > 1){ currentStep--; showStep(currentStep); }
+  });
+});
+
+// Calculate priority based on answers
+function calculatePriority(data){
+  let score = 0;
+  if(data.pgr === 'Não temos') score += 3;
+  if(data.pgr === 'Sim, mas está desatualizado') score += 2;
+  if(data.afastamentos === 'Vários casos (4 ou mais)') score += 3;
+  if(data.afastamentos === 'Alguns casos (1–3)') score += 2;
+  if(data.fiscalizacao === 'Sim, autuação aplicada') score += 3;
+  if(data.fiscalizacao === 'Sim, apenas advertência ou termo') score += 2;
+  if(data.prazo === 'Urgente — até 30 dias') score += 3;
+  if(data.prazo === '1 a 3 meses') score += 2;
+  if(data.tamanho?.includes('250+')) score += 1;
+
+  if(score >= 8) return {level:'ALTO', class:'priority-alto', emoji:'🚨', msg:'Sua empresa está em RISCO ELEVADO. A Selma vai te priorizar e tentar conversar nas próximas horas.'};
+  if(score >= 4) return {level:'MÉDIO', class:'priority-medio', emoji:'⚠️', msg:'Sua empresa tem gaps importantes. A Selma vai te chamar em até 24h com plano de ação.'};
+  return {level:'BAIXO', class:'priority-baixo', emoji:'🟢', msg:'Sua empresa está bem posicionada. A Selma vai conversar com você nos próximos dias pra blindar o que falta.'};
+}
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if(!validateStep(currentStep)) return;
+  const submitBtn = document.getElementById('submitBtn');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Enviando…';
+
+  const formData = new FormData(form);
+  const data = Object.fromEntries(formData.entries());
+  const priority = calculatePriority(data);
+
+  const autoResponseBody = `Olá ${data.nome.split(' ')[0]},
+
+Recebi seu diagnóstico aqui no Instituto. Pelos dados que você compartilhou, sua empresa foi classificada como PRIORIDADE ${priority.level}.
+
+Resumo do seu caso:
+• Empresa: ${data.empresa}
+• Porte: ${data.tamanho}
+• Setor: ${data.setor}
+• PGR atual: ${data.pgr}
+• Afastamentos por saúde mental: ${data.afastamentos}
+• Fiscalização do MTE: ${data.fiscalizacao}
+• Prazo desejado: ${data.prazo}
+
+PRÓXIMOS PASSOS:
+1. Em até 24 horas eu te chamo pessoalmente no WhatsApp (${data.telefone}) com análise específica do seu caso.
+2. Se preferir adiantar, me chame: https://wa.me/5511956520330
+3. Em anexo (mental, vou te mandar quando conversarmos) levo a estrutura inicial de adequação à NR-1 pra sua realidade.
+
+O Checklist NR-1 completo, em formato de 10 perguntas-chave que os auditores do MTE realmente cobram:
+
+1. Sua empresa já mapeou os riscos psicossociais de cada função?
+2. Já foi feito levantamento de sobrecarga, assédio moral e pressão por metas?
+3. Existe canal de denúncia confidencial sem retaliação?
+4. Gestores foram capacitados para identificar adoecimento emocional?
+5. Existe política documentada de prevenção ao assédio?
+6. As jornadas de trabalho são monitoradas (horas extras, pausas)?
+7. O inventário de riscos foi atualizado nos últimos 12 meses?
+8. Existe plano de ação com prazos e responsáveis nomeados?
+9. Foi feita pesquisa de clima organizacional nos últimos 6 meses?
+10. A empresa consegue apresentar toda documentação em 1h se o auditor chegar?
+
+Como interpretar: 8–10 sim = bom caminho; 5–7 sim = gaps importantes; menos de 5 = risco exposto (multa pode chegar a R$ 67 mil por colaborador).
+
+Te chamo logo.
+
+Selma Moraes
+Psicóloga Organizacional · CRP 06/138420
+Método Resguarda™ · selmamoraes.com.br`;
+
+  const payload = {
+    _subject: `[${priority.level}] ${data.empresa} (${data.tamanho?.split('—')[0].trim()}) — Diagnóstico NR-1`,
+    _replyto: data.email,
+    _template: 'table',
+    _captcha: 'false',
+    _autoresponse: autoResponseBody,
+    'Prioridade': `${priority.emoji} ${priority.level}`,
+    'Nome': data.nome,
+    'Cargo': data.cargo,
+    'Empresa': data.empresa,
+    'Porte': data.tamanho,
+    'Setor': data.setor,
+    'PGR atual': data.pgr,
+    'Afastamentos (12 meses)': data.afastamentos,
+    'Fiscalização do MTE': data.fiscalizacao,
+    'Prazo desejado': data.prazo,
+    'Email': data.email,
+    'Telefone/WhatsApp': data.telefone,
+    'Melhor horário': data.horario || 'Sem preferência',
+    'Observações': data.observacoes || '—',
+    'Origem': 'selmamoraes.com.br/diagnostico'
+  };
+
+  try {
+    const res = await fetch('https://formsubmit.co/ajax/smoraes@selmamoraes.com.br', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify(payload)
+    });
+    const result = await res.json();
+    if(result.success === 'true' || result.success === true){
+      form.style.display = 'none';
+      progressWrap.style.display = 'none';
+      document.querySelector('.intro').style.display = 'none';
+      successScreen.classList.add('active');
+      const badge = document.getElementById('priorityBadgeContainer');
+      badge.innerHTML = `<span class="priority-badge ${priority.class}">${priority.emoji} PRIORIDADE ${priority.level}</span>`;
+      document.getElementById('priorityMessage').textContent = priority.msg + ' Confira seu email — o checklist completo já foi enviado pra ' + data.email + '.';
+    } else {
+      throw new Error(result.message || 'Erro no envio');
+    }
+  } catch(err){
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Enviar diagnóstico →';
+    alert('Erro ao enviar: ' + err.message + '\n\nSe persistir, fale direto com a Selma no WhatsApp: https://wa.me/5511956520330');
+  }
+});
+</script>
+</body>
+</html>
