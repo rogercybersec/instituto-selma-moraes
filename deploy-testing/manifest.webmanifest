@@ -1,0 +1,27 @@
+{
+  "name": "Instituto Selma Moraes",
+  "short_name": "Selma Moraes",
+  "description": "NR-1 para PMEs em 30 dias — Método Resguarda™ por Selma Moraes, Psicóloga Organizacional (CRP 06/138420)",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FFFFFF",
+  "theme_color": "#1B365D",
+  "lang": "pt-BR",
+  "categories": ["business", "productivity", "health"],
+  "icons": [
+    {
+      "src": "/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
