@@ -1797,6 +1797,24 @@
 
   <!-- FOOTER -->
   <footer>
+    <svg class="footer-seal" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Selo Instituto Selma Moraes">
+      <defs>
+        <filter id="footerSeal" x="-15%" y="-15%" width="130%" height="130%">
+          <feGaussianBlur stdDeviation="0.5"/>
+          <feSpecularLighting surfaceScale="3" specularConstant="2.2" specularExponent="25" lighting-color="#2DD4BF">
+            <feDistantLight azimuth="135" elevation="55"/>
+          </feSpecularLighting>
+          <feComposite in2="SourceGraphic" operator="in"/>
+          <feMerge>
+            <feMergeNode in="SourceGraphic"/>
+            <feMergeNode/>
+          </feMerge>
+        </filter>
+      </defs>
+      <circle cx="50" cy="50" r="46" fill="none" stroke="#F1F5F9" stroke-width="1.5" opacity="0.85"/>
+      <circle cx="50" cy="50" r="42" fill="none" stroke="#F1F5F9" stroke-width="0.5" opacity="0.4"/>
+      <text x="50" y="63" font-family="Playfair Display, Georgia, serif" font-size="38" font-weight="700" text-anchor="middle" fill="#F1F5F9" filter="url(#footerSeal)">SM</text>
+    </svg>
     <div class="footer-brand">Instituto Selma <span>Moraes</span></div>
     <div class="footer-subtitle">Psicóloga Organizacional — CRP 06/138420 · Método Resguarda™</div>
     <div class="footer-links">
