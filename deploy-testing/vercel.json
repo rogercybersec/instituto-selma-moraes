@@ -13,6 +13,7 @@
   "rewrites": [
     { "source": "/cotacao", "destination": "/cotacao.html" },
     { "source": "/cotacao.html", "destination": "/cotacao.html" },
+    { "source": "/avaliacao", "destination": "/diagnostico.html" },
     { "source": "/diagnostico", "destination": "/diagnostico.html" },
     { "source": "/diagnostico.html", "destination": "/diagnostico.html" },
     { "source": "/logo-preview", "destination": "/logo-preview.html" },
