@@ -181,20 +181,60 @@
       justify-content: space-between;
     }
     .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      font-size: 1.15rem;
-      color: #1B365D;
-      text-decoration: none;
-      letter-spacing: -0.01em;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      text-decoration: none;
+      color: #1B365D;
+    }
+    /* Frame cream — bridge neutro entre gold do logo e teal do site (regra Tiffany/Cartier) */
+    .nav-logo-frame {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 28%, #FBF6EC 0%, #F0E5D2 75%, #E8DBC0 100%);
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.85) inset,
+        0 -1px 0 rgba(139,111,71,0.18) inset,
+        0 2px 6px rgba(139,111,71,0.15),
+        0 0 0 1px rgba(201,168,118,0.20);
+      transition: transform 0.35s cubic-bezier(.2,.7,.2,1), box-shadow 0.35s;
+      flex-shrink: 0;
+    }
+    .nav-logo:hover .nav-logo-frame {
+      transform: translateY(-1px);
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.95) inset,
+        0 -1px 0 rgba(139,111,71,0.22) inset,
+        0 6px 14px rgba(139,111,71,0.22),
+        0 0 0 1px rgba(201,168,118,0.40);
+    }
+    .nav-logo-img {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+      display: block;
+    }
+    /* Tag "Instituto" — discreto, deixa o logo dourado dominar */
+    .nav-logo-tag {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: #1B365D;
+      letter-spacing: 0.02em;
       text-shadow:
         0 1px 0 rgba(255,255,255,0.55),
-        0 -1px 0 rgba(0,0,0,0.18);
+        0 -1px 0 rgba(0,0,0,0.10);
     }
-    .nav-logo span { color: #0D9488; font-weight: 700; }
+    @media (max-width: 600px) {
+      .nav-logo-frame { width: 44px; height: 44px; }
+      .nav-logo-img { width: 36px; height: 36px; }
+      .nav-logo-tag { font-size: 0.95rem; }
+    }
     /* S e M esculturais — Playfair 900 italic com 3D depth stack (referência turning bold) */
     .nav-logo .art-letter, .footer-brand .art-letter {
       font-family: 'Playfair Display', 'Cormorant Garamond', serif;
