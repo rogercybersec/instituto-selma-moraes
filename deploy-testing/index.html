@@ -1399,35 +1399,93 @@
       color: rgba(241,245,249,0.4);
       margin-bottom: 32px;
     }
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px 28px;
-      justify-content: center;
+    /* Email destaque — card com relevo, referência Cartier/Hermès */
+    .footer-contact-card {
+      display: inline-flex;
       align-items: center;
-      margin-bottom: 40px;
-      padding: 0 16px;
-      max-width: 100%;
-      overflow-wrap: break-word;
-    }
-    .footer-links a {
-      color: #0D9488;
+      gap: 12px;
+      padding: 14px 22px;
+      margin: 0 auto 28px;
+      background: linear-gradient(180deg, rgba(20,184,166,0.08) 0%, rgba(13,148,136,0.04) 100%);
+      border: 1px solid rgba(45, 212, 191, 0.18);
+      border-radius: 100px;
+      transition: all 0.3s ease;
       text-decoration: none;
-      font-size: 0.88rem;
+      color: #2DD4BF;
+      font-size: 0.95rem;
       font-weight: 500;
-      transition: color 0.3s;
-      white-space: nowrap;
-      word-break: break-all;
+      letter-spacing: 0.01em;
+      max-width: calc(100% - 32px);
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.04) inset,
+        0 -1px 0 rgba(0,0,0,0.4) inset,
+        0 8px 24px -10px rgba(20,184,166,0.15);
     }
-    .footer-links a[href^="mailto"] {
-      white-space: normal;
-      word-break: break-all;
-      max-width: 100%;
+    .footer-contact-card:hover {
+      background: linear-gradient(180deg, rgba(20,184,166,0.14) 0%, rgba(13,148,136,0.08) 100%);
+      border-color: rgba(45, 212, 191, 0.4);
+      transform: translateY(-1px);
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.06) inset,
+        0 -1px 0 rgba(0,0,0,0.5) inset,
+        0 14px 32px -10px rgba(20,184,166,0.25);
     }
-    .footer-links a:hover { color: #2DD4BF; }
+    .footer-contact-card .mail-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      filter: drop-shadow(0 1px 0 rgba(255,255,255,0.15)) drop-shadow(0 -1px 0 rgba(0,0,0,0.4));
+    }
+    .footer-contact-card .mail-text {
+      word-break: break-all;
+      overflow-wrap: break-word;
+      text-shadow: 0 1px 0 rgba(0,0,0,0.5);
+    }
+
+    /* Social icons com relevo profissional */
+    .footer-socials {
+      display: inline-flex;
+      gap: 14px;
+      margin-bottom: 36px;
+      padding: 0 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .footer-social {
+      width: 44px;
+      height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #1e293b 0%, #0b1424 100%);
+      color: #94a3b8;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.06) inset,
+        0 -1px 0 rgba(0,0,0,0.5) inset,
+        0 4px 12px rgba(0,0,0,0.35),
+        0 1px 2px rgba(0,0,0,0.4);
+      position: relative;
+    }
+    .footer-social:hover {
+      color: #2DD4BF;
+      transform: translateY(-2px);
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.10) inset,
+        0 -1px 0 rgba(0,0,0,0.55) inset,
+        0 8px 18px rgba(20,184,166,0.25),
+        0 2px 4px rgba(0,0,0,0.4);
+    }
+    .footer-social svg {
+      width: 20px;
+      height: 20px;
+      filter: drop-shadow(0 1px 0 rgba(255,255,255,0.10)) drop-shadow(0 -1px 0 rgba(0,0,0,0.55));
+    }
     @media (max-width: 480px) {
-      .footer-links { gap: 12px 18px; flex-direction: column; }
-      .footer-links a { font-size: 0.82rem; }
+      .footer-contact-card { font-size: 0.85rem; padding: 12px 18px; }
+      .footer-social { width: 42px; height: 42px; }
     }
     .footer-copy {
       font-size: 0.78rem;
