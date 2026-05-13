@@ -2133,6 +2133,30 @@
     }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.sr, .sr-scale').forEach(el => observer.observe(el));
 
+    // ─── Gold Shine: dispara no footer logo quando entra em view (scroll trigger)
+    //     + repeats every 6s while visible (gentle luxury shimmer)
+    const footerLogoWrap = document.getElementById('footerLogoWrap');
+    if (footerLogoWrap) {
+      let shineInterval = null;
+      const triggerShine = () => {
+        footerLogoWrap.classList.remove('shine-active');
+        void footerLogoWrap.offsetWidth; // force reflow to restart animation
+        footerLogoWrap.classList.add('shine-active');
+      };
+      const shineObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            triggerShine();
+            if (!shineInterval) shineInterval = setInterval(triggerShine, 6500);
+          } else {
+            if (shineInterval) { clearInterval(shineInterval); shineInterval = null; }
+            footerLogoWrap.classList.remove('shine-active');
+          }
+        });
+      }, { threshold: 0.25 });
+      shineObserver.observe(footerLogoWrap);
+    }
+
     // ─── Navbar scroll ───
     window.addEventListener('scroll', () => {
       document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
