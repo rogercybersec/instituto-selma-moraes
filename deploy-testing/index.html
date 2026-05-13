@@ -2296,6 +2296,24 @@
       document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
     });
 
+    // ─── Hamburger / Mobile menu toggle ───
+    (function(){
+      const ham = document.getElementById('navHamburger');
+      const menu = document.getElementById('mobileMenu');
+      if (!ham || !menu) return;
+      const toggle = (open) => {
+        const isOpen = typeof open === 'boolean' ? open : !ham.classList.contains('open');
+        ham.classList.toggle('open', isOpen);
+        menu.classList.toggle('open', isOpen);
+        ham.setAttribute('aria-expanded', String(isOpen));
+        menu.setAttribute('aria-hidden', String(!isOpen));
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      };
+      ham.addEventListener('click', () => toggle());
+      menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggle(false)));
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') toggle(false); });
+    })();
+
     // ─── Mouse-following gradient ───
     const hero = document.querySelector('.hero');
     const mg = document.getElementById('mouseGradient');
