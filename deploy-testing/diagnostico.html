@@ -438,6 +438,34 @@ function calculatePriority(data){
   return {level:'BAIXO', class:'priority-baixo', emoji:'🟢', msg:'Sua empresa está bem posicionada. A Selma vai conversar com você nos próximos dias pra blindar o que falta.'};
 }
 
+// Estimate investment range based on size + state + urgency
+// PLACEHOLDER pricing — Selma valida na conversa final
+function estimateInvestment(data){
+  // Base by size (Brazilian SST/NR-1 market 2024-2025 typical ranges)
+  let baseMin, baseMax;
+  if(data.tamanho?.startsWith('Até 10')){ baseMin = 1500; baseMax = 3500; }
+  else if(data.tamanho?.startsWith('11–49')){ baseMin = 3500; baseMax = 8500; }
+  else if(data.tamanho?.startsWith('50–249')){ baseMin = 8500; baseMax = 22000; }
+  else { baseMin = 22000; baseMax = 55000; }
+
+  // Adjustments
+  let mult = 1.0;
+  if(data.pgr === 'Não temos') mult += 0.30;
+  else if(data.pgr === 'Sim, mas está desatualizado') mult += 0.15;
+  if(data.prazo === 'Urgente — até 30 dias') mult += 0.20;
+  if(data.fiscalizacao === 'Sim, autuação aplicada') mult += 0.15;
+  if(data.afastamentos === 'Vários casos (4 ou mais)') mult += 0.10;
+
+  const adjMin = Math.round(baseMin * mult / 100) * 100;
+  const adjMax = Math.round(baseMax * mult / 100) * 100;
+  return {
+    min: adjMin,
+    max: adjMax,
+    formatted: `R$ ${adjMin.toLocaleString('pt-BR')} – R$ ${adjMax.toLocaleString('pt-BR')}`,
+    note: 'Faixa estimada com base no padrão de mercado para adequação à NR-1 (PGR + plano de ação psicossocial). A proposta final é personalizada na conversa com a Selma.'
+  };
+}
+
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   if(!validateStep(currentStep)) return;
