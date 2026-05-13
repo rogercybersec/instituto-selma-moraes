@@ -490,7 +490,7 @@ form.addEventListener('submit', async (e) => {
 
   const autoResponseBody = `Olá ${data.nome.split(' ')[0]},
 
-Recebi seu diagnóstico aqui no Instituto. Pelos dados que você compartilhou, sua empresa foi classificada como PRIORIDADE ${priority.level}.
+Recebemos a sua avaliação no Instituto Selma Moraes. Com base nos dados informados, a sua empresa foi classificada como PRIORIDADE ${priority.level}.
 
 Resumo do seu caso:
 • Empresa: ${data.empresa}
@@ -505,29 +505,32 @@ FAIXA ESTIMADA DE INVESTIMENTO: ${investment.formatted}
 (${investment.note})
 
 PRÓXIMOS PASSOS:
-1. Em até 24 horas eu te chamo pessoalmente no WhatsApp (${data.telefone}) com análise específica do seu caso.
-2. Se preferir adiantar, me chame: https://wa.me/5511956520330
-3. Em anexo (mental, vou te mandar quando conversarmos) levo a estrutura inicial de adequação à NR-1 pra sua realidade.
+1. Em até 24 horas, entraremos em contato pelo WhatsApp (${data.telefone}) com uma análise específica do seu caso.
+2. Se preferir adiantar a conversa, fale conosco diretamente: https://wa.me/5511956520330
+3. Após a conversa inicial, enviaremos a estrutura preliminar de adequação à NR-1 ajustada à realidade da sua empresa.
 
-O Checklist NR-1 completo, em formato de 10 perguntas-chave que os auditores do MTE realmente cobram:
+CHECKLIST NR-1 — as 10 perguntas-chave que os auditores do Ministério do Trabalho cobram em fiscalização:
 
-1. Sua empresa já mapeou os riscos psicossociais de cada função?
+1. A empresa já mapeou os riscos psicossociais de cada função?
 2. Já foi feito levantamento de sobrecarga, assédio moral e pressão por metas?
-3. Existe canal de denúncia confidencial sem retaliação?
-4. Gestores foram capacitados para identificar adoecimento emocional?
+3. Existe canal de denúncia confidencial, sem risco de retaliação?
+4. Os gestores foram capacitados para identificar sinais de adoecimento emocional?
 5. Existe política documentada de prevenção ao assédio?
-6. As jornadas de trabalho são monitoradas (horas extras, pausas)?
+6. As jornadas de trabalho são efetivamente monitoradas (horas extras, pausas)?
 7. O inventário de riscos foi atualizado nos últimos 12 meses?
-8. Existe plano de ação com prazos e responsáveis nomeados?
-9. Foi feita pesquisa de clima organizacional nos últimos 6 meses?
-10. A empresa consegue apresentar toda documentação em 1h se o auditor chegar?
+8. Existe plano de ação com prazos definidos e responsáveis nomeados?
+9. Foi realizada pesquisa de clima organizacional nos últimos 6 meses?
+10. A empresa consegue apresentar toda a documentação em até 1 hora, em caso de auditoria?
 
-Como interpretar: 8–10 sim = bom caminho; 5–7 sim = gaps importantes; menos de 5 = risco exposto (multa pode chegar a R$ 67 mil por colaborador).
+Como interpretar o resultado:
+• 8 a 10 sim: bom caminho — continue monitorando.
+• 5 a 7 sim: há lacunas importantes — uma fiscalização pode resultar em notificação ou multa.
+• Menos de 5: a empresa está exposta — a multa pode chegar a R$ 67 mil por colaborador em situação de risco não gerenciado.
 
-Te chamo logo.
+Em breve falaremos.
 
-Selma Moraes
-Psicóloga Organizacional · CRP 06/138420
+Instituto Selma Moraes
+Selma Moraes — Psicóloga Organizacional · CRP 06/138420
 Método Resguarda™ · selmamoraes.com.br`;
 
   const payload = {
