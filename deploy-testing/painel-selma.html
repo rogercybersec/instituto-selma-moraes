@@ -810,6 +810,51 @@ function escapeHtml(s) { return String(s||'').replace(/[&<>"']/g, c=>({'&':'&amp
 renderCRM();
 document.querySelectorAll('.qa-item').forEach(it => { it.addEventListener('click', () => it.classList.toggle('open')); });
 
+// ═══ Personalizador inline dos scripts ═══
+document.querySelectorAll('.script-block[data-script]').forEach(block => {
+  const sid = block.dataset.script;
+  // objeções não levam campos (são respostas, não mensagens nominais)
+  if (sid && sid.startsWith('obj')) return;
+  const card = block.closest('.card');
+  if (!card || card.querySelector('.personalize-fields')) return;
+  block.dataset.originalHtml = block.innerHTML;
+  const tpl = document.createElement('div');
+  tpl.className = 'personalize-fields';
+  tpl.innerHTML = `
+    <div class="personalize-hint">Preencha os campos abaixo — a mensagem se personaliza em tempo real e o botão Copiar leva a versão pronta.</div>
+    <input type="text" placeholder="Nome" data-field="Nome">
+    <input type="text" placeholder="Empresa" data-field="Empresa">
+    <input type="text" placeholder="Cargo" data-field="Cargo">
+    <input type="text" placeholder="Setor" data-field="setor">
+  `;
+  block.parentElement.insertBefore(tpl, block);
+});
+// Substituição em tempo real
+document.addEventListener('input', (e) => {
+  const inp = e.target;
+  if (!inp.dataset || !inp.dataset.field) return;
+  const card = inp.closest('.card'); if (!card) return;
+  const block = card.querySelector('.script-block'); if (!block || !block.dataset.originalHtml) return;
+  let html = block.dataset.originalHtml;
+  card.querySelectorAll('.personalize-fields input[data-field]').forEach(i => {
+    const v = i.value.trim();
+    if (v) html = html.split('[' + i.dataset.field + ']').join(v);
+  });
+  block.innerHTML = html;
+});
+// Delegação do botão Copiar (sobrevive a innerHTML rebuilds)
+document.addEventListener('click', (e) => {
+  if (!e.target.classList.contains('copy-btn')) return;
+  if (e.target.dataset.handled === '1') return;
+  const btn = e.target;
+  const block = btn.parentElement;
+  if (!block) return;
+  const text = (block.cloneNode(true).textContent || '').replace(/Copiar(\s|✓| Copiado)*$/,'').trim();
+  navigator.clipboard.writeText(text);
+  btn.textContent = '✓ Copiado'; btn.classList.add('copied');
+  setTimeout(() => { btn.textContent = 'Copiar'; btn.classList.remove('copied'); }, 1800);
+});
+
 // ═══ Mini-curso ═══
 document.querySelectorAll('.modulo-head').forEach(h => h.addEventListener('click', () => h.parentElement.classList.toggle('open')));
 const CURSO_KEY = 'painel_selma_curso_v1';
