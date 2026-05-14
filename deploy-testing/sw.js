@@ -34,6 +34,10 @@ self.addEventListener('fetch', (e) => {
   if (!req.url.startsWith('http')) return;
 
   const url = new URL(req.url);
+  // CRITICAL: NÃO interceptar cross-origin (CDNs como Three.js, Google Fonts)
+  // Cross-origin retorna opaque response que browser não consegue executar como script
+  if (url.origin !== self.location.origin) return;
+
   const isHTML = req.mode === 'navigate' || req.destination === 'document' || url.pathname.endsWith('.html') || url.pathname === '/' || url.pathname.match(/^\/[^.]*$/);
 
   if (isHTML) {
