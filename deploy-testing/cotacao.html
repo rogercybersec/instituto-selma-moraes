@@ -328,7 +328,18 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(-
     <div class="section-label">Seus dados</div>
     <div class="two-col">
       <div class="field"><label>Nome completo <span class="req">*</span></label><input type="text" id="c_nome" required placeholder="Ex.: Maria Silva"></div>
-      <div class="field"><label>Cargo <span class="req">*</span></label><input type="text" id="c_cargo" required placeholder="Ex.: Diretora de RH"></div>
+      <div class="field"><label>Cargo <span class="req">*</span></label>
+        <select id="c_cargo" required>
+          <option value="">Selecione…</option>
+          <option>Sócio(a) / Proprietário(a)</option>
+          <option>Diretor(a) Geral / CEO</option>
+          <option>Diretor(a) de RH / Gente</option>
+          <option>Gerente de RH</option>
+          <option>Coordenador(a) de SST / Saúde Ocupacional</option>
+          <option>Consultor(a) / Advogado(a) terceirizado</option>
+          <option>Outro</option>
+        </select>
+      </div>
     </div>
     <div class="two-col">
       <div class="field"><label>E-mail corporativo <span class="req">*</span></label><input type="email" id="c_email" required placeholder="voce@empresa.com.br"></div>
