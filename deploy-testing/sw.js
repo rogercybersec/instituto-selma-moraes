@@ -31,10 +31,26 @@ self.addEventListener('activate', (e) => {
 self.addEventListener('fetch', (e) => {
   const req = e.request;
   if (req.method !== 'GET') return;
-  // Ignore extension requests
   if (!req.url.startsWith('http')) return;
 
-  // Stale-while-revalidate: serve cache imediato + revalida em paralelo
+  const url = new URL(req.url);
+  const isHTML = req.mode === 'navigate' || req.destination === 'document' || url.pathname.endsWith('.html') || url.pathname === '/' || url.pathname.match(/^\/[^.]*$/);
+
+  if (isHTML) {
+    // HTML: NETWORK-FIRST — sempre busca fresh, evita cache stale do site
+    e.respondWith(
+      fetch(req).then((res) => {
+        if (res && res.status === 200) {
+          const clone = res.clone();
+          caches.open(VERSION).then((c) => c.put(req, clone));
+        }
+        return res;
+      }).catch(() => caches.match(req))
+    );
+    return;
+  }
+
+  // Assets (img/css/js/png/woff): cache-first stale-while-revalidate
   e.respondWith(
     caches.match(req).then((cached) => {
       const network = fetch(req).then((res) => {
