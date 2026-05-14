@@ -2519,8 +2519,8 @@
       // iOS: sempre mostra botão (Apple não envia beforeinstallprompt)
       if (isIOS) btn.hidden = false;
 
-      const triggerInstall = async () => {
-        if (deferredPrompt) {
+      const triggerInstall = async (forceIOS) => {
+        if (deferredPrompt && !forceIOS) {
           // Android/Chrome: prompt nativo idêntico ao Play Store
           deferredPrompt.prompt();
           const { outcome } = await deferredPrompt.userChoice;
@@ -2528,27 +2528,16 @@
           deferredPrompt = null;
           return;
         }
-        if (isIOS) {
-          // iOS Safari: abre Share Sheet nativa do iPhone diretamente (mais próximo possível
-          // de tap-to-install sem App Store — Apple não permite trigger programático).
-          if (navigator.share) {
-            try {
-              await navigator.share({
-                title: 'Instituto Selma Moraes',
-                text: 'Instalar como app no iPhone',
-                url: window.location.href
-              });
-              return;
-            } catch (e) { /* user cancelled or unsupported — fallback modal */ }
-          }
-          iosModal.classList.add('open');
-        }
+        // iOS Safari (ou forceIOS por click no badge iPhone):
+        // Apple esconde "Add to Home Screen" do navigator.share() — então mostra modal com instruções visuais claras
+        if (iosModal) iosModal.classList.add('open');
       };
-      btn.addEventListener('click', triggerInstall);
+      btn.addEventListener('click', () => triggerInstall(false));
+      // Badge iPhone SEMPRE abre modal iOS (mesmo se em Android — usuário sabe o que quer)
       const fIos = document.getElementById('footerInstallIos');
       const fAnd = document.getElementById('footerInstallAndroid');
-      if (fIos) fIos.addEventListener('click', triggerInstall);
-      if (fAnd) fAnd.addEventListener('click', triggerInstall);
+      if (fIos) fIos.addEventListener('click', () => triggerInstall(true));
+      if (fAnd) fAnd.addEventListener('click', () => triggerInstall(false));
 
       if (iosClose) iosClose.addEventListener('click', () => iosModal.classList.remove('open'));
       if (iosModal) iosModal.addEventListener('click', (e) => {
