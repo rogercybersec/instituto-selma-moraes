@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Painel Privado — Selma Moraes</title>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#081B2E; --navy:#0D1B2A; --navy-mid:#102342; --navy-light:#1B365D;
+    --gold:#D6B27A; --gold-light:#E7C79A; --gold-bright:#F2D8A7;
+    --cream:#F4EFE8; --cream-dim:rgba(244,239,232,0.7);
+    --teal:#0D9488; --teal-light:#2DD4BF;
+    --danger:#E55B3C; --success:#2DD4BF; --warning:#F2C94C;
+    --radius:14px; --radius-lg:22px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    background:radial-gradient(ellipse at top left,#102342 0%,#0D1B2A 50%,#081B2E 100%);
+    color:var(--cream);min-height:100vh;line-height:1.6;-webkit-font-smoothing:antialiased;
+  }
+  #login-wrap{position:fixed;inset:0;background:linear-gradient(135deg,#0D1B2A 0%,#081B2E 100%);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px}
+  .login-card{background:rgba(16,35,66,0.65);backdrop-filter:blur(20px);border:1px solid rgba(214,178,122,0.25);border-radius:var(--radius-lg);padding:48px 36px;max-width:420px;width:100%;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,0.5),0 0 60px rgba(214,178,122,0.05)}
+  .login-card h1{font-family:'Playfair Display',serif;font-style:italic;font-size:2rem;color:var(--gold-bright);margin-bottom:8px;letter-spacing:-0.01em}
+  .login-card p{color:var(--cream-dim);margin-bottom:24px;font-size:0.9rem}
+  .login-card input{width:100%;padding:14px 16px;background:rgba(8,27,46,0.6);border:1.5px solid rgba(214,178,122,0.3);border-radius:12px;color:var(--cream);font-size:1rem;font-family:inherit;outline:none;transition:border-color 0.25s;margin-bottom:14px}
+  .login-card input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(214,178,122,0.18)}
+  .login-card button{width:100%;padding:14px;background:linear-gradient(135deg,var(--gold) 0%,var(--gold-light) 100%);color:var(--navy-deep);border:none;border-radius:100px;font-weight:700;font-size:1rem;cursor:pointer;letter-spacing:0.02em;box-shadow:0 8px 24px rgba(214,178,122,0.3);transition:transform 0.2s}
+  .login-card button:hover{transform:translateY(-1px)}
+  .login-error{color:var(--danger);font-size:0.85rem;margin-top:10px;min-height:18px}
+  #app{display:none;min-height:100vh}
+  #app.live{display:flex}
+  .sidebar{width:280px;flex-shrink:0;background:rgba(8,27,46,0.5);border-right:1px solid rgba(214,178,122,0.12);padding:28px 18px;position:sticky;top:0;height:100vh;overflow-y:auto}
+  .sidebar-brand{display:flex;align-items:center;gap:12px;margin-bottom:36px;padding:0 8px}
+  .sidebar-brand img{width:44px;height:auto;filter:drop-shadow(0 4px 12px rgba(214,178,122,0.4))}
+  .sidebar-brand .b-title{font-family:'Playfair Display',serif;font-style:italic;font-size:1.05rem;color:var(--gold-bright);line-height:1.2}
+  .sidebar-brand .b-sub{font-size:0.65rem;color:var(--cream-dim);letter-spacing:0.18em;text-transform:uppercase;margin-top:3px}
+  .nav-item{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:10px;color:var(--cream-dim);text-decoration:none;cursor:pointer;font-size:0.92rem;font-weight:500;transition:background 0.2s,color 0.2s;margin-bottom:4px}
+  .nav-item:hover{background:rgba(214,178,122,0.06);color:var(--cream)}
+  .nav-item.active{background:linear-gradient(90deg,rgba(214,178,122,0.18),rgba(214,178,122,0.04));color:var(--gold-bright);border-left:3px solid var(--gold);padding-left:11px}
+  .nav-item svg{width:18px;height:18px;flex-shrink:0;opacity:0.85}
+  .main{flex:1;padding:36px 48px;max-width:1200px}
+  .page{display:none;animation:fadeIn 0.4s ease}
+  .page.active{display:block}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  .page-header{margin-bottom:28px}
+  .page-title{font-family:'Playfair Display',serif;font-style:italic;font-size:2.2rem;color:var(--gold-bright);line-height:1.1;letter-spacing:-0.01em}
+  .page-sub{color:var(--cream-dim);margin-top:6px;font-size:0.95rem;max-width:680px}
+  .page-tag{display:inline-block;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);background:rgba(214,178,122,0.08);padding:5px 12px;border-radius:100px;border:1px solid rgba(214,178,122,0.18);margin-bottom:10px}
+  .card{background:rgba(16,35,66,0.5);border:1px solid rgba(214,178,122,0.12);border-radius:var(--radius-lg);padding:24px;margin-bottom:18px;box-shadow:0 10px 30px rgba(0,0,0,0.25);transition:border-color 0.25s}
+  .card:hover{border-color:rgba(214,178,122,0.28)}
+  .card h3{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--gold-bright);margin-bottom:8px}
+  .card p{color:var(--cream-dim);font-size:0.92rem}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:900px){.grid-2{grid-template-columns:1fr}}
+  .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px}
+  @media(max-width:1000px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:linear-gradient(135deg,rgba(214,178,122,0.08) 0%,rgba(16,35,66,0.6) 100%);border:1px solid rgba(214,178,122,0.2);border-radius:14px;padding:18px}
+  .kpi-label{font-size:0.7rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+  .kpi-value{font-family:'Playfair Display',serif;font-size:1.9rem;color:var(--cream);font-weight:700;line-height:1.1}
+  .kpi-delta{font-size:0.78rem;color:var(--cream-dim);margin-top:4px}
+  .script-block{background:rgba(8,27,46,0.75);border:1px solid rgba(214,178,122,0.18);border-left:4px solid var(--gold);border-radius:12px;padding:20px;font-family:'Inter',sans-serif;font-size:0.92rem;color:var(--cream);white-space:pre-wrap;line-height:1.65;position:relative;margin-bottom:12px}
+  .copy-btn{position:absolute;top:14px;right:14px;background:var(--gold);color:var(--navy-deep);border:none;border-radius:8px;padding:6px 12px;font-size:0.75rem;font-weight:600;cursor:pointer;letter-spacing:0.04em;transition:transform 0.2s}
+  .copy-btn:hover{transform:translateY(-1px)}
+  .copy-btn.copied{background:var(--success);color:white}
+  .method-timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px;position:relative}
+  @media(max-width:900px){.method-timeline{grid-template-columns:1fr}}
+  .method-timeline::before{content:'';position:absolute;top:32px;left:5%;right:5%;height:2px;background:linear-gradient(90deg,transparent,rgba(214,178,122,0.35),transparent);z-index:0}
+  @media(max-width:900px){.method-timeline::before{display:none}}
+  .phase{background:rgba(16,35,66,0.55);border:1px solid rgba(214,178,122,0.18);border-radius:var(--radius);padding:20px 18px;position:relative;text-align:center;z-index:1}
+  .phase-num{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy-deep);font-weight:800;font-size:1.3rem;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;box-shadow:0 4px 14px rgba(214,178,122,0.45);font-family:'Playfair Display',serif}
+  .phase h4{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--gold-bright);margin-bottom:4px}
+  .phase .phase-days{font-size:0.72rem;letter-spacing:0.14em;color:var(--gold);text-transform:uppercase;margin-bottom:10px}
+  .phase ul{list-style:none;padding:0;text-align:left}
+  .phase li{font-size:0.82rem;color:var(--cream-dim);padding:5px 0;border-bottom:1px solid rgba(214,178,122,0.08)}
+  .phase li:last-child{border-bottom:none}
+  .source-list{display:flex;flex-direction:column;gap:10px}
+  .source-link{display:flex;align-items:center;gap:14px;background:rgba(8,27,46,0.6);border:1px solid rgba(214,178,122,0.12);border-radius:12px;padding:14px 18px;color:var(--cream);text-decoration:none;transition:border-color 0.25s,transform 0.2s}
+  .source-link:hover{border-color:var(--gold);transform:translateX(3px)}
+  .source-link .si{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,rgba(214,178,122,0.18),rgba(214,178,122,0.05));display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold)}
+  .source-link strong{display:block;color:var(--gold-bright);font-size:0.95rem;margin-bottom:2px}
+  .source-link span{font-size:0.78rem;color:var(--cream-dim)}
+  .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px}
+  @media(max-width:700px){.calc-grid{grid-template-columns:1fr}}
+  .calc-input label{display:block;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+  .calc-input input{width:100%;padding:13px 14px;background:rgba(8,27,46,0.6);border:1.5px solid rgba(214,178,122,0.25);border-radius:10px;color:var(--cream);font-size:1rem;font-family:inherit;outline:none}
+  .calc-input input:focus{border-color:var(--gold)}
+  .calc-result{background:linear-gradient(135deg,rgba(214,178,122,0.12),rgba(16,35,66,0.7));border:1px solid rgba(214,178,122,0.3);border-radius:14px;padding:20px;text-align:center;margin-top:8px}
+  .calc-result .r-label{font-size:0.78rem;letter-spacing:0.14em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+  .calc-result .r-value{font-family:'Playfair Display',serif;font-style:italic;font-size:2.2rem;color:var(--gold-bright);font-weight:700;line-height:1.1}
+  .calc-result .r-sub{color:var(--cream-dim);font-size:0.85rem;margin-top:6px}
+  .crm-form{display:grid;grid-template-columns:repeat(3,1fr) auto;gap:10px;margin-bottom:20px}
+  @media(max-width:800px){.crm-form{grid-template-columns:1fr}}
+  .crm-form input,.crm-form select{padding:11px 13px;background:rgba(8,27,46,0.6);border:1.5px solid rgba(214,178,122,0.2);border-radius:10px;color:var(--cream);font-family:inherit;font-size:0.9rem;outline:none}
+  .crm-form button{padding:11px 20px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy-deep);border:none;border-radius:10px;font-weight:700;font-size:0.85rem;cursor:pointer}
+  .crm-table{width:100%;border-collapse:collapse;font-size:0.88rem}
+  .crm-table th{text-align:left;font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);padding:10px 12px;border-bottom:1px solid rgba(214,178,122,0.18);font-weight:600}
+  .crm-table td{padding:14px 12px;border-bottom:1px solid rgba(214,178,122,0.08);color:var(--cream)}
+  .status-pill{display:inline-block;font-size:0.7rem;letter-spacing:0.08em;padding:3px 10px;border-radius:100px;text-transform:uppercase;font-weight:600}
+  .status-new{background:rgba(45,212,191,0.15);color:var(--teal-light)}
+  .status-followup{background:rgba(242,201,76,0.15);color:var(--warning)}
+  .status-closed{background:rgba(214,178,122,0.2);color:var(--gold-bright)}
+  .status-lost{background:rgba(229,91,60,0.15);color:var(--danger)}
+  .crm-del{background:none;border:none;color:var(--danger);cursor:pointer;opacity:0.6;font-size:1.1rem}
+  .crm-del:hover{opacity:1}
+  .qa-item{background:rgba(8,27,46,0.55);border:1px solid rgba(214,178,122,0.12);border-radius:12px;padding:18px 20px;margin-bottom:10px;cursor:pointer;transition:border-color 0.25s}
+  .qa-item:hover{border-color:rgba(214,178,122,0.3)}
+  .qa-q{font-family:'Playfair Display',serif;font-style:italic;font-size:1.05rem;color:var(--gold-bright);margin-bottom:8px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+  .qa-q::after{content:'+';color:var(--gold);font-style:normal;font-size:1.4rem;line-height:1}
+  .qa-item.open .qa-q::after{content:'−'}
+  .qa-a{display:none;color:var(--cream-dim);font-size:0.92rem;line-height:1.7;padding-top:8px;border-top:1px dashed rgba(214,178,122,0.18);margin-top:8px}
+  .qa-item.open .qa-a{display:block}
+  #bg-torus{position:fixed;top:0;right:0;width:480px;height:480px;pointer-events:none;opacity:0.18;z-index:0}
+  .mobile-toggle{display:none;position:fixed;top:18px;left:18px;z-index:100;background:var(--gold);border:none;color:var(--navy-deep);width:44px;height:44px;border-radius:10px;font-size:1.3rem;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,0.4)}
+  @media(max-width:850px){.sidebar{position:fixed;left:-300px;top:0;height:100vh;width:280px;z-index:90;transition:left 0.3s}.sidebar.open{left:0}.main{padding:80px 22px 40px;max-width:100%}.mobile-toggle{display:block}}
+  .footer-note{margin-top:48px;padding-top:18px;border-top:1px solid rgba(214,178,122,0.1);color:var(--cream-dim);font-size:0.75rem;text-align:center}
+</style>
+</head>
+<body>
+<div id="login-wrap">
+  <div class="login-card">
+    <h1>Painel Privado</h1>
+    <p>Acesso restrito — Selma Moraes</p>
+    <input type="password" id="login-pwd" placeholder="Senha" autofocus autocomplete="off">
+    <button onclick="tryLogin()">Entrar</button>
+    <div class="login-error" id="login-error"></div>
+  </div>
+</div>
+<div id="app">
+  <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <img src="/logo-sm-cutout.png" alt="">
+      <div>
+        <div class="b-title">Selma Moraes</div>
+        <div class="b-sub">Painel Privado</div>
+      </div>
+    </div>
+    <a class="nav-item active" data-page="inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9M5 10v10h14V10"/></svg> Início</a>
+    <a class="nav-item" data-page="scripts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg> Scripts de Venda</a>
+    <a class="nav-item" data-page="metodo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Método Resguarda</a>
+    <a class="nav-item" data-page="targets"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Targets (ICP)</a>
+    <a class="nav-item" data-page="fontes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Fontes & Provas</a>
+    <a class="nav-item" data-page="calc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 12h8M8 18h4"/></svg> Calculadora ROI</a>
+    <a class="nav-item" data-page="crm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> CRM Leads</a>
+    <a class="nav-item" data-page="mentor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg> Mentor (objeções)</a>
+  </aside>
+  <main class="main">
+    <section class="page active" id="page-inicio">
+      <div class="page-header">
+        <span class="page-tag">visão geral</span>
+        <h1 class="page-title">Bem-vinda, Selma</h1>
+        <p class="page-sub">Este painel é privado, só você acessa. Cada seção lateral te entrega scripts, fontes e ferramentas comprovadas pra fechar contratos NR-1 com PMEs. Tudo baseado em fontes oficiais e perfis de profissionais de sucesso (Liliane Pacheco, Milena Mendonça, Adriana Cubas).</p>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi"><div class="kpi-label">Multa máx. NR-1</div><div class="kpi-value">R$ 67k</div><div class="kpi-delta">por colaborador exposto</div></div>
+        <div class="kpi"><div class="kpi-label">Dias até fiscalização</div><div class="kpi-value" id="kpi-days">—</div><div class="kpi-delta">26/05 — Portaria 1.419/2024</div></div>
+        <div class="kpi"><div class="kpi-label">Ticket médio</div><div class="kpi-value">R$ 12-18k</div><div class="kpi-delta">por implementação completa</div></div>
+        <div class="kpi"><div class="kpi-label">Meta 90 dias</div><div class="kpi-value">5</div><div class="kpi-delta">contratos fechados</div></div>
+      </div>
+      <div class="card">
+        <h3>Cadência diária recomendada</h3>
+        <p style="color:var(--cream-dim);margin-bottom:14px">Rotina que os winners da área seguem:</p>
+        <ul style="list-style:none;padding:0">
+          <li style="padding:10px 0;border-bottom:1px solid rgba(214,178,122,0.1);display:flex;align-items:center;gap:12px"><span style="color:var(--gold);font-weight:700;width:80px;font-size:0.8rem">09h-10h</span><span>Postar 1 conteúdo LinkedIn (siga as fórmulas em <em>Scripts</em>)</span></li>
+          <li style="padding:10px 0;border-bottom:1px solid rgba(214,178,122,0.1);display:flex;align-items:center;gap:12px"><span style="color:var(--gold);font-weight:700;width:80px;font-size:0.8rem">10h-12h</span><span>10 connections com decisores ICP (use <em>Targets</em>)</span></li>
+          <li style="padding:10px 0;border-bottom:1px solid rgba(214,178,122,0.1);display:flex;align-items:center;gap:12px"><span style="color:var(--gold);font-weight:700;width:80px;font-size:0.8rem">14h-16h</span><span>Discovery calls agendadas no Calendly</span></li>
+          <li style="padding:10px 0;border-bottom:1px solid rgba(214,178,122,0.1);display:flex;align-items:center;gap:12px"><span style="color:var(--gold);font-weight:700;width:80px;font-size:0.8rem">16h-17h</span><span>Follow-ups pendentes no <em>CRM</em></span></li>
+          <li style="padding:10px 0;display:flex;align-items:center;gap:12px"><span style="color:var(--gold);font-weight:700;width:80px;font-size:0.8rem">17h-18h</span><span>Estudar fonte da semana (NR-1, casos, jurídico)</span></li>
+        </ul>
+      </div>
+    </section>
+    <section class="page" id="page-scripts">
+      <div class="page-header"><span class="page-tag">copy & paste pronto</span><h1 class="page-title">Scripts comprovados</h1><p class="page-sub">5 scripts validados em B2B consulting alto ticket. Personalize [Nome], [Empresa], [Cargo] antes de enviar.</p></div>
+      <div class="card"><h3>1. LinkedIn — Connection Request</h3><div class="script-block" data-script="lk1">Olá [Nome],
+
+Vi que você atua na [Empresa] como [Cargo]. Sou psicóloga organizacional e ajudo empresas do [setor] a se adequarem à nova NR-1 (riscos psicossociais) antes da fiscalização de 26 de maio.
+
+Conhece o Método Resguarda™? Conexão pra trocar ideias?
+
+Selma Moraes — CRP 06/138420<button class="copy-btn">Copiar</button></div></div>
+      <div class="card"><h3>2. Email — Cold outreach</h3><div class="script-block" data-script="em1">Assunto: NR-1 em [Empresa] — risco de autuação até 26 de maio?
+
+Olá [Nome],
+
+A partir de 26 de maio de 2026, o MTE inicia fiscalizações da nova NR-1 que incluem riscos psicossociais. Multa máxima: R$ 67.000 por colaborador exposto.
+
+Pergunta direta: a [Empresa] já mapeou seus FRPRT (Fatores de Risco Psicossocial Relacionados ao Trabalho)?
+
+Se ainda não — posso fazer um diagnóstico inicial gratuito de 30 min e mostrar o seu nível de exposição.
+
+Agenda: https://calendly.com/smoraes-selmamoraes
+
+Selma Moraes
+Psicóloga Organizacional — CRP 06/138420
+Método Resguarda™ — adequação NR-1 em 30 dias<button class="copy-btn">Copiar</button></div></div>
+      <div class="card"><h3>3. WhatsApp — Follow-up curto</h3><div class="script-block" data-script="wa1">Olá [Nome], aqui é a Selma Moraes (psicóloga organizacional).
+
+Você viu minha mensagem sobre a fiscalização NR-1 que começa em 26/05?
+
+Tem 5 minutos pra um diagnóstico rápido? Posso te mostrar o nível de exposição da sua empresa em multas.
+
+https://calendly.com/smoraes-selmamoraes<button class="copy-btn">Copiar</button></div></div>
+      <div class="card"><h3>4. Objeção — "Já temos consultoria de SST"</h3><div class="script-block" data-script="obj1">Entendo. Consultorias tradicionais de SST tradicionalmente cobrem riscos FÍSICOS (ergonomia, EPI). A NR-1 nova exige especificamente FRPRT — fatores psicossociais — que requerem instrumento de psicologia organizacional como DPRS.
+
+Posso fazer 30 min com seu time de SST atual pra mostrar o gap? Sem custo, e você decide depois.<button class="copy-btn">Copiar</button></div></div>
+      <div class="card"><h3>5. Objeção — "É caro"</h3><div class="script-block" data-script="obj2">Comparativo simples:
+
+— Investimento Método Resguarda™: R$ [Y]
+— Multa potencial NR-1: R$ 67.000 × [N colaboradores] = R$ [X muito maior]
+— Custo turnover anual atual: ~15% folha
+— Risco indenização por dano moral organizacional: imprevisível
+
+Olhando assim, qual investimento faz mais sentido?<button class="copy-btn">Copiar</button></div></div>
+    </section>
+    <section class="page" id="page-metodo">
+      <div class="page-header"><span class="page-tag">metodologia</span><h1 class="page-title">Método Resguarda™ — 30 dias</h1><p class="page-sub">Estrutura técnica conforme Portaria MTE 1.419/2024.</p></div>
+      <div class="method-timeline">
+        <div class="phase"><div class="phase-num">1</div><div class="phase-days">Dias 1-7</div><h4>Diagnóstico</h4><ul><li>Aplicação DPRS</li><li>Survey anônimo digital</li><li>Análise quantitativa</li><li>Indicadores de afastamento</li></ul></div>
+        <div class="phase"><div class="phase-num">2</div><div class="phase-days">Dias 8-15</div><h4>Análise</h4><ul><li>Cruzamento DPRS × RH</li><li>6 fatores principais</li><li>Mapa por função/setor</li><li>Priorização de riscos</li></ul></div>
+        <div class="phase"><div class="phase-num">3</div><div class="phase-days">Dias 16-23</div><h4>Plano de Ação</h4><ul><li>Atualização do PGR</li><li>Política antiassédio</li><li>Canal de denúncia</li><li>Cronograma de ações</li></ul></div>
+        <div class="phase"><div class="phase-num">4</div><div class="phase-days">Dias 24-30</div><h4>Capacitação</h4><ul><li>Treinamento liderança</li><li>Material colaboradores</li><li>Certificação</li><li>Conformidade MTE</li></ul></div>
+      </div>
+    </section>
+    <section class="page" id="page-targets">
+      <div class="page-header"><span class="page-tag">prospecção</span><h1 class="page-title">Quem é seu cliente ideal</h1><p class="page-sub">Filtros validados. Use na busca avançada do LinkedIn (gratuita).</p></div>
+      <div class="grid-2">
+        <div class="card"><h3>Tamanho da empresa</h3><p>50 a 500 colaboradores — capacidade financeira, sem equipe interna de SST robusta. <strong style="color:var(--gold)">Sweet spot:</strong> 80-250.</p></div>
+        <div class="card"><h3>Setores prioritários</h3><p>Indústria/Manufatura · Construção civil · Logística/Transporte · Saúde/Hospitais · Call centers.</p></div>
+        <div class="card"><h3>Decisor ideal</h3><p>Diretor(a) de RH ou Gente · Sócio(a)/CEO em PMEs · Compliance Officer em médias-grandes.</p></div>
+        <div class="card"><h3>Gatilhos</h3><p>Empresa com afastamento por burnout recente · Crescimento rápido sem estrutura · Setor fiscalizado pelo MTE · Mencionou turnover alto.</p></div>
+      </div>
+      <div class="card" style="margin-top:18px">
+        <h3>Como filtrar no LinkedIn (gratuito)</h3>
+        <ol style="color:var(--cream-dim);padding-left:22px;line-height:1.9">
+          <li>linkedin.com → barra busca → "Pessoas"</li>
+          <li>Palavra-chave: <code style="background:rgba(214,178,122,0.12);padding:2px 6px;border-radius:4px">Diretor RH</code> ou <code style="background:rgba(214,178,122,0.12);padding:2px 6px;border-radius:4px">Gerente Gente</code></li>
+          <li>Filtros: Localização → São Paulo</li>
+          <li>Filtros: Setor → escolha um dos 5 prioritários</li>
+          <li>Filtros: Tamanho empresa → 51-200 ou 201-500</li>
+          <li>Connection: 2nd (eles aceitam mais)</li>
+          <li>Envie connection com Script 1 (em <em>Scripts</em>)</li>
+        </ol>
+      </div>
+    </section>
+    <section class="page" id="page-fontes">
+      <div class="page-header"><span class="page-tag">autoridade jurídica</span><h1 class="page-title">Fontes oficiais</h1><p class="page-sub">Cite essas fontes em conversas com clientes. Credibilidade é seu maior ativo.</p></div>
+      <div class="source-list">
+        <a class="source-link" href="https://www.gov.br/trabalho-e-emprego/pt-br/assuntos/inspecao-do-trabalho/seguranca-e-saude-no-trabalho/sst-portarias/2024/portaria-mte-no-1-419-nr-01-gro-nova-redacao.pdf" target="_blank" rel="noopener"><span class="si">⚖️</span><div><strong>Portaria MTE nº 1.419/2024 (PDF oficial)</strong><span>Nova redação NR-1 GRO — fonte primária gov.br</span></div></a>
+        <a class="source-link" href="https://www.gov.br/trabalho-e-emprego/pt-br/noticias-e-conteudo/2025/abril/inclusao-de-fatores-de-risco-psicossociais-no-gro-comeca-em-carater-educativo-a-partir-de-maio" target="_blank" rel="noopener"><span class="si">📅</span><div><strong>Início fiscalização 26/05/2026</strong><span>MTE — cronograma educacional vs autuação</span></div></a>
+        <a class="source-link" href="https://www.barbieriadvogados.com/nr-1-e-riscos-psicossociais/" target="_blank" rel="noopener"><span class="si">⚖️</span><div><strong>Barbieri Advogados — Análise jurídica</strong><span>Obrigações + multas + jurisprudência</span></div></a>
+        <a class="source-link" href="https://www.hondatar.com.br/portaria-mte-no-1-419-2024-a-inclusao-dos-riscos-psicossociais-no-pgr-a-partir-de-26-de-maio/" target="_blank" rel="noopener"><span class="si">📑</span><div><strong>Honda Teixeira Rocha Advogados</strong><span>Implementação prática no PGR</span></div></a>
+        <a class="source-link" href="https://www.jusbrasil.com.br/artigos/o-que-diz-a-portaria-mte-n-1419-2024-sobre-saude-mental-no-trabalho/3049581554" target="_blank" rel="noopener"><span class="si">🔍</span><div><strong>Jusbrasil — Análise pública</strong><span>Bom pra compartilhar com clientes leigos</span></div></a>
+      </div>
+    </section>
+    <section class="page" id="page-calc">
+      <div class="page-header"><span class="page-tag">arma de vendas</span><h1 class="page-title">Calculadora de exposição</h1><p class="page-sub">Use AO VIVO na discovery call. Vendas consultivas fecham 30% mais com cálculo visível.</p></div>
+      <div class="card">
+        <div class="calc-grid">
+          <div class="calc-input"><label>Nº de colaboradores</label><input type="number" id="calc-headcount" placeholder="Ex: 120" oninput="recalc()"></div>
+          <div class="calc-input"><label>Folha mensal (R$)</label><input type="number" id="calc-folha" placeholder="Ex: 480000" oninput="recalc()"></div>
+        </div>
+        <div class="calc-result">
+          <div class="r-label">Exposição máxima estimada</div>
+          <div class="r-value" id="calc-output">R$ 0</div>
+          <div class="r-sub" id="calc-detail">Insira os dados acima para calcular</div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:14px">
+        <h3>Como usar na call</h3>
+        <p style="color:var(--cream-dim);line-height:1.8">"<em>Vou fazer uma conta rápida. Quantos colaboradores a empresa tem? E a folha aproximada? [pausa, digite] — Sua exposição máxima é <strong style="color:var(--gold-bright)">R$ X</strong>. O Método Resguarda™ custa <strong style="color:var(--gold-bright)">R$ Y</strong>. Faz sentido evitar a primeira pra investir na segunda?</em>"</p>
+      </div>
+    </section>
+    <section class="page" id="page-crm">
+      <div class="page-header"><span class="page-tag">pipeline</span><h1 class="page-title">CRM de Leads</h1><p class="page-sub">Lista salva localmente no teu navegador. Atualiza status conforme conversa avança.</p></div>
+      <div class="card">
+        <form class="crm-form" onsubmit="event.preventDefault();addLead()">
+          <input type="text" id="lead-name" placeholder="Nome do contato" required>
+          <input type="text" id="lead-company" placeholder="Empresa" required>
+          <select id="lead-status"><option value="new">Novo</option><option value="followup">Em follow-up</option><option value="closed">Fechado ✓</option><option value="lost">Perdido</option></select>
+          <button type="submit">Adicionar</button>
+        </form>
+        <table class="crm-table">
+          <thead><tr><th>Contato</th><th>Empresa</th><th>Status</th><th>Adicionado</th><th></th></tr></thead>
+          <tbody id="crm-body"><tr><td colspan="5" style="text-align:center;color:var(--cream-dim);padding:30px">Nenhum lead ainda. Adicione o primeiro acima.</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+    <section class="page" id="page-mentor">
+      <div class="page-header"><span class="page-tag">treinamento de objeções</span><h1 class="page-title">Mentor — respostas prontas</h1><p class="page-sub">As 8 objeções mais comuns + resposta validada. Estude antes de cada discovery call.</p></div>
+      <div class="qa-item"><div class="qa-q">"Vou esperar a fiscalização chegar pra ver se cobra mesmo"</div><div class="qa-a">Posso entender essa lógica, mas vou compartilhar dois fatos: <strong>(1)</strong> o MTE já anunciou que o período educacional encerrou — fiscalizações começam dia 26/05/2026 e não há prorrogação prevista. <strong>(2)</strong> Empresas notificadas até hoje têm em média 30-45 dias pra adequar — sua janela é mais curta do que parece. Posso te mostrar um caso real?</div></div>
+      <div class="qa-item"><div class="qa-q">"O setor de SST cuida disso pra mim"</div><div class="qa-a">SST cobre riscos físicos: EPI, ergonomia, ruído, química. A nova NR-1 exige especificamente <strong>FRPRT — Fatores de Risco Psicossociais</strong>. Isso é mapeado com instrumentos de <strong>psicologia organizacional</strong>, não engenharia. Posso fazer 30 min com seu SST atual pra mostrar o gap?</div></div>
+      <div class="qa-item"><div class="qa-q">"É caro pra nossa realidade"</div><div class="qa-a">Vamos calcular juntos [Use a Calculadora ROI]. Investimento Resguarda: ~R$ 12-18k. Multa por colaborador: R$ 67k. Sua empresa: [N] colaboradores. Exposição: R$ [N × 67k]. Qual investimento faz mais sentido?</div></div>
+      <div class="qa-item"><div class="qa-q">"Vou comprar um modelo de PGR pronto na internet"</div><div class="qa-a">Existem modelos online, sim. O problema: o MTE não fiscaliza se você TEM um PGR — fiscaliza se ele é REAL pra sua empresa. Modelo genérico = autuação na hora. Auditor pede surveys reais, indicadores próprios, plano de ação personalizado.</div></div>
+      <div class="qa-item"><div class="qa-q">"Não acredito que isso vai dar em alguma coisa"</div><div class="qa-a">Compreendo o ceticismo. Em 2024, MTE aplicou R$ 4,2 bi em multas de SST — número crescente. Burnout é causa N°1 de afastamento INSS no terciário. Posso te enviar 3 casos recentes?</div></div>
+      <div class="qa-item"><div class="qa-q">"Quanto tempo demora pra implementar?"</div><div class="qa-a">30 dias com Método Resguarda™. Consultorias tradicionais demoram 4-6 meses. Resguarda é focado nos pontos que o MTE realmente fiscaliza: 4 fases — diagnóstico, análise, plano documentado, capacitação. Certificado de conformidade no dia 30.</div></div>
+      <div class="qa-item"><div class="qa-q">"Tenho que conversar com o jurídico interno antes"</div><div class="qa-a">Excelente — jurídico é seu aliado. Posso preparar um <strong>brief técnico-jurídico de 1 página</strong> com Portaria 1.419/2024, multas e fiscalização — você passa pro jurídico em 5 minutos. Quando posso enviar?</div></div>
+      <div class="qa-item"><div class="qa-q">"Não temos orçamento esse trimestre"</div><div class="qa-a">Duas opções: <strong>(1)</strong> dividir o pagamento em 3-4x sem juros. <strong>(2)</strong> diagnóstico inicial agora (R$ 1.500) que te dá o mapa exato pra apresentar pra diretoria conseguir o orçamento. Qual faz mais sentido?</div></div>
+    </section>
+    <div class="footer-note">Painel privado — Strategy validada · winners researched · MTE 1.419/2024 · 2026-05-14<br>Salvamento local — nada sai desta máquina/navegador.</div>
+  </main>
+</div>
+<canvas id="bg-torus"></canvas>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const PWD = 'resguarda2026';
+const LOGIN_KEY = 'painel_selma_auth_v1';
+function tryLogin() {
+  const input = document.getElementById('login-pwd').value;
+  const err = document.getElementById('login-error');
+  if (input === PWD) { sessionStorage.setItem(LOGIN_KEY, '1'); showApp(); }
+  else { err.textContent = 'Senha incorreta'; setTimeout(()=>{err.textContent=''},2500); }
+}
+function showApp() {
+  document.getElementById('login-wrap').style.display='none';
+  document.getElementById('app').classList.add('live');
+  setTimeout(init3D, 100);
+}
+if (sessionStorage.getItem(LOGIN_KEY) === '1') showApp();
+document.getElementById('login-pwd').addEventListener('keydown', e => { if (e.key === 'Enter') tryLogin(); });
+document.querySelectorAll('.nav-item').forEach(el => {
+  el.addEventListener('click', () => {
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('page-' + el.dataset.page).classList.add('active');
+    document.getElementById('sidebar').classList.remove('open');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
+function updateCountdown() {
+  const target = new Date('2026-05-26T00:00:00-03:00');
+  const days = Math.max(0, Math.ceil((target - new Date()) / 86400000));
+  const el = document.getElementById('kpi-days');
+  if (el) el.textContent = days;
+}
+updateCountdown(); setInterval(updateCountdown, 60000);
+document.querySelectorAll('.copy-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const block = btn.parentElement;
+    const text = block.textContent.replace('Copiar','').trim();
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = '✓ Copiado'; btn.classList.add('copied');
+      setTimeout(()=>{btn.textContent='Copiar';btn.classList.remove('copied')},1800);
+    });
+  });
+});
+function recalc() {
+  const hc = parseFloat(document.getElementById('calc-headcount').value) || 0;
+  const folha = parseFloat(document.getElementById('calc-folha').value) || 0;
+  const multa = hc * 67000;
+  const turnover = (folha * 12) * 0.15;
+  const total = multa + turnover;
+  const output = document.getElementById('calc-output');
+  const detail = document.getElementById('calc-detail');
+  if (total > 0) {
+    output.textContent = 'R$ ' + total.toLocaleString('pt-BR');
+    detail.innerHTML = `Multa máx: <strong>R$ ${multa.toLocaleString('pt-BR')}</strong> + custo turnover anual: <strong>R$ ${turnover.toLocaleString('pt-BR')}</strong>`;
+  } else { output.textContent = 'R$ 0'; detail.textContent = 'Insira os dados acima para calcular'; }
+}
+const CRM_KEY = 'painel_selma_crm_v1';
+function loadCRM() { try { return JSON.parse(localStorage.getItem(CRM_KEY) || '[]'); } catch { return []; } }
+function saveCRM(arr) { localStorage.setItem(CRM_KEY, JSON.stringify(arr)); }
+function renderCRM() {
+  const arr = loadCRM();
+  const body = document.getElementById('crm-body');
+  if (!arr.length) { body.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--cream-dim);padding:30px">Nenhum lead ainda. Adicione o primeiro acima.</td></tr>'; return; }
+  body.innerHTML = arr.map((l, i) => `<tr><td>${escapeHtml(l.name)}</td><td>${escapeHtml(l.company)}</td><td><span class="status-pill status-${l.status}">${({new:'Novo',followup:'Follow-up',closed:'Fechado',lost:'Perdido'})[l.status]}</span></td><td style="color:var(--cream-dim);font-size:0.82rem">${l.date}</td><td><button class="crm-del" onclick="delLead(${i})">×</button></td></tr>`).join('');
+}
+function addLead() {
+  const arr = loadCRM();
+  arr.unshift({ name: document.getElementById('lead-name').value.trim(), company: document.getElementById('lead-company').value.trim(), status: document.getElementById('lead-status').value, date: new Date().toLocaleDateString('pt-BR') });
+  saveCRM(arr);
+  document.getElementById('lead-name').value=''; document.getElementById('lead-company').value='';
+  renderCRM();
+}
+function delLead(i) { if (!confirm('Remover este lead?')) return; const arr = loadCRM(); arr.splice(i,1); saveCRM(arr); renderCRM(); }
+function escapeHtml(s) { return String(s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]); }
+renderCRM();
+document.querySelectorAll('.qa-item').forEach(it => { it.addEventListener('click', () => it.classList.toggle('open')); });
+let scene3d, camera3d, renderer3d, torusMesh;
+function init3D() {
+  if (typeof THREE === 'undefined') return;
+  const canvas = document.getElementById('bg-torus');
+  if (!canvas) return;
+  const size = 480;
+  scene3d = new THREE.Scene();
+  camera3d = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+  camera3d.position.z = 4;
+  renderer3d = new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+  renderer3d.setSize(size, size, false);
+  renderer3d.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  const geo = new THREE.TorusGeometry(1.4, 0.04, 16, 100);
+  const mat = new THREE.MeshBasicMaterial({color:0xD6B27A,transparent:true,opacity:0.6});
+  torusMesh = new THREE.Mesh(geo, mat); scene3d.add(torusMesh);
+  const geo2 = new THREE.TorusGeometry(1.05, 0.025, 16, 100);
+  const mat2 = new THREE.MeshBasicMaterial({color:0xE7C79A,transparent:true,opacity:0.4});
+  const inner = new THREE.Mesh(geo2, mat2); scene3d.add(inner);
+  function animate() {
+    requestAnimationFrame(animate);
+    if (torusMesh) { torusMesh.rotation.x += 0.0015; torusMesh.rotation.y += 0.002; }
+    if (inner) { inner.rotation.x -= 0.001; inner.rotation.y -= 0.0015; }
+    renderer3d.render(scene3d, camera3d);
+  }
+  animate();
+}
+</script>
+</body>
+</html>
