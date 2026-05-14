@@ -1,6 +1,6 @@
 // Service Worker — Instituto Selma Moraes PWA
-// Versão: 1 | Cache estratégia: stale-while-revalidate (rápido + sempre atualizado)
-const VERSION = 'selma-v1-2026-05-14';
+// Versão: 3 | Network-first para HTML (sempre fresh) + cache-first para assets
+const VERSION = 'selma-v3-' + Date.now();
 const ASSETS = [
   '/',
   '/index.html',
