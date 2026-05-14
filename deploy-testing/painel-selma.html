@@ -787,7 +787,16 @@ document.querySelectorAll('.nav-item').forEach(el => {
     window.scrollTo({top:0,behavior:'smooth'});
   });
 });
-function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
+function toggleSidebar(forceState) {
+  const sb = document.getElementById('sidebar');
+  const bd = document.getElementById('sidebarBackdrop');
+  const open = typeof forceState === 'boolean' ? forceState : !sb.classList.contains('open');
+  sb.classList.toggle('open', open);
+  if (bd) bd.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+// Esc fecha
+document.addEventListener('keydown', e => { if (e.key === 'Escape') toggleSidebar(false); });
 function updateCountdown() {
   const target = new Date('2026-05-26T00:00:00-03:00');
   const days = Math.max(0, Math.ceil((target - new Date()) / 86400000));
