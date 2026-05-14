@@ -2508,12 +2508,21 @@
       document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
     });
 
-    // ─── PWA Service Worker — habilita "Instalar" no Chrome/Edge + offline support
+    // ─── PWA Service Worker — habilita "Instalar" + offline + AUTO-UPDATE
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch((err) => {
-          console.warn('SW register failed', err);
-        });
+        navigator.serviceWorker.register('/sw.js').then((reg) => {
+          reg.addEventListener('updatefound', () => {
+            const newWorker = reg.installing;
+            if (!newWorker) return;
+            newWorker.addEventListener('statechange', () => {
+              if (newWorker.state === 'activated' && navigator.serviceWorker.controller) {
+                window.location.reload();
+              }
+            });
+          });
+          setInterval(() => reg.update().catch(() => {}), 30000);
+        }).catch((err) => console.warn('SW register failed', err));
       });
     }
 
