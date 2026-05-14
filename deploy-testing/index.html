@@ -2030,24 +2030,40 @@
       <div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
       <div class="ios-install-modal" id="iosInstallModal" role="dialog" aria-modal="true" aria-labelledby="iosInstallTitle">
         <div class="ios-install-card">
-          <h3 id="iosInstallTitle">Instalar como App</h3>
-          <p>Adicione o Instituto Selma Moraes à tela inicial do seu iPhone em 3 passos:</p>
+          <h3 id="iosInstallTitle">Instalar no iPhone</h3>
+          <p class="ios-intro">Como Apple não permite instalação automática pelo site, siga 3 passos rápidos no Safari:</p>
           <div class="step">
             <span class="step-num">1</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-            <span>Toque no botão <strong>Compartilhar</strong> na barra inferior</span>
+            <span class="step-icon-real" aria-hidden="true">
+              <svg viewBox="0 0 50 50" fill="none" stroke="#1B365D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="10" y="20" width="30" height="22" rx="3"/>
+                <path d="M25 28V8"/>
+                <path d="M17 16l8-8 8 8"/>
+              </svg>
+            </span>
+            <span>Toque no botão <strong>Compartilhar</strong> (quadrado com seta ↑) na <strong>barra inferior do Safari</strong></span>
           </div>
           <div class="step">
             <span class="step-num">2</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-            <span>Role e toque em <strong>"Adicionar à Tela de Início"</strong></span>
+            <span class="step-icon-real" aria-hidden="true">
+              <svg viewBox="0 0 50 50" fill="none" stroke="#1B365D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="8" y="8" width="34" height="34" rx="6"/>
+                <path d="M25 18v14M18 25h14"/>
+              </svg>
+            </span>
+            <span>No menu que abrir, role <strong>para baixo</strong> e toque em <strong>"Adicionar à Tela de Início"</strong></span>
           </div>
           <div class="step">
             <span class="step-num">3</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>Toque <strong>"Adicionar"</strong> no canto superior direito</span>
+            <span class="step-icon-real" aria-hidden="true">
+              <svg viewBox="0 0 50 50" fill="none" stroke="#1B365D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="38 16 21 33 12 24"/>
+              </svg>
+            </span>
+            <span>Toque em <strong>"Adicionar"</strong> no canto superior direito — pronto, o app aparece na sua tela inicial</span>
           </div>
-          <button class="close-btn" id="iosInstallClose">Entendi</button>
+          <p class="ios-tip">💡 <strong>Importante:</strong> use o Safari (não Chrome ou outros) — só o Safari permite essa instalação no iPhone.</p>
+          <button class="close-btn" id="iosInstallClose">Entendi, vou instalar</button>
         </div>
       </div>
       <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
