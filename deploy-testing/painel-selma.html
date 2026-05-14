@@ -407,6 +407,183 @@ Considerando esses números, qual investimento faz mais sentido para a sua empre
       </div>
     </section>
 
+    <!-- ─── MINI-CURSO INTERATIVO ─── -->
+    <section class="page" id="page-curso">
+      <div class="page-header"><span class="page-tag">aprendizado micro · 35 min total</span><h1 class="page-title">Mini-curso Resguarda™</h1><p class="page-sub">Cinco módulos curtos no formato que professores top usam: <strong>"por que importa"</strong> antes do <strong>"como fazer"</strong>. Faça um por dia. Marque concluído ao final de cada módulo — você verá seu progresso aqui.</p></div>
+
+      <div class="card" style="background:linear-gradient(135deg,rgba(214,178,122,0.10),rgba(16,35,66,0.6))">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap">
+          <div>
+            <div style="font-size:0.78rem;letter-spacing:0.14em;color:var(--gold);text-transform:uppercase">Seu progresso</div>
+            <div style="font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold-bright);font-weight:700" id="curso-progress-pct">0%</div>
+            <div style="color:var(--cream-dim);font-size:0.85rem"><span id="curso-progress-text">0 de 5 módulos concluídos</span></div>
+          </div>
+          <div style="flex:1;min-width:200px;max-width:400px">
+            <div style="height:10px;background:rgba(8,27,46,0.6);border-radius:100px;overflow:hidden;border:1px solid rgba(214,178,122,0.18)"><div id="curso-progress-bar" style="height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));width:0%;transition:width 0.5s"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modulo" data-mod="1">
+        <div class="modulo-head"><span class="modulo-num">1</span><div><h3>Por que a NR-1 mudou tudo</h3><span class="modulo-meta">5 min · Fundamentos</span></div><span class="modulo-status">○</span></div>
+        <div class="modulo-body">
+          <p><strong>Por que importa primeiro:</strong> antes de vender Resguarda, você precisa entender por que toda PME brasileira precisa dele agora. Sem isso, o cliente sente que você está empurrando algo. Com isso, ele te procura.</p>
+          <p style="margin-top:12px"><strong>O que mudou:</strong> a Portaria MTE 1.419/2024 acrescentou ao inventário de riscos da NR-1 os <strong>Fatores de Risco Psicossociais Relacionados ao Trabalho (FRPRT)</strong>. Antes: só riscos físicos (ergonomia, ruído, química). Agora: também sobrecarga, assédio, jornada excessiva, pressão por metas, falta de autonomia.</p>
+          <p style="margin-top:12px"><strong>O gatilho:</strong> a partir de <strong>26 de maio de 2026</strong>, o MTE deixa de orientar e passa a autuar. Multa: <strong>R$ 67.000 por colaborador exposto</strong>.</p>
+          <div class="check-box">
+            <strong>Faça você mesma:</strong> em 30 segundos, escreva (mentalmente) qual a diferença entre risco físico e risco psicossocial. Não consegue? Releia.
+          </div>
+          <button class="modulo-btn" onclick="marcarConcluido(1)">Marcar como concluído ✓</button>
+        </div>
+      </div>
+
+      <div class="modulo" data-mod="2">
+        <div class="modulo-head"><span class="modulo-num">2</span><div><h3>Método Resguarda™ — as 4 fases</h3><span class="modulo-meta">10 min · Metodologia</span></div><span class="modulo-status">○</span></div>
+        <div class="modulo-body">
+          <p><strong>Por que importa:</strong> clientes não compram "consultoria de NR-1" — compram "30 dias para ficar tranquila antes da fiscalização". O Método Resguarda™ é o que torna isso concreto.</p>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px">
+            <div class="micro-card"><strong>Fase 1 — Diagnóstico (dias 1-7)</strong><p>Aplica o instrumento DPRS num survey anônimo. Cruza com indicadores de RH (afastamentos, turnover). Resultado: mapa quantitativo do nível de exposição.</p></div>
+            <div class="micro-card"><strong>Fase 2 — Análise (dias 8-15)</strong><p>Identifica os 6 fatores principais por função/setor. Prioriza riscos por severidade × frequência. Resultado: documento técnico com riscos classificados.</p></div>
+            <div class="micro-card"><strong>Fase 3 — Plano de Ação (dias 16-23)</strong><p>Atualiza o PGR oficial da empresa, cria política antiassédio formal e canal de denúncia. Cronograma com responsáveis. Resultado: PGR aceito por auditor MTE.</p></div>
+            <div class="micro-card"><strong>Fase 4 — Capacitação (dias 24-30)</strong><p>Treina lideranças em 4h (presencial ou remoto), entrega material para colaboradores, emite certificados de conformidade. Resultado: empresa pronta para fiscalização.</p></div>
+          </div>
+          <div class="check-box">
+            <strong>Checkpoint:</strong> imagine que o cliente perguntar "o que entrego em cada fase?". Você consegue responder agora sem olhar nos cards? Boa pergunta de fechamento na call.
+          </div>
+          <button class="modulo-btn" onclick="marcarConcluido(2)">Marcar como concluído ✓</button>
+        </div>
+      </div>
+
+      <div class="modulo" data-mod="3">
+        <div class="modulo-head"><span class="modulo-num">3</span><div><h3>Vender é fazer perguntas (não falar)</h3><span class="modulo-meta">10 min · Vendas consultivas</span></div><span class="modulo-status">○</span></div>
+        <div class="modulo-body">
+          <p><strong>Por que importa:</strong> dados validados — vendedores consultivos fazem <strong>60% mais perguntas</strong> que vendedores tradicionais e fecham com <strong>tickets 30% maiores</strong>. Cliente compra quando se sente entendido, não quando se sente vendido.</p>
+          <p style="margin-top:12px"><strong>As 5 perguntas que abrem caixa-forte:</strong></p>
+          <ol style="padding-left:22px;color:var(--cream);line-height:1.95;margin-top:8px">
+            <li>"Como sua empresa está se preparando para a fiscalização de 26 de maio?"</li>
+            <li>"Vocês já mapearam os riscos psicossociais por função?"</li>
+            <li>"Qual o impacto financeiro estimado se houver autuação?"</li>
+            <li>"Quem é o responsável pelo PGR atualizado hoje?"</li>
+            <li>"Se eu te ajudar a estar 100% adequada em 30 dias, o que isso representaria para a empresa?"</li>
+          </ol>
+          <div class="check-box">
+            <strong>Pratique agora:</strong> grave um áudio de você fazendo essas 5 perguntas em ordem. Escute. Soou natural? Repita até soar.
+          </div>
+          <button class="modulo-btn" onclick="marcarConcluido(3)">Marcar como concluído ✓</button>
+        </div>
+      </div>
+
+      <div class="modulo" data-mod="4">
+        <div class="modulo-head"><span class="modulo-num">4</span><div><h3>Quantifique a dor — calculadora ao vivo</h3><span class="modulo-meta">5 min · Fechamento</span></div><span class="modulo-status">○</span></div>
+        <div class="modulo-body">
+          <p><strong>Por que importa:</strong> cliente decide com emoção e justifica com lógica. Mostrar o número de exposição na frente dele transforma a conversa.</p>
+          <p style="margin-top:12px"><strong>Roteiro testado:</strong></p>
+          <div class="role-play"><em>"Vou fazer uma conta rápida com você. Quantos colaboradores a empresa tem hoje? [120] E a folha mensal aproximada? [R$ 480 mil]"</em><br><br>[abra a Calculadora ROI no painel e digite na frente dele]<br><br><em>"Olha — sua exposição máxima é <strong style="color:var(--gold-bright)">R$ 8,9 milhões</strong> em multas + custo de turnover. O Método Resguarda™ custa R$ 15 mil. Qual investimento faz mais sentido?"</em></div>
+          <div class="check-box">
+            <strong>Vá agora à seção Calculadora ROI</strong> e calcule a exposição de uma empresa hipotética com 200 colaboradores e folha de R$ 800.000. Memorize o número que sai.
+          </div>
+          <button class="modulo-btn" onclick="marcarConcluido(4)">Marcar como concluído ✓</button>
+        </div>
+      </div>
+
+      <div class="modulo" data-mod="5">
+        <div class="modulo-head"><span class="modulo-num">5</span><div><h3>Fechamento sem pressão</h3><span class="modulo-meta">5 min · Conversão</span></div><span class="modulo-status">○</span></div>
+        <div class="modulo-body">
+          <p><strong>Por que importa:</strong> 80% das vendas se perdem porque o vendedor não pede o fechamento. A técnica certa parece uma pergunta natural, não pressão.</p>
+          <p style="margin-top:12px"><strong>3 fechamentos que funcionam para Resguarda:</strong></p>
+          <div style="display:grid;grid-template-columns:1fr;gap:10px;margin-top:8px">
+            <div class="micro-card"><strong>Fechamento alternativo</strong><p>"Você prefere começarmos em segunda 26 ou em quarta 28?" — Cliente escolhe entre dois sim. Nunca pergunte se quer começar.</p></div>
+            <div class="micro-card"><strong>Fechamento com garantia</strong><p>"Se o MTE autuar sua empresa por inadequação à NR-1 em 12 meses após a entrega, devolução integral. Quer começar agora?"</p></div>
+            <div class="micro-card"><strong>Fechamento de urgência real</strong><p>"Faltam X dias para a fiscalização. Se assinarmos hoje, conseguimos concluir as 4 fases antes do prazo. Posso enviar o contrato?"</p></div>
+          </div>
+          <div class="check-box">
+            <strong>Final do curso:</strong> agora você sabe o "por quê", o "o quê", o "como perguntar", o "como quantificar" e o "como fechar". Você está pronta para a primeira call real.
+          </div>
+          <button class="modulo-btn" onclick="marcarConcluido(5)">Marcar como concluído ✓</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── EMPRESAS-ALVO ─── -->
+    <section class="page" id="page-empresas">
+      <div class="page-header"><span class="page-tag">prospecção qualificada</span><h1 class="page-title">Empresas-alvo em São Paulo</h1><p class="page-sub">Não vendo lista comprada (não funciona). Aqui você acessa <strong>diretórios públicos oficiais</strong> e <strong>buscas LinkedIn pré-configuradas</strong> com o filtro do seu ICP já aplicado. Em 10 minutos você levanta 50 leads qualificados.</p></div>
+
+      <div class="card">
+        <h3>🎯 Buscas LinkedIn pré-configuradas (clique e use)</h3>
+        <p style="color:var(--cream-dim);margin-bottom:14px">Cada link abre o LinkedIn já com os filtros aplicados. Você só precisa estar logada.</p>
+        <div class="source-list">
+          <a class="source-link" href="https://www.linkedin.com/search/results/people/?keywords=%22diretor%20de%20RH%22%20%22indústria%22&geoUrn=%5B%22104746682%22%5D" target="_blank" rel="noopener"><span class="si">🏭</span><div><strong>Indústria — Diretores de RH em SP</strong><span>Decisor ideal · setor de maior risco psicossocial</span></div></a>
+          <a class="source-link" href="https://www.linkedin.com/search/results/people/?keywords=%22gerente%20de%20RH%22%20%22construção%22&geoUrn=%5B%22104746682%22%5D" target="_blank" rel="noopener"><span class="si">🏗️</span><div><strong>Construção civil — Gerentes RH em SP</strong><span>Alto turnover · acidentes recorrentes · ICP forte</span></div></a>
+          <a class="source-link" href="https://www.linkedin.com/search/results/people/?keywords=%22gestão%20de%20pessoas%22%20%22logística%22&geoUrn=%5B%22104746682%22%5D" target="_blank" rel="noopener"><span class="si">🚚</span><div><strong>Logística — Gestão de Pessoas em SP</strong><span>Rotinas extensas · pressão por metas · ICP ideal</span></div></a>
+          <a class="source-link" href="https://www.linkedin.com/search/results/people/?keywords=%22diretor%20de%20RH%22%20%22hospital%22&geoUrn=%5B%22104746682%22%5D" target="_blank" rel="noopener"><span class="si">🏥</span><div><strong>Saúde / Hospitais — Diretores RH em SP</strong><span>Burnout endêmico · ticket alto · urgência máxima</span></div></a>
+          <a class="source-link" href="https://www.linkedin.com/search/results/people/?keywords=%22head%20de%20pessoas%22%20OR%20%22chief%20people%20officer%22&geoUrn=%5B%22104746682%22%5D" target="_blank" rel="noopener"><span class="si">💼</span><div><strong>Head/CPO em PMEs Tech SP</strong><span>Empresas que crescem rápido sem estrutura formal · maduras para Resguarda</span></div></a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>📚 Diretórios públicos oficiais (associações + cadastros)</h3>
+        <p style="color:var(--cream-dim);margin-bottom:14px">Fontes públicas com listas reais de empresas filiadas. Identifique a empresa pela lista, depois localize o decisor no LinkedIn.</p>
+        <div class="source-list">
+          <a class="source-link" href="https://www.fiesp.com.br/" target="_blank" rel="noopener"><span class="si">🏛️</span><div><strong>FIESP — Federação das Indústrias SP</strong><span>51 diretorias regionais · comitês setoriais por área · indústrias filiadas listadas</span></div></a>
+          <a class="source-link" href="https://www.sebrae.com.br/sites/PortalSebrae/ufs/sp" target="_blank" rel="noopener"><span class="si">🏢</span><div><strong>SEBRAE-SP</strong><span>Pequenos negócios paulistas · listagens por setor + região</span></div></a>
+          <a class="source-link" href="https://www.fiesp.com.br/sifesp/guia-fiesp/" target="_blank" rel="noopener"><span class="si">📒</span><div><strong>Guia FIESP — Sindicatos filiados</strong><span>Acesso a sindicatos setoriais com listas próprias de empresas</span></div></a>
+          <a class="source-link" href="https://www.sindusconsp.com.br/" target="_blank" rel="noopener"><span class="si">🏗️</span><div><strong>SindusCon-SP — Construção civil</strong><span>Sindicato com diretório de construtoras associadas em SP</span></div></a>
+          <a class="source-link" href="https://www.setcesp.org.br/" target="_blank" rel="noopener"><span class="si">🚚</span><div><strong>SETCESP — Transporte cargas SP</strong><span>Sindicato das transportadoras paulistas · ICP de logística</span></div></a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🎯 Fluxo recomendado em 10 minutos</h3>
+        <ol style="padding-left:22px;color:var(--cream-dim);line-height:1.95">
+          <li>Abre o link da busca LinkedIn do setor desejado (ex.: Indústria)</li>
+          <li>Pega 10 perfis que aparecem nas primeiras 2 páginas</li>
+          <li>Verifica: a empresa deles tem 50-500 funcionários? (no perfil da empresa, "tamanho da empresa")</li>
+          <li>Se sim, adiciona no <strong>Disparador de Mensagens</strong> (próxima aba) com Nome, Empresa e Cargo</li>
+          <li>Lá você gera as mensagens personalizadas em massa e envia</li>
+          <li>Marca o status no CRM</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ─── DISPARADOR DE MENSAGENS ─── -->
+    <section class="page" id="page-disparador">
+      <div class="page-header"><span class="page-tag">automação inteligente</span><h1 class="page-title">Disparador de Mensagens</h1><p class="page-sub">Cole sua lista de leads aqui, escolha o script e o sistema gera <strong>mensagens personalizadas em massa</strong>. Você revisa, clica "Copiar" e envia uma a uma no LinkedIn/Email/WhatsApp. Sem trabalho manual de substituir [Nome] [Empresa] um por um.</p></div>
+
+      <div class="card">
+        <h3>1. Cole seus leads (um por linha, no formato Nome | Empresa | Cargo)</h3>
+        <textarea id="disp-leads" rows="8" style="width:100%;background:rgba(8,27,46,0.7);border:1.5px solid rgba(214,178,122,0.25);border-radius:10px;color:var(--cream);font-family:'Courier New',monospace;font-size:0.88rem;padding:14px;resize:vertical;outline:none" placeholder="Exemplo:
+Maria Silva | Acme Indústria | Diretora de RH
+João Santos | LogisFast | Gerente de Pessoas
+Ana Costa | Construtora ABC | Diretora Geral"></textarea>
+      </div>
+
+      <div class="card">
+        <h3>2. Escolha o script</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px">
+          <label class="disp-radio"><input type="radio" name="disp-tpl" value="lk1" checked><span>LinkedIn — Conexão</span></label>
+          <label class="disp-radio"><input type="radio" name="disp-tpl" value="em1"><span>E-mail — Cold outreach</span></label>
+          <label class="disp-radio"><input type="radio" name="disp-tpl" value="wa1"><span>WhatsApp — Follow-up</span></label>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>3. Setor (opcional, para personalizar ainda mais)</h3>
+        <select id="disp-setor" style="width:100%;max-width:400px;padding:12px 14px;background:rgba(8,27,46,0.7);border:1.5px solid rgba(214,178,122,0.25);border-radius:10px;color:var(--cream);font-family:inherit;font-size:0.95rem;outline:none">
+          <option value="">Genérico (sem setor)</option>
+          <option>indústria</option>
+          <option>construção civil</option>
+          <option>logística</option>
+          <option>saúde e hospitais</option>
+          <option>tecnologia</option>
+          <option>serviços</option>
+        </select>
+      </div>
+
+      <button onclick="gerarMensagens()" style="background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy-deep);border:none;border-radius:100px;padding:14px 28px;font-weight:700;font-size:0.95rem;cursor:pointer;margin-bottom:24px;box-shadow:0 8px 24px rgba(214,178,122,0.3)">⚡ Gerar mensagens personalizadas</button>
+
+      <div id="disp-output"></div>
+    </section>
+
     <div class="footer-note">Painel privado — Strategy validada · winners researched · MTE 1.419/2024 · 2026-05-14<br>Salvamento local — nada sai desta máquina/navegador.</div>
   </main>
 </div>
