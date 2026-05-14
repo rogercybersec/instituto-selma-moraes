@@ -16,6 +16,8 @@
     { "source": "/avaliacao", "destination": "/diagnostico.html" },
     { "source": "/diagnostico", "destination": "/diagnostico.html" },
     { "source": "/diagnostico.html", "destination": "/diagnostico.html" },
+    { "source": "/painel-selma", "destination": "/painel-selma.html" },
+    { "source": "/painel-selma.html", "destination": "/painel-selma.html" },
     { "source": "/logo-preview", "destination": "/logo-preview.html" },
     { "source": "/logo-preview.html", "destination": "/logo-preview.html" },
     { "source": "/manifest.webmanifest", "destination": "/manifest.webmanifest" },
