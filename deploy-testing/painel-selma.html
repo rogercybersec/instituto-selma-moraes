@@ -697,6 +697,116 @@ function delLead(i) { if (!confirm('Remover este lead?')) return; const arr = lo
 function escapeHtml(s) { return String(s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]); }
 renderCRM();
 document.querySelectorAll('.qa-item').forEach(it => { it.addEventListener('click', () => it.classList.toggle('open')); });
+
+// ═══ Mini-curso ═══
+document.querySelectorAll('.modulo-head').forEach(h => h.addEventListener('click', () => h.parentElement.classList.toggle('open')));
+const CURSO_KEY = 'painel_selma_curso_v1';
+function loadCurso(){ try{ return JSON.parse(localStorage.getItem(CURSO_KEY)||'{}'); }catch{return{};} }
+function saveCurso(o){ localStorage.setItem(CURSO_KEY, JSON.stringify(o)); }
+function marcarConcluido(n){
+  event.stopPropagation();
+  const c = loadCurso(); c[n] = true; saveCurso(c);
+  refreshCursoProgress();
+}
+function refreshCursoProgress(){
+  const c = loadCurso();
+  const total = 5;
+  let done = 0;
+  for (let i=1;i<=total;i++){
+    const m = document.querySelector(`.modulo[data-mod="${i}"]`);
+    if (!m) continue;
+    if (c[i]) { m.classList.add('done'); m.querySelector('.modulo-status').textContent='✓'; done++; }
+    else { m.classList.remove('done'); m.querySelector('.modulo-status').textContent='○'; }
+  }
+  const pct = Math.round((done/total)*100);
+  const pctEl = document.getElementById('curso-progress-pct');
+  const barEl = document.getElementById('curso-progress-bar');
+  const txtEl = document.getElementById('curso-progress-text');
+  if (pctEl) pctEl.textContent = pct + '%';
+  if (barEl) barEl.style.width = pct + '%';
+  if (txtEl) txtEl.textContent = `${done} de ${total} módulos concluídos`;
+}
+refreshCursoProgress();
+
+// ═══ Disparador de Mensagens ═══
+const SCRIPT_TEMPLATES = {
+  lk1: (name, empresa, cargo, setor) => `Olá, ${name}.
+
+Vi que você atua na ${empresa} como ${cargo}. Sou psicóloga organizacional e ajudo empresas${setor?' do setor de '+setor:''} a se adequarem à nova NR-1 (riscos psicossociais) antes da fiscalização de 26 de maio de 2026.
+
+Já conhece o Método Resguarda™? Vamos nos conectar para trocarmos algumas ideias?
+
+Atenciosamente,
+Selma Moraes — CRP 06/138420`,
+  em1: (name, empresa, cargo, setor) => `Assunto: NR-1 em ${empresa} — risco de autuação a partir de 26 de maio?
+
+Prezado(a) ${name},
+
+A partir de 26 de maio de 2026, o Ministério do Trabalho e Emprego inicia as fiscalizações da nova NR-1, que passa a incluir os riscos psicossociais. A multa máxima por descumprimento é de R$ 67.000 por colaborador exposto.
+
+Pergunto-lhe diretamente: a ${empresa} já mapeou seus FRPRT (Fatores de Risco Psicossocial Relacionados ao Trabalho)?
+
+Caso ainda não tenha realizado esse mapeamento, posso conduzir um diagnóstico inicial gratuito de 30 minutos e apresentar o nível de exposição da sua empresa.
+
+Para agendar diretamente em minha agenda: https://calendly.com/smoraes-selmamoraes
+
+Atenciosamente,
+Selma Moraes
+Psicóloga Organizacional — CRP 06/138420
+Método Resguarda™ — Adequação à NR-1 em 30 dias`,
+  wa1: (name, empresa, cargo, setor) => `Olá, ${name}. Aqui é a Selma Moraes, psicóloga organizacional.
+
+Você chegou a ver a minha mensagem sobre a fiscalização da NR-1 que se inicia em 26 de maio?
+
+Teria 5 minutos para conversarmos sobre um diagnóstico rápido? Posso lhe mostrar o nível de exposição da ${empresa} em relação às multas.
+
+Agenda direta: https://calendly.com/smoraes-selmamoraes`
+};
+function gerarMensagens(){
+  const raw = document.getElementById('disp-leads').value.trim();
+  const tpl = document.querySelector('input[name="disp-tpl"]:checked').value;
+  const setor = document.getElementById('disp-setor').value.trim();
+  const out = document.getElementById('disp-output');
+  if (!raw){ out.innerHTML = '<div class="card" style="border-color:rgba(229,91,60,0.4)"><p style="color:var(--danger)">Cole pelo menos um lead no formato <strong>Nome | Empresa | Cargo</strong>, um por linha.</p></div>'; return; }
+  const leads = raw.split('\n').map(l=>l.trim()).filter(Boolean).map(l => {
+    const parts = l.split('|').map(p=>p.trim());
+    return { name: parts[0]||'', empresa: parts[1]||'', cargo: parts[2]||'' };
+  }).filter(l => l.name && l.empresa);
+  if (!leads.length){ out.innerHTML = '<div class="card"><p style="color:var(--danger)">Nenhum lead válido encontrado. Verifique o formato.</p></div>'; return; }
+  let html = `<div class="card" style="background:linear-gradient(135deg,rgba(45,212,191,0.08),rgba(16,35,66,0.6));border-color:rgba(45,212,191,0.35)"><h3 style="color:var(--teal-light)">✓ ${leads.length} mensagens geradas</h3><p style="color:var(--cream-dim)">Revise cada uma. Clique em <strong>Copiar</strong> e cole no LinkedIn/E-mail/WhatsApp. O botão de envio direto abre o canal correspondente em nova aba.</p></div>`;
+  leads.forEach((l, i) => {
+    const msg = SCRIPT_TEMPLATES[tpl](l.name, l.empresa, l.cargo, setor);
+    const waLink = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+    const linkedinSearchLink = `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(l.name+' '+l.empresa)}`;
+    const mailtoLink = tpl==='em1' ? `mailto:?subject=${encodeURIComponent('NR-1 em '+l.empresa+' — risco de autuação a partir de 26 de maio?')}&body=${encodeURIComponent(msg.split('\n\n').slice(1).join('\n\n'))}` : '';
+    html += `<div class="card"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:10px"><h3 style="margin:0">${escapeHtml(l.name)} <span style="color:var(--cream-dim);font-size:0.82rem;font-weight:400">— ${escapeHtml(l.empresa)} · ${escapeHtml(l.cargo||'cargo')}</span></h3><span style="font-size:0.7rem;letter-spacing:0.12em;color:var(--gold);background:rgba(214,178,122,0.1);padding:3px 10px;border-radius:100px;text-transform:uppercase">#${i+1}</span></div>
+      <div class="script-block" data-msg="${i}">${escapeHtml(msg)}<button class="copy-btn" onclick="copyMsg(${i})">Copiar</button></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+        <a href="${linkedinSearchLink}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:#0A66C2;color:white;padding:8px 14px;border-radius:8px;text-decoration:none;font-size:0.82rem;font-weight:600">🔵 Abrir LinkedIn</a>
+        ${tpl==='em1' ? `<a href="${mailtoLink}" style="display:inline-flex;align-items:center;gap:6px;background:#EA4335;color:white;padding:8px 14px;border-radius:8px;text-decoration:none;font-size:0.82rem;font-weight:600">✉️ Abrir E-mail</a>` : ''}
+        ${tpl==='wa1' ? `<a href="${waLink}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:#25D366;color:white;padding:8px 14px;border-radius:8px;text-decoration:none;font-size:0.82rem;font-weight:600">💬 Abrir WhatsApp</a>` : ''}
+        <button onclick="addLeadFromDisp(${i})" data-lead='${JSON.stringify(l).replace(/'/g,"&apos;")}' style="background:rgba(214,178,122,0.15);color:var(--gold-bright);border:1px solid rgba(214,178,122,0.3);border-radius:8px;padding:8px 14px;font-size:0.82rem;font-weight:600;cursor:pointer">+ Salvar no CRM</button>
+      </div></div>`;
+  });
+  out.innerHTML = html;
+}
+function copyMsg(i){
+  event.stopPropagation();
+  const block = document.querySelector(`.script-block[data-msg="${i}"]`);
+  const text = block.textContent.replace('Copiar','').trim();
+  navigator.clipboard.writeText(text);
+  const btn = block.querySelector('.copy-btn');
+  btn.textContent='✓ Copiado'; btn.classList.add('copied');
+  setTimeout(()=>{btn.textContent='Copiar';btn.classList.remove('copied')},1800);
+}
+function addLeadFromDisp(i){
+  const btn = event.target;
+  const data = JSON.parse(btn.dataset.lead.replace(/&apos;/g,"'"));
+  const arr = loadCRM();
+  arr.unshift({ name: data.name, company: data.empresa, status: 'new', date: new Date().toLocaleDateString('pt-BR') });
+  saveCRM(arr); renderCRM();
+  btn.textContent='✓ No CRM'; btn.style.background='rgba(45,212,191,0.2)'; btn.style.color='var(--teal-light)';
+}
 let scene3d, camera3d, renderer3d, torusMesh;
 function init3D() {
   if (typeof THREE === 'undefined') return;
