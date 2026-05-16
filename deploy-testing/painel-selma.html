@@ -1923,6 +1923,9 @@ document.addEventListener('DOMContentLoaded', ()=>{ if(document.getElementById('
 document.querySelectorAll('[data-page="publisher"]').forEach(el=>{
   el.addEventListener('click', ()=>{ setTimeout(pubRender, 50); });
 });
+document.querySelectorAll('[data-page="prelaunch"]').forEach(el=>{
+  el.addEventListener('click', ()=>{ setTimeout(plInit, 50); });
+});
 
 </script>
 </body>
