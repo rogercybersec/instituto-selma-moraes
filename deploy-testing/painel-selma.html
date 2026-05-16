@@ -1458,6 +1458,253 @@ function init3D() {
   }
   animate();
 }
+
+// ─── PUBLISHER 1-CLIQUE ───
+const POSTS = [
+  {n:1, label:"Multa NR-1 (PAS)", text:`R$ 67.000.
+
+É a multa máxima por colaborador exposto a risco psicossocial não gerenciado, a partir de 26 de maio de 2026.
+
+A maioria das empresas ainda acha que NR-1 é só sobre EPI e ergonomia. Não é. A fiscalização do Ministério do Trabalho passa a cobrar também a gestão dos fatores psicossociais — sobrecarga, assédio, jornadas exaustivas, falta de autonomia.
+
+Quem ainda não atualizou o PGR está exposto.
+
+Eu ajudo PMEs do setor industrial, da construção e da saúde a chegarem prontas em 30 dias, com o Método Resguarda.
+
+Se a sua empresa ainda não fez esse mapeamento, me chame: https://calendly.com/smoraes-selmamoraes
+
+#NR1 #SaudeMentalNoTrabalho #PsicologiaOrganizacional #RH`},
+  {n:2, label:"Carrossel 5 sinais (capa)", text:`5 sinais de esgotamento que o RH ignora — e que o auditor do Ministério do Trabalho vai apontar em 2026.
+
+Carrossel completo nos slides. Comente "checklist" se quiser receber a versão em PDF para imprimir.
+
+#NR1 #SaudeMentalNoTrabalho #RH #LideranceTRH`},
+  {n:3, label:"FRPRT explicado (Hook+Lição)", text:`FRPRT é a sigla mais importante que o RH precisa aprender em 2026.
+
+Significa Fatores de Risco Psicossociais Relacionados ao Trabalho.
+
+Em termos simples: tudo que, no jeito como a empresa organiza o trabalho, pode adoecer a cabeça do colaborador.
+
+Sobrecarga. Pressão por metas inviáveis. Falta de autonomia. Lideranças tóxicas. Jornadas exaustivas. Insegurança contratual. Assédio moral.
+
+A Portaria MTE 1.419/2024 colocou esses fatores dentro do PGR obrigatório.
+
+A partir de 26 de maio de 2026, empresa que não mapeou os FRPRT está descumprindo a NR-1.
+
+Quer ver como mapear na sua empresa em 30 dias? https://calendly.com/smoraes-selmamoraes
+
+Artigo completo no blog: https://selmamoraes.com.br/blog/frprt-explicado
+
+#NR1 #FRPRT #PGR #RH`},
+  {n:4, label:"Caso real Campinas (BAB)", text:`Uma indústria de médio porte de Campinas me procurou em pânico em fevereiro.
+
+Antes: 180 colaboradores, taxa de rotatividade de 28% ao ano, dois processos trabalhistas em curso por assédio moral, zero menção a riscos psicossociais no PGR. O diretor de RH descobriu, em uma palestra, que a NR-1 seria fiscalizada e percebeu que estavam descobertos.
+
+Depois: em 28 dias, o PGR foi atualizado, a política antiassédio formalizada, o canal de denúncia configurado e 14 líderes treinados. A rotatividade, três meses depois, caiu para 17%.
+
+A ponte foi o Método Resguarda — quatro fases técnicas, alinhadas ao Manual de GRO do MTE.
+
+Se você tem a sensação de que a sua empresa pode estar descoberta, me chame para uma conversa de 30 minutos.
+
+https://calendly.com/smoraes-selmamoraes`},
+  {n:5, label:"Carrossel SST × NR-1", text:`SST tradicional não cumpre a nova NR-1. Veja por quê.
+
+Engenheiro de segurança mede ruído com decibelímetro. Não mede assédio nem sobrecarga emocional.
+
+A nova NR-1 acrescenta uma seção FRPRT que exige instrumento de psicologia organizacional como o COPSOQ III, assinado por profissional habilitado com CRP ativo.
+
+Não é substituição do seu SESMT. É complemento técnico.
+
+Quer ver a integração funcionando na sua empresa em 30 dias? Link no perfil.
+
+#NR1 #SST #SESMT #PGR`},
+  {n:6, label:"Pergunta direta", text:`A sua empresa já mapeou os Fatores de Risco Psicossocial?
+
+Se a resposta for "sim, está no PGR" — você tem um diferencial técnico raro.
+
+Se for "ainda não" ou "estamos providenciando" — você tem dias antes da fiscalização do Ministério do Trabalho começar.
+
+Eu cuido exatamente disso. Trinta dias. Quatro fases. Conformidade documentada.
+
+Comente "NR-1" se quiser receber o checklist com as 10 perguntas que o auditor faz, ou me chame direto: https://calendly.com/smoraes-selmamoraes`},
+  {n:7, label:"Dado INSS 546k afastados", text:`546 mil trabalhadores brasileiros foram afastados por transtornos mentais em 2025.
+
+Esse número, divulgado pelo INSS, representa um aumento de 67% em relação a 2014.
+
+Em uma década, o adoecimento mental no trabalho saiu da margem e virou a maior causa de afastamento prolongado no setor de serviços.
+
+Em 2026, o Ministério do Trabalho oficializa o que a realidade já mostrava: saúde mental no trabalho não é mais agenda de bem-estar. É obrigação legal, com fiscalização e multa.
+
+A pergunta que faço aos diretores de RH que atendo: se sua empresa já tem casos de afastamento por CID F, você já documentou o que está sendo feito para prevenir o próximo?
+
+https://calendly.com/smoraes-selmamoraes`},
+  {n:8, label:"Carrossel Método Resguarda", text:`Como deixar sua empresa em conformidade total com a NR-1 em 30 dias. Método Resguarda — 4 fases.
+
+Fase 1 (dias 1-7): Diagnóstico com COPSOQ III, instrumento validado pela FUNDACENTRO.
+Fase 2 (dias 8-15): Inventário FRPRT integrável ao PGR existente.
+Fase 3 (dias 16-23): Plano de Ação com responsáveis, KPIs e Política Antiassédio formal.
+Fase 4 (dias 24-30): Capacitação de lideranças com certificação documentada.
+
+Empresa pronta para a fiscalização em 30 dias. Sem retrabalho. Sem improviso.
+
+https://calendly.com/smoraes-selmamoraes`},
+  {n:9, label:"Bastidor humano", text:`Ontem, no encerramento de uma capacitação com líderes de uma empresa do interior de São Paulo, uma supervisora chorou.
+
+Ela disse que, em quinze anos de empresa, era a primeira vez que recebia um treinamento sobre como reconhecer adoecimento emocional na equipe — e como agir sem medo de errar.
+
+Esse é o trabalho que mais me dá orgulho. A NR-1 e a fiscalização do Ministério do Trabalho são o gatilho que tira a saúde mental no trabalho do discurso e leva para a prática. Mas o que muda mesmo é o líder que volta para casa sabendo que tem uma ferramenta concreta para cuidar do seu time.
+
+https://calendly.com/smoraes-selmamoraes`},
+  {n:10, label:"Mito × Verdade (alto share)", text:`Os 5 maiores mitos sobre a NR-1 nova:
+
+Mito 1: "A NR-1 só se aplica a indústrias." Verdade: toda empresa com colaboradores CLT.
+
+Mito 2: "Já tenho consultoria de SST, está coberto." Verdade: SST cobre risco físico. NR-1 exige FRPRT — risco psicossocial — que é outra área técnica.
+
+Mito 3: "Posso usar modelo de PGR da internet." Verdade: o auditor fiscaliza dados reais, não modelo genérico.
+
+Mito 4: "A fiscalização vai ser leve no primeiro ano." Verdade: 26 de maio inicia a fase autuativa.
+
+Mito 5: "Saúde mental é assunto do RH." Verdade: descumprir a NR-1 vira passivo trabalhista e indenização por dano moral organizacional.
+
+Se algum desses mitos é o seu raciocínio hoje, vale repensar. https://calendly.com/smoraes-selmamoraes`},
+  {n:11, label:"Carrossel 10 perguntas auditor", text:`10 perguntas que o auditor fiscal do Ministério do Trabalho fará à sua empresa em 2026:
+
+1. A empresa mapeou os fatores de risco psicossocial por função?
+2. O PGR foi atualizado com a seção FRPRT?
+3. Existe política antiassédio formal, escrita e divulgada?
+4. Há canal de denúncia confidencial e acessível?
+5. As lideranças foram capacitadas para identificar adoecimento emocional?
+6. O inventário foi atualizado nos últimos 12 meses?
+7. Existe plano de ação documentado, com responsáveis e prazos?
+8. A empresa monitora absenteísmo e turnover por causa psicossocial?
+9. Foi realizada pesquisa de clima nos últimos 6 meses?
+10. A documentação pode ser apresentada em até 1 hora?
+
+Se você responde "não" a 3 ou mais, está exposta.
+
+Checklist completo em PDF: https://selmamoraes.com.br/checklist-nr1`},
+  {n:12, label:"Convite final diagnóstico", text:`Faltam poucos dias para a fiscalização do Ministério do Trabalho sobre a nova NR-1 começar.
+
+Empresas que ainda não atualizaram o PGR com a seção de riscos psicossociais ficam expostas a autuação e a multas que podem chegar a centenas de milhares de reais por trabalhador exposto.
+
+Reservei 10 horários esta semana para conversas de diagnóstico inicial gratuitas. São 30 minutos, sem compromisso, em que apresento o nível exato de exposição da sua empresa.
+
+Se você é diretor de RH, gerente de pessoas ou empresário e quer chegar tranquilo ao dia 26 de maio, agende aqui: https://calendly.com/smoraes-selmamoraes
+
+#NR1 #RH #ConsultoriaEmpresarial #SaudeMental`}
+];
+
+function pubKey(n){return 'pub-post-'+n+'-done';}
+function pubRender(){
+  const list = document.getElementById('pub-list');
+  if(!list) return;
+  list.innerHTML = POSTS.map(p=>{
+    const done = localStorage.getItem(pubKey(p.n))==='1';
+    const linkedinUrl = 'https://www.linkedin.com/feed/?shareActive=true&shareUrl=https%3A%2F%2Fselmamoraes.com.br&text='+encodeURIComponent(p.text);
+    const waUrl = 'https://wa.me/?text='+encodeURIComponent(p.text);
+    return `<div class="card" style="${done?'opacity:0.6;border-color:rgba(86,204,99,0.4)':''}">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:10px">
+        <h3 style="color:#FFFFFF;margin:0">${done?'✅ ':''}Post ${p.n} — ${p.label}</h3>
+        <label style="color:var(--cream-dim);font-size:0.82rem;display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" ${done?'checked':''} onchange="pubToggle(${p.n})" style="accent-color:var(--gold)"> Marcar como publicado</label>
+      </div>
+      <textarea readonly style="width:100%;background:rgba(8,27,46,0.7);border:1.5px solid rgba(214,178,122,0.18);border-radius:8px;color:var(--cream);font-family:'Inter',sans-serif;font-size:0.88rem;padding:14px;min-height:180px;line-height:1.55;resize:vertical">${p.text}</textarea>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+        <a href="${linkedinUrl}" target="_blank" rel="noopener" style="background:#0a66c2;color:#fff;text-decoration:none;border-radius:100px;padding:11px 22px;font-weight:700;font-size:0.88rem;display:inline-flex;align-items:center;gap:8px">💼 Publicar no LinkedIn (1-clique)</a>
+        <a href="${waUrl}" target="_blank" rel="noopener" style="background:linear-gradient(135deg,#25d366,#1ea854);color:#fff;text-decoration:none;border-radius:100px;padding:11px 22px;font-weight:700;font-size:0.88rem">📱 Compartilhar WhatsApp</a>
+        <button onclick="pubCopy(${p.n})" style="background:rgba(214,178,122,0.15);color:var(--gold-bright);border:1px solid rgba(214,178,122,0.3);border-radius:100px;padding:11px 22px;font-weight:600;font-size:0.88rem;cursor:pointer">📋 Copiar texto</button>
+      </div>
+    </div>`;
+  }).join('');
+  pubRenderTable();
+}
+function pubToggle(n){
+  const k = pubKey(n);
+  if(localStorage.getItem(k)==='1') localStorage.removeItem(k); else localStorage.setItem(k,'1');
+  pubRender();
+}
+function pubCopy(n){
+  const p = POSTS.find(x=>x.n===n);
+  if(!p) return;
+  navigator.clipboard.writeText(p.text).then(()=>{ alert('Texto do Post '+n+' copiado.'); });
+}
+function pubRenderTable(){
+  const t = document.getElementById('pub-status-table');
+  if(!t) return;
+  const done = POSTS.filter(p=>localStorage.getItem(pubKey(p.n))==='1').length;
+  t.innerHTML = `<thead><tr style="border-bottom:1px solid rgba(224,200,147,0.2)"><th style="text-align:left;padding:8px 10px;color:var(--gold);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase">Progresso</th><th style="text-align:right;padding:8px 10px;color:var(--gold);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase">Publicados</th></tr></thead><tbody>
+    <tr><td style="padding:10px"><div style="height:10px;background:rgba(214,178,122,0.15);border-radius:100px;overflow:hidden"><div style="height:100%;width:${(done/12)*100}%;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:100px;transition:width 0.4s"></div></div></td><td style="padding:10px;text-align:right;color:var(--gold-bright);font-weight:700;font-family:'Courier New',monospace">${done} / 12</td></tr>
+    </tbody>`;
+}
+
+function pubBuildPersonalizedDM(nome, empresa){
+  return `Olá ${nome||'[Nome]'},
+
+Vi que você lidera EHS/SST na ${empresa||'[Empresa]'}. Sou Selma Moraes, psicóloga organizacional especializada em Fatores de Risco Psicossocial — a parte da NR-1 nova que a Portaria 1.419/2024 acrescentou e que, na prática, fica fora do escopo técnico do SESMT tradicional.
+
+Não venho oferecer substituição da sua estrutura. Venho oferecer complemento técnico: aplicação do COPSOQ III (referenciado pela FUNDACENTRO), produção da seção FRPRT do PGR e relatório técnico assinado por profissional com CRP ativo, integrável ao seu inventário existente.
+
+Estou oferecendo a algumas empresas uma Gap Analysis NR-1 gratuita: você me envia o PGR atual, eu retorno em 5 dias úteis com relatório PDF de 4 páginas com os gaps psicossociais. Análise técnica, sem pegadinha comercial.
+
+Faz sentido para você? Posso enviar o pedido formal de documentação?
+
+Selma Moraes — CRP 06/138420
+Método Resguarda — Adequação NR-1 em 30 dias
+https://calendly.com/smoraes-selmamoraes`;
+}
+function pubBuildPersonalizedEmail(nome, empresa){
+  return `Gap Analysis NR-1 para ${empresa||'[Empresa]'} — exposição psicossocial em 4 páginas
+
+${nome||'[Nome]'}, bom dia.
+
+A nova NR-1 entrou em vigor educacional em maio de 2025 e, a partir de 26 de maio de 2026, passou à fase autuativa pelo Ministério do Trabalho. A multa máxima por colaborador exposto a fator psicossocial não gerenciado, segundo a Portaria 1.131/2025, pode chegar a R$ 349.978,53.
+
+Sou Selma Moraes, psicóloga organizacional com formação POT e certificação no COPSOQ III. Tenho atendido CHROs de empresas de 80 a 500 colaboradores nos setores de indústria, construção, logística e saúde, com um produto técnico específico: o Método Resguarda — adequação total em 30 dias.
+
+Para você decidir se faz sentido conversar, ofereço primeiro uma Gap Analysis NR-1 gratuita: você me envia o PGR vigente, eu retorno em 5 dias úteis com relatório de 4 páginas. Sem custo, sem compromisso.
+
+Posso te enviar o pedido formal de documentação?
+
+Selma Moraes — CRP 06/138420
+https://selmamoraes.com.br · https://calendly.com/smoraes-selmamoraes`;
+}
+function pubSendWhatsApp(){
+  const nome = document.getElementById('pp-nome').value.trim();
+  const empresa = document.getElementById('pp-empresa').value.trim();
+  const wa = document.getElementById('pp-whatsapp').value.replace(/\D/g,'');
+  if(!wa){ alert('Informe o WhatsApp do prospect (apenas números, com DDD).'); return; }
+  const text = pubBuildPersonalizedDM(nome, empresa);
+  window.open('https://wa.me/55'+wa+'?text='+encodeURIComponent(text), '_blank');
+}
+function pubSendEmail(){
+  const nome = document.getElementById('pp-nome').value.trim();
+  const empresa = document.getElementById('pp-empresa').value.trim();
+  const email = document.getElementById('pp-email').value.trim();
+  if(!email){ alert('Informe o e-mail do prospect.'); return; }
+  const body = pubBuildPersonalizedEmail(nome, empresa);
+  const subject = 'Gap Analysis NR-1 para '+(empresa||'[Empresa]')+' — exposição psicossocial em 4 páginas';
+  window.open('https://mail.google.com/mail/?view=cm&fs=1&to='+encodeURIComponent(email)+'&su='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body), '_blank');
+}
+function pubCopyLinkedInDM(){
+  const nome = document.getElementById('pp-nome').value.trim();
+  const empresa = document.getElementById('pp-empresa').value.trim();
+  const text = pubBuildPersonalizedDM(nome, empresa);
+  navigator.clipboard.writeText(text).then(()=>{ alert('Mensagem LinkedIn copiada. Abra o LinkedIn do decisor e cole na DM.'); });
+}
+
+// Render publisher on page show
+const _origShow = window.showPage || function(){};
+window.showPage = function(p){
+  if(typeof _origShow==='function') _origShow(p);
+  if(p==='publisher') pubRender();
+};
+// Try to render if already on publisher
+document.addEventListener('DOMContentLoaded', ()=>{ if(document.getElementById('page-publisher')&&document.getElementById('page-publisher').classList.contains('active')) pubRender(); });
+// Hook into nav clicks
+document.querySelectorAll('[data-page="publisher"]').forEach(el=>{
+  el.addEventListener('click', ()=>{ setTimeout(pubRender, 50); });
+});
+
 </script>
 </body>
 </html>
