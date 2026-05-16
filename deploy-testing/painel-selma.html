@@ -1915,6 +1915,7 @@ const _origShow = window.showPage || function(){};
 window.showPage = function(p){
   if(typeof _origShow==='function') _origShow(p);
   if(p==='publisher') pubRender();
+  if(p==='prelaunch') plInit();
 };
 // Try to render if already on publisher
 document.addEventListener('DOMContentLoaded', ()=>{ if(document.getElementById('page-publisher')&&document.getElementById('page-publisher').classList.contains('active')) pubRender(); });
