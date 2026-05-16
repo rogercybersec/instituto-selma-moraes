@@ -1138,6 +1138,49 @@ https://selmamoraes.com.br · https://calendly.com/smoraes-selmamoraes<button cl
       </div>
     </section>
 
+    <!-- ─── PUBLISHER 1-CLIQUE ─── -->
+    <section class="page" id="page-publisher">
+      <div class="page-header"><span class="page-tag">automação prática · publicar em 30 segundos</span><h1 class="page-title">Publisher 1-clique — LinkedIn e WhatsApp</h1><p class="page-sub">Cada post abaixo tem um botão que <strong>abre o LinkedIn já com o conteúdo dentro da caixa de publicação</strong>. Você só revisa, escolhe a imagem e clica em Publicar. 30 segundos por post. Para os 12 posts: 6 minutos no total para virar 30 dias de conteúdo no ar.</p></div>
+
+      <div class="tutor">
+        <div class="tutor-avatar">S</div>
+        <div class="tutor-body">
+          <h4>Como funciona</h4>
+          <p>O LinkedIn tem proteção forte contra robôs. Em vez de tentar burlar isso (o que arriscaria a conta da Selma), criei o caminho oficial: cada botão "Publicar" abre o LinkedIn no seu navegador, já logado na sua conta, com o post pronto na caixa. Você só confirma.</p>
+          <ul>
+            <li>Sequência recomendada: 1 post por dia, ter/qua/qui entre 8h-10h ou 17h-19h (BRT).</li>
+            <li>Use a planilha de cronograma abaixo para marcar o que já saiu.</li>
+            <li>Antes do primeiro post, faça login na sua conta LinkedIn no mesmo navegador.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card"><h3 style="color:#FFFFFF">Status dos 12 posts (30 dias)</h3>
+        <p style="color:var(--cream-dim);font-size:0.88rem;margin-bottom:14px">Marque cada um conforme publicar. O status salva no seu navegador.</p>
+        <table style="width:100%;border-collapse:collapse;font-size:0.88rem;color:var(--cream-dim)" id="pub-status-table"></table>
+      </div>
+
+      <!-- BOTÕES DE PUBLICAÇÃO -->
+      <div id="pub-list"></div>
+
+      <div class="card" style="background:linear-gradient(135deg,rgba(214,178,122,0.12),rgba(184,134,93,0.04));border:1px solid rgba(214,178,122,0.3)">
+        <h3 style="color:#FFFFFF">Disparo individual para um prospect</h3>
+        <p style="color:var(--cream-dim);line-height:1.7;margin-bottom:14px">Use quando você identificou um decisor específico (LinkedIn, WhatsApp ou e-mail) e quer mandar uma das mensagens prontas para ele.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+          <input id="pp-nome" type="text" placeholder="Nome do decisor" style="padding:12px 14px;background:rgba(8,27,46,0.7);border:1.5px solid rgba(214,178,122,0.25);border-radius:8px;color:var(--cream);font-family:inherit;font-size:0.95rem;outline:none">
+          <input id="pp-empresa" type="text" placeholder="Empresa" style="padding:12px 14px;background:rgba(8,27,46,0.7);border:1.5px solid rgba(214,178,122,0.25);border-radius:8px;color:var(--cream);font-family:inherit;font-size:0.95rem;outline:none">
+          <input id="pp-whatsapp" type="text" placeholder="WhatsApp (com DDD) — opcional" style="padding:12px 14px;background:rgba(8,27,46,0.7);border:1.5px solid rgba(214,178,122,0.25);border-radius:8px;color:var(--cream);font-family:inherit;font-size:0.95rem;outline:none">
+          <input id="pp-email" type="text" placeholder="E-mail — opcional" style="padding:12px 14px;background:rgba(8,27,46,0.7);border:1.5px solid rgba(214,178,122,0.25);border-radius:8px;color:var(--cream);font-family:inherit;font-size:0.95rem;outline:none">
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button onclick="pubSendWhatsApp()" style="background:linear-gradient(135deg,#25d366,#1ea854);color:#fff;border:none;border-radius:100px;padding:12px 24px;font-weight:700;font-size:0.9rem;cursor:pointer;display:flex;align-items:center;gap:8px">📱 Abrir WhatsApp pronto</button>
+          <button onclick="pubSendEmail()" style="background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy-deep);border:none;border-radius:100px;padding:12px 24px;font-weight:700;font-size:0.9rem;cursor:pointer">✉️ Abrir Gmail pronto</button>
+          <button onclick="pubCopyLinkedInDM()" style="background:#0a66c2;color:#fff;border:none;border-radius:100px;padding:12px 24px;font-weight:700;font-size:0.9rem;cursor:pointer">💼 Copiar DM LinkedIn</button>
+        </div>
+        <p style="color:var(--cream-dim);font-size:0.8rem;margin-top:10px;font-style:italic">Os scripts são os do Playbook B2B Elite, personalizados com o nome e empresa que você digitar.</p>
+      </div>
+    </section>
+
     <div class="footer-note">Painel privado — Estratégia validada · Profissionais de referência pesquisados · Portaria MTE 1.419/2024 · Atualizado em 16 de maio de 2026<br>Salvamento local — nada sai desta máquina nem do seu navegador.</div>
   </main>
 </div>
