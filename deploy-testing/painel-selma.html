@@ -1858,6 +1858,58 @@ function pubCopyLinkedInDM(){
   navigator.clipboard.writeText(text).then(()=>{ alert('Mensagem LinkedIn copiada. Abra o LinkedIn do decisor e cole na DM.'); });
 }
 
+// ─── PRÉ-LANÇAMENTO ───
+function plSaveCurrent(){
+  const data = {
+    url: document.getElementById('pl-url').value,
+    headline_now: document.getElementById('pl-headline-now').value,
+    bio_now: document.getElementById('pl-bio-now').value,
+    conn: document.getElementById('pl-conn').value,
+    posts: document.getElementById('pl-posts').value,
+    when: new Date().toISOString()
+  };
+  localStorage.setItem('pl-current', JSON.stringify(data));
+  alert('Estado atual salvo neste navegador. Aparece sempre que você voltar.');
+}
+function plLoadCurrent(){
+  const raw = localStorage.getItem('pl-current'); if(!raw) return;
+  try{
+    const d = JSON.parse(raw);
+    const set = (id,v)=>{ const el=document.getElementById(id); if(el&&v) el.value=v; };
+    set('pl-url',d.url); set('pl-headline-now',d.headline_now);
+    set('pl-bio-now',d.bio_now); set('pl-conn',d.conn); set('pl-posts',d.posts);
+  }catch(e){}
+}
+let _plHl = localStorage.getItem('pl-headline-pick') || null;
+function plPickHeadline(letter,el){
+  _plHl = letter;
+  localStorage.setItem('pl-headline-pick', letter);
+  document.querySelectorAll('label[onclick^="plPickHeadline"]').forEach(l=>l.style.borderColor='rgba(214,178,122,0.25)');
+  if(el) el.style.borderColor='var(--gold)';
+  plToggle('hl'); // auto-mark
+}
+function plToggle(key){
+  const k='pl-chk-'+key;
+  if(localStorage.getItem(k)==='1') localStorage.removeItem(k); else localStorage.setItem(k,'1');
+  plCount();
+}
+function plCount(){
+  const keys=['hl','bio','dest','banner','post1','foto','calendly','roger-go'];
+  const done = keys.filter(k=>localStorage.getItem('pl-chk-'+k)==='1').length;
+  const el=document.getElementById('pl-count'); if(el) el.textContent=done;
+  const msg=document.getElementById('pl-status-msg');
+  if(msg && done===8) msg.innerHTML='✅ <strong style="color:#7ee098">Todos aprovados — pode abrir o Publisher e disparar o Post 1</strong>';
+}
+function plInit(){
+  plLoadCurrent();
+  plCount();
+  if(_plHl){
+    const labels=document.querySelectorAll('label[onclick^="plPickHeadline"]');
+    const idx={'A':0,'B':1,'C':2}[_plHl];
+    if(labels[idx]){ labels[idx].style.borderColor='var(--gold)'; const r=labels[idx].querySelector('input[type=radio]'); if(r) r.checked=true; }
+  }
+}
+
 // Render publisher on page show
 const _origShow = window.showPage || function(){};
 window.showPage = function(p){
