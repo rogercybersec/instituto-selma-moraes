@@ -20,6 +20,8 @@
     { "source": "/painel-selma.html", "destination": "/painel-selma.html" },
     { "source": "/checklist-nr1", "destination": "/checklist-nr1.html" },
     { "source": "/checklist-nr1.html", "destination": "/checklist-nr1.html" },
+    { "source": "/guia-calendly", "destination": "/guia-calendly.html" },
+    { "source": "/guia-calendly.html", "destination": "/guia-calendly.html" },
     { "source": "/blog", "destination": "/blog/index.html" },
     { "source": "/blog/", "destination": "/blog/index.html" },
     { "source": "/blog/nr1-o-que-mudou-2026", "destination": "/blog/nr1-o-que-mudou-2026.html" },
