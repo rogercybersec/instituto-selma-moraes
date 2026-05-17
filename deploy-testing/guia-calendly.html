@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Como usar o seu Calendly — Guia passo a passo | Selma Moraes</title>
+<meta name="description" content="Guia simples passo a passo de como usar o Calendly. Linguagem direta, sem palavras difíceis. Pode imprimir. Por Instituto Selma Moraes.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/png" href="/favicon-32.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0a2540;--navy-deep:#081b2e;--gold:#D6B27A;--gold-bright:#E7C79A;
+  --gold-light:#F2DCB4;--cream:#FFFFFF;--cream-dim:#E8E1D4;--accent:#B8865D;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',sans-serif;background:#f7f3ee;color:#1a1a1a;line-height:1.65;
+  -webkit-font-smoothing:antialiased
+}
+.page{
+  max-width:850px;margin:24px auto;background:#fff;
+  box-shadow:0 24px 80px rgba(10,37,64,0.18),0 0 0 1px rgba(214,178,122,0.15);
+  border-radius:8px;overflow:hidden
+}
+.cover{
+  background:linear-gradient(135deg,var(--navy-deep) 0%,var(--navy) 60%,#0d3258 100%);
+  padding:56px 48px 48px;color:#fff;position:relative;overflow:hidden
+}
+.cover::before{
+  content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;
+  background:radial-gradient(circle,rgba(214,178,122,0.18),transparent 70%);
+  border-radius:50%
+}
+.brand-row{display:flex;align-items:center;gap:16px;margin-bottom:36px;position:relative;z-index:2}
+.brand-mark{
+  width:54px;height:54px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold-bright));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;color:var(--navy-deep);font-weight:700;font-size:1.5rem;
+  box-shadow:0 6px 24px rgba(214,178,122,0.45)
+}
+.brand-name{display:flex;flex-direction:column}
+.brand-line1{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--gold-bright);font-weight:600;letter-spacing:0.04em}
+.brand-line2{font-size:0.7rem;color:var(--cream-dim);letter-spacing:0.18em;text-transform:uppercase;margin-top:2px}
+.tag{
+  display:inline-block;padding:6px 14px;background:rgba(214,178,122,0.18);
+  border:1px solid rgba(214,178,122,0.35);border-radius:100px;
+  font-size:0.7rem;color:var(--gold-bright);letter-spacing:0.16em;text-transform:uppercase;
+  font-weight:600;margin-bottom:18px;position:relative;z-index:2
+}
+.cover h1{
+  font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;
+  color:var(--cream);line-height:1.15;margin-bottom:14px;position:relative;z-index:2;
+  letter-spacing:-0.02em
+}
+.cover h1 em{color:var(--gold-bright);font-style:italic}
+.cover .subtitle{font-size:1rem;color:var(--cream-dim);line-height:1.55;max-width:560px;position:relative;z-index:2}
+.cover .author-strip{
+  margin-top:28px;padding-top:18px;border-top:1px solid rgba(214,178,122,0.25);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+  position:relative;z-index:2;font-size:0.85rem
+}
+.cover .author-strip strong{color:var(--gold-bright);font-weight:600}
+.cover .author-strip span{color:var(--cream-dim)}
+
+.intro{padding:32px 48px 12px;border-bottom:1px solid #efe7d5;background:#fbf8f1}
+.intro h2{font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--navy);margin-bottom:10px;font-weight:700}
+.intro p{color:#3a4a5c;font-size:1rem;margin-bottom:10px}
+.intro p strong{color:var(--navy)}
+
+.step{padding:32px 48px;border-bottom:1px solid #efe7d5}
+.step:last-of-type{border-bottom:none}
+.step-num-tag{
+  display:inline-block;background:linear-gradient(135deg,var(--navy),var(--navy-deep));
+  color:var(--gold-bright);padding:6px 14px;border-radius:6px;
+  font-family:'Playfair Display',serif;font-weight:700;font-size:0.85rem;
+  letter-spacing:0.06em;margin-bottom:12px
+}
+.step h2{font-family:'Playfair Display',serif;font-size:1.45rem;color:var(--navy);margin-bottom:14px;font-weight:700;letter-spacing:-0.01em}
+.step ol{margin:14px 0 16px;padding-left:22px;color:#2a3340}
+.step ol li{margin-bottom:10px;font-size:1rem;line-height:1.65}
+.step ol li strong{color:var(--navy);font-weight:600}
+.step .gold{color:var(--accent);font-weight:600;user-select:all;background:#fbf8f1;padding:2px 6px;border-radius:4px}
+.step .tip{
+  margin-top:14px;background:linear-gradient(135deg,#faf6ef,#f5ecdc);
+  border-left:4px solid var(--gold);padding:14px 18px;border-radius:6px;
+  font-size:0.92rem;color:#4a5868
+}
+.step .tip strong{color:var(--navy)}
+.step p.note{color:#6b7585;font-size:0.92rem;font-style:italic;margin-top:10px}
+
+.troubleshoot{padding:32px 48px;background:#fbf8f1;border-top:1px solid #efe7d5}
+.troubleshoot h2{font-family:'Playfair Display',serif;font-size:1.45rem;color:var(--navy);margin-bottom:16px;font-weight:700}
+.troubleshoot table{width:100%;border-collapse:collapse;font-size:0.94rem}
+.troubleshoot th{background:var(--navy);color:var(--gold-bright);padding:12px 14px;text-align:left;font-weight:600;font-size:0.78rem;letter-spacing:0.06em;text-transform:uppercase}
+.troubleshoot td{padding:12px 14px;border-bottom:1px solid #e8dfc8;color:#3a4a5c;vertical-align:top}
+.troubleshoot tr:last-child td{border-bottom:none}
+
+.golden-rule{
+  background:linear-gradient(135deg,var(--navy-deep),var(--navy));
+  color:#fff;padding:36px 48px;text-align:center
+}
+.golden-rule h2{font-family:'Playfair Display',serif;color:var(--gold-bright);font-size:1.5rem;margin-bottom:10px;font-weight:700}
+.golden-rule p{color:var(--cream-dim);font-size:1.05rem;line-height:1.65;max-width:600px;margin:0 auto 8px}
+.golden-rule p strong{color:#fff}
+
+.footer{
+  padding:24px 48px;background:#0a2540;color:#a3b1c4;font-size:0.82rem;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:center
+}
+.footer a{color:var(--gold-bright);text-decoration:none;font-weight:600}
+
+.print-link{
+  position:fixed;bottom:24px;right:24px;background:var(--navy);color:var(--gold-bright);
+  padding:12px 22px;border-radius:100px;text-decoration:none;font-size:0.88rem;font-weight:600;
+  box-shadow:0 8px 24px rgba(10,37,64,0.3);transition:transform 0.2s;z-index:50
+}
+.print-link:hover{transform:translateY(-2px)}
+
+@media print{
+  body{background:#fff;padding:0}
+  .page{box-shadow:none;margin:0;max-width:100%;border-radius:0}
+  .cover{break-after:avoid}
+  .step{break-inside:avoid;page-break-inside:avoid}
+  .print-link{display:none}
+}
+@media(max-width:700px){
+  .cover{padding:36px 24px}
+  .cover h1{font-size:1.6rem}
+  .step{padding:24px}
+  .step h2{font-size:1.25rem}
+  .troubleshoot{padding:24px}
+  .golden-rule{padding:28px 24px}
+  .footer{padding:20px 24px;justify-content:center;text-align:center}
+  .print-link{bottom:14px;right:14px;padding:10px 18px;font-size:0.8rem}
+}
+</style>
+</head>
+<body>
+
+<a href="#" onclick="window.print();return false" class="print-link">🖨️ Imprimir guia</a>
+
+<div class="page">
+
+  <header class="cover">
+    <div class="brand-row">
+      <div class="brand-mark">SM</div>
+      <div class="brand-name">
+        <span class="brand-line1">Instituto Selma Moraes</span>
+        <span class="brand-line2">Psicologia Organizacional · NR-1</span>
+      </div>
+    </div>
+    <span class="tag">Guia simples · leitura de 5 minutos · imprimível</span>
+    <h1>Como usar o seu <em>Calendly</em> — passo a passo</h1>
+    <p class="subtitle">Selma, este é o guia da sua agenda online. Sem palavras difíceis, sem pressa. Pode imprimir, pode salvar no celular, pode voltar quantas vezes quiser.</p>
+    <div class="author-strip">
+      <span><strong>Selma Moraes</strong> · CRP 06/138420</span>
+      <span>Atualizado em 17 de maio de 2026</span>
+    </div>
+  </header>
+
+  <section class="intro">
+    <h2>O que é o Calendly, em uma frase</h2>
+    <p>É uma <strong>agenda online</strong> que mostra os seus horários livres para que clientes interessados <strong>marquem reunião com você sozinhos</strong>, sem precisar trocar e-mail três vezes para combinar dia e hora.</p>
+    <p>Quando alguém marca, você recebe um aviso no seu e-mail e a reunião aparece automaticamente no seu calendário.</p>
+  </section>
+
+  <section class="step">
+    <span class="step-num-tag">Passo 1</span>
+    <h2>Como entrar (login)</h2>
+    <ol>
+      <li>Abra o navegador (Chrome, Safari, Edge — qualquer um serve).</li>
+      <li>No endereço lá em cima, digite <span class="gold">calendly.com/app/login</span> e aperte Enter.</li>
+      <li>Vai aparecer a tela com o logo azul do Calendly e o campo "E-mail".</li>
+      <li>Coloque o seu e-mail profissional: <span class="gold">smoraes@selmamoraes.com.br</span></li>
+      <li>Clique em <strong>"Continuar"</strong>.</li>
+      <li>Aparece o campo "Senha". Digite a sua senha e clique <strong>"Continuar"</strong>.</li>
+      <li>Se aparecer uma tela pedindo um <strong>"código de verificação"</strong> (6 números), abra o seu e-mail e procure por uma mensagem do Calendly de poucos minutos atrás. Volte ao Calendly e digite os 6 dígitos.</li>
+      <li>Pronto. Você está dentro.</li>
+    </ol>
+  </section>
+
+  <section class="step">
+    <span class="step-num-tag">Passo 2</span>
+    <h2>A primeira tela (o painel)</h2>
+    <p>Depois do login, você verá vários quadrados. Cada quadrado é um <strong>"tipo de reunião"</strong> que você oferece:</p>
+    <ol>
+      <li><strong>Diagnóstico inicial — 30 minutos:</strong> a primeira conversa, gratuita.</li>
+      <li><strong>Apresentação Método Resguarda — 45 minutos:</strong> a segunda reunião, com a proposta formal e o preço.</li>
+      <li><strong>Início de projeto — 60 minutos:</strong> só com clientes que já fecharam.</li>
+    </ol>
+    <p class="note">Cada um desses tipos tem um link próprio. Você copia o link e cola onde quiser — quem clica marca sozinho.</p>
+  </section>
+
+  <section class="step">
+    <span class="step-num-tag">Passo 3</span>
+    <h2>Copiar o seu link para enviar a alguém</h2>
+    <ol>
+      <li>Passe o mouse em cima do quadrado do tipo de reunião que você quer enviar.</li>
+      <li>Aparece um botão <strong>"Copy link"</strong> (Copiar link). Clique.</li>
+      <li>O link fica na memória do computador. Agora você pode "colar" em qualquer lugar (Ctrl+V no Windows, Cmd+V no Mac): WhatsApp do cliente, e-mail, mensagem do LinkedIn.</li>
+      <li>Seu link principal já é fácil de lembrar: <span class="gold">https://calendly.com/smoraes-selmamoraes</span></li>
+    </ol>
+    <div class="tip"><strong>Dica:</strong> você pode usar esse link principal em todos os lugares. Quem clica vê todos os tipos de reunião e escolhe o que precisa.</div>
+  </section>
+
+  <section class="step">
+    <span class="step-num-tag">Passo 4</span>
+    <h2>Mudar os horários em que você está disponível</h2>
+    <p>Se você quiser receber reuniões apenas, por exemplo, das 9h às 12h e das 14h às 17h, faça assim:</p>
+    <ol>
+      <li>No menu de cima do Calendly, clique em <strong>"Availability"</strong> (Disponibilidade).</li>
+      <li>Você verá uma tabela com os dias da semana.</li>
+      <li>Clique no horário do dia que quer mudar. Apague o que está e digite o novo horário.</li>
+      <li>Para tirar um dia inteiro (por exemplo, sexta à tarde), clique no <strong>"X"</strong> do lado do horário.</li>
+      <li>Clique em <strong>"Save"</strong> (Salvar) no canto direito de baixo.</li>
+    </ol>
+  </section>
+
+  <section class="step">
+    <span class="step-num-tag">Passo 5</span>
+    <h2>Bloquear um dia inteiro (feriado, viagem, consulta médica)</h2>
+    <ol>
+      <li>Vá em <strong>"Availability"</strong> novamente.</li>
+      <li>Clique em <strong>"Date overrides"</strong> (Datas específicas) — fica logo abaixo da tabela de horários.</li>
+      <li>Clique em <strong>"+ Add date override"</strong> (+ Adicionar data).</li>
+      <li>Escolha o dia no calendário.</li>
+      <li>Marque a caixinha <strong>"Unavailable all day"</strong> (Indisponível o dia todo).</li>
+      <li>Clique em <strong>"Apply"</strong> (Aplicar). Pronto — ninguém vai conseguir marcar com você naquele dia.</li>
+    </ol>
+  </section>
+
+  <section class="step">
+    <span class="step-num-tag">Passo 6</span>
+    <h2>Ver quem agendou com você</h2>
+    <ol>
+      <li>No menu de cima, clique em <strong>"Scheduled events"</strong> (Reuniões agendadas).</li>
+      <li>Você verá a lista de todas as reuniões — com data, horário, nome do cliente e e-mail.</li>
+      <li>Clique em qualquer linha para ver os detalhes (o que o cliente escreveu no formulário, o link da videochamada).</li>
+    </ol>
+    <div class="tip"><strong>Importante:</strong> antes da reunião, abra o cadastro do cliente, leia o que ele escreveu no formulário, anote o nome da empresa e cole no CRM do seu painel privado. Você chega na reunião já sabendo de quem é a empresa.</div>
+  </section>
+
+  <section class="step">
+    <span class="step-num-tag">Passo 7</span>
+    <h2>Cancelar ou remarcar uma reunião</h2>
+    <ol>
+      <li>Vá em <strong>"Scheduled events"</strong>.</li>
+      <li>Clique na reunião que você quer mudar.</li>
+      <li>Vai aparecer um botão <strong>"Cancel"</strong> (Cancelar) ou <strong>"Reschedule"</strong> (Remarcar).</li>
+      <li><strong>Cancelar:</strong> você escreve o motivo (por exemplo, "Imprevisto, vou remarcar"), clica em "Cancel event" e o cliente recebe um e-mail automático.</li>
+      <li><strong>Remarcar:</strong> o Calendly manda um e-mail para o cliente com um link novo, onde ele escolhe outra data.</li>
+    </ol>
+    <p class="note">Quando cancelar, sempre escreva uma frase educada. Por exemplo: "Olá [Nome], surgiu um imprevisto e preciso remarcar a nossa reunião. Vou te mandar novas opções de horário em alguns minutos. Desculpe o transtorno."</p>
+  </section>
+
+  <section class="step">
+    <span class="step-num-tag">Passo 8</span>
+    <h2>Conectar com a sua agenda do Google (recomendado)</h2>
+    <p>Isso faz com que, quando alguém marca uma reunião com você no Calendly, ela <strong>apareça automaticamente</strong> no Google Calendar do seu celular. Você nunca mais perde uma reunião.</p>
+    <ol>
+      <li>No menu de cima do Calendly, clique em <strong>"Integrations"</strong> (Integrações).</li>
+      <li>Procure por <strong>"Google Calendar"</strong> e clique em <strong>"Connect"</strong> (Conectar).</li>
+      <li>Vai abrir uma tela do Google pedindo o seu e-mail. Use o seu Gmail.</li>
+      <li>Digite a senha.</li>
+      <li>Vai aparecer uma tela perguntando se o Calendly pode ver e adicionar coisas na sua agenda. Clique <strong>"Permitir"</strong>.</li>
+      <li>Pronto. Toda reunião marcada no Calendly aparece no Google Calendar do seu celular automaticamente.</li>
+    </ol>
+    <div class="tip"><strong>Se preferir:</strong> o Roger pode fazer essa conexão para você uma vez só. Depois fica funcionando para sempre.</div>
+  </section>
+
+  <section class="step">
+    <span class="step-num-tag">Passo 9</span>
+    <h2>Mensagem que o cliente recebe ao agendar (e como mudar)</h2>
+    <p>Quando alguém marca uma reunião com você, o Calendly manda automaticamente um e-mail de confirmação para essa pessoa, com data, horário e link da videochamada. Você pode personalizar essa mensagem.</p>
+    <ol>
+      <li>No painel, passe o mouse sobre o tipo de reunião (ex. "Diagnóstico inicial") e clique em <strong>"Edit"</strong> (Editar).</li>
+      <li>No menu da esquerda, clique em <strong>"Communications"</strong> (Comunicações).</li>
+      <li>Você verá três tipos de mensagem: <strong>confirmação</strong>, <strong>lembrete</strong> e <strong>e-mail pós-reunião</strong>.</li>
+      <li>Clique no que quiser mudar, edite o texto e clique em <strong>"Save"</strong>.</li>
+    </ol>
+    <p class="note">Sugestão de mensagem de confirmação: <em>"Olá [Nome], obrigada por agendar a nossa conversa. Estou ansiosa para te conhecer e te ajudar a deixar a sua empresa em conformidade com a NR-1. No anexo, te mando um checklist de 10 perguntas que vão acelerar a nossa conversa. Até [data]! — Selma."</em></p>
+  </section>
+
+  <section class="troubleshoot">
+    <h2>Quando algo der errado — atalhos de socorro</h2>
+    <table>
+      <thead>
+        <tr><th>Problema</th><th>O que fazer</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Não lembro a senha.</td><td>Na tela de login, clique em <strong>"send me a recovery email"</strong> (mandar e-mail de recuperação). Vai chegar no seu e-mail em 1 minuto.</td></tr>
+        <tr><td>Não consigo entrar mesmo com a senha certa.</td><td>Fale com o Roger pelo WhatsApp — ele tem um cofre seguro com as senhas todas.</td></tr>
+        <tr><td>Um cliente desmarcou e quero remarcar com ele.</td><td>Mande para ele de novo o seu link principal: <span class="gold">calendly.com/smoraes-selmamoraes</span></td></tr>
+        <tr><td>Quero falar com um cliente antes da reunião.</td><td>Em <strong>"Scheduled events"</strong>, clique no nome dele. O e-mail dele aparece. Você pode mandar uma mensagem direto.</td></tr>
+        <tr><td>Apareceu uma tela em inglês que eu não entendo.</td><td>Tire uma foto da tela e me manda no WhatsApp. Eu te respondo em 5 minutos.</td></tr>
+        <tr><td>Acho que apaguei algo importante.</td><td>O Calendly não apaga reuniões — só cancela. Vá em <strong>"Past events"</strong> (Reuniões passadas) que você consegue ver tudo o que aconteceu.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="golden-rule">
+    <h2>A regra de ouro</h2>
+    <p>Você <strong>não precisa decorar nada</strong>. Este guia vai estar sempre aqui (no painel privado ou impresso). Sempre que tiver dúvida, volte aqui e leia o passo certo.</p>
+    <p>Em 7 dias usando, você não vai mais precisar consultar. E se ficar travada em qualquer ponto — me chame. Não tem pergunta boba.</p>
+  </section>
+
+  <footer class="footer">
+    <div>© 2026 <strong>Instituto Selma Moraes</strong> · CRP 06/138420 · Método Resguarda™</div>
+    <div><a href="https://selmamoraes.com.br">selmamoraes.com.br</a></div>
+  </footer>
+
+</div>
+
+</body>
+</html>
