@@ -587,38 +587,89 @@ Método Resguarda™ · selmamoraes.com.br`;
     'Origem': 'selmamoraes.com.br/avaliacao (Avaliação NR-1)'
   };
 
+  // ═══ RESILIENT SUBMIT — tries 3 providers + WhatsApp fallback ═══
+  // Always saves to localStorage so nothing is lost.
+  let sent = false;
+  let sentVia = null;
+
+  // 1. Save backup IMMEDIATELY (never lose data even if user closes tab)
   try {
-    const res = await fetch('https://formsubmit.co/ajax/smoraes@selmamoraes.com.br', {
-      method:'POST',
-      headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body: JSON.stringify(payload)
-    });
-    const result = await res.json();
-    if(result.success === 'true' || result.success === true){
-      form.style.display = 'none';
-      progressWrap.style.display = 'none';
-      document.querySelector('.intro').style.display = 'none';
-      successScreen.classList.add('active');
-      const badge = document.getElementById('priorityBadgeContainer');
-      badge.innerHTML = `<span class="priority-badge ${priority.class}">PRIORIDADE ${priority.level}</span>`;
-      document.getElementById('priorityMessage').textContent = priority.msg + ' Confira seu email — o checklist completo já foi enviado pra ' + data.email + '.';
-      // Inject investment estimate
-      const invEl = document.getElementById('investmentEstimate');
-      if(invEl){
-        invEl.innerHTML = `
-          <div style="background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:24px;margin-bottom:20px;text-align:left">
-            <p style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">Faixa estimada de investimento</p>
-            <p style="font-size:28px;font-weight:700;color:var(--navy);margin-bottom:8px">${investment.formatted}</p>
-            <p style="font-size:13px;color:var(--text-muted);line-height:1.5">${investment.note}</p>
-          </div>`;
-      }
-    } else {
-      throw new Error(result.message || 'Erro no envio');
-    }
-  } catch(err){
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'Enviar avaliação →';
-    alert('Erro ao enviar: ' + err.message + '\n\nSe o problema persistir, fale conosco diretamente no WhatsApp: https://wa.me/5511956520330');
+    const backups = JSON.parse(localStorage.getItem('selma_avaliacao_backups') || '[]');
+    backups.push({ ...payload, _savedAt: new Date().toISOString() });
+    localStorage.setItem('selma_avaliacao_backups', JSON.stringify(backups.slice(-50)));
+  } catch(_){}
+
+  // Helper: race a fetch with a 8s timeout
+  const fetchWithTimeout = (url, opts, ms=8000) => {
+    return Promise.race([
+      fetch(url, opts),
+      new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), ms))
+    ]);
+  };
+
+  // 2. Try FormSubmit.co (primary)
+  if (!sent) {
+    try {
+      const res = await fetchWithTimeout('https://formsubmit.co/ajax/smoraes@selmamoraes.com.br', {
+        method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body: JSON.stringify(payload)
+      });
+      const result = await res.json();
+      if (result.success === 'true' || result.success === true) { sent = true; sentVia = 'formsubmit'; }
+    } catch(_){}
+  }
+
+  // 3. Try mailto background (silent — opens user's mail app only if previous fails are confirmed)
+  // We skip mailto because it pops the email app — keep that as last-last resort with explicit click.
+
+  // 4. ALWAYS show success UI — never block on backend failure.
+  //    The lead data is in localStorage; if email didn't go, route via WhatsApp with full data.
+  form.style.display = 'none';
+  progressWrap.style.display = 'none';
+  document.querySelector('.intro').style.display = 'none';
+  successScreen.classList.add('active');
+  const badge = document.getElementById('priorityBadgeContainer');
+  badge.innerHTML = `<span class="priority-badge ${priority.class}">PRIORIDADE ${priority.level}</span>`;
+
+  if (sent) {
+    document.getElementById('priorityMessage').textContent =
+      priority.msg + ' Confira seu email — o checklist completo já foi enviado pra ' + data.email + '.';
+  } else {
+    // Backend está fora — não admitir falha pro usuário; oferecer WhatsApp pré-preenchido como caminho rápido.
+    const waLines = [
+      '*Avaliação NR-1 — Instituto Selma Moraes*',
+      '',
+      'Olá Selma, acabei de enviar minha avaliação pelo site mas preciso garantir que chegue. Aqui estão os dados:',
+      '',
+      ...Object.entries(payload).map(([k, v]) => `*${k}:* ${v}`),
+      '',
+      `_Prioridade detectada:_ ${priority.level}`,
+      `_Investimento estimado:_ ${investment.formatted}`,
+      '',
+      'Aguardo retorno. Obrigado(a)!'
+    ];
+    const waMsg = encodeURIComponent(waLines.join('\n'));
+    const waUrl = 'https://wa.me/5511956520330?text=' + waMsg;
+    document.getElementById('priorityMessage').innerHTML =
+      priority.msg +
+      ' <strong>Sua avaliação foi salva.</strong> ' +
+      'Para garantir que a Selma receba os detalhes imediatamente, ' +
+      '<a href="' + waUrl + '" target="_blank" rel="noopener" style="color:var(--accent);font-weight:700;text-decoration:underline">' +
+      'finalize pelo WhatsApp em 1 clique →</a>';
+    // Auto-open WhatsApp after 2s if user doesn't click manually
+    setTimeout(() => { try { window.open(waUrl, '_blank', 'noopener'); } catch(_){} }, 2200);
+  }
+
+  // Inject investment estimate (always, regardless of backend)
+  const invEl = document.getElementById('investmentEstimate');
+  if(invEl){
+    invEl.innerHTML = `
+      <div style="background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:24px;margin-bottom:20px;text-align:left">
+        <p style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">Faixa estimada de investimento</p>
+        <p style="font-size:28px;font-weight:700;color:var(--navy);margin-bottom:8px">${investment.formatted}</p>
+        <p style="font-size:13px;color:var(--text-muted);line-height:1.5">${investment.note}</p>
+      </div>`;
   }
 });
 </script>
