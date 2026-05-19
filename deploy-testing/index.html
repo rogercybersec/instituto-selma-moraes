@@ -3160,5 +3160,64 @@
       animate();
     })();
   </script>
+
+  <!-- FLOATING CALENDLY BUTTON — always visible, bottom-right -->
+  <a href="https://calendly.com/smoraes-selmamoraes/" target="_blank" rel="noopener" id="fab-calendly" aria-label="Agendar 30 minutos com Selma Moraes">
+    <span class="fab-icon" aria-hidden="true">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24">
+        <rect x="3" y="4" width="18" height="18" rx="2"/>
+        <line x1="16" y1="2" x2="16" y2="6"/>
+        <line x1="8" y1="2" x2="8" y2="6"/>
+        <line x1="3" y1="10" x2="21" y2="10"/>
+      </svg>
+    </span>
+    <span class="fab-text">
+      <span class="fab-text-main">Agendar 30 min</span>
+      <span class="fab-text-sub">Conversa gratuita · sem compromisso</span>
+    </span>
+  </a>
+  <style>
+    #fab-calendly{
+      position:fixed;bottom:24px;right:24px;z-index:9998;
+      display:inline-flex;align-items:center;gap:12px;
+      padding:14px 22px 14px 16px;
+      background:linear-gradient(135deg,#0a2540 0%,#0d3258 60%,#143b5f 100%);
+      color:#fff;text-decoration:none;
+      border-radius:100px;
+      box-shadow:0 12px 36px rgba(10,37,64,0.45),0 0 0 1px rgba(214,178,122,0.35),0 0 28px rgba(214,178,122,0.18);
+      font-family:'Inter','Segoe UI',-apple-system,BlinkMacSystemFont,sans-serif;
+      transition:transform 0.25s cubic-bezier(.34,1.56,.64,1),box-shadow 0.25s;
+      animation:fabPulse 3.4s ease-in-out infinite;
+    }
+    #fab-calendly:hover{
+      transform:translateY(-3px) scale(1.02);
+      box-shadow:0 18px 48px rgba(10,37,64,0.55),0 0 0 1.5px rgba(214,178,122,0.6),0 0 38px rgba(214,178,122,0.28);
+    }
+    #fab-calendly:active{transform:translateY(-1px) scale(0.99)}
+    .fab-icon{
+      flex-shrink:0;
+      width:38px;height:38px;
+      display:flex;align-items:center;justify-content:center;
+      border-radius:50%;
+      background:linear-gradient(135deg,#D6B27A,#E7C79A);
+      color:#0a2540;
+      box-shadow:0 4px 12px rgba(214,178,122,0.45)
+    }
+    .fab-text{display:flex;flex-direction:column;line-height:1.15}
+    .fab-text-main{font-size:0.95rem;font-weight:700;letter-spacing:-0.01em}
+    .fab-text-sub{font-size:0.72rem;color:#cdb89a;font-weight:500;letter-spacing:0.02em;margin-top:1px}
+    @keyframes fabPulse{
+      0%,100%{box-shadow:0 12px 36px rgba(10,37,64,0.45),0 0 0 1px rgba(214,178,122,0.35),0 0 28px rgba(214,178,122,0.18)}
+      50%{box-shadow:0 12px 36px rgba(10,37,64,0.45),0 0 0 1px rgba(214,178,122,0.5),0 0 44px rgba(214,178,122,0.32)}
+    }
+    @media(max-width:600px){
+      #fab-calendly{bottom:16px;right:16px;padding:12px 18px 12px 12px}
+      .fab-icon{width:34px;height:34px}
+      .fab-text-main{font-size:0.88rem}
+      .fab-text-sub{display:none}
+    }
+    @media print{ #fab-calendly{display:none} }
+  </style>
+
 </body>
 </html>
