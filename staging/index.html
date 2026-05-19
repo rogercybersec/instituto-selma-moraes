@@ -3778,6 +3778,60 @@
     })();
   </script>
 
+  <!-- ═══ 3D TILT — service cards mouse-aware ═══ -->
+  <script>
+  (function(){
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (window.matchMedia('(pointer: coarse)').matches) return; // skip on touch
+
+    const cards = document.querySelectorAll('.service-card[data-tilt]');
+    if (!cards.length) return;
+
+    const MAX_TILT = 6; // degrees — subtle, not nauseating
+    const SCALE = 1.012;
+
+    cards.forEach(card => {
+      let rafId = null;
+      let bounds = null;
+
+      const update = (e) => {
+        if (!bounds) bounds = card.getBoundingClientRect();
+        const x = e.clientX - bounds.left;
+        const y = e.clientY - bounds.top;
+        const cx = bounds.width / 2;
+        const cy = bounds.height / 2;
+        const rx = ((y - cy) / cy) * -MAX_TILT;
+        const ry = ((x - cx) / cx) * MAX_TILT;
+
+        card.style.transform = `perspective(1200px) rotateX(${rx}deg) rotateY(${ry}deg) scale(${SCALE})`;
+
+        // Glow follow cursor
+        const inner = card.querySelector('.service-card-inner');
+        const glow = card.querySelector('.service-card-glow');
+        if (glow) {
+          glow.style.setProperty('--mx', x + 'px');
+          glow.style.setProperty('--my', y + 'px');
+        }
+      };
+
+      card.addEventListener('mouseenter', () => { bounds = card.getBoundingClientRect(); });
+      card.addEventListener('mousemove', (e) => {
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(() => update(e));
+      });
+      card.addEventListener('mouseleave', () => {
+        if (rafId) cancelAnimationFrame(rafId);
+        card.style.transform = '';
+        bounds = null;
+      });
+
+      // Re-measure on scroll/resize
+      window.addEventListener('resize', () => { bounds = null; }, { passive: true });
+      window.addEventListener('scroll', () => { bounds = null; }, { passive: true });
+    });
+  })();
+  </script>
+
   <!-- FLOATING CALENDLY BUTTON — always visible, bottom-right -->
   <a href="https://calendly.com/smoraes-selmamoraes/" target="_blank" rel="noopener" id="fab-calendly" aria-label="Agendar 30 minutos com Selma Moraes">
     <span class="fab-icon" aria-hidden="true">
