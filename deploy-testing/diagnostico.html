@@ -587,12 +587,13 @@ Método Resguarda™ · selmamoraes.com.br`;
     'Origem': 'selmamoraes.com.br/avaliacao (Avaliação NR-1)'
   };
 
-  // ═══ RESILIENT SUBMIT — tries 3 providers + WhatsApp fallback ═══
-  // Always saves to localStorage so nothing is lost.
+  // ═══ RESILIENT SUBMIT — tries multiple email paths + WhatsApp + localStorage ═══
+  // Goal: Selma always receives the lead, by at least 1 of 3 channels.
   let sent = false;
   let sentVia = null;
+  const EMAIL_TO = 'smoraes@selmamoraes.com.br';
 
-  // 1. Save backup IMMEDIATELY (never lose data even if user closes tab)
+  // 1. Save backup IMMEDIATELY (never lose data even if all backends fail)
   try {
     const backups = JSON.parse(localStorage.getItem('selma_avaliacao_backups') || '[]');
     backups.push({ ...payload, _savedAt: new Date().toISOString() });
@@ -607,18 +608,51 @@ Método Resguarda™ · selmamoraes.com.br`;
     ]);
   };
 
-  // 2. Try FormSubmit.co (primary)
+  // 2. PARALLEL EMAIL PATH A: FormSubmit AJAX (primary, fast feedback)
   if (!sent) {
     try {
-      const res = await fetchWithTimeout('https://formsubmit.co/ajax/smoraes@selmamoraes.com.br', {
+      const res = await fetchWithTimeout('https://formsubmit.co/ajax/' + EMAIL_TO, {
         method:'POST',
         headers:{'Content-Type':'application/json','Accept':'application/json'},
         body: JSON.stringify(payload)
       });
       const result = await res.json();
-      if (result.success === 'true' || result.success === true) { sent = true; sentVia = 'formsubmit'; }
+      if (result.success === 'true' || result.success === true) { sent = true; sentVia = 'formsubmit-ajax'; }
     } catch(_){}
   }
+
+  // 3. PARALLEL EMAIL PATH B: FormSubmit standard form POST via hidden iframe
+  // No CORS — real form submit. Email is sent server-side even if browser response fails.
+  // Fires regardless of AJAX result (belt-and-suspenders).
+  try {
+    const iframe = document.createElement('iframe');
+    iframe.name = 'selma_form_iframe_' + Date.now();
+    iframe.style.cssText = 'position:absolute;width:0;height:0;border:0;visibility:hidden;left:-9999px';
+    document.body.appendChild(iframe);
+    const hiddenForm = document.createElement('form');
+    hiddenForm.method = 'POST';
+    hiddenForm.target = iframe.name;
+    hiddenForm.action = 'https://formsubmit.co/' + EMAIL_TO;
+    hiddenForm.style.display = 'none';
+    // Add every field
+    for (const [k, v] of Object.entries(payload)) {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = k;
+      input.value = typeof v === 'string' ? v : JSON.stringify(v);
+      hiddenForm.appendChild(input);
+    }
+    // Prevent FormSubmit from showing its captcha page
+    const noRedirect = document.createElement('input');
+    noRedirect.type = 'hidden';
+    noRedirect.name = '_next';
+    noRedirect.value = 'https://selmamoraes.com.br/avaliacao';
+    hiddenForm.appendChild(noRedirect);
+    document.body.appendChild(hiddenForm);
+    hiddenForm.submit();
+    // Cleanup later (don't await — let the iframe submit fire)
+    setTimeout(() => { try { hiddenForm.remove(); iframe.remove(); } catch(_){} }, 15000);
+  } catch(_){}
 
   // 3. Try mailto background (silent — opens user's mail app only if previous fails are confirmed)
   // We skip mailto because it pops the email app — keep that as last-last resort with explicit click.
