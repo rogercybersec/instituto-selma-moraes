@@ -731,20 +731,31 @@ function renderProposal(skipEmail){
   }
 
   if(!skipEmail){
+    const payload = {
+      _subject:'[PROPOSTA GERADA] '+empresa+' ('+p.label+' colab.) — '+setor,
+      _replyto:email,_template:'table',_captcha:'false',
+      'Nome':nome,'Cargo':cargo,'E-mail':email,'WhatsApp':tel,
+      'Empresa':empresa,'Setor':setor,'Colaboradores':p.label,'Setores':sm.label,
+      'PGR':pgr==='sim'?'Sim, atualizado':pgr==='desatualizado'?'Sim, desatualizado':pgr==='nao'?'Não possui':'Não sabe',
+      'Investimento':'12x R$ '+fmt(discountedMonthly)+' (desconto '+desconto+'%)',
+      'À vista':'R$ '+fmt(vista),
+      'Origem':'selmamoraes.com.br/cotacao (proposta gerada)'
+    };
+    // Backup local sempre (nunca perder o lead)
+    try {
+      const b = JSON.parse(localStorage.getItem('selma_proposta_backups') || '[]');
+      b.push({ ...payload, _savedAt: new Date().toISOString() });
+      localStorage.setItem('selma_proposta_backups', JSON.stringify(b.slice(-50)));
+    } catch(_){}
+    // Fetch com timeout 6s; falhas são silenciosas (fire-and-forget). WhatsApp já está visível como CTA.
     try{
-      fetch('https://formsubmit.co/ajax/smoraes@selmamoraes.com.br',{
-        method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
-        body:JSON.stringify({
-          _subject:'[PROPOSTA GERADA] '+empresa+' ('+p.label+' colab.) — '+setor,
-          _replyto:email,_template:'table',_captcha:'false',
-          'Nome':nome,'Cargo':cargo,'E-mail':email,'WhatsApp':tel,
-          'Empresa':empresa,'Setor':setor,'Colaboradores':p.label,'Setores':sm.label,
-          'PGR':pgr==='sim'?'Sim, atualizado':pgr==='desatualizado'?'Sim, desatualizado':pgr==='nao'?'Não possui':'Não sabe',
-          'Investimento':'12x R$ '+fmt(discountedMonthly)+' (desconto '+desconto+'%)',
-          'À vista':'R$ '+fmt(vista),
-          'Origem':'selmamoraes.com.br/cotacao (proposta gerada)'
-        })
-      });
+      Promise.race([
+        fetch('https://formsubmit.co/ajax/smoraes@selmamoraes.com.br',{
+          method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+          body:JSON.stringify(payload)
+        }),
+        new Promise((_,rej)=>setTimeout(()=>rej(new Error('timeout')),6000))
+      ]).catch(()=>{});
     }catch(err){}
   }
 }
