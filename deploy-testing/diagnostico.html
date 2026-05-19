@@ -621,38 +621,40 @@ Método Resguarda™ · selmamoraes.com.br`;
     } catch(_){}
   }
 
-  // 3. PARALLEL EMAIL PATH B: FormSubmit standard form POST via hidden iframe
-  // No CORS — real form submit. Email is sent server-side even if browser response fails.
-  // Fires regardless of AJAX result (belt-and-suspenders).
-  try {
-    const iframe = document.createElement('iframe');
-    iframe.name = 'selma_form_iframe_' + Date.now();
-    iframe.style.cssText = 'position:absolute;width:0;height:0;border:0;visibility:hidden;left:-9999px';
-    document.body.appendChild(iframe);
-    const hiddenForm = document.createElement('form');
-    hiddenForm.method = 'POST';
-    hiddenForm.target = iframe.name;
-    hiddenForm.action = 'https://formsubmit.co/' + EMAIL_TO;
-    hiddenForm.style.display = 'none';
-    // Add every field
-    for (const [k, v] of Object.entries(payload)) {
-      const input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = k;
-      input.value = typeof v === 'string' ? v : JSON.stringify(v);
-      hiddenForm.appendChild(input);
-    }
-    // Prevent FormSubmit from showing its captcha page
-    const noRedirect = document.createElement('input');
-    noRedirect.type = 'hidden';
-    noRedirect.name = '_next';
-    noRedirect.value = 'https://selmamoraes.com.br/avaliacao';
-    hiddenForm.appendChild(noRedirect);
-    document.body.appendChild(hiddenForm);
-    hiddenForm.submit();
-    // Cleanup later (don't await — let the iframe submit fire)
-    setTimeout(() => { try { hiddenForm.remove(); iframe.remove(); } catch(_){} }, 15000);
-  } catch(_){}
+  // 3. EMAIL PATH B (fallback): FormSubmit standard form POST via hidden iframe
+  // Only fires if AJAX failed — avoids sending duplicate emails when AJAX worked.
+  // No CORS issue (it's a real form submit). Email sent server-side even if browser response fails.
+  if (!sent) {
+    try {
+      const iframe = document.createElement('iframe');
+      iframe.name = 'selma_form_iframe_' + Date.now();
+      iframe.style.cssText = 'position:absolute;width:0;height:0;border:0;visibility:hidden;left:-9999px';
+      document.body.appendChild(iframe);
+      const hiddenForm = document.createElement('form');
+      hiddenForm.method = 'POST';
+      hiddenForm.target = iframe.name;
+      hiddenForm.action = 'https://formsubmit.co/' + EMAIL_TO;
+      hiddenForm.style.display = 'none';
+      for (const [k, v] of Object.entries(payload)) {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = k;
+        input.value = typeof v === 'string' ? v : JSON.stringify(v);
+        hiddenForm.appendChild(input);
+      }
+      const noRedirect = document.createElement('input');
+      noRedirect.type = 'hidden';
+      noRedirect.name = '_next';
+      noRedirect.value = 'https://selmamoraes.com.br/avaliacao';
+      hiddenForm.appendChild(noRedirect);
+      document.body.appendChild(hiddenForm);
+      hiddenForm.submit();
+      // We can't verify success from iframe (cross-origin), but mark optimistically:
+      // the request DID fire server-side. FormSubmit's standard endpoint queues emails.
+      sentVia = sentVia || 'formsubmit-iframe-fallback';
+      setTimeout(() => { try { hiddenForm.remove(); iframe.remove(); } catch(_){} }, 15000);
+    } catch(_){}
+  }
 
   // 3. Try mailto background (silent — opens user's mail app only if previous fails are confirmed)
   // We skip mailto because it pops the email app — keep that as last-last resort with explicit click.
