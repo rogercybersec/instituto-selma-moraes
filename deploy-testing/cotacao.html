@@ -178,29 +178,34 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(-
 .inv-includes li::before{content:'✓';position:absolute;left:0;color:var(--teal-bright);font-weight:700;font-size:11px}
 .validity{display:inline-flex;align-items:center;gap:6px;background:rgba(14,184,166,0.1);border:1px solid rgba(14,184,166,0.2);border-radius:100px;padding:6px 14px;font-size:11px;font-weight:600;color:var(--teal);margin-top:16px}
 
-.mp-pay-section{margin-top:28px;text-align:center}
-.mp-pay-btn{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;background:linear-gradient(135deg,#009EE3 0%,#0077B5 100%);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.25s;box-shadow:0 6px 24px rgba(0,158,227,0.35);position:relative;overflow:hidden}
-.mp-pay-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.15),transparent);opacity:0;transition:opacity 0.25s}
-.mp-pay-btn:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(0,158,227,0.45)}
-.mp-pay-btn:hover::before{opacity:1}
-.mp-pay-btn:active{transform:translateY(0)}
-.mp-pay-btn:disabled{opacity:0.6;cursor:not-allowed;transform:none}
-.mp-pay-btn svg{flex-shrink:0}
-.mp-pay-divider{display:flex;align-items:center;gap:12px;margin:20px 0;color:rgba(255,255,255,0.35);font-size:11px;text-transform:uppercase;letter-spacing:0.1em}
-.mp-pay-divider::before,.mp-pay-divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.12)}
-.mp-methods{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;flex-wrap:wrap}
-.mp-method{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:8px 12px;font-size:11px;color:rgba(255,255,255,0.7)}
-.mp-method svg{opacity:0.6}
-.mp-secure{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:16px;font-size:11px;color:rgba(255,255,255,0.4)}
-.mp-secure svg{opacity:0.5}
+.mp-pay-section{margin-top:32px;text-align:center;position:relative}
+.mp-pay-card{background:rgba(255,255,255,0.04);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px 24px;position:relative;overflow:hidden}
+.mp-pay-card::before{content:'';position:absolute;top:-40%;right:-30%;width:200px;height:200px;background:radial-gradient(circle,rgba(0,158,227,0.12),transparent 70%);border-radius:50%;animation:mpOrb 8s ease-in-out infinite alternate}
+.mp-pay-card::after{content:'';position:absolute;bottom:-30%;left:-20%;width:160px;height:160px;background:radial-gradient(circle,rgba(212,168,83,0.08),transparent 70%);border-radius:50%;animation:mpOrb 10s ease-in-out infinite alternate-reverse}
+@keyframes mpOrb{0%{transform:translate(0,0) scale(1)}100%{transform:translate(20px,-15px) scale(1.15)}}
+.mp-pay-title{font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.4);margin-bottom:20px;position:relative}
+.mp-pay-btn{display:inline-flex;align-items:center;gap:10px;padding:16px 44px;background:linear-gradient(135deg,#009EE3 0%,#0066CC 50%,#0054A8 100%);color:#fff;border:none;border-radius:14px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 20px rgba(0,102,204,0.35),0 0 0 1px rgba(255,255,255,0.1) inset;position:relative;overflow:hidden}
+.mp-pay-btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);transition:left 0.5s}
+.mp-pay-btn:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 8px 32px rgba(0,102,204,0.5),0 0 0 1px rgba(255,255,255,0.15) inset}
+.mp-pay-btn:hover::before{left:100%}
+.mp-pay-btn:active{transform:translateY(-1px) scale(0.99)}
+.mp-pay-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none!important;box-shadow:0 4px 20px rgba(0,102,204,0.2)}
+.mp-pay-btn svg{flex-shrink:0;position:relative}
+.mp-methods{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:20px;flex-wrap:wrap;position:relative}
+.mp-method{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:100px;padding:6px 14px;font-size:11px;color:rgba(255,255,255,0.55);transition:all 0.2s}
+.mp-method:hover{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.8);border-color:rgba(255,255,255,0.15)}
+.mp-method svg{opacity:0.5}
+.mp-secure{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:16px;font-size:10px;color:rgba(255,255,255,0.3);letter-spacing:0.04em;position:relative}
+.mp-secure svg{opacity:0.35}
+.mp-pix-badge{display:inline-flex;align-items:center;gap:4px;background:rgba(46,125,50,0.15);border:1px solid rgba(76,175,80,0.25);color:#66BB6A;padding:3px 10px;border-radius:100px;font-size:10px;font-weight:600;margin-top:10px;position:relative}
 
-.payment-status{max-width:500px;margin:28px auto 0;padding:20px 24px;border-radius:12px;text-align:center;animation:fadeIn 0.4s}
-.payment-status.approved{background:rgba(46,125,50,0.12);border:1px solid rgba(76,175,80,0.3);color:#2E7D32}
-.payment-status.rejected{background:rgba(220,38,38,0.08);border:1px solid rgba(220,38,38,0.25);color:#DC2626}
-.payment-status.pending{background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);color:#D97706}
-.payment-status h3{font-size:16px;margin-bottom:4px}
-.payment-status p{font-size:13px;opacity:0.8}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.payment-status{max-width:500px;margin:28px auto 0;padding:24px 28px;border-radius:14px;text-align:center;animation:statusIn 0.5s cubic-bezier(0.34,1.56,0.64,1)}
+.payment-status.approved{background:linear-gradient(135deg,rgba(46,125,50,0.1),rgba(76,175,80,0.06));border:1px solid rgba(76,175,80,0.25);color:#2E7D32}
+.payment-status.rejected{background:linear-gradient(135deg,rgba(220,38,38,0.08),rgba(220,38,38,0.04));border:1px solid rgba(220,38,38,0.2);color:#DC2626}
+.payment-status.pending{background:linear-gradient(135deg,rgba(245,158,11,0.1),rgba(245,158,11,0.05));border:1px solid rgba(245,158,11,0.25);color:#D97706}
+.payment-status h3{font-size:17px;font-weight:700;margin-bottom:6px}
+.payment-status p{font-size:13px;opacity:0.8;line-height:1.5}
+@keyframes statusIn{from{opacity:0;transform:translateY(12px) scale(0.97)}to{opacity:1;transform:translateY(0) scale(1)}}
 
 .p-cta{background:var(--bg);padding:44px 56px;text-align:center}
 .p-cta h2{font-family:'Playfair Display',serif;font-size:24px;color:var(--navy);margin-bottom:12px}
