@@ -1776,13 +1776,17 @@
         drop-shadow(0 -1px 0 rgba(0,0,0,0.6));
     }
     .footer-contact-card .mail-text {
-      word-break: break-all;
-      overflow-wrap: break-word;
+      word-break: normal;
+      overflow-wrap: anywhere;
+      white-space: nowrap;
       /* letterpress real: texto rebaixado */
       color: rgba(45,212,191,0.95);
       text-shadow:
         0 -1px 0 rgba(0,0,0,0.7),
         0 1px 0 rgba(255,255,255,0.08);
+    }
+    @media (max-width: 400px) {
+      .footer-contact-card .mail-text { font-size: 0.75rem; }
     }
 
     /* Social icons em alto-relevo — bolder, metálico, com brilho specular */
