@@ -756,6 +756,7 @@ function renderProposal(skipEmail){
   }
   document.getElementById('pPrice').textContent='12x R$ '+fmt(discountedMonthly);
   document.getElementById('pVista').textContent='ou R$ '+fmt(vista)+' à vista (10% adicional)';
+  if(typeof updateMPAmount==='function') updateMPAmount(annual, empresa);
   document.getElementById('pScope').textContent='Para '+(p.label||tamanho)+' colaboradores em '+(sm.label||setores)+' setores';
   document.getElementById('pCourtesy').textContent='✨ Cortesia: '+cortesia;
   const vd=new Date();vd.setDate(vd.getDate()+15);
