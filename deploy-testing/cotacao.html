@@ -856,6 +856,66 @@ document.querySelectorAll('.logo-mark').forEach(el=>{
     document.getElementById('clientView').classList.add('active');
   }
 })();
+
+/* ═══ MERCADO PAGO — CHECKOUT PRO ═══ */
+var mpPaymentAmount = 0;
+var mpPaymentDesc = '';
+
+function updateMPAmount(monthly, empresa) {
+  mpPaymentAmount = monthly;
+  mpPaymentDesc = 'Metodo Resguarda NR-1 — ' + empresa;
+}
+
+async function iniciarPagamentoMP() {
+  const btn = document.getElementById('mpPayBtn');
+  if (!mpPaymentAmount || mpPaymentAmount < 1) {
+    alert('Valor da proposta não disponível. Gere a proposta primeiro.');
+    return;
+  }
+  btn.disabled = true;
+  btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mp-spin"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Processando...';
+
+  try {
+    const email = document.getElementById('c_email').value || '';
+    const nome = document.getElementById('c_nome').value || '';
+    const res = await fetch('/api/create-preference', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        amount: mpPaymentAmount,
+        description: mpPaymentDesc,
+        payer_email: email,
+        payer_name: nome,
+        external_ref: 'selma-' + (document.getElementById('c_empresa').value || 'cli') + '-' + Date.now()
+      })
+    });
+    const data = await res.json();
+    if (!res.ok || !data.init_point) {
+      throw new Error(data.error || 'Erro ao criar pagamento');
+    }
+    window.location.href = data.init_point;
+  } catch (err) {
+    btn.disabled = false;
+    btn.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Contratar agora';
+    alert('Não foi possível iniciar o pagamento. Entre em contato pelo WhatsApp.');
+  }
+}
+
+(function checkPaymentStatus() {
+  const params = new URLSearchParams(window.location.search);
+  const status = params.get('payment');
+  if (!status) return;
+  const container = document.getElementById('paymentStatus');
+  if (!container) return;
+  const msgs = {
+    approved: { cls: 'approved', title: '✅ Pagamento confirmado!', text: 'Seu pagamento foi aprovado. A Selma entrará em contato em até 24h para iniciar o projeto.' },
+    rejected: { cls: 'rejected', title: '❌ Pagamento não aprovado', text: 'O pagamento não foi processado. Tente novamente ou entre em contato pelo WhatsApp.' },
+    pending: { cls: 'pending', title: '⏳ Pagamento em processamento', text: 'Seu pagamento está sendo processado. Você receberá uma confirmação por e-mail.' }
+  };
+  const m = msgs[status];
+  if (m) container.innerHTML = '<div class="payment-status ' + m.cls + '"><h3>' + m.title + '</h3><p>' + m.text + '</p></div>';
+})();
 </script>
+<style>.mp-spin{animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}</style>
 </body>
 </html>
