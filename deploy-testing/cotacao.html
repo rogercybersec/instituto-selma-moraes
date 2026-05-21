@@ -538,7 +538,24 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(-
         <li>Treinamento de lideranças</li>
         <li>Suporte em auditorias e fiscalização do MTE</li>
       </ul></div>
+      <div class="mp-pay-section no-print">
+        <div class="mp-pay-divider">ou contrate agora online</div>
+        <button id="mpPayBtn" onclick="iniciarPagamentoMP()" class="mp-pay-btn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          Contratar agora
+        </button>
+        <div class="mp-methods">
+          <span class="mp-method"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Cartão até 12x</span>
+          <span class="mp-method"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg>Pix</span>
+          <span class="mp-method"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Boleto</span>
+        </div>
+        <div class="mp-secure">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Pagamento 100% seguro via Mercado Pago
+        </div>
+      </div>
     </div>
+    <div id="paymentStatus"></div>
     <div class="validity" id="pValidity"></div>
     <p style="font-size:12px;color:var(--text-muted);margin-top:12px;font-style:italic">Os valores apresentados são uma estimativa inicial com base nas informações fornecidas. Após a primeira reunião de alinhamento, o investimento poderá ser ajustado de acordo com as particularidades da sua operação — sem compromisso.</p>
   </div>
