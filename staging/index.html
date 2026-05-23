@@ -253,8 +253,37 @@
     }
     /* Scrolled: encolhe responsivo também */
     nav.scrolled .nav-logo-img { height: clamp(56px, 8vw, 100px) !important; }
-    /* Esconder o tag "Instituto" — logo já tem 'SELMA MORAES' completo */
     .nav-logo-tag { display: none; }
+    .nav-brand-text {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding-left: 4px;
+    }
+    .nav-brand-divider {
+      width: 1.5px;
+      height: 48px;
+      background: linear-gradient(180deg, transparent, #C4A265 20%, #D4A853 50%, #C4A265 80%, transparent);
+      flex-shrink: 0;
+    }
+    .nav-brand-label {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 11.5px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #8B7355;
+      line-height: 1.5;
+    }
+    .nav-brand-label span {
+      display: block;
+    }
+    nav.scrolled .nav-brand-text { gap: 10px; }
+    nav.scrolled .nav-brand-divider { height: 32px; }
+    nav.scrolled .nav-brand-label { font-size: 9.5px; }
+    @media (max-width: 900px) {
+      .nav-brand-text { display: none; }
+    }
 
     /* ═══ INSTALL BUTTON (PWA) ═══ */
     .nav-install-btn {
