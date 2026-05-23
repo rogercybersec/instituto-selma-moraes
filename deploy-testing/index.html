@@ -3766,5 +3766,16 @@
     @media print{ #fab-calendly{display:none} }
   </style>
 
+  <script>
+  (function(){
+    var fab=document.getElementById('fab-calendly');
+    if(!fab)return;
+    window.addEventListener('scroll',function(){
+      if(window.scrollY>100){fab.classList.add('fab-glass')}
+      else{fab.classList.remove('fab-glass')}
+    },{passive:true});
+  })();
+  </script>
+
 </body>
 </html>
