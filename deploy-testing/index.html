@@ -2887,72 +2887,70 @@
       document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
     });
 
-    // ─── Premium 3D flip-in on payment cards (scroll-triggered) ───
+    // ─── 3D FLIP ROTATION on payment cards (scroll-triggered) ───
     (function() {
       var grid = document.querySelector('.pay-grid');
       if (!grid) return;
       var cards = grid.querySelectorAll('.pay-card');
       var fired = false;
-      // Step 1: Hide cards immediately
+
+      // Hide cards — then wait 1 frame so browser paints the hidden state
       for (var i = 0; i < cards.length; i++) cards[i].classList.add('pre-reveal');
-      // Step 2: Watch for scroll
-      var obs = new IntersectionObserver(function(entries) {
-        if (fired) return;
-        for (var j = 0; j < entries.length; j++) {
-          if (entries[j].isIntersecting) {
-            fired = true;
-            obs.disconnect();
-            // Step 3: Flip each card in with stagger
-            for (var k = 0; k < cards.length; k++) {
-              (function(card, idx) {
-                setTimeout(function() {
-                  card.classList.remove('pre-reveal');
-                  card.classList.add('flip-in');
-                  // Step 4: Icon spin after card lands
-                  setTimeout(function() {
-                    card.classList.add('icon-spin');
-                  }, 800);
-                  // Step 5: Shimmer sweep
-                  setTimeout(function() {
-                    card.classList.add('shimmer');
-                  }, 1000);
-                  // Step 6: Glow pulse
-                  setTimeout(function() {
-                    card.classList.add('glow');
-                  }, 1200);
-                  // Step 7: Settle for hover interactions
-                  setTimeout(function() {
-                    card.classList.remove('flip-in', 'icon-spin', 'shimmer', 'glow');
-                    card.classList.add('flip-in-done');
-                  }, 2000);
-                }, idx * 250);
-              })(cards[k], k);
+
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          // Now observer starts AFTER hidden state is painted
+          var obs = new IntersectionObserver(function(entries) {
+            if (fired) return;
+            for (var j = 0; j < entries.length; j++) {
+              if (entries[j].isIntersecting) {
+                fired = true;
+                obs.disconnect();
+                for (var k = 0; k < cards.length; k++) {
+                  (function(card, idx) {
+                    // Stagger: 300ms between each card
+                    setTimeout(function() {
+                      card.classList.remove('pre-reveal');
+                      card.classList.add('flip-in');
+                      // Icon spin after card lands (1.4s animation)
+                      setTimeout(function() { card.classList.add('icon-spin'); }, 1200);
+                      // Shimmer sweep
+                      setTimeout(function() { card.classList.add('shimmer'); }, 1600);
+                      // Glow pulse
+                      setTimeout(function() { card.classList.add('glow'); }, 1800);
+                      // Done — enable hover tilt
+                      setTimeout(function() {
+                        card.classList.remove('flip-in','icon-spin','shimmer','glow');
+                        card.classList.add('flip-done');
+                      }, 3000);
+                    }, idx * 300);
+                  })(cards[k], k);
+                }
+                break;
+              }
             }
-            break;
-          }
-        }
-      }, { threshold: 0.1 });
-      obs.observe(grid);
+          }, { threshold: 0.05 });
+          obs.observe(grid);
+        });
+      });
     })();
 
-    // ─── 3D tilt effect on payment cards (Apple/Stripe-style) ───
-    document.querySelectorAll('.pay-card').forEach(card => {
-      card.addEventListener('mousemove', e => {
-        if (!card.classList.contains('flip-in-done')) return;
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rotateX = ((y - centerY) / centerY) * -8;
-        const rotateY = ((x - centerX) / centerX) * 8;
-        card.style.transform = 'perspective(1000px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale(1.02)';
+    // ─── 3D tilt on hover (after flip animation completes) ───
+    document.querySelectorAll('.pay-card').forEach(function(card) {
+      card.addEventListener('mousemove', function(e) {
+        if (!card.classList.contains('flip-done')) return;
+        var rect = card.getBoundingClientRect();
+        var x = e.clientX - rect.left;
+        var y = e.clientY - rect.top;
+        var rx = ((y - rect.height/2) / (rect.height/2)) * -8;
+        var ry = ((x - rect.width/2) / (rect.width/2)) * 8;
+        card.style.transform = 'rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) scale(1.02)';
         card.style.setProperty('--mouse-x', x + 'px');
         card.style.setProperty('--mouse-y', y + 'px');
       });
-      card.addEventListener('mouseleave', () => {
-        if (!card.classList.contains('flip-in-done')) return;
-        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+      card.addEventListener('mouseleave', function() {
+        if (!card.classList.contains('flip-done')) return;
+        card.style.transform = 'rotateY(0deg) rotateX(0deg) scale(1)';
       });
     });
 
