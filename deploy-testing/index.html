@@ -3771,23 +3771,25 @@
   (function(){
     var fab=document.getElementById('fab-calendly');
     if(!fab)return;
-    var check=function(){
-      var r=fab.getBoundingClientRect();
-      var cx=r.left+r.width/2, cy=r.top+r.height/2;
-      fab.style.pointerEvents='none';
-      var el=document.elementFromPoint(cx,cy);
-      fab.style.pointerEvents='';
-      if(!el)return fab.classList.remove('fab-glass');
-      var tag=el.tagName;
-      var hasContent=tag==='P'||tag==='H1'||tag==='H2'||tag==='H3'||tag==='H4'||tag==='SPAN'||tag==='A'||tag==='IMG'||tag==='LI'||tag==='STRONG'||tag==='EM'||tag==='TD'||tag==='TH'||tag==='LABEL'||tag==='svg'||tag==='path';
-      if(!hasContent){var t=el.textContent||'';hasContent=t.trim().length>20}
-      if(hasContent){fab.classList.add('fab-glass')}
+    var sel='p,h1,h2,h3,h4,h5,h6,img,li,td,th,figcaption,blockquote,article,.service-card,.glass-card,.faq-q,.pay-card,.method-step,.stat-card';
+    function overlaps(a,b){return!(a.right<b.left||a.left>b.right||a.bottom<b.top||a.top>b.bottom)}
+    function check(){
+      var fr=fab.getBoundingClientRect();
+      var els=document.querySelectorAll(sel);
+      var hit=false;
+      for(var i=0;i<els.length;i++){
+        var er=els[i].getBoundingClientRect();
+        if(er.bottom<0||er.top>window.innerHeight)continue;
+        if(overlaps(fr,er)){hit=true;break}
+      }
+      if(hit){fab.classList.add('fab-glass')}
       else{fab.classList.remove('fab-glass')}
-    };
-    var ticking=false;
+    }
+    var t=false;
     window.addEventListener('scroll',function(){
-      if(!ticking){ticking=true;requestAnimationFrame(function(){check();ticking=false})}
+      if(!t){t=true;requestAnimationFrame(function(){check();t=false})}
     },{passive:true});
+    window.addEventListener('resize',function(){check()},{passive:true});
     check();
   })();
   </script>
