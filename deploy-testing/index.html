@@ -1589,8 +1589,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.4s cubic-bezier(0.03,0.98,0.52,0.99);
-      transform: translateZ(20px);
+      transition: background 0.4s, border-color 0.4s, box-shadow 0.4s;
+      transform: translateZ(20px) rotateY(0deg) scale(0.6);
+      opacity: 0;
+      transform-style: preserve-3d;
+    }
+    .pay-card.settle .pay-card-icon {
+      transform: translateZ(20px) scale(1);
+      opacity: 1;
     }
     .pay-card:hover .pay-card-icon {
       background: rgba(14,184,166,0.1);
