@@ -3959,10 +3959,20 @@
     }
     #fab-calendly:active{transform:translateY(-1px) scale(0.99)}
     #fab-calendly.fab-glass{
-      background:rgba(10,37,64,0.72);
-      -webkit-backdrop-filter:blur(8px);
-      backdrop-filter:blur(8px);
+      background:rgba(255,255,255,0.15);
+      -webkit-backdrop-filter:blur(15px);
+      backdrop-filter:blur(15px);
+      border:2px solid #0a2540;
+      box-shadow:0 8px 32px rgba(10,37,64,0.12);
     }
+    #fab-calendly.fab-glass .fab-icon{
+      background:rgba(10,37,64,0.12);
+      border:1.5px solid rgba(10,37,64,0.3);
+      color:#0a2540;
+      box-shadow:none;
+    }
+    #fab-calendly.fab-glass .fab-text-main{color:#0a2540}
+    #fab-calendly.fab-glass .fab-text-sub{color:rgba(10,37,64,0.65)}
     .fab-icon{
       flex-shrink:0;
       width:38px;height:38px;
