@@ -1284,6 +1284,36 @@
       background: linear-gradient(90deg, #D32F2F, #ef5350);
     }
 
+    .expired-scanline {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(211, 47, 47, 0.6), rgba(212, 168, 83, 0.4), transparent);
+      z-index: 3;
+      animation: expiredScanline 3s linear infinite;
+      pointer-events: none;
+    }
+    .expired-burst {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .expired-typewriter {
+      display: inline;
+    }
+    .expired-cursor {
+      color: #ef5350;
+      animation: cursorBlink 0.7s step-end infinite;
+      font-weight: 300;
+    }
+    @keyframes cursorBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
     /* ═══ SECTION SYSTEM ═══ */
     .section { padding: 120px 32px; }
     .section-container { max-width: 1200px; margin: 0 auto; }
