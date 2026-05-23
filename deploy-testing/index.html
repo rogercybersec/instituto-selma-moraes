@@ -2886,33 +2886,58 @@
       document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
     });
 
-    // ─── Premium 3D reveal on payment cards (scroll-triggered) ───
-    const payGrid = document.querySelector('.pay-grid');
-    if (payGrid) {
-      const payCards = payGrid.querySelectorAll('.pay-card');
-      payCards.forEach(c => c.classList.add('pre-reveal'));
-      const payRevealObs = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            payCards.forEach((card, i) => {
-              card.classList.remove('pre-reveal');
-              card.classList.add('revealed');
-              setTimeout(() => {
-                card.classList.remove('revealed');
-                card.classList.add('settled');
-              }, 900 + i * 120 + 500);
-            });
-            payRevealObs.unobserve(payGrid);
+    // ─── Premium 3D flip-in on payment cards (scroll-triggered) ───
+    (function() {
+      var grid = document.querySelector('.pay-grid');
+      if (!grid) return;
+      var cards = grid.querySelectorAll('.pay-card');
+      var fired = false;
+      // Step 1: Hide cards immediately
+      for (var i = 0; i < cards.length; i++) cards[i].classList.add('pre-reveal');
+      // Step 2: Watch for scroll
+      var obs = new IntersectionObserver(function(entries) {
+        if (fired) return;
+        for (var j = 0; j < entries.length; j++) {
+          if (entries[j].isIntersecting) {
+            fired = true;
+            obs.disconnect();
+            // Step 3: Flip each card in with stagger
+            for (var k = 0; k < cards.length; k++) {
+              (function(card, idx) {
+                setTimeout(function() {
+                  card.classList.remove('pre-reveal');
+                  card.classList.add('flip-in');
+                  // Step 4: Icon spin after card lands
+                  setTimeout(function() {
+                    card.classList.add('icon-spin');
+                  }, 800);
+                  // Step 5: Shimmer sweep
+                  setTimeout(function() {
+                    card.classList.add('shimmer');
+                  }, 1000);
+                  // Step 6: Glow pulse
+                  setTimeout(function() {
+                    card.classList.add('glow');
+                  }, 1200);
+                  // Step 7: Settle for hover interactions
+                  setTimeout(function() {
+                    card.classList.remove('flip-in', 'icon-spin', 'shimmer', 'glow');
+                    card.classList.add('flip-in-done');
+                  }, 2000);
+                }, idx * 250);
+              })(cards[k], k);
+            }
+            break;
           }
-        });
-      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-      payRevealObs.observe(payGrid);
-    }
+        }
+      }, { threshold: 0.1 });
+      obs.observe(grid);
+    })();
 
     // ─── 3D tilt effect on payment cards (Apple/Stripe-style) ───
     document.querySelectorAll('.pay-card').forEach(card => {
       card.addEventListener('mousemove', e => {
-        if (!card.classList.contains('settled')) return;
+        if (!card.classList.contains('flip-in-done')) return;
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
