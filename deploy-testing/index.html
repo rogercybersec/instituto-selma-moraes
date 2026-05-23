@@ -1606,26 +1606,16 @@
       align-items: center;
       justify-content: center;
       transition: background 0.4s, border-color 0.4s, box-shadow 0.4s;
-      transform: translateZ(20px);
       transform-style: preserve-3d;
     }
     .pay-card.pre-reveal .pay-card-icon {
       opacity: 0;
-      transform: translateZ(20px) scale(0) rotate(-180deg);
+      transform: scale(0) rotateY(-180deg);
     }
-    .pay-card.revealed .pay-card-icon {
-      animation:
-        payIconPopSpin 600ms cubic-bezier(0.34,1.56,0.64,1) forwards,
-        payIconGlowRing 800ms ease-out forwards;
-      animation-delay:
-        calc(var(--card-index) * var(--stagger) + 700ms),
-        calc(var(--card-index) * var(--stagger) + 900ms);
+    .pay-card.icon-spin .pay-card-icon {
+      animation: payIconSpin 800ms cubic-bezier(0.34,1.56,0.64,1) forwards;
     }
-    .pay-card.settled .pay-card-icon {
-      transform: translateZ(20px) scale(1) rotate(0deg);
-      opacity: 1;
-    }
-    .pay-card.settled:hover .pay-card-icon {
+    .pay-card.flip-in-done:hover .pay-card-icon {
       background: rgba(14,184,166,0.1);
       border-color: rgba(14,184,166,0.2);
       box-shadow: 0 4px 16px rgba(14,184,166,0.15);
