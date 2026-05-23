@@ -1553,10 +1553,12 @@
       position: relative;
       overflow: hidden;
       transform-style: preserve-3d;
+      will-change: transform, opacity, filter;
+    }
+    .pay-card.pre-reveal {
       opacity: 0;
       filter: blur(8px);
       transform: perspective(1200px) rotateX(25deg) rotateY(-35deg) rotateZ(4deg) scale(0.7) translateY(60px) translateZ(-80px);
-      will-change: transform, opacity, filter;
     }
     .pay-card:nth-child(1) { --card-index: 0; }
     .pay-card:nth-child(2) { --card-index: 1; }
