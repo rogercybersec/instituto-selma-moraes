@@ -1629,9 +1629,12 @@
       align-items: center;
       justify-content: center;
       transition: background 0.4s, border-color 0.4s, box-shadow 0.4s;
-      transform: translateZ(20px) scale(0) rotate(-180deg);
-      opacity: 0;
+      transform: translateZ(20px);
       transform-style: preserve-3d;
+    }
+    .pay-card.pre-reveal .pay-card-icon {
+      opacity: 0;
+      transform: translateZ(20px) scale(0) rotate(-180deg);
     }
     .pay-card.revealed .pay-card-icon {
       animation:
