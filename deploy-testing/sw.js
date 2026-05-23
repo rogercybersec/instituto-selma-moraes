@@ -1,6 +1,6 @@
 // Service Worker — Instituto Selma Moraes PWA
 // Versão: 3 | Network-first para HTML (sempre fresh) + cache-first para assets
-const VERSION = 'selma-v5';
+const VERSION = 'selma-v6';
 const ASSETS = [
   '/',
   '/index.html',
