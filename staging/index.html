@@ -512,10 +512,15 @@
     .nav-links a.nav-hover-fx {
       position: relative;
       padding: 8px 14px;
+      margin: -8px -14px;
       border: 2px solid #C4A265;
-      transition: color 0.3s;
+      transition: color 0.3s, transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .nav-links a.nav-hover-fx:hover { color: #1B365D !important; }
+    .nav-links a.nav-hover-fx:hover {
+      color: #1B365D !important;
+      transform: translateY(-3px);
+      box-shadow: 0 4px 15px rgba(196,162,101,0.25);
+    }
     .nav-links a.nav-hover-fx span { position: relative; z-index: 3; }
     .nav-links a.nav-hover-fx::before {
       content: '';
