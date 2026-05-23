@@ -3984,32 +3984,6 @@
     @media print{ #fab-calendly{display:none} }
   </style>
 
-  <script>
-  (function(){
-    var fab=document.getElementById('fab-calendly');
-    if(!fab)return;
-    var sel='p,h1,h2,h3,h4,h5,h6,img,li,td,th,figcaption,blockquote,article,.service-card,.glass-card,.faq-q,.pay-card,.method-step,.stat-card';
-    function overlaps(a,b){return!(a.right<b.left||a.left>b.right||a.bottom<b.top||a.top>b.bottom)}
-    function check(){
-      var fr=fab.getBoundingClientRect();
-      var els=document.querySelectorAll(sel);
-      var hit=false;
-      for(var i=0;i<els.length;i++){
-        var er=els[i].getBoundingClientRect();
-        if(er.bottom<0||er.top>window.innerHeight)continue;
-        if(overlaps(fr,er)){hit=true;break}
-      }
-      if(hit){fab.classList.add('fab-glass')}
-      else{fab.classList.remove('fab-glass')}
-    }
-    var t=false;
-    window.addEventListener('scroll',function(){
-      if(!t){t=true;requestAnimationFrame(function(){check();t=false})}
-    },{passive:true});
-    window.addEventListener('resize',function(){check()},{passive:true});
-    check();
-  })();
-  </script>
 
 </body>
 </html>
