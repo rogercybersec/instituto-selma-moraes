@@ -3529,13 +3529,81 @@
         var badgeEl = document.getElementById("hero-badge-text");
         if (badgeEl) badgeEl.textContent = "NR-1 entra em vigor em " + days + (days === 1 ? " dia" : " dias");
       } else {
-        ['days','hours','mins','secs'].forEach(k => { const el = document.getElementById('cd-' + k); if (el) el.textContent = '00'; });
-        const txt = document.querySelector('.countdown-text');
-        if (txt) txt.innerHTML = '<strong>O prazo da NR-1 já expirou</strong> — sua empresa pode ser autuada a qualquer momento!';
-        const heroEl = document.getElementById('hero-days-left');
-        if (heroEl) heroEl.textContent = '0 dias';
-        var badgeEl = document.getElementById('hero-badge-text');
-        if (badgeEl) badgeEl.textContent = 'NR-1 em vigor — fiscalizações ativas';
+        // ── EXPIRED STATE: dramatic transformation ──
+        const cdBar = document.querySelector('.countdown-bar');
+        if (cdBar && !cdBar.classList.contains('expired')) {
+          cdBar.classList.add('expired');
+          // Replace countdown numbers with expired message + CTA
+          const cdNums = document.getElementById('countdown');
+          if (cdNums) cdNums.style.display = 'none';
+          const cdHeader = cdBar.querySelector('.countdown-header');
+          if (cdHeader) cdHeader.style.display = 'none';
+
+          // Insert expired content
+          const expiredContent = document.createElement('div');
+          expiredContent.style.cssText = 'display:flex;flex-direction:column;align-items:center;gap:16px;position:relative;z-index:2;';
+          expiredContent.innerHTML = `
+            <div class="expired-stamp">⚠ PRAZO ENCERRADO</div>
+            <div class="expired-main-text">
+              O prazo acabou:<br>
+              <span class="expired-highlight">A fiscalização da nova NR-1 começou.</span>
+            </div>
+            <a href="/avaliacao" class="expired-cta">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              Adequar meu PGR Agora
+            </a>
+          `;
+          cdBar.insertBefore(expiredContent, cdBar.querySelector('.countdown-urgency-tag'));
+
+          // Update urgency tag
+          const urgTag = cdBar.querySelector('.countdown-urgency-tag');
+          if (urgTag) urgTag.textContent = 'Autuações em andamento em todo o Brasil';
+        }
+
+        // Transform hero badge to red alert
+        const badge = document.querySelector('.hero-badge');
+        if (badge && !badge.classList.contains('expired-badge')) {
+          badge.classList.add('expired-badge');
+          const badgeText = document.getElementById('hero-badge-text');
+          if (badgeText) badgeText.textContent = 'NR-1 em vigor — fiscalizações ativas';
+          const badgeSub = badge.querySelector('.hero-badge-sub');
+          if (badgeSub) badgeSub.textContent = 'Sua empresa pode ser autuada agora';
+        }
+
+        // Transform hero h1
+        const heroH1 = document.querySelector('.hero h1');
+        if (heroH1 && !heroH1.dataset.expired) {
+          heroH1.dataset.expired = '1';
+          heroH1.innerHTML = `
+            <span class="word" style="animation-delay:0s">O</span>
+            <span class="word" style="animation-delay:0.1s">prazo</span>
+            <span class="word accent expired-accent" style="animation-delay:0.2s">acabou.</span><br>
+            <span class="word" style="animation-delay:0.3s">A</span>
+            <span class="word" style="animation-delay:0.4s">fiscalização</span>
+            <span class="word" style="animation-delay:0.5s">da</span>
+            <span class="word" style="animation-delay:0.6s">NR-1</span>
+            <span class="word" style="animation-delay:0.7s">começou.</span>
+          `;
+        }
+
+        // Transform hero paragraph
+        const heroP = document.querySelector('.hero p');
+        if (heroP && !heroP.dataset.expired) {
+          heroP.dataset.expired = '1';
+          heroP.textContent = 'Empresas sem PGR com riscos psicossociais mapeados já estão sujeitas a multas de até R$67 mil por colaborador. Regularize agora.';
+        }
+
+        // Transform main CTA button
+        const btnGlow = document.querySelector('.hero-actions .btn-glow');
+        if (btnGlow && !btnGlow.dataset.expired) {
+          btnGlow.dataset.expired = '1';
+          btnGlow.style.background = 'linear-gradient(135deg, #D32F2F, #b71c1c)';
+          btnGlow.style.boxShadow = '0 8px 32px rgba(211,47,47,0.3)';
+          btnGlow.innerHTML = `
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            Adequar meu PGR Agora
+          `;
+        }
       }
     }
     updateCountdown();
