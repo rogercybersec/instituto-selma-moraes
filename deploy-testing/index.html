@@ -2923,10 +2923,12 @@
     const payGrid = document.querySelector('.pay-grid');
     if (payGrid) {
       const payCards = payGrid.querySelectorAll('.pay-card');
+      payCards.forEach(c => c.classList.add('pre-reveal'));
       const payRevealObs = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             payCards.forEach((card, i) => {
+              card.classList.remove('pre-reveal');
               card.classList.add('revealed');
               setTimeout(() => {
                 card.classList.remove('revealed');
@@ -2936,7 +2938,7 @@
             payRevealObs.unobserve(payGrid);
           }
         });
-      }, { threshold: 0.2, rootMargin: '0px 0px -60px 0px' });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
       payRevealObs.observe(payGrid);
     }
 
