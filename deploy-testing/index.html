@@ -2869,6 +2869,28 @@
       document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
     });
 
+    // ─── Scroll-triggered 3D reveal on payment cards ───
+    const payGrid = document.querySelector('.pay-grid');
+    if (payGrid) {
+      const payRevealObs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const cards = payGrid.querySelectorAll('.pay-card');
+            cards.forEach((card, i) => {
+              card.classList.add('revealed');
+              const delay = 900 + i * 150 + 400;
+              setTimeout(() => {
+                card.classList.remove('revealed');
+                card.classList.add('settle');
+              }, delay);
+            });
+            payRevealObs.unobserve(payGrid);
+          }
+        });
+      }, { threshold: 0.3 });
+      payRevealObs.observe(payGrid);
+    }
+
     // ─── 3D tilt effect on payment cards (Apple/Stripe-style) ───
     document.querySelectorAll('.pay-card').forEach(card => {
       card.addEventListener('mousemove', e => {
