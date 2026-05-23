@@ -509,6 +509,42 @@
       transition: color 0.3s;
     }
     .nav-links a:hover { color: #0D9488; }
+    .nav-links a.nav-hover-fx {
+      position: relative;
+      padding: 8px 14px;
+      border: 1.5px solid #C4A265;
+      transition: color 0.3s;
+    }
+    .nav-links a.nav-hover-fx span { position: relative; z-index: 3; }
+    .nav-links a.nav-hover-fx::before {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: -1.5px;
+      width: calc(100% + 3px);
+      height: calc(100% - 8px);
+      background: #fff;
+      transition: transform 0.3s ease-in-out;
+      transform: scaleY(1);
+    }
+    .nav-links a.nav-hover-fx:hover::before { transform: scaleY(0); }
+    .nav-links a.nav-hover-fx::after {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: -1.5px;
+      height: calc(100% + 3px);
+      width: calc(100% - 8px);
+      background: #fff;
+      transition: transform 0.3s ease-in-out 0.15s;
+      transform: scaleX(1);
+    }
+    .nav-links a.nav-hover-fx:hover::after { transform: scaleX(0); }
+    .nav-links a.nav-hover-fx:hover { color: #1B365D; }
+    nav.scrolled .nav-links a.nav-hover-fx::before,
+    nav.scrolled .nav-links a.nav-hover-fx::after {
+      background: rgba(255,255,255,0.95);
+    }
     .nav-cta {
       background: linear-gradient(135deg, #0D9488, #115E59) !important;
       color: #FFFFFF !important;
