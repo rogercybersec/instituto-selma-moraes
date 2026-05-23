@@ -2894,6 +2894,7 @@
     // ─── 3D tilt effect on payment cards (Apple/Stripe-style) ───
     document.querySelectorAll('.pay-card').forEach(card => {
       card.addEventListener('mousemove', e => {
+        if (!card.classList.contains('settle')) return;
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
@@ -2906,6 +2907,7 @@
         card.style.setProperty('--mouse-y', y + 'px');
       });
       card.addEventListener('mouseleave', () => {
+        if (!card.classList.contains('settle')) return;
         card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)';
       });
     });
