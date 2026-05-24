@@ -1169,26 +1169,25 @@
     }
 
     .countdown-bar.expired {
-      background: linear-gradient(135deg, #0A1929 0%, #0d1a2e 30%, #0A1929 60%, #0f1f35 100%);
-      border-top: 1px solid rgba(220, 38, 38, 0.2);
-      border-bottom: 1px solid rgba(220, 38, 38, 0.2);
-      animation: expiredBarFlash 4s ease-in-out infinite;
+      background: linear-gradient(135deg, #0A1929 0%, #0f1f35 40%, #0A1929 100%);
+      border-top: 1px solid rgba(212, 168, 83, 0.15);
+      border-bottom: 1px solid rgba(212, 168, 83, 0.15);
       padding: 40px 32px;
     }
     .countdown-bar.expired::before {
       background:
-        radial-gradient(ellipse 600px 200px at 30% 50%, rgba(220, 38, 38, 0.08) 0%, transparent 70%),
-        radial-gradient(ellipse 400px 150px at 70% 50%, rgba(212, 168, 83, 0.05) 0%, transparent 70%);
+        radial-gradient(ellipse 500px 180px at 50% 50%, rgba(180, 83, 40, 0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 400px 150px at 70% 50%, rgba(212, 168, 83, 0.04) 0%, transparent 70%);
     }
     .countdown-bar.expired::after {
-      background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.25), rgba(212, 168, 83, 0.15), transparent);
+      background: linear-gradient(90deg, transparent, rgba(212, 168, 83, 0.15), rgba(180, 83, 40, 0.1), transparent);
     }
-    .countdown-bar.expired .countdown-pulse { background: #EF4444; }
-    .countdown-bar.expired .countdown-pulse::after { background: rgba(239, 68, 68, 0.4); }
+    .countdown-bar.expired .countdown-pulse { background: #B45309; }
+    .countdown-bar.expired .countdown-pulse::after { background: rgba(180, 83, 9, 0.35); }
     .countdown-bar.expired .countdown-urgency-tag {
-      background: rgba(220, 38, 38, 0.1);
-      border-color: rgba(220, 38, 38, 0.25);
-      color: #EF4444;
+      background: rgba(180, 83, 40, 0.08);
+      border-color: rgba(180, 83, 40, 0.2);
+      color: #D97706;
     }
 
     .expired-main-text {
