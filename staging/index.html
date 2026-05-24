@@ -3709,7 +3709,17 @@
           `;
         }
 
-        // Globe stays untouched — brand teal/gold provides contrast anchor for red accents
+        // Shift globe colors to match expired red tone (movement stays identical)
+        if (!window._globeExpired) {
+          window._globeExpired = true;
+          try {
+            const hero3d = document.getElementById('hero3d');
+            if (hero3d) {
+              hero3d.style.transition = 'filter 2s ease';
+              hero3d.style.filter = 'hue-rotate(-120deg) saturate(1.4)';
+            }
+          } catch(e) {}
+        }
       }
     }
     updateCountdown();
