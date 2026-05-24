@@ -3709,30 +3709,7 @@
           `;
         }
 
-        // Transform 3D globe colors to red alert
-        if (typeof THREE !== 'undefined' && !window._globeExpired) {
-          window._globeExpired = true;
-          const redColor = new THREE.Color(0xD32F2F);
-          const darkRed = new THREE.Color(0x4a0e0e);
-          const redEmissive = new THREE.Color(0x3d0a0a);
-          const container = document.getElementById('hero3d');
-          if (container) {
-            const canvas3d = container.querySelector('canvas');
-            if (canvas3d && canvas3d.__three_renderer) {
-              // fallback: can't access scene directly, handled below
-            }
-          }
-          // Expose scene objects globally for expired state
-          // This runs after globe init since countdown runs on setInterval
-          try {
-            // Globe objects are in closure scope — use CSS filter as fallback
-            const hero3d = document.getElementById('hero3d');
-            if (hero3d) {
-              hero3d.style.transition = 'filter 2s ease';
-              hero3d.style.filter = 'hue-rotate(-120deg) saturate(1.4)';
-            }
-          } catch(e) {}
-        }
+        // Globe stays untouched — brand teal/gold provides contrast anchor for red accents
       }
     }
     updateCountdown();
