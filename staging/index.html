@@ -1143,17 +1143,19 @@
     }
 
     /* ═══ EXPIRED STATE — Post-Deadline NR-1 ═══ */
+    /* Color system: DC2626 (primary danger), EF4444 (accent), 991B1B (dark text) */
+    /* Rule: max 15-20% red surface area, rest stays brand navy/teal/gold */
     @keyframes expiredPulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(211, 47, 47, 0); }
-      50% { box-shadow: 0 0 40px 8px rgba(211, 47, 47, 0.15); }
+      0%, 100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+      50% { box-shadow: 0 0 32px 6px rgba(220, 38, 38, 0.12); }
     }
     @keyframes expiredScanline {
       0% { transform: translateY(-100%); }
       100% { transform: translateY(100%); }
     }
     @keyframes expiredBadgePulse {
-      0%, 100% { background: rgba(211, 47, 47, 0.08); border-color: rgba(211, 47, 47, 0.25); }
-      50% { background: rgba(211, 47, 47, 0.15); border-color: rgba(211, 47, 47, 0.45); }
+      0%, 100% { background: rgba(220, 38, 38, 0.06); border-color: rgba(220, 38, 38, 0.2); }
+      50% { background: rgba(220, 38, 38, 0.12); border-color: rgba(220, 38, 38, 0.35); }
     }
     @keyframes expiredStamp {
       0% { transform: scale(3) rotate(-12deg); opacity: 0; }
@@ -1161,38 +1163,32 @@
       75% { transform: scale(1.05) rotate(-6deg); }
       100% { transform: scale(1) rotate(-6deg); opacity: 1; }
     }
-    @keyframes expiredGlitch {
-      0%, 100% { text-shadow: none; }
-      20% { text-shadow: -2px 0 #D32F2F, 2px 0 #0D9488; }
-      40% { text-shadow: 2px 0 #D32F2F, -2px 0 #D4A853; }
-      60% { text-shadow: none; }
-    }
     @keyframes expiredBarFlash {
-      0%, 100% { border-color: rgba(211, 47, 47, 0.2); }
-      50% { border-color: rgba(211, 47, 47, 0.5); }
+      0%, 100% { border-color: rgba(220, 38, 38, 0.15); }
+      50% { border-color: rgba(220, 38, 38, 0.35); }
     }
 
     .countdown-bar.expired {
-      background: linear-gradient(135deg, #1a0a0a 0%, #2d0f0f 30%, #1a0a0a 60%, #0A1929 100%);
-      border-top: 2px solid rgba(211, 47, 47, 0.3);
-      border-bottom: 2px solid rgba(211, 47, 47, 0.3);
-      animation: expiredBarFlash 3s ease-in-out infinite;
+      background: linear-gradient(135deg, #0A1929 0%, #0d1a2e 30%, #0A1929 60%, #0f1f35 100%);
+      border-top: 1px solid rgba(220, 38, 38, 0.2);
+      border-bottom: 1px solid rgba(220, 38, 38, 0.2);
+      animation: expiredBarFlash 4s ease-in-out infinite;
       padding: 40px 32px;
     }
     .countdown-bar.expired::before {
       background:
-        radial-gradient(ellipse 600px 200px at 30% 50%, rgba(211, 47, 47, 0.12) 0%, transparent 70%),
-        radial-gradient(ellipse 400px 150px at 70% 50%, rgba(212, 168, 83, 0.06) 0%, transparent 70%);
+        radial-gradient(ellipse 600px 200px at 30% 50%, rgba(220, 38, 38, 0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 400px 150px at 70% 50%, rgba(212, 168, 83, 0.05) 0%, transparent 70%);
     }
     .countdown-bar.expired::after {
-      background: linear-gradient(90deg, transparent, rgba(211, 47, 47, 0.4), rgba(212, 168, 83, 0.2), transparent);
+      background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.25), rgba(212, 168, 83, 0.15), transparent);
     }
-    .countdown-bar.expired .countdown-pulse { background: #D32F2F; }
-    .countdown-bar.expired .countdown-pulse::after { background: rgba(211, 47, 47, 0.5); }
+    .countdown-bar.expired .countdown-pulse { background: #EF4444; }
+    .countdown-bar.expired .countdown-pulse::after { background: rgba(239, 68, 68, 0.4); }
     .countdown-bar.expired .countdown-urgency-tag {
-      background: rgba(211, 47, 47, 0.12);
-      border-color: rgba(211, 47, 47, 0.3);
-      color: #ef5350;
+      background: rgba(220, 38, 38, 0.1);
+      border-color: rgba(220, 38, 38, 0.25);
+      color: #EF4444;
     }
 
     .expired-main-text {
@@ -1206,7 +1202,7 @@
       text-align: center;
     }
     .expired-main-text .expired-highlight {
-      color: #ef5350;
+      color: #EF4444;
       position: relative;
     }
     .expired-main-text .expired-highlight::after {
@@ -1216,17 +1212,17 @@
       left: 0;
       right: 0;
       height: 3px;
-      background: linear-gradient(90deg, #D32F2F, #ef5350);
+      background: linear-gradient(90deg, #DC2626, #EF4444);
       border-radius: 2px;
-      opacity: 0.6;
+      opacity: 0.5;
     }
 
     .expired-stamp {
       display: inline-block;
       padding: 8px 28px;
-      border: 3px solid #D32F2F;
+      border: 2px solid #DC2626;
       border-radius: 8px;
-      color: #D32F2F;
+      color: #EF4444;
       font-family: 'Inter', sans-serif;
       font-size: 0.85rem;
       font-weight: 900;
@@ -1243,7 +1239,7 @@
       align-items: center;
       gap: 10px;
       padding: 16px 36px;
-      background: linear-gradient(135deg, #D32F2F 0%, #b71c1c 100%);
+      background: linear-gradient(135deg, #DC2626 0%, #991B1B 100%);
       color: #fff;
       font-weight: 700;
       font-size: 1rem;
@@ -1253,25 +1249,25 @@
       z-index: 2;
       margin-top: 16px;
       transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: 0 8px 32px rgba(211, 47, 47, 0.3), 0 0 0 1px rgba(211, 47, 47, 0.2);
+      box-shadow: 0 8px 28px rgba(220, 38, 38, 0.25), 0 0 0 1px rgba(220, 38, 38, 0.15);
       animation: expiredPulse 3s ease-in-out infinite;
     }
     .expired-cta:hover {
       transform: translateY(-3px) scale(1.03);
-      box-shadow: 0 12px 40px rgba(211, 47, 47, 0.4), 0 0 0 1px rgba(211, 47, 47, 0.3);
+      box-shadow: 0 12px 36px rgba(220, 38, 38, 0.35), 0 0 0 1px rgba(220, 38, 38, 0.25);
     }
 
     .hero-badge.expired-badge {
-      background: rgba(211, 47, 47, 0.06);
-      border-color: rgba(211, 47, 47, 0.25);
-      color: #D32F2F;
+      background: rgba(220, 38, 38, 0.05);
+      border-color: rgba(220, 38, 38, 0.2);
+      color: #DC2626;
       animation: expiredBadgePulse 3s ease-in-out infinite;
     }
     .hero-badge.expired-badge .hero-badge-dot {
-      background: #D32F2F;
+      background: #DC2626;
     }
     .hero-badge.expired-badge .hero-badge-dot::after {
-      border-color: #D32F2F;
+      border-color: #DC2626;
     }
     .hero-badge.expired-badge .hero-badge-sub {
       color: #D32F2F;
