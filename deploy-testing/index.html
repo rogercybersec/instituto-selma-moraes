@@ -3348,13 +3348,86 @@
         var badgeEl = document.getElementById("hero-badge-text");
         if (badgeEl) badgeEl.textContent = "NR-1 entra em vigor em " + days + (days === 1 ? " dia" : " dias");
       } else {
-        ['days','hours','mins','secs'].forEach(k => { const el = document.getElementById('cd-' + k); if (el) el.textContent = '00'; });
-        const txt = document.querySelector('.countdown-text');
-        if (txt) txt.innerHTML = '<strong>O prazo da NR-1 já expirou</strong> — sua empresa pode ser autuada a qualquer momento!';
-        const heroEl = document.getElementById('hero-days-left');
-        if (heroEl) heroEl.textContent = '0 dias';
-        var badgeEl = document.getElementById('hero-badge-text');
-        if (badgeEl) badgeEl.textContent = 'NR-1 em vigor — fiscalizações ativas';
+        // ── EXPIRED STATE: dramatic transformation ──
+        const cdBar = document.querySelector('.countdown-bar');
+        if (cdBar && !cdBar.classList.contains('expired')) {
+          cdBar.classList.add('expired');
+          const cdNums = document.getElementById('countdown');
+          if (cdNums) cdNums.style.display = 'none';
+          const cdHeader = cdBar.querySelector('.countdown-header');
+          if (cdHeader) cdHeader.style.display = 'none';
+          const scanline = document.createElement('div');
+          scanline.className = 'expired-scanline';
+          cdBar.appendChild(scanline);
+          const burstCanvas = document.createElement('canvas');
+          burstCanvas.className = 'expired-burst';
+          burstCanvas.width = cdBar.offsetWidth || 800;
+          burstCanvas.height = cdBar.offsetHeight || 200;
+          cdBar.appendChild(burstCanvas);
+          (function runBurst() {
+            const bCtx = burstCanvas.getContext('2d');
+            const sparks = [];
+            const cx = burstCanvas.width / 2, cy = burstCanvas.height / 2;
+            for (let i = 0; i < 60; i++) {
+              const angle = Math.random() * Math.PI * 2;
+              const speed = 1.5 + Math.random() * 4;
+              sparks.push({ x: cx, y: cy, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed, life: 1, decay: 0.008 + Math.random() * 0.012, size: 1.5 + Math.random() * 2.5, color: Math.random() > 0.5 ? '#D4A853' : (Math.random() > 0.4 ? '#D97706' : '#0D9488') });
+            }
+            function drawBurst() {
+              bCtx.clearRect(0, 0, burstCanvas.width, burstCanvas.height);
+              let alive = false;
+              sparks.forEach(s => { if (s.life <= 0) return; alive = true; s.x += s.vx; s.y += s.vy; s.vy += 0.04; s.life -= s.decay; bCtx.globalAlpha = s.life; bCtx.fillStyle = s.color; bCtx.shadowColor = s.color; bCtx.shadowBlur = 8; bCtx.beginPath(); bCtx.arc(s.x, s.y, s.size, 0, Math.PI * 2); bCtx.fill(); bCtx.globalAlpha = s.life * 0.3; bCtx.beginPath(); bCtx.arc(s.x - s.vx, s.y - s.vy, s.size * 0.6, 0, Math.PI * 2); bCtx.fill(); });
+              bCtx.globalAlpha = 1; bCtx.shadowBlur = 0;
+              if (alive) requestAnimationFrame(drawBurst); else burstCanvas.style.display = 'none';
+            }
+            drawBurst();
+          })();
+          const expiredContent = document.createElement('div');
+          expiredContent.style.cssText = 'display:flex;flex-direction:column;align-items:center;gap:16px;position:relative;z-index:2;';
+          expiredContent.innerHTML = '<div class="expired-stamp">⚠ PRAZO ENCERRADO</div><div class="expired-main-text"><span class="expired-typewriter" id="expiredTyper"></span></div><a href="/cotacao" class="expired-cta"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Adequar meu PGR Agora</a>';
+          cdBar.insertBefore(expiredContent, cdBar.querySelector('.countdown-urgency-tag'));
+          const typerEl = document.getElementById('expiredTyper');
+          if (typerEl) {
+            const fullText = 'O prazo acabou: A fiscalização da nova NR-1 começou.';
+            let ti = 0; const colonPos = fullText.indexOf(':');
+            function typeChar() {
+              if (ti <= fullText.length) { const typed = fullText.substring(0, ti); const before = typed.substring(0, colonPos + 1); const after = typed.substring(colonPos + 1); typerEl.innerHTML = before + (after ? '<span class="expired-highlight">' + after + '</span>' : '') + '<span class="expired-cursor">|</span>'; ti++; setTimeout(typeChar, ti === colonPos + 1 ? 300 : 40 + Math.random() * 30); }
+              else { const before = fullText.substring(0, colonPos + 1); const after = fullText.substring(colonPos + 1); typerEl.innerHTML = before + '<span class="expired-highlight">' + after + '</span>'; }
+            }
+            setTimeout(typeChar, 800);
+          }
+          const urgTag = cdBar.querySelector('.countdown-urgency-tag');
+          if (urgTag) urgTag.textContent = 'Autuações em andamento em todo o Brasil';
+        }
+        const badge = document.querySelector('.hero-badge');
+        if (badge && !badge.classList.contains('expired-badge')) {
+          badge.classList.add('expired-badge');
+          const badgeText = document.getElementById('hero-badge-text');
+          if (badgeText) badgeText.textContent = 'NR-1 em vigor — fiscalizações ativas';
+          const badgeSub = badge.querySelector('.hero-badge-sub');
+          if (badgeSub) badgeSub.textContent = 'Sua empresa pode ser autuada agora';
+        }
+        const heroH1 = document.querySelector('.hero h1');
+        if (heroH1 && !heroH1.dataset.expired) {
+          heroH1.dataset.expired = '1';
+          heroH1.innerHTML = '<span class="word" style="animation-delay:0s">O</span> <span class="word" style="animation-delay:0.1s">prazo</span> <span class="word accent expired-accent" style="animation-delay:0.2s">acabou.</span><br><span class="word" style="animation-delay:0.3s">A</span> <span class="word" style="animation-delay:0.4s">fiscalização</span> <span class="word" style="animation-delay:0.5s">da</span> <span class="word" style="animation-delay:0.6s">NR-1</span> <span class="word" style="animation-delay:0.7s">começou.</span>';
+        }
+        const heroP = document.querySelector('.hero p');
+        if (heroP && !heroP.dataset.expired) {
+          heroP.dataset.expired = '1';
+          heroP.textContent = 'Empresas sem PGR com riscos psicossociais mapeados já estão sujeitas a multas de até R$67 mil por colaborador. Regularize agora.';
+        }
+        const btnGlow = document.querySelector('.hero-actions .btn-glow');
+        if (btnGlow && !btnGlow.dataset.expired) {
+          btnGlow.dataset.expired = '1';
+          btnGlow.style.background = 'linear-gradient(135deg, #B45309, #78350F)';
+          btnGlow.style.boxShadow = '0 8px 28px rgba(180,83,9,0.2)';
+          btnGlow.innerHTML = '<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Adequar meu PGR Agora';
+        }
+        if (!window._globeExpired) {
+          window._globeExpired = true;
+          try { const hero3d = document.getElementById('hero3d'); if (hero3d) { hero3d.style.transition = 'filter 2s ease'; hero3d.style.filter = 'sepia(0.15) hue-rotate(-30deg) saturate(1.15) brightness(0.95)'; } } catch(e) {}
+        }
       }
     }
     updateCountdown();
