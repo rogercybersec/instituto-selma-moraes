@@ -1138,6 +1138,145 @@
       z-index: 1;
     }
 
+    /* ═══ EXPIRED STATE — Post-Deadline NR-1 ═══ */
+    @keyframes expiredPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(180, 83, 9, 0); }
+      50% { box-shadow: 0 0 28px 5px rgba(180, 83, 9, 0.1); }
+    }
+    @keyframes expiredScanline {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(100%); }
+    }
+    @keyframes expiredBadgePulse {
+      0%, 100% { background: rgba(180, 83, 9, 0.04); border-color: rgba(180, 83, 9, 0.15); }
+      50% { background: rgba(180, 83, 9, 0.1); border-color: rgba(180, 83, 9, 0.3); }
+    }
+    @keyframes expiredStamp {
+      0% { transform: scale(3) rotate(-12deg); opacity: 0; }
+      60% { transform: scale(1) rotate(-6deg); opacity: 1; }
+      75% { transform: scale(1.05) rotate(-6deg); }
+      100% { transform: scale(1) rotate(-6deg); opacity: 1; }
+    }
+    @keyframes expiredBarFlash {
+      0%, 100% { border-color: rgba(212, 168, 83, 0.1); }
+      50% { border-color: rgba(212, 168, 83, 0.25); }
+    }
+    .countdown-bar.expired {
+      background: linear-gradient(135deg, #0A1929 0%, #0f1f35 40%, #0A1929 100%);
+      border-top: 1px solid rgba(212, 168, 83, 0.15);
+      border-bottom: 1px solid rgba(212, 168, 83, 0.15);
+      padding: 40px 32px;
+    }
+    .countdown-bar.expired::before {
+      background:
+        radial-gradient(ellipse 500px 180px at 50% 50%, rgba(180, 83, 40, 0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 400px 150px at 70% 50%, rgba(212, 168, 83, 0.04) 0%, transparent 70%);
+    }
+    .countdown-bar.expired::after {
+      background: linear-gradient(90deg, transparent, rgba(212, 168, 83, 0.15), rgba(180, 83, 40, 0.1), transparent);
+    }
+    .countdown-bar.expired .countdown-pulse { background: #B45309; }
+    .countdown-bar.expired .countdown-pulse::after { background: rgba(180, 83, 9, 0.35); }
+    .countdown-bar.expired .countdown-urgency-tag {
+      background: rgba(180, 83, 40, 0.08);
+      border-color: rgba(180, 83, 40, 0.2);
+      color: #D97706;
+    }
+    .expired-main-text {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.3;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+    .expired-main-text .expired-highlight {
+      color: #D97706;
+      position: relative;
+    }
+    .expired-main-text .expired-highlight::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #B45309, #D97706);
+      border-radius: 2px;
+      opacity: 0.5;
+    }
+    .expired-stamp {
+      display: inline-block;
+      padding: 8px 28px;
+      border: 2px solid #B45309;
+      border-radius: 8px;
+      color: #D97706;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      animation: expiredStamp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+      position: relative;
+      z-index: 2;
+      margin-top: 8px;
+    }
+    .expired-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      background: linear-gradient(135deg, #B45309 0%, #78350F 100%);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      border-radius: 100px;
+      text-decoration: none;
+      position: relative;
+      z-index: 2;
+      margin-top: 16px;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 8px 28px rgba(180, 83, 9, 0.2), 0 0 0 1px rgba(212, 168, 83, 0.15);
+      animation: expiredPulse 3s ease-in-out infinite;
+    }
+    .expired-cta:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 12px 36px rgba(180, 83, 9, 0.3), 0 0 0 1px rgba(212, 168, 83, 0.25);
+    }
+    .hero-badge.expired-badge {
+      background: rgba(180, 83, 9, 0.05);
+      border-color: rgba(180, 83, 9, 0.2);
+      color: #B45309;
+      animation: expiredBadgePulse 3s ease-in-out infinite;
+    }
+    .hero-badge.expired-badge .hero-badge-dot { background: #B45309; }
+    .hero-badge.expired-badge .hero-badge-dot::after { border-color: #B45309; }
+    .hero-badge.expired-badge .hero-badge-sub { color: #B45309; }
+    .hero h1 .accent.expired-accent { color: #B45309; }
+    .hero h1 .accent.expired-accent::after { background: linear-gradient(90deg, #B45309, #D97706); }
+    .expired-scanline {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(180, 83, 9, 0.25), rgba(212, 168, 83, 0.2), transparent);
+      z-index: 3;
+      animation: expiredScanline 3s linear infinite;
+      pointer-events: none;
+    }
+    .expired-burst { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+    .expired-typewriter { display: inline; }
+    .expired-cursor {
+      color: #D97706;
+      animation: cursorBlink 0.7s step-end infinite;
+      font-weight: 300;
+    }
+    @keyframes cursorBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
     /* ═══ SECTION SYSTEM ═══ */
     .section { padding: 120px 32px; }
     .section-container { max-width: 1200px; margin: 0 auto; }
