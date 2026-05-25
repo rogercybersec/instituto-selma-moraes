@@ -605,7 +605,14 @@
       .hero-video-abs { width: 220px; height: 320px; right: 2%; top: 45%; }
     }
     @media (max-width: 600px) {
-      .hero-video-abs { width: 160px; height: 240px; right: 2%; top: 40%; }
+      .hero-video-abs {
+        position: relative;
+        top: auto; right: auto; transform: none;
+        width: 100%;
+        height: 260px;
+        margin: -20px auto 0;
+        z-index: 6;
+      }
     }
     @media (prefers-reduced-motion: reduce) {
       .hero-video-abs { display: none; }
