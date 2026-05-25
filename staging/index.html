@@ -3463,6 +3463,15 @@
       });
     }
 
+    // ─── Hero Video — fade in on load
+    (function(){
+      var v = document.getElementById('heroVideo');
+      if (!v) return;
+      function show() { v.classList.add('loaded'); }
+      if (v.readyState >= 3) show();
+      else v.addEventListener('canplay', show);
+    })();
+
     // ─── PWA Install Button — detecta plataforma + dispara prompt
     (function(){
       const btn = document.getElementById('navInstallBtn');
