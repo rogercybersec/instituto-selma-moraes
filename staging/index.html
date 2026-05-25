@@ -583,19 +583,19 @@
       grid-row: 1;
       align-self: center;
     }
+    /* Right column: video on top, globe below */
     .hero-video-col {
       grid-column: 2;
-      grid-row: 1 / 3;
+      grid-row: 1;
       position: relative;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      min-height: 420px;
+      gap: 20px;
     }
     .hero-video-col video {
       width: 100%;
-      height: 100%;
-      max-height: 580px;
+      max-height: 380px;
       object-fit: cover;
       object-position: center 18%;
       border-radius: 20px;
@@ -605,48 +605,23 @@
     .hero-video-col video.loaded {
       opacity: 1;
     }
-    .hero-video-col.faded-out {
-      opacity: 0;
-      transition: opacity 2s ease-out;
-    }
-    .hero-bottom-row {
-      grid-column: 1;
-      grid-row: 2;
-      display: flex;
-      gap: 24px;
-      align-items: center;
-    }
-    .hero-bottom-row #hero3d {
-      width: 140px;
-      height: 140px;
+    .hero-video-col #hero3d {
+      width: 180px;
+      height: 180px;
       flex-shrink: 0;
     }
-    .hero-bottom-row .hero-card-wrapper {
-      flex: 1;
+    /* Stats card spans full width below */
+    .hero-bottom-row {
+      grid-column: 1 / -1;
+      grid-row: 2;
     }
     @media (max-width: 768px) {
-      .hero-content {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto;
-        gap: 24px;
-      }
-      .hero-text { grid-column: 1; grid-row: 1; }
-      .hero-video-col {
-        grid-column: 1;
-        grid-row: 2;
-        min-height: 300px;
-      }
       .hero-video-col video {
-        max-height: 400px;
+        max-height: 280px;
       }
-      .hero-bottom-row {
-        grid-column: 1;
-        grid-row: 3;
-        flex-direction: column;
-      }
-      .hero-bottom-row #hero3d {
-        width: 120px;
-        height: 120px;
+      .hero-video-col #hero3d {
+        width: 140px;
+        height: 140px;
       }
     }
     @media (prefers-reduced-motion: reduce) {
