@@ -3469,17 +3469,16 @@
       });
     }
 
-    // ─── Hero Video — cinematic single-play with fade-out (Apple/Tesla pattern)
+    // ─── Hero Video — plays once over the globe, fades to reveal 3D globe
     (function(){
       var v = document.getElementById('heroVideo');
-      if (!v) return;
-      v.removeAttribute('loop');
+      var wrap = document.getElementById('heroVideoWrap');
+      if (!v || !wrap) return;
       function show() { v.classList.add('loaded'); }
       if (v.readyState >= 3) show();
       else v.addEventListener('canplay', show, {once:true});
       v.addEventListener('ended', function() {
-        v.style.transition = 'opacity 2s ease-out';
-        v.style.opacity = '0';
+        wrap.classList.add('faded-out');
       }, {once:true});
     })();
 
