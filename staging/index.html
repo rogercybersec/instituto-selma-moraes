@@ -2790,12 +2790,10 @@
 
   <!-- HERO — IMMERSIVE DARK WITH INTERACTIVE EFFECTS -->
   <section class="hero" id="hero">
-    <div class="hero-video-abs">
-      <video id="heroVideo" autoplay muted loop playsinline poster="selma-hero-poster.jpg" preload="auto">
-        <source src="selma-hero-web.mp4" type="video/mp4">
-        <source src="selma-hero.webm" type="video/webm">
-      </video>
-    </div>
+    <video id="heroVideo" autoplay muted loop playsinline poster="selma-hero-poster.jpg"
+      style="position:absolute;top:0;right:0;width:50%;height:100%;object-fit:cover;object-position:center 18%;z-index:4;pointer-events:none;border-radius:0 0 0 40px">
+      <source src="selma-hero-web.mp4" type="video/mp4">
+    </video>
     <canvas id="heroCanvas"></canvas>
     <div class="hero-grid"></div>
     <div class="hero-orb hero-orb-1"></div>
