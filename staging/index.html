@@ -577,63 +577,38 @@
       cursor: none;
     }
 
-    /* Hero layout: text left + video right, globe below with stats */
-    .hero-text {
-      grid-column: 1;
-      grid-row: 1;
-      align-self: center;
+    /* Hero video — ALWAYS on the right side, absolute positioned, all viewports */
+    .hero-video-abs {
+      position: absolute;
+      top: 50%;
+      right: 5%;
+      transform: translateY(-50%);
+      width: 340px;
+      height: 480px;
+      z-index: 3;
+      border-radius: 20px;
+      overflow: hidden;
+      pointer-events: none;
     }
-    /* Right column: video on top, globe below */
-    .hero-video-col {
-      grid-column: 2;
-      grid-row: 1;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-    }
-    .hero-video-col video {
+    .hero-video-abs video {
+      display: block;
       width: 100%;
-      max-height: 380px;
+      height: 100%;
       object-fit: cover;
       object-position: center 18%;
       border-radius: 20px;
-      opacity: 1;
     }
-    .hero-video-col #hero3d {
-      width: 180px;
-      height: 180px;
-      flex-shrink: 0;
-    }
-    /* Stats card spans full width below */
-    .hero-bottom-row {
-      grid-column: 1 / -1;
-      grid-row: 2;
+    @media (max-width: 1200px) {
+      .hero-video-abs { width: 280px; height: 400px; right: 2%; }
     }
     @media (max-width: 960px) {
-      .hero-text { grid-column: 1; grid-row: 1; }
-      .hero-video-col {
-        grid-column: 1;
-        grid-row: 2;
-        flex-direction: row;
-        justify-content: center;
-      }
-      .hero-video-col video {
-        max-height: 280px;
-        max-width: 60%;
-      }
-      .hero-video-col #hero3d {
-        width: 140px;
-        height: 140px;
-      }
-      .hero-bottom-row {
-        grid-column: 1;
-        grid-row: 3;
-      }
+      .hero-video-abs { width: 220px; height: 320px; right: 2%; top: 45%; }
+    }
+    @media (max-width: 600px) {
+      .hero-video-abs { width: 160px; height: 240px; right: 2%; top: 40%; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .hero-video-col video { display: none; }
+      .hero-video-abs { display: none; }
     }
 
     /* Dynamic grid background */
