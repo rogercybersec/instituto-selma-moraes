@@ -3478,13 +3478,10 @@
       });
     }
 
-    // ─── Hero Video — loops, Selma always visible on the right
+    // ─── Hero Video — autoplay muted loop, no JS needed for visibility
     (function(){
       var v = document.getElementById('heroVideo');
-      if (!v) return;
-      function show() { v.classList.add('loaded'); }
-      if (v.readyState >= 3) show();
-      else v.addEventListener('canplay', show, {once:true});
+      if (v) v.play().catch(function(){});
     })();
 
     // ─── PWA Install Button — detecta plataforma + dispara prompt
