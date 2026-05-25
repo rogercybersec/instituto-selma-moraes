@@ -577,7 +577,7 @@
       cursor: none;
     }
 
-    /* Hero video — ALWAYS on the right side, absolute positioned, all viewports */
+    /* Hero video — right side, ABOVE all content, all viewports */
     .hero-video-abs {
       position: absolute;
       top: 50%;
@@ -585,10 +585,11 @@
       transform: translateY(-50%);
       width: 340px;
       height: 480px;
-      z-index: 3;
+      z-index: 10;
       border-radius: 20px;
       overflow: hidden;
       pointer-events: none;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
     }
     .hero-video-abs video {
       display: block;
@@ -611,9 +612,8 @@
         right: 8px;
         top: 160px;
         transform: none;
-        z-index: 6;
         border-radius: 16px;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.18);
       }
     }
     @media (prefers-reduced-motion: reduce) {
