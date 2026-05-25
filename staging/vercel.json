@@ -1,0 +1,27 @@
+{
+  "buildCommand": "",
+  "outputDirectory": ".",
+  "framework": null,
+  "rewrites": [
+    { "source": "/cotacao", "destination": "/cotacao.html" },
+    { "source": "/avaliacao", "destination": "/diagnostico.html" },
+    { "source": "/diagnostico", "destination": "/diagnostico.html" },
+    { "source": "/painel-selma", "destination": "/painel-selma.html" },
+    { "source": "/checklist-nr1", "destination": "/checklist-nr1.html" },
+    { "source": "/guia-calendly", "destination": "/guia-calendly.html" },
+    { "source": "/blog", "destination": "/blog/index.html" },
+    { "source": "/blog/", "destination": "/blog/index.html" },
+    { "source": "/blog/nr1-o-que-mudou-2026", "destination": "/blog/nr1-o-que-mudou-2026.html" },
+    { "source": "/blog/frprt-explicado", "destination": "/blog/frprt-explicado.html" },
+    { "source": "/blog/multa-nr1-2026", "destination": "/blog/multa-nr1-2026.html" },
+    { "source": "/:path*.:ext(png|jpg|jpeg|gif|svg|webp|ico|woff|woff2|ttf|otf|js|css|map|webmanifest|mp4|webm|ogg)", "destination": "/:path*.:ext" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "headers": [
+    { "source": "/(.*)", "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex" },
+        { "key": "X-Selma-Env", "value": "staging" }
+      ]
+    }
+  ]
+}
