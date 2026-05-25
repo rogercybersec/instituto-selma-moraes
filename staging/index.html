@@ -3550,9 +3550,15 @@
         });
         cdPrev = vals;
         const heroEl = document.getElementById('hero-days-left');
-        if (heroEl) heroEl.innerHTML = days + "&nbsp;" + (days === 1 ? "dia" : "dias");
+        if (heroEl) {
+          if (days > 0) heroEl.innerHTML = days + "&nbsp;" + (days === 1 ? "dia" : "dias");
+          else heroEl.innerHTML = hours + "h&nbsp;" + mins + "min";
+        }
         var badgeEl = document.getElementById("hero-badge-text");
-        if (badgeEl) badgeEl.textContent = "NR-1 entra em vigor em " + days + (days === 1 ? " dia" : " dias");
+        if (badgeEl) {
+          if (days > 0) badgeEl.textContent = "NR-1 entra em vigor em " + days + (days === 1 ? " dia" : " dias");
+          else badgeEl.textContent = "NR-1 entra em vigor em " + hours + "h " + mins + "min";
+        }
       } else {
         // ── EXPIRED STATE: dramatic transformation ──
         const cdBar = document.querySelector('.countdown-bar');
