@@ -3451,7 +3451,7 @@
       var v = document.getElementById('heroVideo');
       if (!v) return;
       v.play().catch(function(){});
-      v.addEventListener('ended', function(){ v.style.opacity = '0'; });
+      // Video loops continuously as ghost background
     })();
 
     // ─── PWA Install Button — detecta plataforma + dispara prompt
