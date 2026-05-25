@@ -14,8 +14,13 @@
     { "source": "/blog/nr1-o-que-mudou-2026", "destination": "/blog/nr1-o-que-mudou-2026.html" },
     { "source": "/blog/frprt-explicado", "destination": "/blog/frprt-explicado.html" },
     { "source": "/blog/multa-nr1-2026", "destination": "/blog/multa-nr1-2026.html" },
-    { "source": "/:path*.:ext(png|jpg|jpeg|gif|svg|webp|ico|woff|woff2|ttf|otf|js|css|map|webmanifest|mp4|webm|ogg)", "destination": "/:path*.:ext" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/:path*.:ext(png|jpg|jpeg|gif|svg|webp|ico|woff|woff2|ttf|otf|js|css|map|webmanifest|mp4|webm|ogg)", "destination": "/:path*.:ext" }
+  ],
+  "redirects": [],
+  "cleanUrls": true,
+  "trailingSlash": false
+}
+
   ],
   "headers": [
     { "source": "/(.*)", "headers": [
