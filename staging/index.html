@@ -21,7 +21,7 @@
       v.muted = true;
       v.playsInline = true;
       v.setAttribute('playsinline','');
-      v.style.cssText = 'position:absolute;top:0;right:0;width:50%;height:100%;object-fit:cover;object-position:center 15%;pointer-events:none;z-index:6;transition:opacity 1.5s ease-out;-webkit-mask-image:linear-gradient(to right,transparent 0%,black 18%);mask-image:linear-gradient(to right,transparent 0%,black 18%);';
+      v.style.cssText = 'position:absolute;top:0;right:0;width:55%;height:100%;object-fit:cover;object-position:center 15%;pointer-events:none;z-index:1;opacity:0.12;filter:grayscale(1) contrast(2) brightness(1.1);transition:opacity 2s ease-out;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,black 10%,black 85%,transparent 100%),linear-gradient(to right,transparent 0%,black 35%,black 92%,transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to bottom,transparent 0%,black 10%,black 85%,transparent 100%),linear-gradient(to right,transparent 0%,black 35%,black 92%,transparent 100%);mask-composite:intersect;';
       v.onended = function(){ v.style.opacity = '0'; };
       var src = document.createElement('source');
       src.src = 'selma-hero-web.mp4';
