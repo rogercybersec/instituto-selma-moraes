@@ -15,12 +15,20 @@
     if(!document.getElementById('heroVideo')){
       var hero = document.getElementById('hero');
       if(!hero) return;
-      var wrap = document.createElement('div');
-      wrap.className = 'hero-video-abs';
-      wrap.innerHTML = '<video id="heroVideo" autoplay muted loop playsinline preload="auto" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center 18%;border-radius:20px"><source src="selma-hero-web.mp4" type="video/mp4"></video>';
-      hero.insertBefore(wrap, hero.firstChild);
-      var v = document.getElementById('heroVideo');
-      if(v) v.play().catch(function(){});
+      var v = document.createElement('video');
+      v.id = 'heroVideo';
+      v.autoplay = true;
+      v.muted = true;
+      v.loop = true;
+      v.playsInline = true;
+      v.setAttribute('playsinline','');
+      v.style.cssText = 'position:absolute;top:0;right:0;width:50%;height:100%;object-fit:cover;object-position:center 18%;z-index:4;pointer-events:none;border-radius:0 0 0 40px';
+      var src = document.createElement('source');
+      src.src = 'selma-hero-web.mp4';
+      src.type = 'video/mp4';
+      v.appendChild(src);
+      hero.insertBefore(v, hero.firstChild);
+      v.play().catch(function(){});
     }
   });
 })();
