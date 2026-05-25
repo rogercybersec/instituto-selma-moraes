@@ -2848,7 +2848,14 @@
           </a>
         </div>
       </div>
-      <div id="hero3d" style="width:100%;max-width:380px;aspect-ratio:1;position:relative;"></div>
+      <div id="heroRightCol" style="position:relative;width:100%;max-width:420px;min-height:480px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:20px;">
+        <video id="heroVideo" autoplay muted playsinline poster="selma-hero-poster.jpg"
+          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 18%;z-index:2;pointer-events:none;border-radius:20px;transition:opacity 1.2s ease-out;"
+          onended="this.style.opacity='0';">
+          <source src="selma-hero-web.mp4" type="video/mp4">
+        </video>
+        <div id="hero3d" style="width:100%;max-width:380px;aspect-ratio:1;position:relative;z-index:1;"></div>
+      </div>
       <div class="hero-card-wrapper tilt-3d">
         <div class="glass-card tilt-3d-inner" id="tiltCard">
           <div class="glass-card-title">O custo de não agir</div>
