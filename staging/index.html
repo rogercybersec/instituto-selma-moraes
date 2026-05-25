@@ -3491,10 +3491,12 @@
       });
     }
 
-    // ─── Hero Video — autoplay muted loop, no JS needed for visibility
+    // ─── Hero Video — plays once, fades out to reveal 3D globe
     (function(){
       var v = document.getElementById('heroVideo');
-      if (v) v.play().catch(function(){});
+      if (!v) return;
+      v.play().catch(function(){});
+      v.addEventListener('ended', function(){ v.style.opacity = '0'; });
     })();
 
     // ─── PWA Install Button — detecta plataforma + dispara prompt
