@@ -14,15 +14,13 @@
     { "source": "/blog/nr1-o-que-mudou-2026", "destination": "/blog/nr1-o-que-mudou-2026.html" },
     { "source": "/blog/frprt-explicado", "destination": "/blog/frprt-explicado.html" },
     { "source": "/blog/multa-nr1-2026", "destination": "/blog/multa-nr1-2026.html" },
-    { "source": "/:path*.:ext(png|jpg|jpeg|gif|svg|webp|ico|woff|woff2|ttf|otf|js|css|map|webmanifest|mp4|webm|ogg)", "destination": "/:path*.:ext" }
-  ],
-  "redirects": [],
-  "cleanUrls": true,
-  "trailingSlash": false
-}
-
+    { "source": "/(.*)", "destination": "/index.html" }
   ],
   "headers": [
+    { "source": "/selma-hero-web.mp4", "headers": [{ "key": "Content-Type", "value": "video/mp4" }] },
+    { "source": "/selma-hero.mp4", "headers": [{ "key": "Content-Type", "value": "video/mp4" }] },
+    { "source": "/selma-hero.webm", "headers": [{ "key": "Content-Type", "value": "video/webm" }] },
+    { "source": "/selma-hero-poster.jpg", "headers": [{ "key": "Content-Type", "value": "image/jpeg" }] },
     { "source": "/(.*)", "headers": [
         { "key": "X-Robots-Tag", "value": "noindex" },
         { "key": "X-Selma-Env", "value": "staging" }
