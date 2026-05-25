@@ -3470,17 +3470,13 @@
       });
     }
 
-    // ─── Hero Video — plays once over the globe, fades to reveal 3D globe
+    // ─── Hero Video — loops, Selma always visible on the right
     (function(){
       var v = document.getElementById('heroVideo');
-      var wrap = document.getElementById('heroVideoWrap');
-      if (!v || !wrap) return;
+      if (!v) return;
       function show() { v.classList.add('loaded'); }
       if (v.readyState >= 3) show();
       else v.addEventListener('canplay', show, {once:true});
-      v.addEventListener('ended', function() {
-        wrap.classList.add('faded-out');
-      }, {once:true});
     })();
 
     // ─── PWA Install Button — detecta plataforma + dispara prompt
