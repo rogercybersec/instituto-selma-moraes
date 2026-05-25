@@ -615,13 +615,25 @@
       grid-column: 1 / -1;
       grid-row: 2;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 960px) {
+      .hero-text { grid-column: 1; grid-row: 1; }
+      .hero-video-col {
+        grid-column: 1;
+        grid-row: 2;
+        flex-direction: row;
+        justify-content: center;
+      }
       .hero-video-col video {
         max-height: 280px;
+        max-width: 60%;
       }
       .hero-video-col #hero3d {
         width: 140px;
         height: 140px;
+      }
+      .hero-bottom-row {
+        grid-column: 1;
+        grid-row: 3;
       }
     }
     @media (prefers-reduced-motion: reduce) {
