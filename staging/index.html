@@ -577,10 +577,13 @@
       cursor: none;
     }
 
-    /* Hero background video — Apple/Tesla-tier treatment */
+    /* Hero background video — Selma visible on right side, Apple-tier blend */
     .hero-video-wrap {
       position: absolute;
-      inset: 0;
+      top: 0;
+      right: 0;
+      width: 55%;
+      height: 100%;
       z-index: 1;
       overflow: hidden;
       pointer-events: none;
@@ -589,33 +592,50 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 20%;
+      object-position: center 15%;
       opacity: 0;
-      transition: opacity 1.5s ease-out;
+      transition: opacity 1.8s ease-out;
     }
     .hero-video-wrap video.loaded {
-      opacity: 0.55;
+      opacity: 0.8;
     }
     .hero-video-overlay {
       position: absolute;
       inset: 0;
       background:
+        linear-gradient(90deg,
+          rgba(255,255,255,1) 0%,
+          rgba(255,255,255,0.85) 15%,
+          rgba(255,255,255,0.15) 50%,
+          rgba(255,255,255,0.05) 70%,
+          rgba(255,255,255,0.3) 100%
+        ),
         linear-gradient(180deg,
-          rgba(255,255,255,0.92) 0%,
-          rgba(255,255,255,0.65) 25%,
-          rgba(255,255,255,0.40) 50%,
-          rgba(255,255,255,0.70) 75%,
-          rgba(255,255,255,0.95) 100%
+          rgba(255,255,255,0.7) 0%,
+          transparent 15%,
+          transparent 80%,
+          rgba(255,255,255,0.9) 100%
         );
       z-index: 1;
     }
     @media (max-width: 768px) {
-      .hero-video-wrap video {
-        object-position: center center;
-        opacity: 0;
+      .hero-video-wrap {
+        width: 100%;
+        top: auto;
+        bottom: 0;
+        height: 50%;
       }
       .hero-video-wrap video.loaded {
-        opacity: 0.4;
+        opacity: 0.5;
+      }
+      .hero-video-overlay {
+        background:
+          linear-gradient(180deg,
+            rgba(255,255,255,1) 0%,
+            rgba(255,255,255,0.4) 30%,
+            rgba(255,255,255,0.2) 70%,
+            rgba(255,255,255,0.8) 100%
+          );
       }
     }
     @media (prefers-reduced-motion: reduce) {
