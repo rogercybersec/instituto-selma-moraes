@@ -3463,13 +3463,18 @@
       });
     }
 
-    // ─── Hero Video — fade in on load
+    // ─── Hero Video — cinematic single-play with fade-out (Apple/Tesla pattern)
     (function(){
       var v = document.getElementById('heroVideo');
       if (!v) return;
+      v.removeAttribute('loop');
       function show() { v.classList.add('loaded'); }
       if (v.readyState >= 3) show();
-      else v.addEventListener('canplay', show);
+      else v.addEventListener('canplay', show, {once:true});
+      v.addEventListener('ended', function() {
+        v.style.transition = 'opacity 2s ease-out';
+        v.style.opacity = '0';
+      }, {once:true});
     })();
 
     // ─── PWA Install Button — detecta plataforma + dispara prompt
