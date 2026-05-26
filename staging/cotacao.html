@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<script>if(location.hostname==='selmamoraes.com.br'){location.replace('https://www.selmamoraes.com.br'+location.pathname+location.search+location.hash);}</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>Proposta de Adequação NR-1 | Instituto Selma Moraes</title>
+<meta name="description" content="Proposta personalizada de adequação à NR-1 com o Método Resguarda™. Visualize o escopo completo e o investimento.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%231B365D'/%3E%3Ctext x='50' y='62' font-family='Georgia,serif' font-size='42' fill='%23D4A853' text-anchor='middle' font-weight='bold'%3ESM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1B365D;--navy-deep:#0A1929;--navy-mid:#132F4C;
+  --teal:#0F766E;--teal-light:#14B8A6;--teal-bright:#2DD4BF;
+  --green:#2E7D32;--green-bright:#4CAF50;
+  --gold:#D4A853;--gold-light:#E8C87A;
+  --red:#DC2626;
+  --text:#111827;--text-muted:#475569;--border:#E2E8F0;--bg:#F8FAFC;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.6}
+
+/* ═══ SHARED ═══ */
+.container{max-width:640px;margin:0 auto;padding:24px 20px 60px}
+.brand{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--navy);font-weight:700;font-size:15px}
+.logo-mark{width:36px;height:36px;background:var(--navy);color:var(--gold);display:flex;align-items:center;justify-content:center;border-radius:8px;font-family:Georgia,serif;font-weight:700;letter-spacing:-1px}
+.back-link{color:var(--text-muted);text-decoration:none;font-size:13px}
+.back-link:hover{color:var(--navy)}
+
+.card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:28px 24px;box-shadow:0 4px 20px rgba(15,23,42,0.04)}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px}
+.field label .req{color:var(--red);margin-left:2px}
+.field label .hint{display:block;font-size:11px;color:var(--text-muted);font-weight:400;margin-top:2px}
+.field input,.field select,.field textarea{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit;background:#fff;transition:border-color 0.2s,box-shadow 0.2s;color:var(--text)}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(20,184,166,0.12)}
+.field textarea{resize:vertical;min-height:60px}
+.field input:read-only{background:#F1F5F9;color:var(--text-muted);cursor:default}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--teal);margin-bottom:14px}
+.divider{border:none;border-top:1px solid var(--border);margin:24px 0 20px}
+
+.radio-grid{display:grid;gap:6px}
+.radio-card{position:relative;cursor:pointer}
+.radio-card input{position:absolute;opacity:0;pointer-events:none}
+.radio-card .rc{padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;display:flex;align-items:center;gap:10px;transition:all 0.2s;background:#fff;font-size:13px;font-weight:500;color:var(--text)}
+.radio-card input:checked+.rc{border-color:var(--teal);background:#F0FDFA;color:var(--teal)}
+.radio-card .dot{width:16px;height:16px;border:2px solid var(--border);border-radius:50%;flex-shrink:0;position:relative;transition:all 0.2s}
+.radio-card input:checked+.rc .dot{border-color:var(--teal)}
+.radio-card input:checked+.rc .dot::after{content:'';position:absolute;inset:3px;background:var(--teal);border-radius:50%}
+
+.btn{padding:14px 24px;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:transform 0.2s,box-shadow 0.2s}
+.btn:hover:not(:disabled){transform:translateY(-2px)}
+.btn:disabled{opacity:0.5;cursor:not-allowed}
+.btn-primary{background:linear-gradient(135deg,var(--teal),var(--teal-light));color:#fff;box-shadow:0 4px 16px rgba(20,184,166,0.3);width:100%}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy-deep);box-shadow:0 4px 16px rgba(212,168,83,0.3);width:100%}
+.btn-outline{background:transparent;color:var(--text-muted);border:1.5px solid var(--border)}
+
+.prefilled-notice{background:#F0FDFA;border:1px solid rgba(14,184,166,0.2);border-radius:10px;padding:12px 16px;margin-bottom:20px;display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--teal)}
+.prefilled-notice strong{color:#047857}
+
+.view{display:none}
+.view.active{display:block}
+
+/* ═══ ADMIN PANEL STYLES ═══ */
+.admin-hero{background:linear-gradient(135deg,var(--navy-deep),var(--navy));color:#fff;border-radius:16px;padding:28px 24px;margin-bottom:24px}
+.admin-hero .badge{display:inline-block;background:rgba(212,168,83,0.2);color:var(--gold);padding:5px 14px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:12px}
+.admin-hero h1{font-family:'Playfair Display',serif;font-size:22px;font-weight:800;margin-bottom:8px}
+.admin-hero p{font-size:13px;color:rgba(255,255,255,0.7);line-height:1.5}
+.admin-steps{display:flex;gap:8px;margin-top:16px}
+.admin-step{flex:1;padding:10px 12px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;text-align:center}
+.admin-step strong{display:block;font-size:14px;color:var(--gold)}
+.admin-step span{font-size:10px;color:rgba(255,255,255,0.5)}
+
+.link-box{background:#F0FDF4;border:1.5px solid #86EFAC;border-radius:12px;padding:16px;margin-top:20px}
+.link-box h3{font-size:13px;font-weight:700;color:#166534;margin-bottom:8px}
+.link-url{width:100%;padding:10px 12px;background:#fff;border:1px solid #86EFAC;border-radius:8px;font-size:12px;font-family:'Inter',monospace;color:var(--text);word-break:break-all;cursor:pointer}
+.link-actions{display:flex;gap:8px;margin-top:10px}
+.link-actions button{flex:1;padding:10px;border:none;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit}
+.link-copy{background:#166534;color:#fff}
+.link-wa{background:#25D366;color:#fff}
+.link-email{background:var(--navy);color:#fff}
+
+.msg-templates{margin-top:20px}
+.msg-templates h3{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:8px}
+.msg-box{background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px;font-size:13px;color:var(--text-muted);line-height:1.6;white-space:pre-line;position:relative;margin-bottom:10px}
+.msg-box .copy-msg{position:absolute;top:8px;right:8px;background:var(--navy);color:#fff;border:none;border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;font-family:inherit;font-weight:600}
+
+/* ═══ CLIENT FORM STYLES ═══ */
+.client-hero{background:linear-gradient(135deg,var(--navy),var(--navy-deep));color:#fff;border-radius:16px;padding:28px 24px;margin-bottom:24px;position:relative;overflow:hidden}
+.client-hero::after{content:'';position:absolute;top:-40%;right:-15%;width:260px;height:260px;background:radial-gradient(circle,rgba(212,168,83,0.1),transparent 70%);border-radius:50%}
+.client-hero .badge{display:inline-block;background:rgba(212,168,83,0.2);color:var(--gold);padding:5px 14px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:12px;position:relative;z-index:1}
+.client-hero h1{font-family:'Playfair Display',serif;font-size:24px;font-weight:800;margin-bottom:8px;position:relative;z-index:1}
+.client-hero h1 span{color:var(--gold)}
+.client-hero p{font-size:13px;color:rgba(255,255,255,0.75);line-height:1.5;position:relative;z-index:1}
+.trust-row{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:14px;font-size:11px;color:var(--text-muted)}
+
+/* ═══ PROPOSAL ═══ */
+.proposal{max-width:900px;margin:0 auto;background:#fff}
+.p-cover{background:linear-gradient(135deg,var(--navy-deep) 0%,var(--navy) 50%,var(--navy-mid) 100%);color:#fff;padding:72px 56px 52px;position:relative;overflow:hidden;min-height:440px;display:flex;flex-direction:column;justify-content:space-between}
+.p-cover::before{content:'';position:absolute;top:-50%;right:-15%;width:500px;height:500px;background:radial-gradient(circle,rgba(212,168,83,0.08),transparent 70%);border-radius:50%}
+.p-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(212,168,83,0.15);border:1px solid rgba(212,168,83,0.3);padding:6px 16px;border-radius:100px;font-size:11px;font-weight:700;color:var(--gold);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:28px;position:relative;z-index:1}
+.p-badge::before{content:'';width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+.p-cover h1{font-family:'Playfair Display',serif;font-size:38px;font-weight:800;line-height:1.15;margin-bottom:14px;position:relative;z-index:1}
+.p-cover h1 em{color:var(--gold);font-style:normal}
+.p-cover .p-sub{font-size:15px;color:rgba(255,255,255,0.7);max-width:460px;line-height:1.6;position:relative;z-index:1}
+.p-cover-footer{display:flex;justify-content:space-between;align-items:flex-end;margin-top:48px;position:relative;z-index:1}
+.p-client-box{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px 18px}
+.p-client-box .lbl{font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.5);margin-bottom:3px}
+.p-client-box .val{font-size:15px;font-weight:600}
+.p-cover-meta{text-align:right;font-size:12px;color:rgba(255,255,255,0.4)}
+.p-cover-brand{font-weight:600;color:rgba(255,255,255,0.6);margin-top:6px}
+
+.p-section{padding:48px 56px;border-bottom:1px solid #F1F5F9}
+.p-section:last-of-type{border-bottom:none}
+.p-num{font-size:11px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px}
+.p-section h2{font-family:'Playfair Display',serif;font-size:26px;font-weight:800;color:var(--navy);margin-bottom:18px;line-height:1.2}
+.p-section p{color:var(--text-muted);font-size:14px;line-height:1.8;margin-bottom:14px}
+.p-section p strong{color:var(--text)}
+
+.cred-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}
+.cred{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:18px}
+.cred .ic{width:34px;height:34px;background:linear-gradient(135deg,var(--navy),var(--navy-mid));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:15px;margin-bottom:10px}
+.cred h4{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:3px}
+.cred p{font-size:12px;color:var(--text-muted);margin:0;line-height:1.4}
+
+.urgency{background:linear-gradient(135deg,#FEF3C7,#FDE68A);border:1px solid #F59E0B;border-radius:12px;padding:18px 20px;margin:20px 0;display:flex;gap:12px;align-items:flex-start}
+.urgency .u-icon{font-size:22px;flex-shrink:0;margin-top:2px}
+.urgency h4{font-size:13px;font-weight:700;color:#92400E;margin-bottom:3px}
+.urgency p{font-size:12px;color:#78350F;margin:0;line-height:1.5}
+
+.fines{width:100%;border-collapse:collapse;margin-top:16px;border-radius:12px;overflow:hidden;border:1px solid #FECACA}
+.fines th{background:#DC2626;color:#fff;padding:10px 12px;text-align:center;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em}
+.fines td{padding:9px 12px;border-bottom:1px solid #FEE2E2;font-size:12px;color:var(--text-muted);text-align:center}
+.fines tr:nth-child(even){background:#FEF2F2}
+.fines td:first-child{text-align:left;font-weight:600;color:var(--text);font-size:11px}
+
+.phases{margin-top:24px}
+.phase{display:grid;grid-template-columns:52px 1fr;gap:16px;margin-bottom:24px;position:relative}
+.phase:not(:last-child)::after{content:'';position:absolute;left:25px;top:52px;bottom:-24px;width:2px;background:linear-gradient(to bottom,var(--teal),transparent)}
+.phase-n{width:52px;height:52px;background:linear-gradient(135deg,var(--navy),var(--navy-mid));border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:18px;font-weight:800;flex-shrink:0;position:relative;z-index:1}
+.phase h3{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:2px}
+.phase .ph-time{font-size:11px;color:var(--teal);font-weight:600;margin-bottom:6px}
+.phase ul{list-style:none;margin:0}
+.phase li{font-size:13px;color:var(--text-muted);padding:2px 0 2px 18px;position:relative;line-height:1.5}
+.phase li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:700;font-size:12px}
+
+.svc{width:100%;border-collapse:collapse;margin-top:18px;border-radius:12px;overflow:hidden;border:1px solid var(--border)}
+.svc th{background:var(--navy);color:#fff;padding:12px 18px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em}
+.svc td{padding:12px 18px;border-bottom:1px solid #F1F5F9;font-size:13px;color:var(--text-muted)}
+.svc tr:nth-child(even){background:var(--bg)}
+.svc td:first-child{font-weight:600;color:var(--text)}
+
+.results{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+.res{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;transition:transform 0.2s}
+.res:hover{transform:translateY(-2px)}
+.res .r-icon{font-size:24px;margin-bottom:6px}
+.res h4{font-size:12px;font-weight:700;color:var(--navy);line-height:1.3}
+
+.inv-box{background:linear-gradient(135deg,var(--navy-deep),var(--navy));border-radius:16px;padding:36px;color:#fff;text-align:center;margin-top:24px;position:relative;overflow:hidden}
+.inv-box::before{content:'';position:absolute;top:-50%;right:-20%;width:280px;height:280px;background:radial-gradient(circle,rgba(212,168,83,0.1),transparent 70%);border-radius:50%}
+.inv-label{font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--gold);font-weight:700;margin-bottom:10px;position:relative}
+.inv-price{font-family:'Playfair Display',serif;font-size:40px;font-weight:800;margin-bottom:4px;position:relative}
+.inv-price-original{font-size:16px;color:rgba(255,255,255,0.4);text-decoration:line-through;margin-bottom:6px;position:relative}
+.inv-discount-badge{display:inline-block;background:rgba(46,125,50,0.3);border:1px solid rgba(76,175,80,0.4);color:#4CAF50;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;margin-bottom:12px;position:relative}
+.inv-vista{font-size:14px;color:var(--gold-light);margin-bottom:14px;position:relative}
+.inv-scope{display:inline-block;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:10px 18px;font-size:13px;color:rgba(255,255,255,0.8);position:relative}
+.inv-courtesy{margin-top:16px;font-size:12px;color:var(--teal-bright);font-weight:500;position:relative}
+.inv-includes{margin-top:20px;text-align:left;position:relative}
+.inv-includes h4{font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.5);margin-bottom:8px}
+.inv-includes li{font-size:12px;color:rgba(255,255,255,0.7);padding:3px 0 3px 16px;position:relative;list-style:none}
+.inv-includes li::before{content:'✓';position:absolute;left:0;color:var(--teal-bright);font-weight:700;font-size:11px}
+.validity{display:inline-flex;align-items:center;gap:6px;background:rgba(14,184,166,0.1);border:1px solid rgba(14,184,166,0.2);border-radius:100px;padding:6px 14px;font-size:11px;font-weight:600;color:var(--teal);margin-top:16px}
+
+.p-cta{background:var(--bg);padding:44px 56px;text-align:center}
+.p-cta h2{font-family:'Playfair Display',serif;font-size:24px;color:var(--navy);margin-bottom:12px}
+.p-cta p{color:var(--text-muted);font-size:14px;max-width:460px;margin:0 auto 24px}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 24px;border-radius:12px;font-size:14px;font-weight:600;text-decoration:none;transition:transform 0.2s}
+.cta-btn:hover{transform:translateY(-2px)}
+.cta-btn.wa{background:#25D366;color:#fff;box-shadow:0 4px 14px rgba(37,211,102,0.3)}
+.cta-btn.email{background:#fff;color:var(--navy);border:2px solid var(--navy)}
+
+.p-footer{padding:28px 56px;background:var(--navy-deep);color:rgba(255,255,255,0.5);font-size:11px;text-align:center;line-height:1.8}
+.p-footer strong{color:rgba(255,255,255,0.8)}
+
+@media print{.view,.no-print{display:none!important}.proposal{display:block!important}.p-cover{-webkit-print-color-adjust:exact;print-color-adjust:exact}.p-section{page-break-inside:avoid}body{background:#fff}}
+@media(max-width:768px){
+  .p-cover{padding:48px 24px 36px}.p-cover h1{font-size:26px}.p-section{padding:32px 24px}
+  .cred-grid{grid-template-columns:1fr}.results{grid-template-columns:1fr 1fr}
+  .phase{grid-template-columns:40px 1fr;gap:12px}.phase-n{width:40px;height:40px;font-size:15px;border-radius:10px}
+  .p-cta{padding:32px 24px}.inv-box{padding:28px 20px}.inv-price{font-size:30px}
+  .two-col{grid-template-columns:1fr}.p-cover-footer{flex-direction:column;gap:14px}.p-cover-meta{text-align:left}
+  .fines th,.fines td{padding:6px 5px;font-size:9px}.admin-steps{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- VIEW 1: ADMIN — Selma pre-preenche e gera o link -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="view" id="adminView">
+<div class="container">
+  <div class="brand">
+    <a href="/" class="logo"><div class="logo-mark">SM</div><span>Instituto Selma Moraes</span></a>
+    <span style="font-size:11px;color:var(--gold);font-weight:700;background:rgba(212,168,83,0.1);padding:4px 10px;border-radius:6px">PAINEL SELMA</span>
+  </div>
+
+  <div class="admin-hero">
+    <span class="badge">Gerador de propostas</span>
+    <h1>Crie uma proposta personalizada</h1>
+    <p>Preencha o que você já sabe sobre o cliente (do LinkedIn, WhatsApp ou telefone). O sistema gera um link exclusivo — o cliente completa o que falta e recebe a proposta na hora.</p>
+    <div class="admin-steps">
+      <div class="admin-step"><strong>1</strong><span>Você preenche</span></div>
+      <div class="admin-step"><strong>2</strong><span>Gera o link</span></div>
+      <div class="admin-step"><strong>3</strong><span>Envia ao cliente</span></div>
+      <div class="admin-step"><strong>4</strong><span>Ele completa</span></div>
+      <div class="admin-step"><strong>5</strong><span>Proposta pronta</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:4px">O que você já sabe?</h2>
+    <p style="font-size:12px;color:var(--text-muted);margin-bottom:20px">Preencha apenas o que tiver. O restante o cliente completa ao abrir o link.</p>
+
+    <div class="section-label">Dados do contato</div>
+    <div class="two-col">
+      <div class="field"><label>Nome do contato</label><input type="text" id="a_nome" placeholder="Ex.: João Silva"></div>
+      <div class="field"><label>Cargo</label><input type="text" id="a_cargo" placeholder="Ex.: Diretor de RH"></div>
+    </div>
+    <div class="field"><label>E-mail</label><input type="email" id="a_email" placeholder="joao@empresa.com.br"></div>
+
+    <hr class="divider">
+    <div class="section-label">Dados da empresa</div>
+    <div class="field"><label>Nome da empresa</label><input type="text" id="a_empresa" placeholder="Ex.: TechSolutions Ltda"></div>
+    <div class="two-col">
+      <div class="field"><label>Ramo de atividade</label>
+        <select id="a_setor"><option value="">Não sei ainda</option><option>Indústria / Manufatura</option><option>Construção civil</option><option>Logística / Transporte</option><option>Varejo / Comércio</option><option>Serviços (financeiro, jurídico, contábil)</option><option>Saúde / Hospitais / Clínicas</option><option>Educação</option><option>Alimentação / Hotelaria</option><option>Tecnologia</option><option>Agro</option><option>Outro</option></select>
+      </div>
+      <div class="field"><label>Nº de colaboradores</label>
+        <select id="a_tamanho"><option value="">Não sei ainda</option><option value="1-19">Até 19</option><option value="20-49">20 a 49</option><option value="50-99">50 a 99</option><option value="100-200">100 a 200</option><option value="200+">Mais de 200</option></select>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <div class="section-label">Desconto e condições especiais</div>
+    <div class="two-col">
+      <div class="field"><label>Desconto (%)<span class="hint">0% a 30% permitido</span></label><input type="number" id="a_desconto" placeholder="10" min="0" max="30" value="10"></div>
+      <div class="field"><label>Cortesia</label><input type="text" id="a_cortesia" value="Ação Setembro Amarelo presencial" placeholder="Ex.: palestra gratuita"></div>
+    </div>
+    <div style="background:#F8FAFC;border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:18px;font-size:12px;line-height:1.7;color:var(--text-muted)">
+      <strong style="color:var(--navy);font-size:11px;text-transform:uppercase;letter-spacing:0.05em;display:block;margin-bottom:6px">Guia de desconto</strong>
+      <span style="color:var(--teal);font-weight:600">5%</span> — Padrão para novos contatos (prospecção fria)<br>
+      <span style="color:var(--teal);font-weight:600">10%</span> — Indicação de parceiro ou cliente satisfeito<br>
+      <span style="color:var(--teal);font-weight:600">15%</span> — Parceria estratégica ou volume (ex.: grupo de empresas)<br>
+      <span style="color:var(--teal);font-weight:600">20–30%</span> — Caso especial (negociar diretamente, considerar escopo)
+    </div>
+    <div class="field"><label>Mensagem pessoal para o cliente <span class="hint">Opcional — aparece no topo da proposta</span></label><textarea id="a_mensagem" placeholder="Ex.: João, conforme conversamos no LinkedIn, preparei esta proposta especialmente para a sua empresa..."></textarea></div>
+
+    <button class="btn btn-gold" onclick="generateLink()" style="margin-top:20px">Gerar link da proposta →</button>
+
+    <div class="link-box" id="linkBox" style="display:none">
+      <h3>Link gerado com sucesso</h3>
+      <div class="link-url" id="linkUrl" onclick="copyLink()"></div>
+      <div class="link-actions">
+        <button class="link-copy" onclick="copyLink()">Copiar link</button>
+        <button class="link-wa" onclick="sendWhatsApp()">Enviar no WhatsApp</button>
+        <button class="link-email" onclick="sendEmail()">Enviar por e-mail</button>
+      </div>
+    </div>
+
+    <div id="adminActions" style="display:none;margin-top:16px">
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-outline" onclick="previewProposal()" style="flex:1;padding:12px;font-size:13px">👁 Ver proposta</button>
+        <button class="btn btn-outline" onclick="editProposal()" style="flex:1;padding:12px;font-size:13px">✏️ Editar e regerar</button>
+      </div>
+      <p style="font-size:11px;color:var(--text-muted);margin-top:8px;text-align:center">"Ver proposta" abre exatamente o que o cliente verá. "Editar" permite ajustar e gerar um novo link.</p>
+    </div>
+
+    <div class="msg-templates" id="msgTemplates" style="display:none">
+      <h3>Mensagens prontas para enviar</h3>
+      <div class="msg-box" id="msgWhatsApp">
+        <button class="copy-msg" onclick="copyMsg('msgWhatsApp')">Copiar</button>
+      </div>
+      <div class="msg-box" id="msgEmail">
+        <button class="copy-msg" onclick="copyMsg('msgEmail')">Copiar</button>
+      </div>
+    </div>
+  </div>
+
+  <footer style="margin-top:32px;text-align:center;font-size:11px;color:var(--text-muted);opacity:0.5">Painel interno — Instituto Selma Moraes</footer>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- VIEW 2: CLIENT — completa o que falta             -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="view" id="clientView">
+<div class="container">
+  <div class="brand">
+    <a href="/" class="logo"><div class="logo-mark">SM</div><span>Instituto Selma Moraes</span></a>
+    <a href="/" class="back-link">← Voltar ao site</a>
+    <a href="#" class="back-link" id="adminAccessLink" onclick="showAdminLogin();return false" style="margin-left:8px;color:var(--gold);font-size:11px;opacity:0.4">Área profissional</a>
+  </div>
+
+  <div class="client-hero">
+    <span class="badge">Proposta exclusiva</span>
+    <h1>Sua proposta de adequação à <span>NR-1</span></h1>
+    <p>Complete as informações abaixo para visualizar imediatamente a proposta personalizada com o Método Resguarda™ — escopo, cronograma e investimento.</p>
+  </div>
+
+  <div class="prefilled-notice" id="prefilledNotice" style="display:none">
+    <span>✓</span>
+    <span><strong>Alguns campos já foram preenchidos</strong> pela Selma com base na sua conversa. Confira e complete o restante.</span>
+  </div>
+
+  <form class="card" id="clientForm">
+    <h2 style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:4px">Confirme seus dados</h2>
+    <p style="font-size:12px;color:var(--text-muted);margin-bottom:20px">Leva menos de 1 minuto. Todas as informações são confidenciais.</p>
+
+    <div class="section-label">Seus dados</div>
+    <div class="two-col">
+      <div class="field"><label>Nome completo <span class="req">*</span></label><input type="text" id="c_nome" required placeholder="Ex.: Maria Silva"></div>
+      <div class="field"><label>Cargo <span class="req">*</span></label>
+        <select id="c_cargo" required>
+          <option value="">Selecione…</option>
+          <option>Sócio(a) / Proprietário(a)</option>
+          <option>Diretor(a) Geral / CEO</option>
+          <option>Diretor(a) de RH / Gente</option>
+          <option>Gerente de RH</option>
+          <option>Coordenador(a) de SST / Saúde Ocupacional</option>
+          <option>Consultor(a) / Advogado(a) terceirizado</option>
+          <option>Outro</option>
+        </select>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="field"><label>E-mail corporativo <span class="req">*</span></label><input type="email" id="c_email" required placeholder="voce@empresa.com.br"></div>
+      <div class="field"><label>WhatsApp <span class="req">*</span></label><input type="tel" id="c_telefone" required placeholder="(11) 99999-9999"></div>
+    </div>
+
+    <hr class="divider">
+    <div class="section-label">Sobre a empresa</div>
+    <div class="field"><label>Nome da empresa <span class="req">*</span></label><input type="text" id="c_empresa" required placeholder="Ex.: TechSolutions Ltda"></div>
+    <div class="two-col">
+      <div class="field"><label>Ramo de atividade <span class="req">*</span></label>
+        <select id="c_setor" required><option value="">Selecione…</option><option>Indústria / Manufatura</option><option>Construção civil</option><option>Logística / Transporte</option><option>Varejo / Comércio</option><option>Serviços (financeiro, jurídico, contábil)</option><option>Saúde / Hospitais / Clínicas</option><option>Educação</option><option>Alimentação / Hotelaria</option><option>Tecnologia</option><option>Agro</option><option>Outro</option></select>
+      </div>
+      <div class="field"><label>Nº de colaboradores <span class="req">*</span></label>
+        <select id="c_tamanho" required><option value="">Selecione…</option><option value="1-19">Até 19 (microempresa)</option><option value="20-49">20 a 49 (pequena)</option><option value="50-99">50 a 99 (média)</option><option value="100-200">100 a 200 (média-grande)</option><option value="200+">Mais de 200</option></select>
+      </div>
+    </div>
+    <div class="field"><label>Quantos setores ou departamentos? <span class="req">*</span></label>
+      <select id="c_setores" required><option value="">Selecione…</option><option value="1-3">1 a 3 setores</option><option value="4-8">4 a 8 setores</option><option value="9-15">9 a 15 setores</option><option value="16+">Mais de 15 setores</option></select>
+    </div>
+
+    <hr class="divider">
+    <div class="section-label">Situação atual</div>
+    <div class="field">
+      <label>A empresa já possui PGR atualizado? <span class="req">*</span></label>
+      <div class="radio-grid">
+        <label class="radio-card"><input type="radio" name="c_pgr" value="sim" required><div class="rc"><div class="dot"></div>Sim, atualizado</div></label>
+        <label class="radio-card"><input type="radio" name="c_pgr" value="desatualizado"><div class="rc"><div class="dot"></div>Sim, mas desatualizado</div></label>
+        <label class="radio-card"><input type="radio" name="c_pgr" value="nao"><div class="rc"><div class="dot"></div>Não possui</div></label>
+        <label class="radio-card"><input type="radio" name="c_pgr" value="nao-sei"><div class="rc"><div class="dot"></div>Não sei informar</div></label>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" id="btnGenerate">Ver minha proposta →</button>
+    <div class="trust-row">
+      <span>Dados protegidos</span><span>•</span><span>Sem compromisso</span><span>•</span><span>Proposta imediata</span>
+    </div>
+  </form>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- VIEW 3: PROPOSAL — proposta final                 -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="view" id="proposalView">
+<div class="proposal">
+
+  <!-- Back to admin button (only visible when previewing) -->
+  <div id="backToAdmin" style="display:none;padding:12px 56px;background:var(--gold);align-items:center;justify-content:center;gap:8px;cursor:pointer;font-size:13px;font-weight:600;color:var(--navy-deep)" onclick="backToAdmin()">
+    ← Voltar ao painel — esta é uma pré-visualização
+  </div>
+
+  <!-- Personal message from Selma -->
+  <div id="personalMsg" style="display:none;padding:20px 56px;background:#F0FDFA;border-bottom:1px solid rgba(14,184,166,0.15);font-size:14px;color:#047857;line-height:1.6">
+    <strong style="display:block;margin-bottom:4px;font-size:12px;color:var(--teal);text-transform:uppercase;letter-spacing:0.06em">Mensagem da Selma</strong>
+    <span id="personalMsgText"></span>
+  </div>
+
+  <!-- COVER -->
+  <div class="p-cover">
+    <div>
+      <div class="p-badge">Proposta Comercial</div>
+      <h1>Gerenciamento de<br>Riscos Psicossociais<br><em>Método Resguarda™</em></h1>
+      <p class="p-sub">Implementação completa de adequação à NR-1 para a sua empresa — sem burocracia excessiva, sem autuações, sem colaboradores adoecendo.</p>
+    </div>
+    <div class="p-cover-footer">
+      <div class="p-client-box"><div class="lbl">Preparada para</div><div class="val" id="pCompany">—</div></div>
+      <div><div class="p-cover-meta" id="pDate"></div><div class="p-cover-brand">Instituto Selma Moraes</div></div>
+    </div>
+  </div>
+
+  <!-- 01: QUEM SOMOS -->
+  <div class="p-section">
+    <div class="p-num">01 — Sobre nós</div>
+    <h2>Quem está por trás desta proposta</h2>
+    <p>Me chamo <strong>Selma Moraes</strong>, sou <strong>Psicóloga Clínica e Organizacional (CRP 06/138420)</strong> e atuo há 9 anos com as consequências do adoecimento ocupacional — burnout, trauma organizacional e os impactos reais que a falta de gestão de riscos psicossociais causa nos colaboradores e nas empresas.</p>
+    <p>Desenvolvi o <strong>Método Resguarda™</strong>, uma metodologia em 4 fases que implementa o gerenciamento de riscos psicossociais conforme exigido pela <strong>Portaria MTE nº 1.419/2024</strong>. O método é específico para PMEs — empresas que precisam de adequação técnica rigorosa, mas sem a burocracia das grandes consultorias.</p>
+    <div class="cred-grid">
+      <div class="cred"><div class="ic">🧠</div><h4>Especialista em NR-1</h4><p>Alinhada com as mudanças regulatórias desde a publicação da Portaria MTE nº 1.419, de agosto de 2024</p></div>
+      <div class="cred"><div class="ic">📊</div><h4>Instrumentos validados</h4><p>Diagnóstico por meio do DPRS — ferramentas cientificamente validadas para a população brasileira</p></div>
+      <div class="cred"><div class="ic">🏢</div><h4>Foco em PMEs</h4><p>Metodologia desenhada para empresas de 20 a 200 colaboradores, com agilidade e custo-benefício</p></div>
+      <div class="cred"><div class="ic">🤝</div><h4>Atuação integrada</h4><p>Parceria com RH, TST, Medicina do Trabalho, CIPA e SIPAT para um gerenciamento que funciona na prática</p></div>
+    </div>
+  </div>
+
+  <!-- 02: CONTEXTO LEGAL -->
+  <div class="p-section">
+    <div class="p-num">02 — Contexto legal</div>
+    <h2>Por que a adequação é urgente</h2>
+    <p>A <strong>Portaria MTE nº 1.419/2024</strong> incluiu expressamente os <strong>fatores de risco psicossociais relacionados ao trabalho (FRPRT)</strong> no Gerenciamento de Riscos Ocupacionais (GRO) da NR-1. Toda empresa é obrigada a identificar, classificar e gerenciar esses riscos — sob pena de multa e autuação.</p>
+    <div class="urgency"><div class="u-icon">⚠️</div><div><h4>Cronograma oficial (Portaria MTE nº 765/2025)</h4><p><strong>26 de maio de 2025:</strong> início da fase educativa — o MTE orienta, mas já fiscaliza.<br><strong>26 de maio de 2026:</strong> início da fiscalização punitiva — multas e autuações formais.<br>O Ministério Público do Trabalho já pode atuar com base na legislação vigente, independentemente desse prazo.</p></div></div>
+    <p><strong>Valores das multas por porte de empresa</strong> (NR-28, Portaria MTE 1.131/2025):</p>
+    <table class="fines">
+      <thead><tr><th>Infração</th><th>Micro (≤19)</th><th>Peq. (20–99)</th><th>Média (100–499)</th><th>Grande (500+)</th></tr></thead>
+      <tbody>
+        <tr><td>Ausência de PGR</td><td>R$ 632</td><td>R$ 1.265</td><td>R$ 3.161</td><td>R$ 6.323</td></tr>
+        <tr><td>PGR sem riscos psicossociais</td><td>R$ 1.265</td><td>R$ 2.529</td><td>R$ 6.323</td><td>R$ 12.645</td></tr>
+        <tr><td>Não implementação de ações</td><td>R$ 1.265</td><td>R$ 2.529</td><td>R$ 6.323</td><td>R$ 12.645</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:11px;color:var(--text-muted);margin-top:8px;opacity:0.7">Reincidência: a multa dobra se a mesma infração ocorrer em 12 meses. Além das multas: ações trabalhistas, aumento do FAP/RAT, danos à reputação.</p>
+  </div>
+
+  <!-- 03: MÉTODO -->
+  <div class="p-section">
+    <div class="p-num">03 — Metodologia</div>
+    <h2>Método Resguarda™ — 4 fases</h2>
+    <p>Quatro fases estruturadas para levar <strong id="pMethodCompany">a sua empresa</strong> à conformidade total com a NR-1 — sem atalhos que comprometam a qualidade e sem burocracia que paralise o seu time.</p>
+    <div class="phases">
+      <div class="phase"><div class="phase-n">1</div><div><h3>Radiografia</h3><div class="ph-time">Semana 1–2</div><ul><li>Diagnóstico aprofundado por meio do instrumento DPRS (online e/ou presencial)</li><li>Inventário com todos os colaboradores da empresa</li><li>Identificação de sobrecarga, pressão excessiva, assédio e fatores de adoecimento</li><li>Visita técnica presencial para levantamento e classificação dos riscos</li></ul></div></div>
+      <div class="phase"><div class="phase-n">2</div><div><h3>Estruturação</h3><div class="ph-time">Semana 2–3</div><ul><li>Apuração dos dados e análise quantitativa e qualitativa</li><li>Relatório técnico com classificação dos riscos identificados</li><li>Inclusão dos riscos psicossociais no PGR da empresa</li><li>Plano de ação personalizado com prioridades, prazos e responsáveis</li></ul></div></div>
+      <div class="phase"><div class="phase-n">3</div><div><h3>Sustentação</h3><div class="ph-time">Semana 3–4</div><ul><li>Implantação do programa de promoção de saúde mental</li><li>Treinamento de lideranças para identificação e prevenção</li><li>Protocolos de crise para situações críticas</li></ul></div></div>
+      <div class="phase"><div class="phase-n">4</div><div><h3>Gestão contínua</h3><div class="ph-time">Acompanhamento permanente</div><ul><li>Monitoramento contínuo com indicadores de saúde organizacional</li><li>Revisões periódicas conforme exigido pela NR-1</li><li>Suporte em auditorias e fiscalização do MTE</li><li>12 programas anuais de promoção e prevenção de saúde mental</li></ul></div></div>
+    </div>
+  </div>
+
+  <!-- 04: ESCOPO -->
+  <div class="p-section">
+    <div class="p-num">04 — Escopo de serviços</div>
+    <h2>O que está incluído</h2>
+    <table class="svc">
+      <thead><tr><th>Serviço</th><th>Descrição</th></tr></thead>
+      <tbody>
+        <tr><td>Diagnóstico DPRS</td><td>Inventário completo com todos os colaboradores — análise quantitativa e qualitativa</td></tr>
+        <tr><td>Classificação de riscos</td><td>Categorização e priorização dos fatores de risco psicossociais identificados</td></tr>
+        <tr><td>Inclusão no PGR</td><td>Integração dos riscos psicossociais ao Programa de Gerenciamento de Riscos</td></tr>
+        <tr><td>Relatório técnico</td><td>Documentação completa para apresentação ao MTE em caso de fiscalização</td></tr>
+        <tr><td>Plano de ação</td><td>Medidas de prevenção e controle com prazos, responsáveis e prioridades definidos</td></tr>
+        <tr><td>Programa de saúde mental</td><td>12 programas anuais de promoção, prevenção e melhoria contínua</td></tr>
+        <tr><td>Treinamento de lideranças</td><td>Capacitação de gestores para identificar sinais e agir preventivamente</td></tr>
+        <tr><td>Canais de escuta</td><td>Implementação de canais seguros para relatos de assédio e situações de risco</td></tr>
+        <tr><td>Suporte a auditorias</td><td>Acompanhamento e documentação para fiscalização do MTE</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 05: RESULTADOS -->
+  <div class="p-section">
+    <div class="p-num">05 — Resultados esperados</div>
+    <h2>O que a sua empresa ganha</h2>
+    <div class="results">
+      <div class="res"><div class="r-icon">📉</div><h4>Redução de afastamentos</h4></div>
+      <div class="res"><div class="r-icon">⚖️</div><h4>Menor passivo trabalhista</h4></div>
+      <div class="res"><div class="r-icon">💰</div><h4>Economia no FAP/RAT</h4></div>
+      <div class="res"><div class="r-icon">📋</div><h4>Conformidade total com a NR-1</h4></div>
+      <div class="res"><div class="r-icon">🔄</div><h4>Redução do turnover</h4></div>
+      <div class="res"><div class="r-icon">🚀</div><h4>Melhor performance</h4></div>
+      <div class="res"><div class="r-icon">🏥</div><h4>Economia em plano de saúde</h4></div>
+      <div class="res"><div class="r-icon">✅</div><h4>Proteção contra multas</h4></div>
+      <div class="res"><div class="r-icon">🧠</div><h4>Cultura de saúde mental</h4></div>
+    </div>
+  </div>
+
+  <!-- 06: INVESTIMENTO -->
+  <div class="p-section">
+    <div class="p-num">06 — Investimento</div>
+    <h2>Investimento para <span id="pInvCompany">a sua empresa</span></h2>
+    <p>Para implementação completa do Método Resguarda™ — diagnóstico, classificação, gerenciamento, relatório técnico e 12 programas anuais de promoção de saúde mental:</p>
+    <div class="inv-box">
+      <div class="inv-label">Investimento</div>
+      <div class="inv-price-original" id="pOriginal"></div>
+      <div class="inv-discount-badge" id="pDiscountBadge" style="display:none"></div>
+      <div class="inv-price" id="pPrice">12x R$ 1.500</div>
+      <div class="inv-vista" id="pVista"></div>
+      <div class="inv-scope" id="pScope"></div>
+      <div class="inv-courtesy" id="pCourtesy"></div>
+      <div class="inv-includes"><h4>Incluso no investimento</h4><ul>
+        <li>Diagnóstico completo via DPRS (Fase 1 — Radiografia)</li>
+        <li>Relatório técnico com classificação de riscos</li>
+        <li>Inclusão dos riscos psicossociais no PGR</li>
+        <li>Plano de ação com prazos e responsáveis</li>
+        <li>12 programas anuais de promoção de saúde mental</li>
+        <li>Treinamento de lideranças</li>
+        <li>Suporte em auditorias e fiscalização do MTE</li>
+      </ul></div>
+    </div>
+    <div class="validity" id="pValidity"></div>
+    <p style="font-size:12px;color:var(--text-muted);margin-top:12px;font-style:italic">Os valores apresentados são uma estimativa inicial com base nas informações fornecidas. Após a primeira reunião de alinhamento, o investimento poderá ser ajustado de acordo com as particularidades da sua operação — sem compromisso.</p>
+  </div>
+
+  <!-- CTA -->
+  <div class="p-cta">
+    <h2>Vamos adequar a sua empresa?</h2>
+    <p>A fase educativa já está em vigor desde maio de 2025. Empresas que se adequam agora saem na frente — com segurança jurídica, colaboradores saudáveis e economia real.</p>
+    <div class="cta-btns">
+      <a id="pWhatsapp" href="#" class="cta-btn wa" target="_blank">💬 Falar no WhatsApp</a>
+      <a href="mailto:smoraes@selmamoraes.com.br?subject=Proposta%20NR-1%20—%20Retorno" class="cta-btn email">✉️ Enviar e-mail</a>
+    </div>
+    <div style="text-align:center;margin-top:16px" class="no-print">
+      <button onclick="window.print()" style="padding:10px 20px;background:var(--navy);color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit">📄 Salvar como PDF</button>
+    </div>
+  </div>
+
+  <div class="p-footer">
+    <strong>Instituto Selma Moraes</strong> · Selma Moraes — Psicóloga CRP 06/138420<br>
+    selmamoraes.com.br · smoraes@selmamoraes.com.br · (11) 95652-0330<br><br>
+    Base legal: Portaria MTE nº 1.419/2024 · Portaria MTE nº 765/2025 · NR-1 atualizada<br>
+    Informações regulatórias verificadas em fontes oficiais do Ministério do Trabalho e Emprego
+  </div>
+</div>
+</div>
+
+<!-- ADMIN LOGIN MODAL -->
+<div id="adminLoginModal" style="display:none;position:fixed;inset:0;background:rgba(10,25,41,0.85);z-index:9999;display:none;align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:16px;padding:32px 28px;max-width:360px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3)">
+    <div style="width:48px;height:48px;background:var(--navy);color:var(--gold);display:flex;align-items:center;justify-content:center;border-radius:12px;font-family:Georgia,serif;font-weight:700;font-size:18px;margin:0 auto 16px">SM</div>
+    <h3 style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:4px">Área profissional</h3>
+    <p style="font-size:12px;color:var(--text-muted);margin-bottom:20px">Digite sua senha para acessar o painel de propostas.</p>
+    <input type="password" id="adminPassword" placeholder="Senha" style="width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit;text-align:center;margin-bottom:12px" onkeydown="if(event.key==='Enter')checkAdminPassword()">
+    <div id="adminLoginError" style="display:none;color:var(--red);font-size:12px;margin-bottom:10px">Senha incorreta</div>
+    <button onclick="checkAdminPassword()" style="width:100%;padding:13px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy-deep);border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">Entrar</button>
+    <button onclick="closeAdminLogin()" style="margin-top:10px;background:none;border:none;color:var(--text-muted);font-size:12px;cursor:pointer;font-family:inherit">Cancelar</button>
+  </div>
+</div>
+
+<script>
+/* ═══ ADMIN LOGIN ═══ */
+const ADMIN_HASH='resguarda2026';
+function showAdminLogin(){
+  const m=document.getElementById('adminLoginModal');
+  m.style.display='flex';
+  document.getElementById('adminPassword').value='';
+  document.getElementById('adminLoginError').style.display='none';
+  setTimeout(()=>document.getElementById('adminPassword').focus(),100);
+}
+function closeAdminLogin(){document.getElementById('adminLoginModal').style.display='none'}
+function checkAdminPassword(){
+  const pw=document.getElementById('adminPassword').value;
+  if(pw===ADMIN_HASH){
+    closeAdminLogin();
+    document.getElementById('clientView').classList.remove('active');
+    document.getElementById('proposalView').classList.remove('active');
+    document.getElementById('adminView').classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  } else {
+    document.getElementById('adminLoginError').style.display='block';
+    document.getElementById('adminPassword').value='';
+    document.getElementById('adminPassword').focus();
+  }
+}
+</script>
+
+<script>
+/* ═══ PRICING ENGINE ═══ */
+const PRICING={
+  '1-19':{base:900,label:'até 19'},'20-49':{base:1350,label:'20 a 49'},
+  '50-99':{base:2000,label:'50 a 99'},'100-200':{base:3200,label:'100 a 200'},
+  '200+':{base:5000,label:'mais de 200'}
+};
+const SECTOR_MULT={'1-3':{m:1.0,label:'1 a 3'},'4-8':{m:1.15,label:'4 a 8'},'9-15':{m:1.3,label:'9 a 15'},'16+':{m:1.5,label:'mais de 15'}};
+const PGR_MULT={'sim':1.0,'desatualizado':1.15,'nao':1.3,'nao-sei':1.2};
+
+function fmt(n){return n.toLocaleString('pt-BR')}
+function fmtDate(d){
+  const m=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+  return d.getDate()+' de '+m[d.getMonth()]+' de '+d.getFullYear();
+}
+function round50(n){return Math.round(n/50)*50}
+
+/* ═══ ENCODE/DECODE DATA IN URL ═══ */
+function encodeData(obj){return btoa(unescape(encodeURIComponent(JSON.stringify(obj))))}
+function decodeData(str){try{return JSON.parse(decodeURIComponent(escape(atob(str))))}catch(e){return null}}
+
+/* ═══ ADMIN: GENERATE LINK ═══ */
+let generatedLink='';
+function generateLink(){
+  const data={};
+  const fields=['nome','cargo','email','empresa','setor','tamanho','desconto','cortesia','mensagem'];
+  fields.forEach(f=>{const el=document.getElementById('a_'+f);if(el&&el.value)data[f]=el.value});
+  const encoded=encodeData(data);
+  const base=window.location.origin+window.location.pathname;
+  generatedLink=base+'?p='+encoded;
+  document.getElementById('linkUrl').textContent=generatedLink;
+  document.getElementById('linkBox').style.display='block';
+
+  const nome=data.nome?data.nome.split(' ')[0]:'';
+  const empresa=data.empresa||'sua empresa';
+  const whatsMsg=`Olá${nome?(' '+nome):''}, tudo bem?\n\nConforme conversamos, preparei uma proposta personalizada de adequação à NR-1 para ${empresa} com o Método Resguarda™.\n\nÉ só clicar no link abaixo, confirmar algumas informações e a proposta completa aparece na hora — com escopo, cronograma e investimento:\n\n${generatedLink}\n\nLeva menos de 1 minuto. Qualquer dúvida, estou à disposição!\n\nSelma Moraes\nPsicóloga CRP 06/138420\nInstituto Selma Moraes`;
+  const emailMsg=`Prezado(a)${nome?(' '+nome):''},\n\nConforme nosso contato, elaborei uma proposta personalizada de adequação à NR-1 para ${empresa}, utilizando o Método Resguarda™.\n\nPara visualizar a proposta completa — com escopo, metodologia, cronograma e investimento — basta acessar o link abaixo e confirmar algumas informações rápidas:\n\n${generatedLink}\n\nO processo leva menos de 1 minuto e a proposta é gerada na hora.\n\nFico à disposição para esclarecer qualquer dúvida e agendar uma conversa.\n\nAtenciosamente,\n\nSelma Moraes\nPsicóloga Clínica e Organizacional — CRP 06/138420\nInstituto Selma Moraes\nselmamoraes.com.br\n(11) 95652-0330`;
+
+  document.getElementById('msgWhatsApp').firstChild.textContent=whatsMsg;
+  document.getElementById('msgEmail').firstChild.textContent=emailMsg;
+  document.getElementById('msgTemplates').style.display='block';
+  document.getElementById('adminActions').style.display='block';
+  document.getElementById('linkBox').scrollIntoView({behavior:'smooth'});
+}
+function previewProposal(){
+  const data={};
+  const fields=['nome','cargo','email','empresa','setor','tamanho','desconto','cortesia','mensagem'];
+  fields.forEach(f=>{const el=document.getElementById('a_'+f);if(el&&el.value)data[f]=el.value});
+  // Simulate client submission with admin data to render proposal
+  proposalData=data;
+  if(data.nome)document.getElementById('c_nome').value=data.nome;
+  if(data.cargo)document.getElementById('c_cargo').value=data.cargo;
+  if(data.email)document.getElementById('c_email').value=data.email;
+  if(data.empresa)document.getElementById('c_empresa').value=data.empresa;
+  if(data.setor){const s=document.getElementById('c_setor');for(let o of s.options){if(o.value===data.setor||o.textContent===data.setor){o.selected=true;break}}}
+  if(data.tamanho)document.getElementById('c_tamanho').value=data.tamanho;
+  // Fill required fields with placeholders if empty for preview
+  if(!document.getElementById('c_nome').value)document.getElementById('c_nome').value='[Nome do cliente]';
+  if(!document.getElementById('c_cargo').value)document.getElementById('c_cargo').value='[Cargo]';
+  if(!document.getElementById('c_email').value)document.getElementById('c_email').value='preview@exemplo.com';
+  if(!document.getElementById('c_telefone').value)document.getElementById('c_telefone').value='(00) 00000-0000';
+  if(!document.getElementById('c_empresa').value)document.getElementById('c_empresa').value='[Empresa]';
+  if(!document.getElementById('c_setor').value)document.getElementById('c_setor').selectedIndex=1;
+  if(!document.getElementById('c_tamanho').value)document.getElementById('c_tamanho').selectedIndex=2;
+  if(!document.getElementById('c_setores').value)document.getElementById('c_setores').selectedIndex=1;
+  if(!document.querySelector('input[name="c_pgr"]:checked'))document.querySelector('input[name="c_pgr"]').checked=true;
+  // Render proposal without sending email
+  renderProposal(true);
+  document.getElementById('adminView').classList.remove('active');
+  document.getElementById('proposalView').classList.add('active');
+  document.getElementById('backToAdmin').style.display='flex';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function editProposal(){
+  document.getElementById('linkBox').style.display='none';
+  document.getElementById('adminActions').style.display='none';
+  document.getElementById('msgTemplates').style.display='none';
+  document.getElementById('a_nome').focus();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function backToAdmin(){
+  document.getElementById('proposalView').classList.remove('active');
+  document.getElementById('adminView').classList.add('active');
+  document.getElementById('backToAdmin').style.display='none';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function copyLink(){navigator.clipboard.writeText(generatedLink).then(()=>{const b=document.querySelector('.link-copy');b.textContent='Copiado!';setTimeout(()=>b.textContent='Copiar link',2000)})}
+function sendWhatsApp(){window.open('https://wa.me/?text='+encodeURIComponent(document.getElementById('msgWhatsApp').firstChild.textContent),'_blank')}
+function sendEmail(){
+  const empresa=document.getElementById('a_empresa').value||'Adequação NR-1';
+  const email=document.getElementById('a_email').value||'';
+  window.open('mailto:'+email+'?subject=Proposta de Adequação à NR-1 — '+empresa+'&body='+encodeURIComponent(document.getElementById('msgEmail').firstChild.textContent));
+}
+function copyMsg(id){const t=document.getElementById(id).firstChild.textContent;navigator.clipboard.writeText(t).then(()=>{const b=document.getElementById(id).querySelector('.copy-msg');b.textContent='Copiado!';setTimeout(()=>b.textContent='Copiar',2000)})}
+
+/* ═══ RENDER PROPOSAL (shared by client submit & admin preview) ═══ */
+let proposalData={};
+function renderProposal(skipEmail){
+  const empresa=document.getElementById('c_empresa').value.trim();
+  const tamanho=document.getElementById('c_tamanho').value;
+  const setores=document.getElementById('c_setores').value;
+  const pgr=document.querySelector('input[name="c_pgr"]:checked')?.value||'nao-sei';
+  const nome=document.getElementById('c_nome').value.trim();
+  const email=document.getElementById('c_email').value.trim();
+  const tel=document.getElementById('c_telefone').value.trim();
+  const cargo=document.getElementById('c_cargo').value.trim();
+  const setor=document.getElementById('c_setor').value;
+  const desconto=parseFloat(proposalData.desconto)||10;
+  const cortesia=proposalData.cortesia||'Ação Setembro Amarelo presencial para toda a empresa';
+  const mensagem=proposalData.mensagem||'';
+
+  const p=PRICING[tamanho]||PRICING['50-99'];
+  const sm=SECTOR_MULT[setores]||SECTOR_MULT['4-8'];
+  const pm=PGR_MULT[pgr]||1.2;
+  const baseMonthly=round50(p.base*sm.m*pm);
+  const discountedMonthly=round50(baseMonthly*(1-desconto/100));
+  const annual=discountedMonthly*12;
+  const vista=round50(annual*0.9);
+
+  document.getElementById('pCompany').textContent=empresa;
+  document.getElementById('pDate').textContent=fmtDate(new Date());
+  document.getElementById('pMethodCompany').textContent=empresa;
+  document.getElementById('pInvCompany').textContent=empresa;
+  if(desconto>0){
+    document.getElementById('pOriginal').textContent='12x R$ '+fmt(baseMonthly);
+    document.getElementById('pOriginal').style.display='block';
+    document.getElementById('pDiscountBadge').textContent=desconto+'% de desconto aplicado';
+    document.getElementById('pDiscountBadge').style.display='inline-block';
+  } else {
+    document.getElementById('pOriginal').style.display='none';
+    document.getElementById('pDiscountBadge').style.display='none';
+  }
+  document.getElementById('pPrice').textContent='12x R$ '+fmt(discountedMonthly);
+  document.getElementById('pVista').textContent='ou R$ '+fmt(vista)+' à vista (10% adicional)';
+  document.getElementById('pScope').textContent='Para '+(p.label||tamanho)+' colaboradores em '+(sm.label||setores)+' setores';
+  document.getElementById('pCourtesy').textContent='✨ Cortesia: '+cortesia;
+  const vd=new Date();vd.setDate(vd.getDate()+15);
+  document.getElementById('pValidity').textContent='📅 Proposta válida por 15 dias — até '+vd.getDate()+'/'+(vd.getMonth()+1)+'/'+vd.getFullYear();
+  const waMsg=encodeURIComponent('Olá Selma, acabei de visualizar a proposta de adequação à NR-1 para '+empresa+'. Gostaria de conversar sobre os próximos passos.');
+  document.getElementById('pWhatsapp').href='https://wa.me/5511956520330?text='+waMsg;
+
+  if(mensagem){
+    document.getElementById('personalMsgText').textContent=mensagem;
+    document.getElementById('personalMsg').style.display='block';
+  } else {
+    document.getElementById('personalMsg').style.display='none';
+  }
+
+  if(!skipEmail){
+    const payload = {
+      _subject:'[PROPOSTA GERADA] '+empresa+' ('+p.label+' colab.) — '+setor,
+      _replyto:email,_template:'table',_captcha:'false',
+      'Nome':nome,'Cargo':cargo,'E-mail':email,'WhatsApp':tel,
+      'Empresa':empresa,'Setor':setor,'Colaboradores':p.label,'Setores':sm.label,
+      'PGR':pgr==='sim'?'Sim, atualizado':pgr==='desatualizado'?'Sim, desatualizado':pgr==='nao'?'Não possui':'Não sabe',
+      'Investimento':'12x R$ '+fmt(discountedMonthly)+' (desconto '+desconto+'%)',
+      'À vista':'R$ '+fmt(vista),
+      'Origem':'selmamoraes.com.br/cotacao (proposta gerada)'
+    };
+    // Backup local sempre (nunca perder o lead)
+    try {
+      const b = JSON.parse(localStorage.getItem('selma_proposta_backups') || '[]');
+      b.push({ ...payload, _savedAt: new Date().toISOString() });
+      localStorage.setItem('selma_proposta_backups', JSON.stringify(b.slice(-50)));
+    } catch(_){}
+    // Fetch com timeout 6s; falhas são silenciosas (fire-and-forget). WhatsApp já está visível como CTA.
+    try{
+      Promise.race([
+        fetch('https://formsubmit.co/ajax/smoraes@selmamoraes.com.br',{
+          method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+          body:JSON.stringify(payload)
+        }),
+        new Promise((_,rej)=>setTimeout(()=>rej(new Error('timeout')),6000))
+      ]).catch(()=>{});
+    }catch(err){}
+  }
+}
+
+/* ═══ CLIENT: SUBMIT & GENERATE PROPOSAL ═══ */
+document.getElementById('clientForm').addEventListener('submit',async function(e){
+  e.preventDefault();
+  const btn=document.getElementById('btnGenerate');
+  btn.disabled=true;btn.textContent='Gerando proposta…';
+  renderProposal(false);
+  document.getElementById('clientView').classList.remove('active');
+  document.getElementById('proposalView').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+/* ═══ SECRET ADMIN ACCESS — triple-tap on SM logo ═══ */
+let tapCount=0,tapTimer=null;
+document.querySelectorAll('.logo-mark').forEach(el=>{
+  el.addEventListener('click',function(e){
+    e.preventDefault();e.stopPropagation();
+    tapCount++;
+    clearTimeout(tapTimer);
+    tapTimer=setTimeout(()=>tapCount=0,800);
+    if(tapCount>=3){
+      tapCount=0;
+      document.getElementById('clientView').classList.remove('active');
+      document.getElementById('proposalView').classList.remove('active');
+      document.getElementById('adminView').classList.add('active');
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+  });
+});
+
+/* ═══ ROUTER ═══ */
+(function(){
+  const params=new URLSearchParams(window.location.search);
+  if(params.has('admin')){
+    document.getElementById('adminView').classList.add('active');
+  } else if(params.has('p')){
+    const data=decodeData(params.get('p'));
+    if(data){
+      proposalData=data;
+      if(data.nome)document.getElementById('c_nome').value=data.nome;
+      if(data.cargo)document.getElementById('c_cargo').value=data.cargo;
+      if(data.email)document.getElementById('c_email').value=data.email;
+      if(data.empresa)document.getElementById('c_empresa').value=data.empresa;
+      if(data.setor){const s=document.getElementById('c_setor');for(let o of s.options){if(o.value===data.setor||o.textContent===data.setor){o.selected=true;break}}}
+      if(data.tamanho)document.getElementById('c_tamanho').value=data.tamanho;
+      const prefilled=data.nome||data.empresa||data.email;
+      if(prefilled)document.getElementById('prefilledNotice').style.display='flex';
+      // Make prefilled fields read-only
+      ['c_nome','c_cargo','c_email','c_empresa'].forEach(id=>{const el=document.getElementById(id);if(el&&el.value)el.readOnly=true});
+      if(data.setor){document.getElementById('c_setor').style.pointerEvents='none';document.getElementById('c_setor').style.opacity='0.7'}
+      if(data.tamanho){document.getElementById('c_tamanho').style.pointerEvents='none';document.getElementById('c_tamanho').style.opacity='0.7'}
+    }
+    document.getElementById('clientView').classList.add('active');
+  } else {
+    document.getElementById('clientView').classList.add('active');
+  }
+})();
+</script>
+</body>
+</html>
