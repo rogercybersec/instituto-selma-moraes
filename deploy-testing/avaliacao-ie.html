@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avaliação de Inteligência Emocional — WLEIS | Instituto Selma Moraes</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0a2540;--teal:#0f766e;--teal-light:#5eead4;--gold:#D6B27A;--cream:#faf6ef}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a1a;line-height:1.7}
+.container{max-width:720px;margin:0 auto;padding:40px 24px 80px}
+header{text-align:center;margin-bottom:40px;padding-bottom:24px;border-bottom:2px solid var(--cream)}
+header h1{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.2rem);color:var(--navy);margin-bottom:8px}
+header p{color:#666;font-size:0.95rem}
+.info-box{background:#f0fdfa;border:1px solid rgba(45,212,191,0.2);border-radius:12px;padding:20px;margin-bottom:32px;font-size:0.9rem;color:#444}
+.info-box strong{color:var(--teal)}
+.dimension{margin-bottom:32px}
+.dimension-header{background:var(--navy);color:#fff;padding:14px 20px;border-radius:10px 10px 0 0;font-weight:700;font-size:0.95rem;display:flex;justify-content:space-between;align-items:center}
+.dimension-header span{color:var(--teal-light);font-size:0.8rem}
+.question{padding:16px 20px;border:1px solid #e5e7eb;border-top:none;display:flex;align-items:center;gap:16px}
+.question:last-child{border-radius:0 0 10px 10px}
+.question:nth-child(even){background:#f9fafb}
+.q-text{flex:1;font-size:0.92rem;color:#333}
+.q-scale{display:flex;gap:4px}
+.q-scale label{display:flex;flex-direction:column;align-items:center;cursor:pointer;padding:4px 6px;border-radius:6px;transition:all 0.2s;font-size:0.7rem;color:#999}
+.q-scale label:hover{background:rgba(45,212,191,0.1)}
+.q-scale input{accent-color:var(--teal);width:18px;height:18px}
+.q-scale input:checked+span{color:var(--teal);font-weight:700}
+.submit-btn{display:block;width:100%;padding:16px;background:var(--navy);color:#fff;border:none;border-radius:10px;font-size:1.1rem;font-weight:700;cursor:pointer;margin-top:32px;transition:all 0.3s}
+.submit-btn:hover{background:#143b5f;transform:translateY(-2px);box-shadow:0 8px 24px rgba(10,37,64,0.2)}
+.submit-btn:disabled{background:#ccc;cursor:not-allowed;transform:none;box-shadow:none}
+.results{display:none;margin-top:32px}
+.results.visible{display:block}
+.result-card{background:linear-gradient(135deg,var(--navy),#143b5f);color:#fff;border-radius:16px;padding:32px;text-align:center;margin-bottom:24px}
+.result-card h2{font-family:'Playfair Display',serif;font-size:1.8rem;margin-bottom:8px}
+.result-score{font-size:3rem;font-weight:800;color:var(--teal-light);font-family:'Playfair Display',serif}
+.result-level{display:inline-block;padding:6px 20px;border-radius:20px;font-weight:700;font-size:0.9rem;margin-top:8px}
+.level-high{background:rgba(45,212,191,0.2);color:var(--teal-light)}
+.level-moderate{background:rgba(214,178,122,0.2);color:var(--gold)}
+.level-low{background:rgba(239,68,68,0.2);color:#fca5a5}
+.dim-result{background:#f8fafc;border:1px solid #e5e7eb;border-radius:12px;padding:18px;margin-bottom:12px;display:flex;align-items:center;gap:16px}
+.dim-bar-wrap{flex:1}
+.dim-name{font-weight:600;font-size:0.9rem;color:var(--navy);margin-bottom:4px}
+.dim-bar{height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden}
+.dim-bar-fill{height:100%;border-radius:4px;transition:width 1s ease}
+.dim-score{font-weight:800;font-size:1.2rem;color:var(--navy);min-width:50px;text-align:right}
+.interpretation{background:var(--cream);border-radius:12px;padding:24px;margin-top:24px}
+.interpretation h3{color:var(--navy);font-family:'Playfair Display',serif;margin-bottom:12px}
+.interpretation p{font-size:0.92rem;color:#444;margin-bottom:8px}
+.actions{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;justify-content:center}
+.actions a{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:8px;font-weight:700;text-decoration:none;font-size:0.9rem}
+.actions .primary{background:var(--teal);color:#fff}
+.actions .secondary{background:transparent;color:var(--navy);border:1.5px solid var(--navy)}
+.footer{text-align:center;margin-top:40px;padding-top:24px;border-top:1px solid #e5e7eb;color:#888;font-size:0.82rem}
+@media print{.submit-btn,.actions{display:none}.results{display:block !important}}
+@media(max-width:600px){.q-scale{gap:2px}.q-scale label{padding:2px 4px;font-size:0.65rem}.question{flex-direction:column;gap:8px}.q-scale{justify-content:space-between;width:100%}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>Avaliação de Inteligência Emocional</h1>
+  <p>Escala WLEIS (Wong & Law Emotional Intelligence Scale) — instrumento validado cientificamente</p>
+</header>
+
+<div class="info-box">
+  <strong>Instruções:</strong> Para cada afirmação, selecione o número que melhor representa o quanto você concorda. Não há respostas certas ou erradas — responda com honestidade sobre como você realmente é, não como gostaria de ser. O resultado é confidencial e será gerado instantaneamente ao final.
+  <br><br>
+  <strong>Escala:</strong> 1 = Discordo totalmente · 2 = Discordo · 3 = Discordo parcialmente · 4 = Neutro · 5 = Concordo parcialmente · 6 = Concordo · 7 = Concordo totalmente
+</div>
+
+<form id="wleisForm">
+
+  <div class="dimension">
+    <div class="dimension-header">Dimensão 1 — Percepção das Próprias Emoções (SEA)<span>4 perguntas</span></div>
+    <div class="question"><div class="q-text">1. Na maioria das vezes, tenho boa percepção de por que tenho certos sentimentos.</div><div class="q-scale"></div></div>
+    <div class="question"><div class="q-text">2. Tenho bom entendimento das minhas próprias emoções.</div><div class="q-scale"></div></div>
+    <div class="question"><div class="q-text">3. Eu realmente entendo o que sinto.</div><div class="q-scale"></div></div>
+    <div class="question"><div class="q-text">4. Sempre sei se estou ou não feliz.</div><div class="q-scale"></div></div>
+  </div>
+
+  <div class="dimension">
+    <div class="dimension-header">Dimensão 2 — Percepção das Emoções dos Outros (OEA)<span>4 perguntas</span></div>
+    <div class="question"><div class="q-text">5. Sempre reconheço as emoções das outras pessoas pelo comportamento delas.</div><div class="q-scale"></div></div>
+    <div class="question"><div class="q-text">6. Sou um(a) bom(boa) observador(a) das emoções dos outros.</div><div class="q-scale"></div></div>
+    <div class="question"><div class="q-text">7. Sou sensível aos sentimentos e emoções das outras pessoas.</div><div class="q-scale"></div></div>
+    <div class="question"><div class="q-text">8. Tenho bom entendimento das emoções das pessoas ao meu redor.</div><div class="q-scale"></div></div>
+  </div>
+
+  <div class="dimension">
+    <div class="dimension-header">Dimensão 3 — Uso das Emoções (UOE)<span>4 perguntas</span></div>
+    <div class="question"><div class="q-text">9. Sempre estabeleço metas para mim mesmo(a) e depois dou o melhor para alcançá-las.</div><div class="q-scale"></div></div>
+    <div class="question"><div class="q-text">10. Sempre me digo que sou uma pessoa competente.</div><div class="q-scale"></div></div>
+    <div class="question"><div class="q-text">11. Sou uma pessoa automotivada.</div><div class="q-scale"></div></div>
+    <div class="question"><div class="q-text">12. Sempre me encorajo a dar o meu melhor.</div><div class="q-scale"></div></div>
+  </div>
+
+  <div class="dimension">
+    <div class="dimension-header">Dimensão 4 — Regulação das Emoções (ROE)<span>4 perguntas</span></div>
+    <div class="question"><div class="q-text">13. Sou capaz de controlar meu temperamento para lidar com dificuldades racionalmente.</div><div class="q-scale"></div></div>
+    <div class="question"><div class="q-text">14. Sou muito capaz de controlar minhas próprias emoções.</div><div class="q-scale"></div></div>
+    <div class="question"><div class="q-text">15. Consigo sempre me acalmar rapidamente quando estou muito irritado(a).</div><div class="q-scale"></div></div>
+    <div class="question"><div class="q-text">16. Tenho bom controle das minhas emoções.</div><div class="q-scale"></div></div>
+  </div>
+
+  <button type="submit" class="submit-btn" id="submitBtn" disabled>Responda todas as 16 perguntas para ver o resultado</button>
+</form>
+
+<div class="results" id="results">
+  <div class="result-card">
+    <p style="color:rgba(255,255,255,0.5);font-size:0.85rem;margin-bottom:8px">Seu score de Inteligência Emocional</p>
+    <div class="result-score" id="totalScore">—</div>
+    <p style="color:rgba(255,255,255,0.5);font-size:0.85rem">de 112 pontos</p>
+    <div class="result-level" id="totalLevel">—</div>
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif;color:var(--navy);margin-bottom:16px">Resultado por dimensão</h3>
+
+  <div class="dim-result" id="dimSEA">
+    <div class="dim-bar-wrap"><div class="dim-name">SEA — Percepção Própria</div><div class="dim-bar"><div class="dim-bar-fill" style="width:0;background:var(--teal)"></div></div></div>
+    <div class="dim-score">—</div>
+  </div>
+  <div class="dim-result" id="dimOEA">
+    <div class="dim-bar-wrap"><div class="dim-name">OEA — Percepção do Outro</div><div class="dim-bar"><div class="dim-bar-fill" style="width:0;background:#3b82f6"></div></div></div>
+    <div class="dim-score">—</div>
+  </div>
+  <div class="dim-result" id="dimUOE">
+    <div class="dim-bar-wrap"><div class="dim-name">UOE — Uso da Emoção</div><div class="dim-bar"><div class="dim-bar-fill" style="width:0;background:var(--gold)"></div></div></div>
+    <div class="dim-score">—</div>
+  </div>
+  <div class="dim-result" id="dimROE">
+    <div class="dim-bar-wrap"><div class="dim-name">ROE — Regulação Emocional</div><div class="dim-bar"><div class="dim-bar-fill" style="width:0;background:#8b5cf6"></div></div></div>
+    <div class="dim-score">—</div>
+  </div>
+
+  <div class="interpretation" id="interpretation"></div>
+
+  <div class="actions">
+    <a href="javascript:window.print()" class="primary">📄 Salvar resultado em PDF</a>
+    <a href="https://calendly.com/smoraes-selmamoraes/" target="_blank" class="secondary">📅 Agendar devolutiva com Selma</a>
+  </div>
+</div>
+
+<div class="footer">
+  <p>Escala WLEIS — Wong, C.S. & Law, K.S. (2002). Leadership Quarterly, 13, 243-274.</p>
+  <p>Versão brasileira validada — Rodrigues, N. & Rebelo, T. (2013).</p>
+  <p style="margin-top:8px">Instituto Selma Moraes · CRP 06/138420 · selmamoraes.com.br</p>
+  <p style="color:#bbb;margin-top:8px">Este instrumento é de uso educacional e de autoconhecimento. Não substitui avaliação clínica profissional.</p>
+</div>
+
+</div>
+
+<script>
+document.querySelectorAll('.q-scale').forEach((container, idx) => {
+  for(let i=1;i<=7;i++){
+    const label=document.createElement('label');
+    const input=document.createElement('input');
+    input.type='radio';input.name='q'+(idx+1);input.value=i;
+    input.addEventListener('change',checkComplete);
+    const span=document.createElement('span');span.textContent=i;
+    label.appendChild(input);label.appendChild(span);
+    container.appendChild(label);
+  }
+});
+
+function checkComplete(){
+  const answered=document.querySelectorAll('input[type=radio]:checked').length;
+  const btn=document.getElementById('submitBtn');
+  if(answered===16){btn.disabled=false;btn.textContent='Ver meu resultado →';}
+  else{btn.disabled=true;btn.textContent='Responda todas as 16 perguntas ('+answered+'/16)';}
+}
+
+document.getElementById('wleisForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  const dims={SEA:[1,2,3,4],OEA:[5,6,7,8],UOE:[9,10,11,12],ROE:[13,14,15,16]};
+  const scores={};let total=0;
+  for(const[dim,qs]of Object.entries(dims)){
+    let s=0;
+    for(const q of qs){const v=document.querySelector('input[name=q'+q+']:checked');s+=parseInt(v.value);}
+    scores[dim]=s;total+=s;
+  }
+
+  document.getElementById('totalScore').textContent=total;
+  let level,levelClass,levelText;
+  if(total>=85){level='Alto';levelClass='level-high';levelText='Você demonstra alto nível de inteligência emocional. Suas competências emocionais são um diferencial significativo na sua liderança. Foque em manter esse nível e desenvolver as dimensões mais baixas para excelência completa.';}
+  else if(total>=57){level='Moderado';levelClass='level-moderate';levelText='Você tem uma base sólida de inteligência emocional com espaço significativo para desenvolvimento. As dimensões abaixo de 21 pontos são seus pontos prioritários de trabalho. O programa de IE para Lideranças pode acelerar esse desenvolvimento.';}
+  else{level='Necessita desenvolvimento';levelClass='level-low';levelText='Seu resultado indica oportunidades importantes de desenvolvimento emocional. Isso não é um julgamento — muitos líderes de sucesso começaram com scores similares. O programa de Inteligência Emocional para Lideranças foi desenhado especificamente para esta faixa.';}
+
+  const el=document.getElementById('totalLevel');
+  el.textContent=level;el.className='result-level '+levelClass;
+
+  const colors={SEA:'var(--teal)',OEA:'#3b82f6',UOE:'var(--gold)',ROE:'#8b5cf6'};
+  const names={SEA:'Percepção Própria',OEA:'Percepção do Outro',UOE:'Uso da Emoção',ROE:'Regulação Emocional'};
+  for(const[dim,score]of Object.entries(scores)){
+    const container=document.getElementById('dim'+dim);
+    container.querySelector('.dim-score').textContent=score+'/28';
+    container.querySelector('.dim-bar-fill').style.width=(score/28*100)+'%';
+  }
+
+  const lowest=Object.entries(scores).sort((a,b)=>a[1]-b[1])[0];
+  const highest=Object.entries(scores).sort((a,b)=>b[1]-a[1])[0];
+
+  document.getElementById('interpretation').innerHTML='<h3>Sua interpretação personalizada</h3>'+
+    '<p>'+levelText+'</p>'+
+    '<p><strong style="color:var(--teal)">Sua dimensão mais forte:</strong> '+names[highest[0]]+' ('+highest[1]+'/28). Este é o seu recurso principal — use-o conscientemente nas situações de liderança.</p>'+
+    '<p><strong style="color:#ef4444">Sua dimensão prioritária:</strong> '+names[lowest[0]]+' ('+lowest[1]+'/28). Concentre seus esforços de desenvolvimento aqui nos próximos 90 dias.</p>'+
+    '<p style="margin-top:16px;font-size:0.85rem;color:#888"><em>Referência: Wong, C.S. & Law, K.S. (2002). The effects of leader and follower emotional intelligence on performance and attitude. Leadership Quarterly, 13, 243-274. Versão brasileira: Rodrigues, N. & Rebelo, T. (2013).</em></p>';
+
+  document.getElementById('results').classList.add('visible');
+  document.getElementById('results').scrollIntoView({behavior:'smooth'});
+
+  try{
+    const payload={_subject:'[WLEIS] Avaliação IE — Score '+total+'/112 ('+level+')',_replyto:'smoraes@selmamoraes.com.br',_template:'table',_captcha:'false',
+      'Score Total':total+'/112','Nível':level,'SEA':scores.SEA+'/28','OEA':scores.OEA+'/28','UOE':scores.UOE+'/28','ROE':scores.ROE+'/28',
+      'Dimensão mais forte':names[highest[0]]+' ('+highest[1]+')','Dimensão prioritária':names[lowest[0]]+' ('+lowest[1]+')','Data':new Date().toLocaleDateString('pt-BR')};
+    fetch('https://formsubmit.co/ajax/smoraes@selmamoraes.com.br',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)}).catch(()=>{});
+  }catch(e){}
+});
+</script>
+</body>
+</html>
