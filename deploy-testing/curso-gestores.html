@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Treinamento para Gestores e Lideranças — Instituto Selma Moraes</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0a2540;--navy-deep:#061b30;--gold:#D6B27A;--gold-dark:#B8865D;--teal:#0f766e;--cream:#faf6ef}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a1a;line-height:1.7}
+.login-gate{position:fixed;inset:0;background:var(--navy-deep);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:16px}
+.login-gate.hidden{display:none}
+.login-gate h2{color:var(--gold);font-family:'Playfair Display',serif;font-size:1.8rem}
+.login-gate p{color:rgba(255,255,255,0.6);font-size:0.9rem;max-width:400px;text-align:center}
+.login-gate input{padding:12px 20px;border-radius:8px;border:1px solid rgba(214,178,122,0.3);background:rgba(255,255,255,0.05);color:#fff;font-size:1rem;width:280px;text-align:center}
+.login-gate button{padding:12px 32px;border-radius:8px;border:none;background:var(--gold);color:var(--navy-deep);font-weight:700;font-size:1rem;cursor:pointer}
+.course-content{display:none;max-width:900px;margin:0 auto;padding:40px 24px 80px}
+.course-content.visible{display:block}
+.course-header{text-align:center;margin-bottom:48px;padding-bottom:32px;border-bottom:2px solid var(--cream)}
+.course-header h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,2.8rem);color:var(--navy);margin-bottom:8px}
+.course-header .subtitle{color:var(--gold-dark);font-size:1.1rem;font-weight:600;font-style:italic}
+.course-header .meta{color:#666;font-size:0.9rem;margin-top:16px}
+.course-header .meta span{display:inline-block;padding:4px 14px;background:var(--cream);border-radius:20px;margin:4px}
+.module{margin-bottom:48px;page-break-inside:avoid}
+.module-header{display:flex;align-items:center;gap:16px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--gold)}
+.module-num{background:var(--navy);color:var(--gold);width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:800;font-size:1.2rem;flex-shrink:0}
+.module-title{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--navy);font-weight:700}
+.module-time{color:#888;font-size:0.85rem;margin-left:auto}
+.module-body{padding-left:64px}
+.module-body h4{color:var(--navy);font-size:1rem;font-weight:700;margin:20px 0 8px;display:flex;align-items:center;gap:8px}
+.module-body h4::before{content:'';width:6px;height:6px;background:var(--gold);border-radius:50%;flex-shrink:0}
+.module-body p{color:#444;font-size:0.95rem;margin-bottom:12px}
+.module-body ul{padding-left:20px;color:#444;font-size:0.95rem;margin-bottom:16px}
+.module-body ul li{margin-bottom:6px}
+.exercise{background:linear-gradient(135deg,var(--cream),#fff);border:1px solid rgba(214,178,122,0.3);border-radius:12px;padding:20px;margin:16px 0}
+.exercise-label{color:var(--gold-dark);font-weight:700;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px}
+.case-study{background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;padding:20px;margin:16px 0}
+.case-label{color:#0369a1;font-weight:700;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px}
+.key-point{background:#f0fdf4;border-left:4px solid var(--teal);padding:12px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:0.92rem;color:#166534}
+.script-box{background:var(--navy-deep);color:#fff;border-radius:12px;padding:20px;margin:16px 0;font-size:0.92rem}
+.script-box .label{color:var(--gold);font-weight:700;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px}
+.source-ref{color:#888;font-size:0.82rem;font-style:italic;margin-top:4px}
+.download-bar{position:fixed;bottom:0;left:0;right:0;background:var(--navy);padding:12px 24px;display:flex;align-items:center;justify-content:center;gap:16px;z-index:100}
+.download-bar button{padding:10px 24px;border-radius:8px;border:none;background:var(--gold);color:var(--navy-deep);font-weight:700;cursor:pointer;font-size:0.9rem}
+.download-bar span{color:rgba(255,255,255,0.6);font-size:0.85rem}
+@media print{.download-bar,.login-gate{display:none !important}.course-content{display:block !important;padding:20px}.module-body{padding-left:32px}}
+</style>
+</head>
+<body>
+
+<div class="login-gate" id="loginGate">
+  <h2>Área do Aluno</h2>
+  <p>Este conteúdo é exclusivo para clientes do Instituto Selma Moraes que contrataram o programa de Treinamento para Gestores.</p>
+  <input type="password" id="loginPwd" placeholder="Senha de acesso" autocomplete="off">
+  <button onclick="doLogin()">Acessar curso</button>
+  <p style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin-top:8px">Não tem senha? Entre em contato com a Selma.</p>
+</div>
+
+<div class="course-content" id="courseContent">
+
+  <div class="course-header">
+    <h1>Treinamento para Gestores e Lideranças</h1>
+    <div class="subtitle">Saúde Mental no Trabalho e Conformidade com a NR-1</div>
+    <div class="meta">
+      <span>4h presencial / 6h online</span>
+      <span>Até 25 participantes</span>
+      <span>Certificação individual</span>
+      <span>CRP 06/138420</span>
+    </div>
+  </div>
+
+  <!-- MÓDULO 1 -->
+  <div class="module">
+    <div class="module-header">
+      <div class="module-num">1</div>
+      <div class="module-title">NR-1 e Responsabilidades do Gestor</div>
+      <div class="module-time">30 min</div>
+    </div>
+    <div class="module-body">
+      <h4>O que mudou com a Portaria MTE 1.419/2024</h4>
+      <p>Em agosto de 2024, o Ministério do Trabalho e Emprego publicou a Portaria nº 1.419, que alterou significativamente a Norma Regulamentadora nº 1 (NR-1). A principal mudança: <strong>riscos psicossociais agora são obrigatórios no Programa de Gerenciamento de Riscos (PGR)</strong> de todas as empresas brasileiras.</p>
+      <p>Isso significa que fatores como sobrecarga de trabalho, assédio moral e sexual, pressão por metas inatingíveis, jornadas excessivas e falta de autonomia precisam ser identificados, avaliados e gerenciados — da mesma forma que riscos físicos, químicos e biológicos já eram tratados.</p>
+
+      <div class="key-point">A fase educativa começou em maio de 2025. A fiscalização punitiva com multas e autuações formais está prevista para maio de 2026 (Portaria MTE 765/2025). O Ministério Público do Trabalho já pode atuar antes desse prazo.</div>
+
+      <h4>Cronograma oficial de implementação</h4>
+      <ul>
+        <li><strong>26 de maio de 2025:</strong> início da fase educativa — o MTE orienta, mas já pode fiscalizar</li>
+        <li><strong>26 de maio de 2026:</strong> início da fiscalização punitiva — multas e autuações formais</li>
+        <li>Empresas com Comissão Interna de Prevenção de Acidentes (CIPA) já devem incluir riscos psicossociais nas deliberações</li>
+      </ul>
+
+      <h4>O que o gestor precisa saber: responsabilidades legais</h4>
+      <p>Muitos gestores acreditam que a conformidade com a NR-1 é responsabilidade exclusiva do RH ou do SESMT. Isso é um erro. O gestor direto é juridicamente corresponsável pelos riscos psicossociais da sua equipe. Se um colaborador adoece por burnout e a empresa não demonstrar que mapeou e gerenciou esse risco, o gestor pode ser responsabilizado solidariamente em ações trabalhistas.</p>
+      <ul>
+        <li><strong>Artigo 157 da CLT:</strong> cabe às empresas cumprir e fazer cumprir as normas de segurança e medicina do trabalho — o gestor é o braço operacional dessa obrigação</li>
+        <li><strong>Responsabilidade por omissão:</strong> não agir diante de sinais de adoecimento pode configurar negligência</li>
+        <li><strong>Dever de documentação:</strong> conversas, encaminhamentos e ações preventivas devem ser registrados</li>
+      </ul>
+
+      <h4>Multas e penalidades</h4>
+      <p>As multas por descumprimento da NR-1 são calculadas por infração e por colaborador exposto:</p>
+      <ul>
+        <li>Multa base por item não conforme: R$ 1.700 a R$ 5.200</li>
+        <li>Múltiplas infrações em uma visita: R$ 15.000 a R$ 20.000</li>
+        <li>Multa máxima acumulada: até R$ 44.000</li>
+        <li>Processos trabalhistas por dano moral: sem teto (casos de R$ 67.000+ por colaborador são documentados)</li>
+      </ul>
+      <p class="source-ref">Fonte: Tabela NR-28 (gradação de multas) · Solides Blog "Multas por descumprimento da NR-1" · CLT Art. 157</p>
+
+      <div class="case-study">
+        <div class="case-label">Caso real para discussão</div>
+        <p><strong>Empresa de tecnologia, 120 colaboradores, São Paulo.</strong> Um desenvolvedor sênior foi afastado por burnout após 14 meses de horas extras não controladas. A empresa não tinha PGR atualizado com riscos psicossociais. O gestor direto sabia da sobrecarga mas não documentou nem encaminhou. Resultado: condenação de R$ 85.000 em dano moral + R$ 32.000 em diferenças de horas extras. O gestor foi citado nominalmente na sentença por negligência.</p>
+        <p><strong>Pergunta para o grupo:</strong> O que o gestor deveria ter feito? Em que momento ele poderia ter evitado esse desfecho?</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MÓDULO 2 -->
+  <div class="module">
+    <div class="module-header">
+      <div class="module-num">2</div>
+      <div class="module-title">Reconhecimento de Riscos Psicossociais</div>
+      <div class="module-time">40 min</div>
+    </div>
+    <div class="module-body">
+      <h4>Os 6 fatores de risco psicossocial (modelo COPSOQ-III)</h4>
+      <p>O COPSOQ (Copenhagen Psychosocial Questionnaire) é o instrumento mais utilizado mundialmente para avaliar riscos psicossociais no trabalho. A versão III, validada para o Brasil em 2024, organiza os riscos em 6 dimensões:</p>
+
+      <p><strong>1. Exigências do trabalho</strong></p>
+      <ul>
+        <li>Carga de trabalho excessiva (quantitativa e cognitiva)</li>
+        <li>Ritmo de trabalho acelerado e constante</li>
+        <li>Exigências emocionais (atendimento ao público, conflitos)</li>
+        <li>Conflito trabalho-família (horários que invadem a vida pessoal)</li>
+      </ul>
+
+      <p><strong>2. Organização e conteúdo do trabalho</strong></p>
+      <ul>
+        <li>Falta de autonomia e controle sobre as próprias tarefas</li>
+        <li>Trabalho monótono e repetitivo sem significado</li>
+        <li>Subutilização de competências</li>
+        <li>Ambiguidade de papéis (não saber exatamente o que se espera)</li>
+      </ul>
+
+      <p><strong>3. Relações interpessoais e liderança</strong></p>
+      <ul>
+        <li>Assédio moral (humilhações, exclusão, perseguição)</li>
+        <li>Assédio sexual</li>
+        <li>Conflitos interpessoais não mediados</li>
+        <li>Liderança autoritária ou negligente</li>
+        <li>Falta de apoio social de colegas e chefia</li>
+      </ul>
+
+      <p><strong>4. Recompensa e reconhecimento</strong></p>
+      <ul>
+        <li>Salário percebido como injusto em relação ao esforço</li>
+        <li>Falta de reconhecimento pelo trabalho bem feito</li>
+        <li>Insegurança no emprego e precariedade contratual</li>
+        <li>Ausência de perspectiva de crescimento</li>
+      </ul>
+
+      <p><strong>5. Valores no local de trabalho</strong></p>
+      <ul>
+        <li>Conflito entre valores pessoais e práticas da empresa</li>
+        <li>Falta de confiança na gestão</li>
+        <li>Injustiça organizacional percebida</li>
+        <li>Comunicação interna deficiente ou manipulativa</li>
+      </ul>
+
+      <p><strong>6. Saúde e bem-estar</strong></p>
+      <ul>
+        <li>Sintomas de estresse crônico</li>
+        <li>Esgotamento profissional (burnout)</li>
+        <li>Sintomas depressivos e ansiosos</li>
+        <li>Problemas de sono relacionados ao trabalho</li>
+        <li>Presenteísmo (estar presente mas sem capacidade produtiva)</li>
+      </ul>
+      <p class="source-ref">Fonte: COPSOQ-III — Kristensen et al. (2005), versão brasileira validada por Fernandes & Pereira (2024) · Solides Blog "COPSOQ-BR"</p>
+
+      <h4>Sinais de burnout: o que o gestor precisa observar</h4>
+      <p>O burnout (CID-11: QD85) foi reconhecido pela OMS como fenômeno ocupacional em 2022. É caracterizado por três dimensões:</p>
+      <ul>
+        <li><strong>Exaustão emocional:</strong> "Não aguento mais" — cansaço que não melhora com descanso. O colaborador parece constantemente esgotado, sem energia para iniciar ou concluir tarefas.</li>
+        <li><strong>Despersonalização/cinismo:</strong> "Tanto faz" — distanciamento emocional, tratamento mecânico de colegas e clientes, sarcasmo frequente, perda de empatia.</li>
+        <li><strong>Redução da realização pessoal:</strong> "Nada que eu faço importa" — sensação de incompetência, queda na autoestima profissional, perda de sentido no trabalho.</li>
+      </ul>
+
+      <div class="key-point">Sinais precoces que o gestor pode observar ANTES do afastamento: aumento de faltas (especialmente às segundas-feiras), queda de produtividade sem causa aparente, isolamento social, irritabilidade desproporcional, erros repetidos em tarefas que antes dominava, choro no ambiente de trabalho, queixas físicas recorrentes (dor de cabeça, insônia, problemas gástricos).</div>
+
+      <h4>Diferença entre pressão saudável e sobrecarga patológica</h4>
+      <p>Nem toda pressão é prejudicial. O estresse pontual (eustresse) pode ser motivador — o problema é quando se torna crônico e sem recuperação.</p>
+      <ul>
+        <li><strong>Pressão saudável:</strong> desafios com prazo definido + recursos adequados + reconhecimento + período de recuperação</li>
+        <li><strong>Sobrecarga patológica:</strong> demandas constantes + recursos insuficientes + sem reconhecimento + sem pausa</li>
+      </ul>
+
+      <h4>Assédio moral e sexual: como identificar antes que escale</h4>
+      <p><strong>Assédio moral</strong> é toda conduta abusiva, repetitiva, que atenta contra a dignidade do trabalhador. Exemplos:</p>
+      <ul>
+        <li>Gritar com o colaborador na frente de colegas</li>
+        <li>Dar instruções contraditórias deliberadamente</li>
+        <li>Excluir sistematicamente de reuniões e decisões</li>
+        <li>Atribuir tarefas muito abaixo ou muito acima da capacidade como punição</li>
+        <li>Espalhar rumores ou fazer comentários depreciativos</li>
+      </ul>
+      <p><strong>Assédio sexual</strong> é qualquer conduta de conotação sexual não desejada — verbal, visual ou física. O gestor deve saber:</p>
+      <ul>
+        <li>Uma única ocorrência já configura assédio sexual (não precisa ser repetitivo)</li>
+        <li>O "não" pode ser verbal, gestual ou contextual</li>
+        <li>Piadas de conteúdo sexual no ambiente de trabalho podem configurar assédio ambiental</li>
+        <li>O gestor que testemunha e não age é corresponsável</li>
+      </ul>
+      <p class="source-ref">Fonte: Lei 14.457/2022 (Programa Emprega + Mulheres) · TST — Cartilha de Prevenção ao Assédio · NR-1 atualizada</p>
+
+      <div class="exercise">
+        <div class="exercise-label">Exercício prático — 15 minutos</div>
+        <p><strong>Análise de cenários reais.</strong> Em grupos de 4-5 pessoas, cada grupo recebe um cenário impresso e deve:</p>
+        <ol>
+          <li>Identificar qual(is) dos 6 fatores de risco COPSOQ estão presentes</li>
+          <li>Classificar a gravidade (verde/amarelo/vermelho)</li>
+          <li>Propor 2 ações imediatas que o gestor poderia tomar</li>
+          <li>Apresentar ao grupo em 2 minutos</li>
+        </ol>
+        <p><strong>Cenário A:</strong> "Marina, analista financeira, acumula as funções de 2 colegas que pediram demissão há 3 meses. Trabalha das 8h às 21h, inclusive sábados. Nas últimas 2 semanas, começou a ter crises de choro no banheiro. O gestor direto sabe da sobrecarga mas diz que 'não tem o que fazer porque RH não aprova contratação'."</p>
+        <p><strong>Cenário B:</strong> "Carlos, supervisor de produção, foi promovido há 6 meses. Seu novo gestor manda mensagens no WhatsApp às 23h cobrando relatórios. Quando Carlos pede para discutir prazos, o gestor responde: 'Se não aguenta o ritmo, tem gente na fila'. Carlos começou a tomar ansiolíticos por conta própria."</p>
+        <p><strong>Cenário C:</strong> "Em uma reunião de equipe, o diretor comercial faz uma piada sobre a aparência física de Fernanda, estagiária. Alguns riem, ela fica vermelha e sai da sala. Na semana seguinte, Fernanda pede transferência de setor sem explicar o motivo."</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MÓDULO 3 -->
+  <div class="module">
+    <div class="module-header">
+      <div class="module-num">3</div>
+      <div class="module-title">Liderança e Segurança Psicológica</div>
+      <div class="module-time">40 min</div>
+    </div>
+    <div class="module-body">
+      <h4>O conceito de segurança psicológica</h4>
+      <p>Segurança psicológica, conceito desenvolvido pela professora Amy Edmondson de Harvard, é a crença compartilhada de que a equipe é um espaço seguro para assumir riscos interpessoais. Em termos práticos: é quando as pessoas sentem que podem fazer perguntas, admitir erros, propor ideias e discordar do chefe — sem medo de punição, humilhação ou retaliação.</p>
+
+      <div class="key-point">A pesquisa do Google (Projeto Aristóteles, 2015) analisou 180 equipes internas e concluiu que o fator #1 que diferencia equipes de alta performance de equipes medianas NÃO é talento individual, experiência ou recursos — é segurança psicológica.</div>
+
+      <h4>Os 4 estágios da segurança psicológica</h4>
+      <p>Timothy Clark, em "The 4 Stages of Psychological Safety" (2020), propõe uma progressão:</p>
+      <ul>
+        <li><strong>Estágio 1 — Segurança de inclusão:</strong> "Eu pertenço a este grupo." O colaborador sente que é aceito como pessoa, independentemente de cargo ou performance.</li>
+        <li><strong>Estágio 2 — Segurança de aprendizagem:</strong> "Posso fazer perguntas sem parecer burro." O colaborador se sente à vontade para admitir que não sabe algo e pedir ajuda.</li>
+        <li><strong>Estágio 3 — Segurança de contribuição:</strong> "Posso dar ideias sem ser ridicularizado." O colaborador sente que suas contribuições são valorizadas, mesmo quando discorda do consenso.</li>
+        <li><strong>Estágio 4 — Segurança de desafio:</strong> "Posso questionar o status quo." O colaborador se sente seguro para apontar problemas, sugerir mudanças e desafiar decisões — inclusive do gestor.</li>
+      </ul>
+
+      <h4>Gestão baseada em confiança vs gestão baseada em medo</h4>
+      <p>Compare os dois modelos:</p>
+      <ul>
+        <li><strong>Medo:</strong> "Se eu errar, serei punido" → colaborador esconde erros, não inova, faz o mínimo</li>
+        <li><strong>Confiança:</strong> "Se eu errar, terei apoio para corrigir" → colaborador reporta problemas cedo, experimenta soluções, se engaja</li>
+      </ul>
+      <p>Pesquisas de Edmondson mostram que equipes com alta segurança psicológica têm 76% mais engajamento, 50% mais produtividade e 27% menos turnover.</p>
+
+      <h4>Como o gestor constrói segurança psicológica na prática</h4>
+      <ul>
+        <li><strong>Modelar vulnerabilidade:</strong> admita seus próprios erros primeiro. "Eu errei nessa decisão, e aprendi X"</li>
+        <li><strong>Fazer perguntas, não dar respostas:</strong> "O que vocês acham?" antes de "Façam assim"</li>
+        <li><strong>Responder positivamente a más notícias:</strong> "Obrigado por me contar isso cedo" — nunca punir o mensageiro</li>
+        <li><strong>Normalizar o erro como aprendizagem:</strong> separar erros de negligência (inaceitáveis) de erros de tentativa (esperados)</li>
+        <li><strong>Dar crédito público e feedback privado:</strong> elogiar na frente de todos, corrigir em particular</li>
+      </ul>
+      <p class="source-ref">Fonte: Amy Edmondson — "The Fearless Organization" (2018) · Google — "Project Aristotle" (2015) · Timothy Clark — "The 4 Stages of Psychological Safety" (2020)</p>
+
+      <div class="exercise">
+        <div class="exercise-label">Autoavaliação — 10 minutos</div>
+        <p><strong>Escala de segurança psicológica da equipe.</strong> Cada gestor responde individualmente sobre a SUA equipe (1 = discordo totalmente, 5 = concordo totalmente):</p>
+        <ol>
+          <li>Meus colaboradores se sentem confortáveis em admitir erros para mim</li>
+          <li>As pessoas da minha equipe fazem perguntas quando não entendem algo</li>
+          <li>Alguém da minha equipe já discordou de mim abertamente em uma reunião</li>
+          <li>Quando alguém comete um erro, focamos na solução, não na culpa</li>
+          <li>As pessoas propõem ideias novas sem medo de serem ridicularizadas</li>
+          <li>Eu consigo dar feedback honesto sem que a pessoa fique na defensiva</li>
+          <li>Os colaboradores me procuram quando estão com problemas pessoais que afetam o trabalho</li>
+        </ol>
+        <p><strong>Interpretação:</strong> 7-21 pontos = segurança psicológica baixa (ação urgente). 22-28 pontos = moderada (há espaço para melhorar). 29-35 pontos = alta (manter e reforçar).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MÓDULO 4 -->
+  <div class="module">
+    <div class="module-header">
+      <div class="module-num">4</div>
+      <div class="module-title">Conversas Difíceis e Protocolo de Encaminhamento</div>
+      <div class="module-time">50 min</div>
+    </div>
+    <div class="module-body">
+      <h4>Como abordar um colaborador em sofrimento</h4>
+      <p>Este é o módulo mais prático do treinamento. A maioria dos gestores sabe que algo está errado com um colaborador, mas não sabe COMO abordar. O medo de "piorar as coisas" faz com que fiquem paralisados — e a omissão é a pior resposta possível.</p>
+
+      <h4>Passo a passo para a conversa</h4>
+      <p><strong>Passo 1 — Escolha o momento certo</strong></p>
+      <ul>
+        <li>Em particular, NUNCA na frente de colegas</li>
+        <li>Num horário tranquilo, não entre reuniões</li>
+        <li>Presencialmente se possível (vídeo como segunda opção)</li>
+        <li>Sem celular na mesa, sem interrupções</li>
+      </ul>
+
+      <p><strong>Passo 2 — Abra com observação, não com julgamento</strong></p>
+      <div class="script-box">
+        <div class="label">Script sugerido — abertura</div>
+        <p>"[Nome], tenho notado que nas últimas semanas você parece mais cansado/a do que o normal. Não estou aqui para cobrar nada — quero entender como você está e se posso ajudar de alguma forma."</p>
+      </div>
+
+      <p><strong>Passo 3 — Escute mais do que fala</strong></p>
+      <ul>
+        <li>Use perguntas abertas: "Como você está se sentindo?" (não "Você está bem?")</li>
+        <li>Não interrompa, mesmo que o silêncio seja desconfortável</li>
+        <li>Valide sem minimizar: "Entendo que isso é difícil" (nunca "Todo mundo passa por isso")</li>
+        <li>Não tente resolver na hora — apenas ouvir já é terapêutico</li>
+      </ul>
+
+      <p><strong>Passo 4 — Ofereça apoio concreto</strong></p>
+      <div class="script-box">
+        <div class="label">Script sugerido — oferta de apoio</div>
+        <p>"Quero que saiba que a empresa tem recursos para ajudar. Posso encaminhar você para uma conversa confidencial com nossa psicóloga — tudo que você disser lá fica entre vocês, eu não recebo detalhes. Também posso rever a distribuição de tarefas se isso ajudar. O que faz mais sentido para você?"</p>
+      </div>
+
+      <p><strong>Passo 5 — Documente (sem expor)</strong></p>
+      <ul>
+        <li>Registre data, hora e tema geral da conversa (não detalhes íntimos)</li>
+        <li>Modelo: "Em [data], conversei com [nome] sobre sua condição geral de trabalho. Ofereci encaminhamento ao programa de saúde mental. [Aceito/Recusado/Vai pensar]."</li>
+        <li>Guarde em pasta pessoal confidencial, não em sistemas abertos</li>
+      </ul>
+
+      <h4>O que NUNCA dizer</h4>
+      <ul>
+        <li>❌ "Isso é frescura" / "Todo mundo passa por isso"</li>
+        <li>❌ "Você precisa separar pessoal do profissional"</li>
+        <li>❌ "Quando eu era da sua idade, aguentava muito mais pressão"</li>
+        <li>❌ "Se você não está dando conta, talvez esse cargo não seja para você"</li>
+        <li>❌ "Vou falar com o RH sobre a sua situação" (sem consentimento)</li>
+      </ul>
+
+      <h4>Protocolo formal de encaminhamento</h4>
+      <p>Todo encaminhamento deve seguir este fluxo:</p>
+      <ol>
+        <li><strong>Gestor identifica sinais</strong> → conversa com o colaborador</li>
+        <li><strong>Colaborador aceita ajuda</strong> → gestor comunica ao RH (somente que houve encaminhamento, não o motivo)</li>
+        <li><strong>RH agenda com Psicóloga</strong> (Selma) → sessão de acolhimento em até 72h</li>
+        <li><strong>Psicóloga avalia</strong> → pode ser acompanhamento psicológico, encaminhamento psiquiátrico, ou ajuste organizacional</li>
+        <li><strong>Feedback ao gestor</strong> → apenas recomendações operacionais ("flexibilizar horário", "redistribuir tarefa X"), NUNCA diagnóstico</li>
+      </ol>
+
+      <div class="key-point">O sigilo é absoluto. O gestor NUNCA recebe diagnóstico ou detalhes do atendimento psicológico. Recebe apenas recomendações de ajuste no trabalho. Isso é obrigatório pelo Código de Ética do Psicólogo (CFP).</div>
+
+      <div class="exercise">
+        <div class="exercise-label">Role-playing — 25 minutos (3 cenários × 8 min cada)</div>
+        <p>Em trios: um é o gestor, um é o colaborador, um observa e dá feedback.</p>
+        <p><strong>Cenário 1:</strong> Colaboradora que chora frequentemente no banheiro. Colegas já comentaram. Performance caiu 40% no último mês.</p>
+        <p><strong>Cenário 2:</strong> Colaborador que começou a faltar às segundas-feiras (3 das últimas 5). Quando presente, está irritável e evita interações com a equipe.</p>
+        <p><strong>Cenário 3:</strong> Colaborador que pede demissão alegando "motivos pessoais", mas colegas próximos dizem que ele está esgotado e sentindo assédio do supervisor de outra área.</p>
+        <p><strong>Roteiro do observador:</strong> Avaliar (1) O gestor abriu com observação ou julgamento? (2) Mais ouviu ou mais falou? (3) Ofereceu apoio concreto? (4) Respeitou a autonomia do colaborador?</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MÓDULO 5 -->
+  <div class="module">
+    <div class="module-header">
+      <div class="module-num">5</div>
+      <div class="module-title">Autocuidado para Líderes</div>
+      <div class="module-time">30 min</div>
+    </div>
+    <div class="module-body">
+      <h4>O líder que adoece não protege a equipe</h4>
+      <p>Dados do INSS mostram que em 2025, 546 mil trabalhadores brasileiros foram afastados por transtornos mentais — um aumento de 67% em relação a 2014. Gestores e líderes estão entre os mais afetados: a pressão por resultados, a responsabilidade por equipes e a exigência de estar "sempre disponível" criam um ambiente propício ao esgotamento.</p>
+
+      <div class="key-point">Analogia da máscara de oxigênio: "Em caso de despressurização, coloque sua máscara antes de ajudar o próximo." Um gestor esgotado não consegue identificar sinais de adoecimento na equipe, não tem paciência para conversas difíceis e tende a replicar comportamentos tóxicos que sofre.</div>
+
+      <h4>Técnicas de regulação emocional para alta pressão</h4>
+      <p><strong>1. Respiração tática 4-7-8 (60 segundos)</strong></p>
+      <p>Desenvolvida pelo Dr. Andrew Weil (Harvard), esta técnica ativa o sistema nervoso parassimpático e reduz cortisol em menos de 1 minuto:</p>
+      <ul>
+        <li>Inspire pelo nariz contando até 4</li>
+        <li>Segure a respiração contando até 7</li>
+        <li>Expire pela boca contando até 8</li>
+        <li>Repita 3 ciclos. Pode usar antes de reuniões difíceis, após um conflito ou no final do dia.</li>
+      </ul>
+
+      <p><strong>2. Técnica STOP (antes de reagir)</strong></p>
+      <ul>
+        <li><strong>S</strong> — Stop (pare o que está fazendo)</li>
+        <li><strong>T</strong> — Take a breath (respire fundo uma vez)</li>
+        <li><strong>O</strong> — Observe (o que estou sentindo? raiva? frustração? medo?)</li>
+        <li><strong>P</strong> — Proceed (agora responda, não reaja)</li>
+      </ul>
+
+      <p><strong>3. Delimitação de horários</strong></p>
+      <ul>
+        <li>Defina um horário de "encerramento digital" — sem e-mails/WhatsApp depois das 20h</li>
+        <li>Comunique à equipe: "Emergências reais, liguem. O restante, amanhã às 8h."</li>
+        <li>Líder que respeita próprios limites autoriza a equipe a respeitar os dela</li>
+      </ul>
+
+      <h4>Construindo sua rede de apoio profissional</h4>
+      <ul>
+        <li>Tenha pelo menos 1 pessoa fora da empresa com quem possa falar abertamente sobre pressão do trabalho</li>
+        <li>Considere terapia individual (não é fraqueza — é manutenção preventiva)</li>
+        <li>Participe de grupos de gestores (mastermind, fórum de líderes) para compartilhar experiências</li>
+        <li>Use o programa de atendimento psicológico da empresa — ele também é para você</li>
+      </ul>
+      <p class="source-ref">Fonte: INSS — Anuário Estatístico 2025 · Dr. Andrew Weil — "4-7-8 Breathing" · OMS — "World Mental Health Report" (2022)</p>
+    </div>
+  </div>
+
+  <!-- MÓDULO 6 -->
+  <div class="module">
+    <div class="module-header">
+      <div class="module-num">6</div>
+      <div class="module-title">Plano de Ação Departamental</div>
+      <div class="module-time">30 min</div>
+    </div>
+    <div class="module-body">
+      <h4>Construção do plano de ação — exercício ao vivo</h4>
+      <p>Cada gestor preenche seu próprio plano durante a sessão. Este é o entregável concreto do treinamento — um documento que sai pronto para ser implementado.</p>
+
+      <div class="exercise">
+        <div class="exercise-label">Template do plano de ação (preencher agora)</div>
+        <p><strong>Dados do gestor:</strong></p>
+        <ul>
+          <li>Nome: _______________</li>
+          <li>Departamento: _______________</li>
+          <li>Número de colaboradores diretos: ___</li>
+          <li>Data: ___/___/______</li>
+        </ul>
+        <p><strong>1. Diagnóstico atual da minha equipe (marcar o que se aplica):</strong></p>
+        <ul>
+          <li>□ Sobrecarga de trabalho percebida</li>
+          <li>□ Conflitos interpessoais não resolvidos</li>
+          <li>□ Alta rotatividade nos últimos 6 meses</li>
+          <li>□ Aumento de faltas/atestados</li>
+          <li>□ Colaboradores com sinais de esgotamento</li>
+          <li>□ Queixas recorrentes sobre gestão</li>
+          <li>□ Outro: _______________</li>
+        </ul>
+        <p><strong>2. Três ações que vou implementar nos próximos 30 dias:</strong></p>
+        <ul>
+          <li>Ação 1: _______________ (Prazo: ___/___)</li>
+          <li>Ação 2: _______________ (Prazo: ___/___)</li>
+          <li>Ação 3: _______________ (Prazo: ___/___)</li>
+        </ul>
+        <p><strong>3. Indicadores que vou monitorar mensalmente:</strong></p>
+        <ul>
+          <li>□ Taxa de absenteísmo da equipe</li>
+          <li>□ Número de horas extras</li>
+          <li>□ Resultado da pesquisa de clima (se disponível)</li>
+          <li>□ Turnover da equipe</li>
+          <li>□ Número de encaminhamentos ao programa de saúde mental</li>
+          <li>□ Outro: _______________</li>
+        </ul>
+        <p><strong>4. Compromisso pessoal de autocuidado:</strong></p>
+        <ul>
+          <li>Horário de encerramento digital: ___h</li>
+          <li>Atividade de descompressão semanal: _______________</li>
+          <li>Pessoa de confiança para falar sobre pressão: _______________</li>
+        </ul>
+        <p><strong>Assinatura do gestor:</strong> _______________ <strong>Data:</strong> ___/___/______</p>
+      </div>
+
+      <h4>Indicadores de acompanhamento</h4>
+      <p>Após o treinamento, cada gestor deve monitorar mensalmente:</p>
+      <ul>
+        <li><strong>Absenteísmo:</strong> meta < 3% (média nacional é 6,2% — dados ABRH 2024)</li>
+        <li><strong>Horas extras:</strong> meta < 10% da jornada regular</li>
+        <li><strong>Turnover voluntário:</strong> meta < 15% anual</li>
+        <li><strong>Encaminhamentos:</strong> quantidade de colaboradores encaminhados ao programa (mais encaminhamentos no início = bom sinal de que o gestor está identificando)</li>
+      </ul>
+
+      <h4>Compromisso de liderança responsável</h4>
+      <div class="script-box">
+        <div class="label">Declaração de compromisso (leitura em grupo)</div>
+        <p>"Eu, como gestor/a desta organização, reconheço minha responsabilidade na promoção da saúde mental da minha equipe. Comprometo-me a identificar sinais de adoecimento, conduzir conversas com empatia, encaminhar colaboradores quando necessário, documentar minhas ações e cuidar da minha própria saúde. Entendo que a NR-1 não é apenas uma obrigação legal — é uma oportunidade de construir um ambiente de trabalho mais saudável, produtivo e humano."</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- REFERÊNCIAS -->
+  <div class="module">
+    <div class="module-header">
+      <div class="module-num">📚</div>
+      <div class="module-title">Referências Bibliográficas</div>
+    </div>
+    <div class="module-body">
+      <ul>
+        <li>BRASIL. Portaria MTE nº 1.419, de agosto de 2024. Altera a NR-1.</li>
+        <li>BRASIL. Portaria MTE nº 765, de maio de 2025. Cronograma de fiscalização.</li>
+        <li>CLT — Consolidação das Leis do Trabalho, Art. 157.</li>
+        <li>COPSOQ-III — Copenhagen Psychosocial Questionnaire, versão brasileira validada (Fernandes & Pereira, 2024).</li>
+        <li>EDMONDSON, Amy. <em>The Fearless Organization: Creating Psychological Safety in the Workplace.</em> Wiley, 2018.</li>
+        <li>CLARK, Timothy R. <em>The 4 Stages of Psychological Safety.</em> Berrett-Koehler, 2020.</li>
+        <li>GOOGLE. <em>Project Aristotle: What Makes a Team Effective?</em> re:Work, 2015.</li>
+        <li>OMS/OIT. <em>WHO Guidelines on Mental Health at Work.</em> World Health Organization, 2022.</li>
+        <li>INSS — Anuário Estatístico da Previdência Social, 2025.</li>
+        <li>KRISTENSEN, T.S. et al. <em>The Copenhagen Psychosocial Questionnaire (COPSOQ).</em> Scand J Work Environ Health, 2005.</li>
+        <li>CFP — Código de Ética Profissional do Psicólogo, Resolução CFP nº 10/2005.</li>
+        <li>Lei 14.457/2022 — Programa Emprega + Mulheres (prevenção ao assédio).</li>
+        <li>TST — Cartilha de Prevenção ao Assédio Moral e Sexual no Trabalho, 2023.</li>
+        <li>ABRH — Associação Brasileira de Recursos Humanos, Indicadores de Absenteísmo 2024.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="text-align:center;padding:40px 0;border-top:2px solid var(--cream);margin-top:40px">
+    <p style="color:var(--gold-dark);font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700">Instituto Selma Moraes</p>
+    <p style="color:#888;font-size:0.85rem">Selma Moraes — Psicóloga Clínica e Organizacional · CRP 06/138420</p>
+    <p style="color:#888;font-size:0.85rem">selmamoraes.com.br · smoraes@selmamoraes.com.br</p>
+    <p style="color:#aaa;font-size:0.78rem;margin-top:12px">Este material é de uso exclusivo dos clientes do Instituto Selma Moraes. Reprodução proibida sem autorização.</p>
+  </div>
+
+</div>
+
+<div class="download-bar" id="downloadBar" style="display:none">
+  <span>📄 Curso: Treinamento para Gestores e Lideranças</span>
+  <button onclick="window.print()">Baixar PDF</button>
+  <button onclick="window.close()" style="background:transparent;color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.2)">Fechar</button>
+</div>
+
+<script>
+const COURSE_PWD = 'Estrela16';
+function doLogin(){
+  const v = document.getElementById('loginPwd').value;
+  if(v === COURSE_PWD){
+    document.getElementById('loginGate').classList.add('hidden');
+    document.getElementById('courseContent').classList.add('visible');
+    document.getElementById('downloadBar').style.display='flex';
+    sessionStorage.setItem('curso_gestores_auth','1');
+  } else {
+    alert('Senha incorreta. Entre em contato com a Selma.');
+  }
+}
+if(sessionStorage.getItem('curso_gestores_auth')==='1'){
+  document.getElementById('loginGate').classList.add('hidden');
+  document.getElementById('courseContent').classList.add('visible');
+  document.getElementById('downloadBar').style.display='flex';
+}
+document.getElementById('loginPwd').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()});
+</script>
+</body>
+</html>
