@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inteligência Emocional para Lideranças — Instituto Selma Moraes</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0a2540;--navy-deep:#061b30;--gold:#D6B27A;--gold-dark:#B8865D;--teal:#0f766e;--teal-light:#5eead4;--cream:#faf6ef}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a1a;line-height:1.7}
+.login-gate{position:fixed;inset:0;background:linear-gradient(135deg,var(--navy-deep),#0a3040);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:16px}
+.login-gate.hidden{display:none}
+.login-gate h2{color:var(--teal-light);font-family:'Playfair Display',serif;font-size:1.8rem}
+.login-gate p{color:rgba(255,255,255,0.6);font-size:0.9rem;max-width:400px;text-align:center}
+.login-gate input{padding:12px 20px;border-radius:8px;border:1px solid rgba(94,234,212,0.3);background:rgba(255,255,255,0.05);color:#fff;font-size:1rem;width:280px;text-align:center}
+.login-gate button{padding:12px 32px;border-radius:8px;border:none;background:var(--teal-light);color:var(--navy-deep);font-weight:700;font-size:1rem;cursor:pointer}
+.course-content{display:none;max-width:900px;margin:0 auto;padding:40px 24px 80px}
+.course-content.visible{display:block}
+.course-header{text-align:center;margin-bottom:48px;padding-bottom:32px;border-bottom:2px solid #f0fdfa}
+.course-header h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,2.8rem);color:var(--navy);margin-bottom:8px}
+.course-header .subtitle{color:var(--teal);font-size:1.1rem;font-weight:600;font-style:italic}
+.course-header .meta{color:#666;font-size:0.9rem;margin-top:16px}
+.course-header .meta span{display:inline-block;padding:4px 14px;background:#f0fdfa;border-radius:20px;margin:4px}
+.session-break{background:linear-gradient(135deg,rgba(45,212,191,0.08),rgba(14,184,166,0.04));border:1px solid rgba(45,212,191,0.2);border-radius:12px;padding:16px 24px;text-align:center;margin:32px 0;font-weight:600;color:var(--teal)}
+.module{margin-bottom:48px;page-break-inside:avoid}
+.module-header{display:flex;align-items:center;gap:16px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--teal)}
+.module-num{background:var(--teal);color:#fff;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:800;font-size:1.2rem;flex-shrink:0}
+.module-title{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--navy);font-weight:700}
+.module-time{color:#888;font-size:0.85rem;margin-left:auto}
+.module-body{padding-left:64px}
+.module-body h4{color:var(--navy);font-size:1rem;font-weight:700;margin:20px 0 8px;display:flex;align-items:center;gap:8px}
+.module-body h4::before{content:'';width:6px;height:6px;background:var(--teal);border-radius:50%;flex-shrink:0}
+.module-body p{color:#444;font-size:0.95rem;margin-bottom:12px}
+.module-body ul,.module-body ol{padding-left:20px;color:#444;font-size:0.95rem;margin-bottom:16px}
+.module-body ul li,.module-body ol li{margin-bottom:6px}
+.exercise{background:linear-gradient(135deg,#f0fdfa,#fff);border:1px solid rgba(45,212,191,0.3);border-radius:12px;padding:20px;margin:16px 0}
+.exercise-label{color:var(--teal);font-weight:700;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px}
+.key-point{background:#f0fdf4;border-left:4px solid var(--teal);padding:12px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:0.92rem;color:#166534}
+.script-box{background:var(--navy-deep);color:#fff;border-radius:12px;padding:20px;margin:16px 0;font-size:0.92rem}
+.script-box .label{color:var(--teal-light);font-weight:700;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px}
+.scale-item{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:14px;margin:8px 0;display:flex;align-items:center;gap:12px}
+.scale-num{background:var(--teal);color:#fff;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;flex-shrink:0}
+.source-ref{color:#888;font-size:0.82rem;font-style:italic;margin-top:4px}
+.download-bar{position:fixed;bottom:0;left:0;right:0;background:var(--navy);padding:12px 24px;display:flex;align-items:center;justify-content:center;gap:16px;z-index:100}
+.download-bar button{padding:10px 24px;border-radius:8px;border:none;background:var(--teal-light);color:var(--navy-deep);font-weight:700;cursor:pointer;font-size:0.9rem}
+.download-bar span{color:rgba(255,255,255,0.6);font-size:0.85rem}
+@media print{.download-bar,.login-gate{display:none !important}.course-content{display:block !important;padding:20px}.module-body{padding-left:32px}}
+</style>
+</head>
+<body>
+
+<div class="login-gate" id="loginGate">
+  <h2>Área do Aluno</h2>
+  <p>Este conteúdo é exclusivo para clientes do Instituto Selma Moraes que contrataram o programa de Inteligência Emocional para Lideranças.</p>
+  <input type="password" id="loginPwd" placeholder="Senha de acesso" autocomplete="off">
+  <button onclick="doLogin()">Acessar curso</button>
+  <p style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin-top:8px">Não tem senha? Entre em contato com a Selma.</p>
+</div>
+
+<div class="course-content" id="courseContent">
+
+  <div class="course-header">
+    <h1>Inteligência Emocional para Lideranças</h1>
+    <div class="subtitle">Autorregulação, Empatia e Tomada de Decisão sob Pressão</div>
+    <div class="meta">
+      <span>8h (2 sessões de 4h)</span>
+      <span>Até 20 participantes</span>
+      <span>Diagnóstico WLEIS pré/pós</span>
+      <span>Acompanhamento 90 dias</span>
+      <span>CRP 06/138420</span>
+    </div>
+  </div>
+
+  <div class="session-break">SESSÃO 1 (4 horas) — Autoconhecimento e Autorregulação</div>
+
+  <!-- MÓDULO 1 -->
+  <div class="module">
+    <div class="module-header">
+      <div class="module-num">1</div>
+      <div class="module-title">Diagnóstico Inicial — Escala WLEIS</div>
+      <div class="module-time">30 min</div>
+    </div>
+    <div class="module-body">
+      <h4>O que é a Escala WLEIS</h4>
+      <p>A WLEIS (Wong and Law Emotional Intelligence Scale) é um instrumento científico desenvolvido por Chi-Sum Wong e Kenneth Law (2002), validado internacionalmente e com versão brasileira adaptada. É o instrumento mais utilizado em pesquisas acadêmicas sobre inteligência emocional em contextos organizacionais.</p>
+      <p>A escala mede 4 dimensões da inteligência emocional, com 16 itens no total (4 por dimensão), usando escala Likert de 7 pontos (1 = discordo totalmente, 7 = concordo totalmente):</p>
+
+      <p><strong>Dimensão 1 — Avaliação das próprias emoções (Self-Emotion Appraisal — SEA)</strong></p>
+      <p>Capacidade de perceber e entender suas próprias emoções em profundidade.</p>
+      <div class="scale-item"><div class="scale-num">1</div>Na maioria das vezes, tenho boa percepção de por que tenho certos sentimentos.</div>
+      <div class="scale-item"><div class="scale-num">2</div>Tenho bom entendimento das minhas próprias emoções.</div>
+      <div class="scale-item"><div class="scale-num">3</div>Eu realmente entendo o que sinto.</div>
+      <div class="scale-item"><div class="scale-num">4</div>Sempre sei se estou ou não feliz.</div>
+
+      <p><strong>Dimensão 2 — Avaliação das emoções dos outros (Others' Emotion Appraisal — OEA)</strong></p>
+      <p>Capacidade de perceber e entender as emoções das pessoas ao redor.</p>
+      <div class="scale-item"><div class="scale-num">5</div>Sempre reconheço as emoções das outras pessoas pelo comportamento delas.</div>
+      <div class="scale-item"><div class="scale-num">6</div>Sou um(a) bom(boa) observador(a) das emoções dos outros.</div>
+      <div class="scale-item"><div class="scale-num">7</div>Sou sensível aos sentimentos e emoções das outras pessoas.</div>
+      <div class="scale-item"><div class="scale-num">8</div>Tenho bom entendimento das emoções das pessoas ao meu redor.</div>
+
+      <p><strong>Dimensão 3 — Uso das emoções (Use of Emotion — UOE)</strong></p>
+      <p>Capacidade de direcionar emoções para atividades construtivas e performance.</p>
+      <div class="scale-item"><div class="scale-num">9</div>Sempre estabeleço metas para mim mesmo(a) e depois dou o melhor para alcançá-las.</div>
+      <div class="scale-item"><div class="scale-num">10</div>Sempre me digo que sou uma pessoa competente.</div>
+      <div class="scale-item"><div class="scale-num">11</div>Sou uma pessoa automotivada.</div>
+      <div class="scale-item"><div class="scale-num">12</div>Sempre me encorajo a dar o meu melhor.</div>
+
+      <p><strong>Dimensão 4 — Regulação das emoções (Regulation of Emotion — ROE)</strong></p>
+      <p>Capacidade de controlar e regular suas emoções em situações de pressão.</p>
+      <div class="scale-item"><div class="scale-num">13</div>Sou capaz de controlar meu temperamento para lidar com dificuldades racionalmente.</div>
+      <div class="scale-item"><div class="scale-num">14</div>Sou muito capaz de controlar minhas próprias emoções.</div>
+      <div class="scale-item"><div class="scale-num">15</div>Consigo sempre me acalmar rapidamente quando estou muito irritado(a).</div>
+      <div class="scale-item"><div class="scale-num">16</div>Tenho bom controle das minhas emoções.</div>
+
+      <div class="key-point"><strong>Interpretação:</strong> Cada dimensão = soma dos 4 itens (mín. 4, máx. 28). Score total = soma das 4 dimensões (mín. 16, máx. 112). Acima de 84 = alto. 56-84 = moderado. Abaixo de 56 = necessita desenvolvimento. Este resultado é seu BASELINE — será comparado com o pós-diagnóstico no Módulo 7.</div>
+
+      <div class="exercise">
+        <div class="exercise-label">Atividade — 20 minutos</div>
+        <p>Cada participante preenche a escala WLEIS individualmente (impressa ou digital). Não há respostas certas ou erradas. O resultado é confidencial — só o participante e a facilitadora terão acesso. Anote seus scores por dimensão para comparação futura.</p>
+      </div>
+      <p class="source-ref">Fonte: Wong, C.S., & Law, K.S. (2002). The effects of leader and follower emotional intelligence on performance and attitude. Leadership Quarterly, 13, 243-274. Versão brasileira: Rodrigues, N., & Rebelo, T. (2013).</p>
+    </div>
+  </div>
+
+  <!-- MÓDULO 2 -->
+  <div class="module">
+    <div class="module-header">
+      <div class="module-num">2</div>
+      <div class="module-title">Fundamentos da Inteligência Emocional</div>
+      <div class="module-time">45 min</div>
+    </div>
+    <div class="module-body">
+      <h4>O modelo de Daniel Goleman</h4>
+      <p>Em 1995, Daniel Goleman publicou "Emotional Intelligence", o livro que popularizou o conceito. Goleman identificou 5 competências fundamentais que distinguem líderes excepcionais:</p>
+
+      <p><strong>1. Autoconsciência (Self-Awareness)</strong></p>
+      <p>A capacidade de reconhecer e entender suas próprias emoções, forças, fraquezas, valores e motivações — e como eles afetam os outros. Líderes com alta autoconsciência sabem, por exemplo, que reuniões após o almoço os deixam impacientes, e ajustam seu comportamento conscientemente.</p>
+      <ul>
+        <li>Reconhecer emoções no momento em que surgem (não depois)</li>
+        <li>Entender como suas emoções influenciam decisões</li>
+        <li>Autoavaliação realista de competências e limitações</li>
+        <li>Autoconfiança baseada em evidências (não arrogância)</li>
+      </ul>
+
+      <p><strong>2. Autorregulação (Self-Regulation)</strong></p>
+      <p>A capacidade de controlar ou redirecionar impulsos e humores disruptivos. Não é suprimir emoções — é escolher como e quando expressá-las. Um líder com boa autorregulação não explode numa reunião, mesmo quando provocado. Ele processa a emoção, escolhe a resposta e age com intenção.</p>
+      <ul>
+        <li>Pensar antes de agir (responder, não reagir)</li>
+        <li>Manter a calma sob pressão</li>
+        <li>Adaptar-se a mudanças sem resistência excessiva</li>
+        <li>Manter padrões de integridade e ética sob pressão</li>
+      </ul>
+
+      <p><strong>3. Motivação intrínseca (Motivation)</strong></p>
+      <p>A paixão pelo trabalho que vai além de dinheiro e status. Líderes com alta motivação intrínseca são otimistas mesmo diante de fracassos, têm alto nível de comprometimento com a organização e mantêm o impulso de melhorar continuamente.</p>
+
+      <p><strong>4. Empatia (Empathy)</strong></p>
+      <p>A capacidade de entender a composição emocional de outras pessoas. Não é concordar com o outro — é entender o que ele sente. A empatia é especialmente crítica em: gestão de equipes diversas, coaching e mentoria, negociações e retenção de talentos.</p>
+
+      <p><strong>5. Habilidades sociais (Social Skills)</strong></p>
+      <p>A competência em gerenciar relacionamentos e construir redes. Inclui persuasão, comunicação, gestão de conflitos, liderança inspiradora e capacidade de catalisar mudanças.</p>
+
+      <h4>A neurociência por trás: o sequestro da amígdala</h4>
+      <p>A amígdala é uma estrutura cerebral do tamanho de uma amêndoa que funciona como "sistema de alarme" do cérebro. Quando percebe uma ameaça (real ou imaginária), ela dispara uma reação de luta-fuga-congelamento ANTES que o córtex pré-frontal (responsável pelo pensamento racional) tenha tempo de processar a situação.</p>
+      <p>Isso explica por que um gestor pode gritar com um colaborador numa reunião e se arrepender 30 segundos depois. A amígdala agiu antes da razão. O intervalo entre o estímulo e a reação racional é de apenas 6 segundos — mas nesses 6 segundos, carreiras são destruídas e relações profissionais são permanentemente danificadas.</p>
+
+      <div class="key-point"><strong>A grande habilidade da IE:</strong> aumentar a janela entre o estímulo e a resposta. Passar de 0,5 segundo (reação automática) para 6+ segundos (resposta consciente). Todas as técnicas deste curso servem a esse propósito.</div>
+
+      <h4>IE e performance: os dados</h4>
+      <ul>
+        <li>90% dos profissionais de alto desempenho têm alta IE (TalentSmart, 2019)</li>
+        <li>IE explica 58% da variação em desempenho em todos os tipos de trabalho</li>
+        <li>Profissionais com alta IE ganham em média US$ 29.000 mais por ano</li>
+        <li>Empresas com líderes de alta IE têm 20% mais engajamento (Gallup, 2020)</li>
+      </ul>
+      <p class="source-ref">Fonte: Goleman, D. (1995). Emotional Intelligence. Bantam Books. · Bradberry, T. & Greaves, J. (2009). Emotional Intelligence 2.0. TalentSmart. · LeDoux, J. (1996). The Emotional Brain. Simon & Schuster.</p>
+    </div>
+  </div>
+
+  <!-- MÓDULO 3 -->
+  <div class="module">
+    <div class="module-header">
+      <div class="module-num">3</div>
+      <div class="module-title">Autoconhecimento e Gatilhos Emocionais</div>
+      <div class="module-time">50 min</div>
+    </div>
+    <div class="module-body">
+      <h4>Mapeamento pessoal de gatilhos</h4>
+      <p>Um gatilho emocional é qualquer estímulo que provoca uma reação emocional intensa e desproporcional. Todos temos gatilhos — o problema é quando não os conhecemos e somos "sequestrados" por eles.</p>
+      <p>Gatilhos comuns em líderes:</p>
+      <ul>
+        <li><strong>Sentir-se desrespeitado:</strong> quando alguém questiona sua competência ou autoridade</li>
+        <li><strong>Perda de controle:</strong> quando as coisas não saem como planejado</li>
+        <li><strong>Injustiça percebida:</strong> quando vê alguém sendo promovido ou reconhecido "sem merecer"</li>
+        <li><strong>Rejeição:</strong> quando uma ideia sua é descartada ou ignorada</li>
+        <li><strong>Pressão por tempo:</strong> quando prazos apertam e não há como estender</li>
+        <li><strong>Incompetência alheia:</strong> quando alguém comete um erro "óbvio"</li>
+      </ul>
+
+      <h4>Padrões automáticos de reação</h4>
+      <p>Quando um gatilho é acionado, o sistema nervoso autônomo ativa uma de três respostas primitivas:</p>
+      <ul>
+        <li><strong>Luta (fight):</strong> agressividade, gritar, culpar, ser sarcástico, querer "ganhar" a qualquer custo</li>
+        <li><strong>Fuga (flight):</strong> evitar a situação, procrastinar decisões difíceis, delegar para se livrar, mudar de assunto</li>
+        <li><strong>Congelamento (freeze):</strong> ficar paralisado, não conseguir pensar, mente em branco, concordar com tudo para "acabar logo"</li>
+      </ul>
+
+      <h4>Sinais físicos: o corpo avisa antes da explosão</h4>
+      <p>O corpo envia sinais ANTES da reação emocional se manifestar em comportamento. Aprender a lê-los dá tempo de usar as técnicas de regulação:</p>
+      <ul>
+        <li>Mandíbula cerrada ou dentes apertados</li>
+        <li>Mãos fechadas ou tremendo</li>
+        <li>Calor subindo pelo pescoço e rosto</li>
+        <li>Respiração acelerada ou superficial</li>
+        <li>Estômago contraído ou "embrulhado"</li>
+        <li>Vontade de levantar e sair (ou de gritar)</li>
+        <li>Pensamentos repetitivos e acelerados</li>
+      </ul>
+
+      <div class="exercise">
+        <div class="exercise-label">Exercício — Diário de gatilhos (ferramenta prática) — 20 minutos</div>
+        <p>Cada participante preenche seu mapa pessoal de gatilhos:</p>
+        <p><strong>Nos últimos 30 dias, identifique 3 situações em que você teve uma reação emocional forte no trabalho:</strong></p>
+        <p><em>Situação 1:</em></p>
+        <ul>
+          <li>O que aconteceu? _______________</li>
+          <li>O que você sentiu? (nome da emoção) _______________</li>
+          <li>O que seu corpo fez? (sinal físico) _______________</li>
+          <li>Como você reagiu? _______________</li>
+          <li>O que você gostaria de ter feito diferente? _______________</li>
+          <li>Qual padrão (luta/fuga/congelamento)? _______________</li>
+        </ul>
+        <p><em>(Repetir para situações 2 e 3)</em></p>
+        <p><strong>Padrão identificado:</strong> Olhando as 3 situações, qual gatilho aparece mais? Qual é a sua reação predominante? Esse é o seu ponto de trabalho prioritário.</p>
+        <p><em>Compartilhar em duplas (voluntário, não obrigatório). O objetivo é normalizar — todos têm gatilhos.</em></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MÓDULO 4 -->
+  <div class="module">
+    <div class="module-header">
+      <div class="module-num">4</div>
+      <div class="module-title">Autorregulação e Crenças Limitantes</div>
+      <div class="module-time">55 min</div>
+    </div>
+    <div class="module-body">
+      <h4>Técnicas de regulação emocional para usar em tempo real</h4>
+
+      <p><strong>Técnica 1 — Respiração tática 4-7-8 (60 segundos)</strong></p>
+      <p>A técnica mais rápida e cientificamente comprovada para ativar o sistema nervoso parassimpático e reduzir cortisol:</p>
+      <ol>
+        <li>Inspire pelo nariz contando mentalmente até 4</li>
+        <li>Segure a respiração contando até 7</li>
+        <li>Expire lentamente pela boca contando até 8</li>
+        <li>Repita 3 ciclos completos</li>
+      </ol>
+      <p><strong>Quando usar:</strong> antes de uma reunião difícil, após um conflito, quando sentir os sinais físicos de ativação. Pode ser feita discretamente — ninguém percebe.</p>
+
+      <p><strong>Técnica 2 — Reappraisal cognitivo (reenquadramento)</strong></p>
+      <p>Mudar a interpretação da situação para mudar a emoção. Não é "pensar positivo" — é encontrar uma interpretação mais precisa e menos emocionalmente carregada.</p>
+      <ul>
+        <li><strong>Situação:</strong> "Meu chefe criticou meu relatório na frente de todos"</li>
+        <li><strong>Interpretação automática:</strong> "Ele me humilhou de propósito. Ele não me respeita."</li>
+        <li><strong>Reenquadramento:</strong> "Ele pode não ter medido o impacto. Vou conversar em particular sobre como prefiro receber feedback."</li>
+      </ul>
+
+      <p><strong>Técnica 3 — Labeling (rotulação emocional)</strong></p>
+      <p>Pesquisa da UCLA (Lieberman et al., 2007) mostrou que simplesmente NOMEAR a emoção que estamos sentindo reduz a ativação da amígdala em até 50%. Dizer internamente "Estou sentindo raiva" já começa a diminuir a raiva.</p>
+
+      <p><strong>Técnica 4 — Distanciamento temporal</strong></p>
+      <p>Pergunte-se: "Isso vai importar daqui a 5 anos?" Se a resposta for não, não gaste mais que 5 minutos se preocupando.</p>
+
+      <h4>Crenças limitantes de líderes</h4>
+      <p>Crenças limitantes são "verdades" internalizadas que restringem nosso comportamento e potencial. As mais comuns em gestores:</p>
+      <ul>
+        <li><strong>"Preciso controlar tudo"</strong> → leva a microgerenciamento e exaustão</li>
+        <li><strong>"Pedir ajuda é fraqueza"</strong> → leva a isolamento e burnout</li>
+        <li><strong>"Se eu mostrar vulnerabilidade, perco autoridade"</strong> → leva a distanciamento e falta de confiança da equipe</li>
+        <li><strong>"Eu preciso ter todas as respostas"</strong> → leva a decisões apressadas e falta de colaboração</li>
+        <li><strong>"Demonstrar emoção é falta de profissionalismo"</strong> → leva a relações superficiais e comunicação ineficaz</li>
+      </ul>
+
+      <h4>Reprogramação: de crença limitante a crença potencializadora</h4>
+      <p>O processo de reestruturação cognitiva em 4 passos:</p>
+      <ol>
+        <li><strong>Identificar:</strong> qual crença está operando? (ex: "Preciso controlar tudo")</li>
+        <li><strong>Questionar:</strong> isso é fato ou interpretação? Há evidências contrárias?</li>
+        <li><strong>Substituir:</strong> qual crença mais funcional posso adotar? (ex: "Delegar com clareza é liderar com inteligência")</li>
+        <li><strong>Praticar:</strong> testar a nova crença em situações reais e observar resultados</li>
+      </ol>
+
+      <div class="exercise">
+        <div class="exercise-label">Dinâmica em grupo — Reestruturação ao vivo (20 min)</div>
+        <p>A facilitadora coleta 3 crenças limitantes do grupo (anônimas, escritas em papéis). Para cada uma:</p>
+        <ol>
+          <li>O grupo identifica que tipo de crença é (controle, perfeição, vulnerabilidade)</li>
+          <li>O grupo questiona: "Qual líder admirado vocês conhecem que age diferente dessa crença?"</li>
+          <li>Juntos, constroem a crença potencializadora substituta</li>
+          <li>Cada participante anota: qual DAS SUAS crenças se parece mais com essa? Qual seria a substituta?</li>
+        </ol>
+      </div>
+      <p class="source-ref">Fonte: Lieberman, M.D. et al. (2007). Putting Feelings into Words. Psychological Science. · Beck, A.T. (1979). Cognitive Therapy and the Emotional Disorders. · Dr. Andrew Weil — 4-7-8 Breathing Technique.</p>
+    </div>
+  </div>
+
+  <div class="session-break">SESSÃO 2 (4 horas) — Liderança Empática e Aplicação Prática</div>
+
+  <!-- MÓDULO 5 -->
+  <div class="module">
+    <div class="module-header">
+      <div class="module-num">5</div>
+      <div class="module-title">Tomada de Decisão Sob Pressão</div>
+      <div class="module-time">50 min</div>
+    </div>
+    <div class="module-body">
+      <h4>Como emoções distorcem decisões estratégicas</h4>
+      <p>O cérebro humano toma aproximadamente 35.000 decisões por dia. A maioria é automática e influenciada por emoções, vieses e atalhos mentais — mesmo quando acreditamos estar sendo "racionais".</p>
+
+      <p><strong>Vieses emocionais que afetam gestores:</strong></p>
+      <ul>
+        <li><strong>Viés de confirmação:</strong> buscar informações que confirmam o que já acreditamos e ignorar as que contradizem. Ex: "Esse projeto vai dar certo" → foco seletivo nos sinais positivos.</li>
+        <li><strong>Efeito ancoragem:</strong> a primeira informação recebida influencia desproporcionalmente a decisão. Ex: negociação salarial — quem fala primeiro define a faixa.</li>
+        <li><strong>Aversão à perda:</strong> sentimos perdas 2x mais intensamente que ganhos equivalentes. Ex: manter um projeto fracassado porque "já investimos muito" (falácia do custo afundado).</li>
+        <li><strong>Viés do otimismo:</strong> subestimar riscos e superestimar a probabilidade de sucesso. Ex: "Vamos conseguir entregar em 2 semanas" quando toda evidência aponta para 6.</li>
+      </ul>
+
+      <h4>O modelo STOP para decisões sob pressão</h4>
+      <p>Antes de qualquer decisão importante, passe pelo filtro STOP:</p>
+      <ul>
+        <li><strong>S — Stop:</strong> pare. Literalmente. Não decida no calor do momento.</li>
+        <li><strong>T — Think:</strong> que emoção está operando agora? Raiva? Medo? Excitação? Nomeie.</li>
+        <li><strong>O — Observe:</strong> quais são os FATOS (não interpretações)? O que eu sei vs o que estou assumindo?</li>
+        <li><strong>P — Proceed:</strong> com a emoção nomeada e os fatos separados, agora decida. Se ainda não está claro, peça 24h.</li>
+      </ul>
+
+      <div class="key-point"><strong>Regra das 24 horas:</strong> para decisões que envolvem pessoas (demissões, promoções, feedbacks duros, mudanças de equipe), NUNCA decida no mesmo dia em que o gatilho emocional foi acionado. Durma com a decisão. Se no dia seguinte ainda parecer a decisão certa, faça.</div>
+
+      <div class="exercise">
+        <div class="exercise-label">Simulação — Crise empresarial (20 min)</div>
+        <p><strong>Cenário:</strong> Você é diretor de operações de uma empresa de 200 funcionários. Às 14h de uma sexta-feira, você recebe 3 notícias simultaneamente:</p>
+        <ol>
+          <li>O maior cliente (30% do faturamento) acaba de comunicar que não vai renovar o contrato</li>
+          <li>Dois gerentes seniores entregaram cartas de demissão para ir ao concorrente</li>
+          <li>O RH informa que 3 colaboradores entraram com processo trabalhista por assédio moral contra um supervisor</li>
+        </ol>
+        <p><strong>Você tem 5 minutos para:</strong></p>
+        <ol>
+          <li>Aplicar o STOP: identifique a emoção dominante e separe fatos de interpretações</li>
+          <li>Priorizar: qual dos 3 problemas precisa de ação nas próximas 2 horas? Qual pode esperar segunda-feira?</li>
+          <li>Decidir: escreva 1 ação concreta para o problema mais urgente</li>
+        </ol>
+        <p><strong>Debriefing:</strong> O grupo compara prioridades. A facilitadora destaca como diferentes emoções (medo, raiva, pânico) levaram a priorizações diferentes — e como o STOP ajuda a alinhar.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MÓDULO 6 -->
+  <div class="module">
+    <div class="module-header">
+      <div class="module-num">6</div>
+      <div class="module-title">Liderança Empática e Comunicação</div>
+      <div class="module-time">60 min</div>
+    </div>
+    <div class="module-body">
+      <h4>Escuta ativa avançada: ouvir o que não é dito</h4>
+      <p>A maioria dos gestores acredita que escuta bem. Pesquisas mostram que retemos apenas 25-50% do que ouvimos (Treasure, 2011). Escuta ativa avançada vai além de "ouvir as palavras" — envolve captar emoções, linguagem corporal e o que está sendo evitado.</p>
+
+      <p><strong>Os 5 níveis de escuta (Stephen Covey):</strong></p>
+      <ol>
+        <li><strong>Ignorar:</strong> não prestar atenção (olhando o celular)</li>
+        <li><strong>Fingir:</strong> "hm hm" enquanto pensa em outra coisa</li>
+        <li><strong>Escuta seletiva:</strong> ouvir apenas o que confirma seu ponto de vista</li>
+        <li><strong>Escuta atenta:</strong> ouvir as palavras e o conteúdo</li>
+        <li><strong>Escuta empática:</strong> ouvir palavras + emoções + intenção + contexto</li>
+      </ol>
+
+      <p><strong>Técnicas de escuta empática:</strong></p>
+      <ul>
+        <li><strong>Espelhamento:</strong> repetir as últimas 3-5 palavras que a pessoa disse. "Então você se sentiu desvalorizado." Isso valida e convida a continuar.</li>
+        <li><strong>Parafraseamento:</strong> reformular o que foi dito com suas palavras. "Se eu entendi, o que mais te incomoda não é o prazo, mas não ter sido consultado sobre ele."</li>
+        <li><strong>Perguntas abertas:</strong> "Como isso te afetou?" (não "Isso te afetou?")</li>
+        <li><strong>Silêncio intencional:</strong> após uma pergunta difícil, fique em silêncio. A maioria das pessoas vai preencher o silêncio com informações mais profundas.</li>
+      </ul>
+
+      <h4>Feedback construtivo: o modelo SBI</h4>
+      <p>O modelo SBI (Situation-Behavior-Impact), desenvolvido pelo Center for Creative Leadership, é a estrutura mais eficaz para dar feedback sem ativar defesas:</p>
+      <ul>
+        <li><strong>S — Situação:</strong> descreva quando e onde aconteceu. "Na reunião de resultados de terça-feira..."</li>
+        <li><strong>B — Comportamento:</strong> descreva o que a pessoa FEZ (observável, não interpretação). "...você interrompeu o João três vezes enquanto ele apresentava os números."</li>
+        <li><strong>I — Impacto:</strong> descreva o efeito concreto. "O João ficou visivelmente desconfortável, parou de participar e a equipe perdeu a contribuição dele."</li>
+      </ul>
+
+      <div class="script-box">
+        <div class="label">Exemplo de feedback SBI completo</div>
+        <p><strong>Feedback positivo:</strong> "Na apresentação para o cliente ontem (S), você antecipou as objeções dele e trouxe dados que respondiam cada uma antes que ele perguntasse (B). Isso fez o cliente fechar na hora, e a equipe ficou impressionada com a preparação (I). Parabéns — continue assim."</p>
+        <p style="margin-top:12px"><strong>Feedback corretivo:</strong> "Na reunião de sprint de hoje (S), percebi que você respondeu e-mails durante a apresentação da Ana (B). Ela percebeu, ficou insegura e encurtou a apresentação — perdemos informações importantes para o planejamento (I). Como podemos garantir que isso não aconteça na próxima?"</p>
+      </div>
+
+      <h4>Gestão de conflitos com inteligência emocional</h4>
+      <p>Conflitos não são o problema — a forma como são gerenciados é. Líderes com alta IE transformam conflitos em oportunidades de alinhamento.</p>
+      <p><strong>Os 5 estilos de gestão de conflitos (Thomas-Kilmann):</strong></p>
+      <ul>
+        <li><strong>Competir:</strong> ganhar a qualquer custo (alta assertividade, baixa cooperação)</li>
+        <li><strong>Acomodar:</strong> ceder para manter a paz (baixa assertividade, alta cooperação)</li>
+        <li><strong>Evitar:</strong> fugir do conflito (baixa assertividade, baixa cooperação)</li>
+        <li><strong>Comprometer:</strong> cada um cede um pouco (assertividade e cooperação médias)</li>
+        <li><strong>Colaborar:</strong> buscar solução que atenda ambos (alta assertividade, alta cooperação) — o ideal quando o relacionamento e o resultado importam</li>
+      </ul>
+
+      <div class="exercise">
+        <div class="exercise-label">Role-playing — 3 cenários de feedback difícil (25 min)</div>
+        <p>Em trios (gestor, colaborador, observador). Cada cenário dura 5 min + 3 min de feedback do observador.</p>
+        <p><strong>Cenário 1:</strong> Um colaborador de alta performance tem tratado os colegas de forma grosseira nas últimas semanas. A equipe está reclamando, mas ele entrega resultados excepcionais.</p>
+        <p><strong>Cenário 2:</strong> Uma colaboradora voltou de licença maternidade há 2 meses. Sua produtividade caiu 40%, mas ela está claramente fazendo o melhor que pode. Você precisa abordar o tema sem parecer insensível.</p>
+        <p><strong>Cenário 3:</strong> Você precisa dizer a um gerente veterano (20 anos de empresa) que sua forma de liderar está gerando reclamações formais de assédio moral. Ele é amigo pessoal do diretor.</p>
+        <p><strong>O observador avalia:</strong> (1) Usou modelo SBI? (2) Separou comportamento de pessoa? (3) Ouviu mais do que falou? (4) Manteve tom respeitoso mesmo em ponto difícil? (5) Propôs próximos passos concretos?</p>
+      </div>
+      <p class="source-ref">Fonte: Center for Creative Leadership — Modelo SBI. · Covey, S. (1989). The 7 Habits of Highly Effective People. · Thomas, K.W. & Kilmann, R.H. (1974). Thomas-Kilmann Conflict Mode Instrument. · Treasure, J. (2011). TED Talk: 5 Ways to Listen Better.</p>
+    </div>
+  </div>
+
+  <!-- MÓDULO 7 -->
+  <div class="module">
+    <div class="module-header">
+      <div class="module-num">7</div>
+      <div class="module-title">Diagnóstico Final + Plano de Desenvolvimento Individual</div>
+      <div class="module-time">55 min</div>
+    </div>
+    <div class="module-body">
+      <h4>Reaplicação da Escala WLEIS</h4>
+      <p>Cada participante preenche novamente a Escala WLEIS (mesmos 16 itens do Módulo 1). A facilitadora fornece o score do pré-diagnóstico para comparação.</p>
+
+      <div class="key-point"><strong>Interpretação da comparação:</strong> Uma melhora de 5+ pontos no score total após 8h de programa é significativa e indica que o participante internalizou conceitos e técnicas. A melhora tende a aumentar nas semanas seguintes à medida que pratica. Se o score diminuiu, pode indicar que o participante está sendo mais honesto/consciente (o que também é progresso).</div>
+
+      <h4>Construção do Plano de Desenvolvimento Individual (PDI)</h4>
+      <div class="exercise">
+        <div class="exercise-label">PDI — Preencher durante a sessão (25 min)</div>
+        <p><strong>Nome:</strong> _______________</p>
+        <p><strong>Data:</strong> ___/___/______</p>
+        <p><strong>Resultados WLEIS:</strong></p>
+        <ul>
+          <li>SEA (percepção própria): Pré ___ → Pós ___</li>
+          <li>OEA (percepção do outro): Pré ___ → Pós ___</li>
+          <li>UOE (uso da emoção): Pré ___ → Pós ___</li>
+          <li>ROE (regulação): Pré ___ → Pós ___</li>
+          <li>Total: Pré ___ → Pós ___</li>
+        </ul>
+        <p><strong>Dimensão mais forte:</strong> _______________ (manter e usar como recurso)</p>
+        <p><strong>Dimensão que mais preciso desenvolver:</strong> _______________</p>
+
+        <p><strong>Compromissos para os próximos 90 dias:</strong></p>
+        <p><em>Primeiros 30 dias:</em></p>
+        <ul>
+          <li>Praticar diariamente: _______________ (ex: respiração 4-7-8 antes de reuniões)</li>
+          <li>Aplicar em 1 situação real: _______________ (ex: usar SBI no próximo feedback)</li>
+          <li>Observar 1 gatilho e registrar: _______________</li>
+        </ul>
+        <p><em>30-60 dias:</em></p>
+        <ul>
+          <li>Crença limitante que vou trabalhar: _______________</li>
+          <li>Crença potencializadora substituta: _______________</li>
+          <li>Praticar escuta empática com: _______________ (nomear a pessoa)</li>
+        </ul>
+        <p><em>60-90 dias:</em></p>
+        <ul>
+          <li>Meta de desenvolvimento: _______________</li>
+          <li>Como vou medir o progresso: _______________</li>
+          <li>Pessoa que vai me dar feedback honesto: _______________</li>
+        </ul>
+
+        <p><strong>Assinatura do participante:</strong> _______________</p>
+        <p><strong>Assinatura da facilitadora:</strong> _______________</p>
+      </div>
+
+      <h4>Acompanhamento pós-programa (90 dias)</h4>
+      <p>O programa não termina hoje. O desenvolvimento de inteligência emocional é um processo contínuo. Para garantir que as técnicas sejam internalizadas:</p>
+      <ul>
+        <li><strong>30 dias:</strong> Check-in individual com a Selma (30 min por vídeo) — como está aplicando, dificuldades encontradas, ajustes no PDI</li>
+        <li><strong>60 dias:</strong> Sessão de grupo (1h) — troca de experiências entre participantes, novos cenários, reforço de técnicas</li>
+        <li><strong>90 dias:</strong> Reaplicação final da WLEIS + relatório de evolução comparativo (pré → pós-imediato → 90 dias). Entrega do certificado final com horas de desenvolvimento.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- REFERÊNCIAS -->
+  <div class="module">
+    <div class="module-header">
+      <div class="module-num">📚</div>
+      <div class="module-title">Referências Bibliográficas</div>
+    </div>
+    <div class="module-body">
+      <ul>
+        <li>GOLEMAN, Daniel. <em>Emotional Intelligence: Why It Can Matter More Than IQ.</em> Bantam Books, 1995.</li>
+        <li>GOLEMAN, Daniel. <em>Working with Emotional Intelligence.</em> Bantam Books, 1998.</li>
+        <li>BRADBERRY, Travis; GREAVES, Jean. <em>Emotional Intelligence 2.0.</em> TalentSmart, 2009.</li>
+        <li>WONG, Chi-Sum; LAW, Kenneth S. The effects of leader and follower emotional intelligence on performance and attitude. <em>Leadership Quarterly</em>, v. 13, p. 243-274, 2002.</li>
+        <li>RODRIGUES, N.; REBELO, T. Validação da versão portuguesa da WLEIS. <em>Psicologia: Reflexão e Crítica</em>, 2013.</li>
+        <li>LEDOUX, Joseph. <em>The Emotional Brain: The Mysterious Underpinnings of Emotional Life.</em> Simon & Schuster, 1996.</li>
+        <li>LIEBERMAN, M.D. et al. Putting Feelings into Words: Affect Labeling Disrupts Amygdala Activity. <em>Psychological Science</em>, v. 18, n. 5, p. 421-428, 2007.</li>
+        <li>BECK, Aaron T. <em>Cognitive Therapy and the Emotional Disorders.</em> Penguin, 1979.</li>
+        <li>EDMONDSON, Amy. <em>The Fearless Organization.</em> Wiley, 2018.</li>
+        <li>CLARK, Timothy R. <em>The 4 Stages of Psychological Safety.</em> Berrett-Koehler, 2020.</li>
+        <li>COVEY, Stephen R. <em>The 7 Habits of Highly Effective People.</em> Free Press, 1989.</li>
+        <li>CENTER FOR CREATIVE LEADERSHIP. <em>Feedback That Works: SBI Model.</em> CCL Press.</li>
+        <li>THOMAS, Kenneth W.; KILMANN, Ralph H. <em>Thomas-Kilmann Conflict Mode Instrument.</em> CPP, 1974.</li>
+        <li>TREASURE, Julian. <em>5 Ways to Listen Better.</em> TED Talk, 2011.</li>
+        <li>TALENTSMART. <em>Emotional Intelligence Statistics.</em> 2019.</li>
+        <li>GALLUP. <em>State of the Global Workplace Report.</em> 2020.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="text-align:center;padding:40px 0;border-top:2px solid #f0fdfa;margin-top:40px">
+    <p style="color:var(--teal);font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700">Instituto Selma Moraes</p>
+    <p style="color:#888;font-size:0.85rem">Selma Moraes — Psicóloga Clínica e Organizacional · CRP 06/138420</p>
+    <p style="color:#888;font-size:0.85rem">selmamoraes.com.br · smoraes@selmamoraes.com.br</p>
+    <p style="color:#aaa;font-size:0.78rem;margin-top:12px">Este material é de uso exclusivo dos clientes do Instituto Selma Moraes. Reprodução proibida sem autorização.</p>
+  </div>
+
+</div>
+
+<div class="download-bar" id="downloadBar" style="display:none">
+  <span>📄 Curso: Inteligência Emocional para Lideranças</span>
+  <button onclick="window.print()">Baixar PDF</button>
+  <button onclick="window.close()" style="background:transparent;color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.2)">Fechar</button>
+</div>
+
+<script>
+const COURSE_PWD = 'Estrela16';
+function doLogin(){
+  const v = document.getElementById('loginPwd').value;
+  if(v === COURSE_PWD){
+    document.getElementById('loginGate').classList.add('hidden');
+    document.getElementById('courseContent').classList.add('visible');
+    document.getElementById('downloadBar').style.display='flex';
+    sessionStorage.setItem('curso_ie_auth','1');
+  } else { alert('Senha incorreta. Entre em contato com a Selma.'); }
+}
+if(sessionStorage.getItem('curso_ie_auth')==='1'){
+  document.getElementById('loginGate').classList.add('hidden');
+  document.getElementById('courseContent').classList.add('visible');
+  document.getElementById('downloadBar').style.display='flex';
+}
+document.getElementById('loginPwd').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()});
+</script>
+</body>
+</html>
