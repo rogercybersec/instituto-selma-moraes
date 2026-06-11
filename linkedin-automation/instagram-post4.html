@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  .slide {
+    width: 1080px;
+    height: 1080px;
+    position: relative;
+    overflow: hidden;
+    display: none;
+    font-family: 'Inter', sans-serif;
+  }
+  .slide.active { display: block; }
+
+  /* === SLIDE 1 — HOOK (Dark with 3D floating card) === */
+  .s1 {
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 50%, #16213e 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .s1 .floating-card {
+    width: 820px;
+    padding: 80px 70px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,169,110,0.3);
+    border-radius: 24px;
+    backdrop-filter: blur(20px);
+    transform: perspective(1200px) rotateY(-3deg) rotateX(2deg);
+    box-shadow:
+      0 25px 50px rgba(0,0,0,0.5),
+      0 0 80px rgba(201,169,110,0.08),
+      inset 0 1px 0 rgba(255,255,255,0.05);
+    position: relative;
+  }
+  .s1 .floating-card::before {
+    content: '';
+    position: absolute;
+    top: -2px; left: -2px; right: -2px; bottom: -2px;
+    border-radius: 26px;
+    background: linear-gradient(135deg, rgba(201,169,110,0.4), transparent 50%, rgba(201,169,110,0.2));
+    z-index: -1;
+  }
+  .s1 .eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #c9a96e;
+    margin-bottom: 40px;
+  }
+  .s1 h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.2;
+    margin-bottom: 30px;
+  }
+  .s1 h1 em {
+    color: #c9a96e;
+    font-style: italic;
+  }
+  .s1 .subtitle {
+    font-size: 22px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+  .s1 .glow-orb {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.15;
+  }
+  .s1 .glow-1 { background: #c9a96e; top: -100px; right: -50px; }
+  .s1 .glow-2 { background: #4a90d9; bottom: -100px; left: -50px; }
+  .s1 .brand {
+    position: absolute;
+    bottom: 40px;
+    left: 0; right: 0;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.3);
+    text-transform: uppercase;
+  }
+
+  /* === SLIDE 2 — Stat with 3D depth layers === */
+  .s2 {
+    background: #f5f0eb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .s2 .depth-bg {
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,169,110,0.15);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .s2 .depth-bg.ring2 {
+    width: 500px; height: 500px;
+    border-color: rgba(201,169,110,0.25);
+  }
+  .s2 .depth-bg.ring3 {
+    width: 300px; height: 300px;
+    border-color: rgba(201,169,110,0.35);
+    background: rgba(201,169,110,0.03);
+  }
+  .s2 .big-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 180px;
+    font-weight: 900;
+    color: #c9a96e;
+    line-height: 1;
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 4px 20px rgba(201,169,110,0.3);
+  }
+  .s2 .big-number span {
+    font-size: 80px;
+    vertical-align: super;
+  }
+  .s2 .stat-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-align: center;
+    max-width: 700px;
+    line-height: 1.4;
+    position: relative;
+    z-index: 2;
+    margin-top: 20px;
+  }
+  .s2 .source {
+    position: absolute;
+    bottom: 60px;
+    font-size: 15px;
+    color: rgba(26,26,26,0.4);
+    font-weight: 400;
+    letter-spacing: 1px;
+  }
+  .s2 .corner-line {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-color: rgba(201,169,110,0.3);
+    border-style: solid;
+  }
+  .s2 .corner-line.tl { top: 40px; left: 40px; border-width: 2px 0 0 2px; }
+  .s2 .corner-line.br { bottom: 40px; right: 40px; border-width: 0 2px 2px 0; }
+
+  /* === SLIDE 3 — 3D Cards with consequences === */
+  .s3 {
+    background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 80px 60px;
+  }
+  .s3 .section-label {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #c9a96e;
+    margin-bottom: 50px;
+  }
+  .s3 .cards-row {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+  .s3 .card3d {
+    width: 290px;
+    padding: 40px 30px;
+    background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+    border: 1px solid rgba(201,169,110,0.2);
+    border-radius: 20px;
+    transform: perspective(800px) rotateX(3deg);
+    box-shadow:
+      0 20px 40px rgba(0,0,0,0.4),
+      0 0 1px rgba(201,169,110,0.3);
+    transition: transform 0.3s;
+    text-align: center;
+  }
+  .s3 .card3d .icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+  .s3 .card3d h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 15px;
+    line-height: 1.3;
+  }
+  .s3 .card3d p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.5;
+  }
+  .s3 .bottom-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    margin-top: auto;
+    line-height: 1.4;
+  }
+  .s3 .bottom-text em { color: #c9a96e; font-style: italic; }
+  .s3 .brand {
+    position: absolute;
+    bottom: 40px;
+    left: 0; right: 0;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.25);
+    text-transform: uppercase;
+  }
+
+  /* === SLIDE 4 — Solution with glassmorphism === */
+  .s4 {
+    background: linear-gradient(135deg, #f5f0eb 0%, #ede4d8 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px;
+    position: relative;
+  }
+  .s4 .glass-panel {
+    width: 900px;
+    padding: 60px;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid rgba(201,169,110,0.2);
+    border-radius: 30px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+    transform: perspective(1000px) rotateX(1deg);
+  }
+  .s4 .section-label {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #c9a96e;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  .s4 h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-align: center;
+    margin-bottom: 50px;
+    line-height: 1.3;
+  }
+  .s4 .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+  .s4 .step {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
+  .s4 .step-num {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #c9a96e, #b8944a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+    box-shadow: 0 4px 15px rgba(201,169,110,0.4);
+  }
+  .s4 .step-content h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+  }
+  .s4 .step-content p {
+    font-size: 16px;
+    color: rgba(26,26,26,0.6);
+    line-height: 1.4;
+  }
+  .s4 .corner-accent {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+  }
+  .s4 .corner-accent.tl {
+    top: 30px; left: 30px;
+    border-left: 2px solid rgba(201,169,110,0.2);
+    border-top: 2px solid rgba(201,169,110,0.2);
+  }
+  .s4 .corner-accent.br {
+    bottom: 30px; right: 30px;
+    border-right: 2px solid rgba(201,169,110,0.2);
+    border-bottom: 2px solid rgba(201,169,110,0.2);
+  }
+
+  /* === SLIDE 5 — CTA with depth === */
+  .s5 {
+    background: linear-gradient(135deg, #c9a96e 0%, #b8944a 40%, #a07830 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px;
+    position: relative;
+  }
+  .s5::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+      radial-gradient(circle at 70% 80%, rgba(0,0,0,0.15) 0%, transparent 50%);
+  }
+  .s5 .cta-card {
+    background: rgba(26,26,26,0.9);
+    border-radius: 30px;
+    padding: 80px 70px;
+    text-align: center;
+    max-width: 850px;
+    transform: perspective(1000px) rotateX(2deg);
+    box-shadow:
+      0 30px 60px rgba(0,0,0,0.3),
+      0 0 0 1px rgba(255,255,255,0.05);
+    position: relative;
+    z-index: 2;
+  }
+  .s5 .cta-label {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #c9a96e;
+    margin-bottom: 30px;
+  }
+  .s5 h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.3;
+    margin-bottom: 25px;
+  }
+  .s5 .cta-sub {
+    font-size: 20px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+    margin-bottom: 45px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .s5 .cta-btn {
+    display: inline-block;
+    padding: 20px 50px;
+    background: linear-gradient(135deg, #c9a96e, #b8944a);
+    border-radius: 60px;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a1a;
+    letter-spacing: 1px;
+    box-shadow: 0 8px 30px rgba(201,169,110,0.4);
+    margin-bottom: 25px;
+  }
+  .s5 .url {
+    font-size: 16px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 1px;
+  }
+  .s5 .brand-footer {
+    position: absolute;
+    bottom: 40px;
+    left: 0; right: 0;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.2);
+    text-transform: uppercase;
+    z-index: 2;
+  }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1 — Hook -->
+<div class="slide s1 active" id="slide-1">
+  <div class="glow-orb glow-1"></div>
+  <div class="glow-orb glow-2"></div>
+  <div class="floating-card">
+    <div class="eyebrow">Alerta para empresas</div>
+    <h1>Sua empresa está preparada para uma <em>fiscalização</em> da NR-1?</h1>
+    <div class="subtitle">72% das empresas brasileiras ainda não se adequaram.<br>O prazo já venceu.</div>
+  </div>
+  <div class="brand">Selma Moraes | NR-1</div>
+</div>
+
+<!-- SLIDE 2 — Impactful stat -->
+<div class="slide s2" id="slide-2">
+  <div class="corner-line tl"></div>
+  <div class="corner-line br"></div>
+  <div class="depth-bg"></div>
+  <div class="depth-bg ring2"></div>
+  <div class="depth-bg ring3"></div>
+  <div class="big-number">R$50<span>mil</span></div>
+  <div class="stat-text">Esse é o valor da multa por infração<br>para quem não cumpre a NR-1</div>
+  <div class="source">Fonte: Portaria MTE 1.419/2024</div>
+</div>
+
+<!-- SLIDE 3 — Consequences (3D cards) -->
+<div class="slide s3" id="slide-3">
+  <div class="section-label">O que está em jogo</div>
+  <div class="cards-row">
+    <div class="card3d">
+      <div class="icon">&#9888;</div>
+      <h3>Multas e autuações</h3>
+      <p>Fiscalização ativa desde maio de 2026. Auditor pode chegar sem aviso.</p>
+    </div>
+    <div class="card3d">
+      <div class="icon">&#128168;</div>
+      <h3>Processos trabalhistas</h3>
+      <p>Burnout é doença ocupacional. Sem PGR atualizado, a empresa é responsável.</p>
+    </div>
+    <div class="card3d">
+      <div class="icon">&#128200;</div>
+      <h3>Perda de talentos</h3>
+      <p>Ambientes tóxicos geram turnover. O custo de repor um colaborador é 3x o salário.</p>
+    </div>
+  </div>
+  <div class="bottom-text">Ignorar a NR-1 não é uma opção.<br><em>É um risco calculável.</em></div>
+  <div class="brand">Selma Moraes | NR-1</div>
+</div>
+
+<!-- SLIDE 4 — Solution steps -->
+<div class="slide s4" id="slide-4">
+  <div class="corner-accent tl"></div>
+  <div class="corner-accent br"></div>
+  <div class="glass-panel">
+    <div class="section-label">Método Resguarda™</div>
+    <h2>Adequação completa em 30 dias</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Diagnóstico de riscos psicossociais</h4>
+          <p>Mapeamento completo com COPSOQ III e FRPRT</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Atualização do PGR</h4>
+          <p>Inclusão dos fatores de saúde mental exigidos pela norma</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>Capacitação de líderes</h4>
+          <p>Gestores preparados para promover ambientes saudáveis</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>Documentação para auditoria</h4>
+          <p>Tudo pronto para quando o auditor chegar</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5 — CTA -->
+<div class="slide s5" id="slide-5">
+  <div class="cta-card">
+    <div class="cta-label">Próximo passo</div>
+    <h2>Proteja sua empresa antes que o auditor bata na porta</h2>
+    <div class="cta-sub">Agende uma conversa gratuita de 30 minutos e descubra exatamente o que sua empresa precisa fazer.</div>
+    <div class="cta-btn">Agendar consultoria gratuita</div>
+    <div class="url">selmamoraes.com.br</div>
+  </div>
+  <div class="brand-footer">Instituto Selma Moraes — Método Resguarda™</div>
+</div>
+
+</body>
+</html>
