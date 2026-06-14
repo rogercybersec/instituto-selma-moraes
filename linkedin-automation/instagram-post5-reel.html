@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700;800&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #000; overflow: hidden; }
+  #canvas-container {
+    width: 1080px;
+    height: 1080px;
+    position: relative;
+  }
+  #overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    z-index: 2;
+    text-align: center;
+    padding: 50px 80px 80px;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 50%, transparent 100%);
+    opacity: 0;
+    font-family: 'Inter', sans-serif;
+  }
+  #overlay.visible { opacity: 1; transition: opacity 1.5s ease; }
+  .eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: rgba(42,157,143,0.9);
+    margin-bottom: 20px;
+    text-shadow: 0 0 20px rgba(42,157,143,0.4);
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 1.12;
+    margin-bottom: 16px;
+    text-shadow: 0 4px 40px rgba(0,0,0,0.8);
+  }
+  h1 em {
+    color: #c9a96e;
+    font-style: italic;
+    text-shadow: 0 0 30px rgba(201,169,110,0.5);
+  }
+  .subtitle {
+    font-size: 17px;
+    color: rgba(255,255,255,0.45);
+    font-weight: 300;
+    letter-spacing: 1px;
+  }
+  .brand-footer {
+    position: absolute;
+    bottom: 24px;
+    left: 0; right: 0;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    color: rgba(201,169,110,0.35);
+    text-transform: uppercase;
+    z-index: 3;
+  }
+</style>
+</head>
+<body>
+<div id="canvas-container">
+  <div id="overlay">
+    <div class="eyebrow">DADOS GLOBAIS 2026</div>
+    <h1>O custo <em>invisível</em> que<br>destrói empresas por dentro</h1>
+    <div class="subtitle">Deslize para ver o que a sua empresa pode estar perdendo →</div>
+  </div>
+  <div class="brand-footer">SELMA MORAES · NR-1</div>
+</div>
+
+<script>
+(function() {
+  var container = document.getElementById('canvas-container');
+
+  var scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x050a15, 0.018);
+
+  var camera = new THREE.PerspectiveCamera(50, 1, 0.1, 200);
+  camera.position.set(0, 2, 24);
+  camera.lookAt(0, 0, 0);
+
+  var renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+  renderer.setSize(1080, 1080);
+  renderer.setPixelRatio(1);
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 2.2;
+  renderer.setClearColor(0x050a15, 1);
+  container.insertBefore(renderer.domElement, container.firstChild);
+
+  var mainGroup = new THREE.Group();
+  scene.add(mainGroup);
+
+  // Seed-based pseudo-random
+  var seed = 42;
+  function rand() { seed = (seed * 16807 + 0) % 2147483647; return (seed - 1) / 2147483646; }
+
+  // ── 100 NODES with organic clustering ──
+  var nodeCount = 100;
+  var nodes = [];
+  var nodeMeshes = [];
+  var haloMeshes = [];
+  var halo2Meshes = [];
+
+  var attractors = [
+    {x: -5, y: 4, z: -2}, {x: 6, y: -3, z: 1},
+    {x: -3, y: -5, z: 3}, {x: 4, y: 5, z: -3},
+    {x: 0, y: 0, z: 0}
+  ];
+
+  for (var i = 0; i < nodeCount; i++) {
+    var theta = rand() * Math.PI * 2;
+    var phi = Math.acos(2 * rand() - 1);
+    var r = 3 + rand() * 8;
+    var att = attractors[i % 5];
+    var x = Math.sin(phi) * Math.cos(theta) * r * 0.6 + att.x * 0.4;
+    var y = Math.sin(phi) * Math.sin(theta) * r * 0.6 + att.y * 0.4;
+    var z = Math.cos(phi) * r * 0.4;
+
+    var brightness = rand();
+    var isActive = brightness > 0.7;
+    var isGold = rand() > 0.55;
+    var nodeSize = isActive ? 0.22 + rand() * 0.18 : 0.06 + rand() * 0.06;
+    var pulseSpeed = 1.5 + rand() * 2.0;
+    var pulsePhase = rand() * Math.PI * 2;
+
+    nodes.push({x:x, y:y, z:z, active:isActive, gold:isGold, size:nodeSize, pulseSpeed:pulseSpeed, pulsePhase:pulsePhase});
+
+    var baseColor = isGold ? 0xc9a96e : 0x2A9D8F;
+    var emissiveColor = isActive ? (isGold ? 0xc9a96e : 0x2A9D8F) : (isGold ? 0x2a1f0a : 0x081a17);
+
+    var nGeo = new THREE.SphereGeometry(nodeSize, 16, 16);
+    var nMat = new THREE.MeshPhongMaterial({
+      color: baseColor,
+      emissive: emissiveColor,
+      shininess: isActive ? 200 : 40,
+      transparent: true,
+      opacity: isActive ? 1.0 : 0.35
+    });
+    var nMesh = new THREE.Mesh(nGeo, nMat);
+    nMesh.position.set(x, y, z);
+    mainGroup.add(nMesh);
+    nodeMeshes.push(nMesh);
+
+    // Glow halos for active nodes
+    if (isActive) {
+      var h1Geo = new THREE.SphereGeometry(nodeSize * 4, 16, 16);
+      var h1Mat = new THREE.MeshBasicMaterial({color: baseColor, transparent: true, opacity: 0.1, side: THREE.BackSide});
+      var h1 = new THREE.Mesh(h1Geo, h1Mat);
+      h1.position.set(x, y, z);
+      mainGroup.add(h1);
+      haloMeshes.push({mesh: h1, nodeIdx: i});
+
+      var h2Geo = new THREE.SphereGeometry(nodeSize * 7, 16, 16);
+      var h2Mat = new THREE.MeshBasicMaterial({color: baseColor, transparent: true, opacity: 0.04, side: THREE.BackSide});
+      var h2 = new THREE.Mesh(h2Geo, h2Mat);
+      h2.position.set(x, y, z);
+      mainGroup.add(h2);
+      halo2Meshes.push({mesh: h2, nodeIdx: i});
+    }
+  }
+
+  // ── CONNECTIONS ──
+  var maxDist = 5.0;
+  var connections = [];
+  for (var i = 0; i < nodeCount; i++) {
+    for (var j = i + 1; j < nodeCount; j++) {
+      var dx = nodes[i].x - nodes[j].x;
+      var dy = nodes[i].y - nodes[j].y;
+      var dz = nodes[i].z - nodes[j].z;
+      var dist = Math.sqrt(dx*dx + dy*dy + dz*dz);
+      if (dist < maxDist) {
+        connections.push({i: i, j: j, dist: dist});
+      }
+    }
+  }
+
+  // Draw connections
+  var connectionLines = [];
+  for (var c = 0; c < connections.length; c++) {
+    var conn = connections[c];
+    var ni = nodes[conn.i];
+    var nj = nodes[conn.j];
+    var bothActive = ni.active && nj.active;
+    var oneActive = ni.active || nj.active;
+    var lineColor = (ni.gold || nj.gold) ? 0xc9a96e : 0x2A9D8F;
+    var lineOpacity = bothActive ? 0.4 : (oneActive ? 0.12 : 0.03);
+
+    var lGeo = new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(ni.x, ni.y, ni.z),
+      new THREE.Vector3(nj.x, nj.y, nj.z)
+    ]);
+    var lMat = new THREE.LineBasicMaterial({color: lineColor, transparent: true, opacity: lineOpacity});
+    var line = new THREE.Line(lGeo, lMat);
+    mainGroup.add(line);
+    connectionLines.push({line: line, conn: conn, bothActive: bothActive, baseOpacity: lineOpacity});
+  }
+
+  // ── ENERGY PULSES — spheres that travel along active connections ──
+  var pulses = [];
+  for (var c = 0; c < connections.length; c++) {
+    var conn = connections[c];
+    var ni = nodes[conn.i];
+    var nj = nodes[conn.j];
+    if (ni.active && nj.active && conn.dist < 4.5) {
+      var pulseColor = (ni.gold || nj.gold) ? 0xc9a96e : 0x2A9D8F;
+      var pGeo = new THREE.SphereGeometry(0.07, 8, 8);
+      var pMat = new THREE.MeshBasicMaterial({color: pulseColor, transparent: true, opacity: 0.8});
+      var pMesh = new THREE.Mesh(pGeo, pMat);
+      mainGroup.add(pMesh);
+
+      // Pulse halo
+      var phGeo = new THREE.SphereGeometry(0.2, 8, 8);
+      var phMat = new THREE.MeshBasicMaterial({color: pulseColor, transparent: true, opacity: 0.15, side: THREE.BackSide});
+      var phMesh = new THREE.Mesh(phGeo, phMat);
+      mainGroup.add(phMesh);
+
+      pulses.push({
+        mesh: pMesh, halo: phMesh,
+        from: new THREE.Vector3(ni.x, ni.y, ni.z),
+        to: new THREE.Vector3(nj.x, nj.y, nj.z),
+        speed: 0.3 + rand() * 0.5,
+        offset: rand(),
+        forward: rand() > 0.5
+      });
+    }
+  }
+
+  // ── BACKGROUND PARTICLES ──
+  var dustCount = 800;
+  var dustPos = new Float32Array(dustCount * 3);
+  var dustCol = new Float32Array(dustCount * 3);
+  var dustOrigPos = [];
+  for (var d = 0; d < dustCount; d++) {
+    var dx = (rand() - 0.5) * 35;
+    var dy = (rand() - 0.5) * 35;
+    var dz = (rand() - 0.5) * 20 - 5;
+    dustPos[d*3] = dx; dustPos[d*3+1] = dy; dustPos[d*3+2] = dz;
+    dustOrigPos.push({x: dx, y: dy, z: dz, speed: 0.1 + rand() * 0.3, phase: rand() * Math.PI * 2});
+    var bright = 0.4 + rand() * 0.6;
+    if (rand() > 0.55) {
+      dustCol[d*3] = 0.79*bright; dustCol[d*3+1] = 0.66*bright; dustCol[d*3+2] = 0.43*bright;
+    } else {
+      dustCol[d*3] = 0.16*bright; dustCol[d*3+1] = 0.62*bright; dustCol[d*3+2] = 0.56*bright;
+    }
+  }
+  var dustGeo = new THREE.BufferGeometry();
+  dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPos, 3));
+  dustGeo.setAttribute('color', new THREE.BufferAttribute(dustCol, 3));
+  var dustMat = new THREE.PointsMaterial({size: 0.05, vertexColors: true, transparent: true, opacity: 0.55});
+  var dustMesh = new THREE.Points(dustGeo, dustMat);
+  mainGroup.add(dustMesh);
+
+  // ── LIGHTS ──
+  scene.add(new THREE.AmbientLight(0x111125, 0.5));
+  var lights = [
+    {x: -5, y: 4, z: 4, color: 0xc9a96e, intensity: 1.8},
+    {x: 6, y: -3, z: 5, color: 0x2A9D8F, intensity: 1.5},
+    {x: -3, y: -5, z: 4, color: 0xc9a96e, intensity: 1.2},
+    {x: 4, y: 5, z: 3, color: 0x2A9D8F, intensity: 1.4},
+    {x: 0, y: 0, z: 8, color: 0xffffff, intensity: 0.6}
+  ];
+  for (var li = 0; li < lights.length; li++) {
+    var l = lights[li];
+    var pl = new THREE.PointLight(l.color, l.intensity, 20);
+    pl.position.set(l.x, l.y, l.z);
+    scene.add(pl);
+  }
+
+  // ── ANIMATION ──
+  var frameCount = 0;
+  var totalFrames = 300; // 10 seconds at 30fps
+
+  window.currentFrame = 0;
+  window.totalFrames = totalFrames;
+  window.animationDone = false;
+
+  window.renderFrame = function(frame) {
+    var t = frame / 30.0; // time in seconds
+
+    // Slow orbit rotation
+    mainGroup.rotation.y = 0.15 + t * 0.08;
+    mainGroup.rotation.x = 0.05 + Math.sin(t * 0.3) * 0.03;
+
+    // Camera subtle breathing
+    camera.position.z = 24 + Math.sin(t * 0.4) * 0.8;
+    camera.position.y = 2 + Math.sin(t * 0.25) * 0.5;
+
+    // Pulse active nodes (scale + glow intensity)
+    for (var i = 0; i < nodeMeshes.length; i++) {
+      var node = nodes[i];
+      if (node.active) {
+        var pulse = Math.sin(t * node.pulseSpeed + node.pulsePhase);
+        var scale = 1.0 + pulse * 0.25;
+        nodeMeshes[i].scale.set(scale, scale, scale);
+        nodeMeshes[i].material.opacity = 0.8 + pulse * 0.2;
+      }
+    }
+
+    // Pulse halos
+    for (var h = 0; h < haloMeshes.length; h++) {
+      var haloData = haloMeshes[h];
+      var node = nodes[haloData.nodeIdx];
+      var pulse = Math.sin(t * node.pulseSpeed + node.pulsePhase);
+      haloData.mesh.material.opacity = 0.06 + pulse * 0.06;
+      var hScale = 1.0 + pulse * 0.15;
+      haloData.mesh.scale.set(hScale, hScale, hScale);
+    }
+    for (var h = 0; h < halo2Meshes.length; h++) {
+      var haloData = halo2Meshes[h];
+      var node = nodes[haloData.nodeIdx];
+      var pulse = Math.sin(t * node.pulseSpeed + node.pulsePhase);
+      halo2Meshes[h].mesh.material.opacity = 0.02 + pulse * 0.03;
+    }
+
+    // Move energy pulses along connections
+    for (var p = 0; p < pulses.length; p++) {
+      var pd = pulses[p];
+      var progress = ((t * pd.speed + pd.offset) % 1.0);
+      if (!pd.forward) progress = 1.0 - progress;
+      var pos = new THREE.Vector3().lerpVectors(pd.from, pd.to, progress);
+      pd.mesh.position.copy(pos);
+      pd.halo.position.copy(pos);
+      pd.mesh.material.opacity = 0.7 + Math.sin(progress * Math.PI) * 0.3;
+      pd.halo.material.opacity = 0.1 + Math.sin(progress * Math.PI) * 0.1;
+    }
+
+    // Animate dust particles — gentle drift
+    var positions = dustGeo.attributes.position.array;
+    for (var d = 0; d < dustCount; d++) {
+      var dp = dustOrigPos[d];
+      positions[d*3] = dp.x + Math.sin(t * dp.speed + dp.phase) * 0.3;
+      positions[d*3+1] = dp.y + Math.cos(t * dp.speed * 0.7 + dp.phase) * 0.2;
+      positions[d*3+2] = dp.z + Math.sin(t * dp.speed * 0.5 + dp.phase * 2) * 0.15;
+    }
+    dustGeo.attributes.position.needsUpdate = true;
+
+    // Pulse connection line opacity
+    for (var cl = 0; cl < connectionLines.length; cl++) {
+      var clData = connectionLines[cl];
+      if (clData.bothActive) {
+        var pulse = Math.sin(t * 2 + cl * 0.5);
+        clData.line.material.opacity = clData.baseOpacity + pulse * 0.1;
+      }
+    }
+
+    // Fade in overlay text at frame 30 (1 second)
+    if (frame >= 30) {
+      document.getElementById('overlay').classList.add('visible');
+    }
+
+    renderer.render(scene, camera);
+    return renderer.domElement.toDataURL('image/png');
+  };
+
+  // Render first frame immediately
+  window.renderFrame(0);
+})();
+</script>
+</body>
+</html>
